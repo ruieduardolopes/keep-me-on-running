@@ -37,8 +37,36 @@ public class Spectator implements Runnable {
     }
 
     /**
+     * Returns the Spectator numerical identification between all the others Spectators.
+     *
+     * @return a numerical identification represented as an integer.
+     */
+    public int getIdentification() {
+        return identification;
+    }
+
+    /**
+     * Returns the amount of current money that this Spectator has available for new bets.
+     *
+     * @return the current amount of money, as an integer.
+     */
+    public int getMoney() {
+        return money;
+    }
+
+    /**
      * A representation of the Spectator's state given by the {@link SpectatorState}
      * enumeration.
      */
     private SpectatorState state = SpectatorState.WAITING_FOR_A_RACE_TO_START;
+
+    /**
+     * Proper Spectator numerical identification.
+     */
+    private int identification;
+
+    /**
+     * Current amount of this Spectator's money to spend on new bets.
+     */
+    private int money;
 }
