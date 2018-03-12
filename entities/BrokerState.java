@@ -3,7 +3,10 @@ package entities;
 /**
  * Enumeration of all Broker's states, given on its lifecycle.
  *
+ * @author Hugo Fragata
+ * @author Rui Lopes
  * @see Broker#run()
+ * @version 1.0
  */
 public enum BrokerState {
     /**

@@ -6,7 +6,10 @@ import hippodrome.Paddock;
 /**
  * Enumeration of all pair Horse/Jockey's states, given on its lifecycle.
  *
+ * @author Hugo Fragata
+ * @author Rui Lopes
  * @see HorseJockey#run()
+ * @version 1.0
  */
 public enum HorseJockeyState {
     /**

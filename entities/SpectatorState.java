@@ -6,7 +6,10 @@ import hippodrome.RacingTrack;
 /**
  * Enumeration of all Spectator's states, given on its lifecycle.
  *
+ * @author Hugo Fragata
+ * @author Rui Lopes
  * @see Spectator#run()
+ * @version 1.0
  */
 public enum SpectatorState {
     /**
