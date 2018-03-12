@@ -8,6 +8,7 @@
  *
  * @author Hugo Fragata
  * @author Rui Lopes
+ * @see concepts
  * @see hippodrome
  * @see stage
  * @since 1.0

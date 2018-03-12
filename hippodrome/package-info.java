@@ -9,6 +9,7 @@
  *
  * @author Hugo Fragata
  * @author Rui Lopes
+ * @see concepts
  * @see entities
  * @see stage
  * @since 1.0
