@@ -1,0 +1,15 @@
+/**
+ * Provides the classes necessary to create a
+ * set of characters needed to complete a horse
+ * race scenario.
+ *
+ * Its contents are a {@link entities.Broker}, a
+ * {@link entities.HorseJockey} and a {@link entities.Spectator}.
+ *
+ * @author Hugo Fragata
+ * @author Rui Lopes
+ * @see hippodrome
+ * @see stage
+ * @since 1.0
+ */
+package entities;
