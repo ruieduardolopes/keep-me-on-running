@@ -37,8 +37,37 @@ public class HorseJockey implements Runnable {
     }
 
     /**
+     * Returns the pair Horse/Jockey number identification.
+     *
+     * @return a number represented by an integer.
+     */
+    public int getIdentification() {
+        return identification;
+    }
+
+    /**
+     * Returns the pair Horse/Jockey ability to move forward on its track of the Racing Track.
+     *
+     * @return an integer representation of the ability.
+     */
+    public int getAbility() {
+        return ability;
+    }
+
+    /**
      * A representation of the pair Horse/Jockey's state given by the {@link HorseJockeyState}
      * enumeration.
      */
     private HorseJockeyState state = HorseJockeyState.AT_THE_STABLE;
+
+    /**
+     * Proper pair Horse/Jockey identification number.
+     */
+    private int identification;
+
+    /**
+     * Pair Horse/Jockey ability to run. This value represents how easily this pair Horse/Jockey
+     * can advance on its track of the Racing Track.
+     */
+    private int ability;
 }
