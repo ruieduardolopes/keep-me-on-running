@@ -24,4 +24,21 @@ public class Spectator implements Runnable {
     public void run() {
 
     }
+
+    /**
+     * Returns the Spectator state representation given by the {@link SpectatorState}
+     * enumeration.
+     *
+     * @return the current spectator {@link SpectatorState}.
+     * @see SpectatorState
+     */
+    public SpectatorState getState() {
+        return state;
+    }
+
+    /**
+     * A representation of the Spectator's state given by the {@link SpectatorState}
+     * enumeration.
+     */
+    private SpectatorState state = SpectatorState.WAITING_FOR_A_RACE_TO_START;
 }

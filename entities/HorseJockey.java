@@ -24,4 +24,21 @@ public class HorseJockey implements Runnable {
     public void run() {
 
     }
+
+    /**
+     * Returns the pair Horse/Jockey state representation given by the {@link HorseJockeyState}
+     * enumeration.
+     *
+     * @return the current spectator {@link HorseJockeyState}.
+     * @see HorseJockeyState
+     */
+    public HorseJockeyState getState() {
+        return state;
+    }
+
+    /**
+     * A representation of the pair Horse/Jockey's state given by the {@link HorseJockeyState}
+     * enumeration.
+     */
+    private HorseJockeyState state = HorseJockeyState.AT_THE_STABLE;
 }
