@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"hippodrome","l":"BettingCentre"},{"p":"entities","l":"Broker"},{"p":"hippodrome","l":"ControlCentre"},{"p":"stage","l":"GeneralRepositoryOfInformation"},{"p":"entities","l":"HorseJockey"},{"p":"hippodrome","l":"Paddock"},{"p":"hippodrome","l":"RacingTrack"},{"p":"entities","l":"Spectator"},{"p":"hippodrome","l":"Stable"}]
