@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"entities"},{"l":"hippodrome"},{"l":"stage"}]
+packageSearchIndex = [{"l":"concepts"},{"l":"entities"},{"l":"hippodrome"},{"l":"stage"}]
