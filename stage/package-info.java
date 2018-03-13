@@ -2,7 +2,7 @@
  * Provides the classes necessary to create a
  * simulation of a horse race scenario.
  *
- * Its contents are based on a {@link stage.GeneralRepositoryOfInformation}.
+ * Its contents are based on a {@link stage.GeneralInformationRepository}.
  *
  * @author Hugo Fragata
  * @author Rui Lopes
