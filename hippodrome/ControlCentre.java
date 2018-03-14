@@ -19,7 +19,7 @@ public class ControlCentre {
      *
      * @param raceNumber number identification of the next {@link concepts.Race}.
      */
-    public void summonHorsesToPaddock(int raceNumber) {
+    public static void summonHorsesToPaddock(int raceNumber) {
 
     }
 
@@ -28,7 +28,7 @@ public class ControlCentre {
      *
      * @param raceNumber number idenitification of the next {@link concepts.Race} to be started as of this instant.
      */
-    public void startTheRace(int raceNumber) {
+    public static void startTheRace(int raceNumber) {
 
     }
 
@@ -36,7 +36,7 @@ public class ControlCentre {
      * Start entertaining the guests (representation of the {@link Spectator}s), as the {@link entities.Broker}'s actions
      * can be considered as terminated.
      */
-    public void entertainTheGuests() {
+    public static void entertainTheGuests() {
 
     }
 
@@ -45,9 +45,11 @@ public class ControlCentre {
      * by the number {@code raceNumber}.
      *
      * @param raceNumber number identification of the next {@link concepts.Race} to begin.
+     *
+     * @return {@code true} if the next race is still not prepared to begin; otherwise {@code false}.
      */
-    public void waitForTheNextRace(int raceNumber) {
-
+    public static boolean waitForTheNextRace(int raceNumber) {
+        return false;
     }
 
     /**
@@ -55,7 +57,7 @@ public class ControlCentre {
      *
      * @param raceNumber number identification of the {@link concepts.Race} which is about to start.
      */
-    public void goWatchTheRace(int raceNumber) {
+    public static void goWatchTheRace(int raceNumber) {
 
     }
 
@@ -66,21 +68,21 @@ public class ControlCentre {
      *
      * @return {@code true} if {@code spectator} has won his (or hers) bet; otherwise, it will return {@code false}.
      */
-    public boolean haveIWon(Spectator spectator) {
+    public static boolean haveIWon(Spectator spectator) {
         return false;
     }
 
     /**
      * Relax a bit from the games, as this is could be the final transition of a {@link Spectator} lifecycle.
      */
-    public void relaxABit() {
+    public static void relaxABit() {
 
     }
 
     /**
      * Publishing of the results by the {@link entities.Broker} performing its job.
      */
-    public void reportResults() {
+    public static void reportResults() {
 
     }
 
@@ -89,7 +91,30 @@ public class ControlCentre {
      *
      * @return {@code true} if anybody had won indeed; otherwise it will return {@code false}.
      */
-    public boolean areThereAnyWinners() {
+    public static boolean areThereAnyWinners() {
         return false;
+    }
+
+    /**
+     * Signal given by the {@link entities.Broker} to summon all the horses from the {@link Stable} to the
+     * {@link Paddock}.
+     */
+    public static void summonHorsesToPaddock() {
+
+    }
+
+    /**
+     * Signal given by the last pair Horse/Jockey which exits the {@link Stable} in direction to the {@link Paddock}.
+     */
+    public static void proceedToPaddock() {
+
+    }
+
+    /**
+     * Signal given by the last {@link Spectator} which arrives at the {@link Paddock} to watch the horses, before placing
+     * a bet.
+     */
+    public static void goCheckHorses() {
+
     }
 }

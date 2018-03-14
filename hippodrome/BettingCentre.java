@@ -27,14 +27,14 @@ public class BettingCentre {
     /**
      * Accept all the bets done by the {@link Spectator}s.
      */
-    public void acceptTheBets() {
+    public static void acceptTheBets() {
 
     }
 
     /**
      * Give all the money to the respective betting parts - the {@link Spectator}s.
      */
-    public void honourTheBets() {
+    public static void honourTheBets() {
 
     }
 
@@ -45,11 +45,11 @@ public class BettingCentre {
      *
      * @param spectator an object of class {@link Spectator} which represents a better.
      * @param bet an amount of money represented as an integer, which the {@code spectator} wants to bet.
-     * @param horse the pair Horse/Jockey in which the {@code spectator} wants to bet.
+     * @param horse the identification of the pair Horse/Jockey in which the {@code spectator} wants to bet.
      *
      * @return the amount of money which was accepted by the {@link Broker} to place the bet.
      */
-    public int placeABet(Spectator spectator, int bet, HorseJockey horse) {
+    public static int placeABet(Spectator spectator, int bet, int horse) {
         return 0;
     }
 
@@ -60,7 +60,7 @@ public class BettingCentre {
      *
      * @return the amount of money collected by the {@code spectator}.
      */
-    public int goCollectTheGains(Spectator spectator) {
+    public static int goCollectTheGains(Spectator spectator) {
         return 0;
     }
 
@@ -68,5 +68,5 @@ public class BettingCentre {
      * The waiting queue to contact the {@link Broker} on its tasks. This could be used while waiting to a {@link Spectator}
      * place a bet, or while wainting to a {@link Spectator} go collect his (or hers) gains.
      */
-    private Queue<Spectator> bettingQueue = null;
+    private static Queue<Spectator> bettingQueue = null;
 }

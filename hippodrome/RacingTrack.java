@@ -17,7 +17,7 @@ public class RacingTrack {
      * Signal given by the {@link entities.Broker} in order to call all the paradded pairs Horse/Jockey
      * on the {@link Paddock} to the Racing Track's start line.
      */
-    public void proceedToStartLine() {
+    public static void proceedToStartLine() {
 
     }
 
@@ -26,7 +26,7 @@ public class RacingTrack {
      *
      * @param horse the pair Horse/Jockey which wants to make a move.
      */
-    public void makeAMove(HorseJockey horse) {
+    public static void makeAMove(HorseJockey horse) {
 
     }
 
@@ -37,7 +37,7 @@ public class RacingTrack {
      *
      * @return {@code true} if the pair Horse/Jockey had crossed the finish line; otherwise it will return {@code false}.
      */
-    public boolean hasFinishLineBeenCrossed(HorseJockey horse) {
+    public static boolean hasFinishLineBeenCrossed(HorseJockey horse) {
         return false;
     }
 
@@ -45,5 +45,5 @@ public class RacingTrack {
      * A representation of a race with an identification, a distance and a number of tracks. This is made using the class
      * {@link Race}.
      */
-    private Race race = null;
+    private static Race race = null;
 }
