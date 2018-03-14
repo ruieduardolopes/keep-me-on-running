@@ -21,7 +21,7 @@ public enum BrokerState {
     ANNOUNCING_NEXT_RACE,
     /**
      * This is a <strong>blocking state</strong> with transition. Here, the broker is waken up
-     * by the operation {@link hippodrome.BettingCentre#placeABet(Spectator, int, HorseJockey)}
+     * by the operation {@link hippodrome.BettingCentre#placeABet(Spectator, int, int)}
      * of each of the spectators ({@link Spectator}) and <strong>blocks again</strong> after the bet is accepted.
      *
      * The transition only occurs after the betting of all spectators is considered done.

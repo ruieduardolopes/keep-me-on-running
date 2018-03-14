@@ -1,5 +1,10 @@
 package entities;
 
+import hippodrome.ControlCentre;
+import hippodrome.Paddock;
+import hippodrome.RacingTrack;
+import hippodrome.Stable;
+
 /**
  * Implementation of a pair Horse/Jockey, the main horse race character. This entity,
  * belonging to the {@link entities} package, represents one of N pairs in a competition,
@@ -22,7 +27,17 @@ public class HorseJockey implements Runnable {
      */
     @Override
     public void run() {
-
+        Stable.proceedToStable();                                   // Stable's call for this pair Horse/Jockey;
+        Stable.proceedToPaddock();                                  // alarm the Horses on Stable to go to the Paddock;
+        boolean isLastPair = Paddock.proceedToPaddock(raceNumber);  // verify if this Horse is the last on his go;
+        if (isLastPair) {                                           // if this is the last Horse to go to Paddock then
+            ControlCentre.proceedToPaddock();                       //    the Control Centre must know it can proceed;
+        }                                                           //
+        RacingTrack.proceedToStartLine();                           // Racing track's call for horses on the start line;
+        while (!RacingTrack.hasFinishLineBeenCrossed(this)) {       // while this horse has not crossed the finish line
+            RacingTrack.makeAMove(this);                            //    it should make a move forward, to reach it;
+        }                                                           //
+        Stable.proceedToStable();                                   // finished the run, the pair must return to Stable.
     }
 
     /**
@@ -55,6 +70,25 @@ public class HorseJockey implements Runnable {
     }
 
     /**
+     * Returns the pair Horse/Jockey race number identification, in order to compete in the Racing Track.
+     *
+     * @return an integer representing the identification.
+     */
+    public int getRaceNumber() {
+        return raceNumber;
+    }
+
+    /**
+     * Sets a new race number identification for this pair Horse/Jockey, appliable when this same entity runs in
+     * different occasions.
+     *
+     * @param raceNumber an integer representing the identification.
+     */
+    public void setRaceNumber(int raceNumber) {
+        this.raceNumber = raceNumber;
+    }
+
+    /**
      * A representation of the pair Horse/Jockey's state given by the {@link HorseJockeyState}
      * enumeration.
      */
@@ -70,4 +104,10 @@ public class HorseJockey implements Runnable {
      * can advance on its track of the Racing Track.
      */
     private int ability;
+
+    /**
+     * Pair Horse/Jockey race identification number. This number identifies which race they are going to
+     * compete. This value can be updated via its setter method {@link HorseJockey#setRaceNumber}.
+     */
+    private int raceNumber;
 }
