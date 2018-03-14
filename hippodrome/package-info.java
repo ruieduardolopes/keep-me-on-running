@@ -5,7 +5,8 @@
  *
  * Its contents are a {@link hippodrome.BettingCentre}, a
  * {@link hippodrome.ControlCentre}, a {@link hippodrome.Paddock},
- * a {@link hippodrome.RacingTrack} and a {@link hippodrome.Stable}.
+ * a {@link hippodrome.GeneralInformationRepository}, a {@link hippodrome.RacingTrack}
+ * and a {@link hippodrome.Stable}.
  *
  * @author Hugo Fragata
  * @author Rui Lopes
