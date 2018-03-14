@@ -9,6 +9,7 @@ import hippodrome.Paddock;
  * @author Hugo Fragata
  * @author Rui Lopes
  * @see HorseJockey#run()
+ * @since 1.0
  * @version 1.0
  */
 public enum HorseJockeyState {

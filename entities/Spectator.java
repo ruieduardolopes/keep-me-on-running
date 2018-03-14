@@ -15,6 +15,7 @@ import hippodrome.Paddock;
  * @see Broker
  * @see HorseJockey
  * @since 1.0
+ * @version 1.0
  */
 public class Spectator implements Runnable {
     /**

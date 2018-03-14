@@ -16,6 +16,7 @@ import hippodrome.Stable;
  * @see Spectator
  * @see HorseJockey
  * @since 1.0
+ * @version 1.0
  */
 public class Broker implements Runnable {
     /**
