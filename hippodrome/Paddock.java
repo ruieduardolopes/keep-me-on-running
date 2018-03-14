@@ -1,5 +1,7 @@
 package hippodrome;
 
+import hippodrome.actions.Race;
+
 /**
  * Place where the horses are paradded before the {@link entities.Spectator}s. As the
  * pairs Horse/Jockey comes here, it means that each and everyone of them is getting prepared
@@ -12,7 +14,7 @@ package hippodrome;
 public class Paddock {
     /**
      * Signal given by the {@link entities.Broker} in order to proceed to here (the {@link Paddock}).
-     * This signal is given calling only the pairs Horse/Jockey which are supposed to run on the next {@link concepts.Race},
+     * This signal is given calling only the pairs Horse/Jockey which are supposed to run on the next {@link Race},
      * identified by the number {@code raceNumber}.
      *
      * @param raceNumber number identification of the race which is about to begin.

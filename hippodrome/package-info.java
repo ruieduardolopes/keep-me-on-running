@@ -13,6 +13,7 @@
  * @see concepts
  * @see entities
  * @see stage
+ * @see hippodrome.actions
  * @since 1.0
  */
 package hippodrome;

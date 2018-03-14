@@ -1,6 +1,7 @@
 package hippodrome;
 
 import entities.Spectator;
+import hippodrome.actions.Race;
 
 /**
  * Place where the {@link Spectator}s go to enjoy the race (at a Watching Stand) and the {@link entities.Broker}
@@ -15,18 +16,18 @@ public class ControlCentre {
      * Signal given by the {@link entities.Broker} to summon all the horses from the {@link Stable} to the
      * {@link Paddock}. Such horses, representation of pairs Horse/Jockey's, must be identified by a race
      * number identification, such as the {@link entities.Broker}'s call should only be relative to some of the
-     * pairs - the ones which will run side-by-side on the same {@link concepts.Race}, on the same {@link RacingTrack}.
+     * pairs - the ones which will run side-by-side on the same {@link Race}, on the same {@link RacingTrack}.
      *
-     * @param raceNumber number identification of the next {@link concepts.Race}.
+     * @param raceNumber number identification of the next {@link Race}.
      */
     public static void summonHorsesToPaddock(int raceNumber) {
 
     }
 
     /**
-     * Signal given by the {@link entities.Broker} to start a {@link concepts.Race} identified by {@code raceNumber}.
+     * Signal given by the {@link entities.Broker} to start a {@link Race} identified by {@code raceNumber}.
      *
-     * @param raceNumber number idenitification of the next {@link concepts.Race} to be started as of this instant.
+     * @param raceNumber number idenitification of the next {@link Race} to be started as of this instant.
      */
     public static void startTheRace(int raceNumber) {
 
@@ -41,10 +42,10 @@ public class ControlCentre {
     }
 
     /**
-     * Wait for the next signal of the {@link entities.Broker} in order to prepare a new {@link concepts.Race}, identified
+     * Wait for the next signal of the {@link entities.Broker} in order to prepare a new {@link Race}, identified
      * by the number {@code raceNumber}.
      *
-     * @param raceNumber number identification of the next {@link concepts.Race} to begin.
+     * @param raceNumber number identification of the next {@link Race} to begin.
      *
      * @return {@code true} if the next race is still not prepared to begin; otherwise {@code false}.
      */
@@ -53,9 +54,9 @@ public class ControlCentre {
     }
 
     /**
-     * Signal set out to all the {@link Spectator}s in order to watch the {@link concepts.Race} number {@code raceNumber}.
+     * Signal set out to all the {@link Spectator}s in order to watch the {@link Race} number {@code raceNumber}.
      *
-     * @param raceNumber number identification of the {@link concepts.Race} which is about to start.
+     * @param raceNumber number identification of the {@link Race} which is about to start.
      */
     public static void goWatchTheRace(int raceNumber) {
 

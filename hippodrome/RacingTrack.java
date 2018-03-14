@@ -1,6 +1,6 @@
 package hippodrome;
 
-import concepts.Race;
+import hippodrome.actions.Race;
 import entities.HorseJockey;
 
 /**

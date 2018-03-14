@@ -1,4 +1,4 @@
-package concepts;
+package hippodrome.actions;
 
 /**
  * Representation of a race, which is done over a {@link hippodrome.RacingTrack}.
