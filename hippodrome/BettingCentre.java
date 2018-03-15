@@ -66,6 +66,15 @@ public class BettingCentre {
     }
 
     /**
+     * Verification of bet's winners.
+     *
+     * @return {@code true} if anybody had won indeed; otherwise it will return {@code false}.
+     */
+    public static boolean areThereAnyWinners() {
+        return false;
+    }
+
+    /**
      * The waiting queue to contact the {@link Broker} on its tasks. This could be used while waiting to a {@link Spectator}
      * place a bet, or while wainting to a {@link Spectator} go collect his (or hers) gains.
      */
