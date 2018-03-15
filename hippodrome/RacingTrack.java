@@ -29,6 +29,7 @@ public class RacingTrack {
      * Let a pair Horse/Jockey {@code horse} make a move on the track, accordingly to its abilities to move.
      *
      * @param horse the pair Horse/Jockey which wants to make a move.
+     * @param isLastPairHorseJockey boolean value which validates if {@code horse} is the last one arriving.
      */
     public static void makeAMove(HorseJockey horse, boolean isLastPairHorseJockey) {
         if (isLastPairHorseJockey) {

@@ -30,7 +30,7 @@ public enum BrokerState {
     WAITING_FOR_BETS,
     /**
      * This is a <strong>blocking state</strong>. Here, the broker is waken up by the operation
-     * {@link hippodrome.RacingTrack#makeAMove(HorseJockey)} of the last pair Horse/Jockey ({@link HorseJockey})
+     * {@link hippodrome.RacingTrack#makeAMove(HorseJockey,boolean)} of the last pair Horse/Jockey ({@link HorseJockey})
      * crossing the finishing line.
      */
     SUPERVISING_THE_RACE,
