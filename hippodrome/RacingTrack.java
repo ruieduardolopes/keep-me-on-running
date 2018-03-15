@@ -1,5 +1,7 @@
 package hippodrome;
 
+import entities.Broker;
+import entities.BrokerState;
 import hippodrome.actions.Race;
 import entities.HorseJockey;
 
@@ -28,7 +30,9 @@ public class RacingTrack {
      * @param horse the pair Horse/Jockey which wants to make a move.
      */
     public static void makeAMove(HorseJockey horse) {
-
+        //TODO implement condition to change state
+        //if last horse
+        ((Broker)Thread.currentThread()).setBrokerState(BrokerState.SETTLING_ACCOUNTS);
     }
 
     /**
