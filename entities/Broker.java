@@ -34,7 +34,7 @@ public class Broker extends Thread implements Runnable {
             BettingCentre.acceptTheBets();                                  // the Broker must accept all the bets on the Betting Center;
             ControlCentre.startTheRace(raceNumber);                         // then alerting everybody that the race starts (on the Control Centre);
             ControlCentre.reportResults();                                  // as soon as it is over, the results must be reported at the same place;
-            if (ControlCentre.areThereAnyWinners()) {                       // if there are any betting winners then
+            if (BettingCentre.areThereAnyWinners()) {                       // if there are any betting winners then
                 BettingCentre.honourTheBets();                              //    these bets must be honoured;
             }                                                               //
         }                                                                   //
