@@ -18,7 +18,7 @@ import hippodrome.Stable;
  * @since 0.1
  * @version 0.1
  */
-public class HorseJockey extends Thread implements Runnable {
+public class HorseJockey implements Runnable {
     /**
      * Creates a pair Horse/Jockey with a given {@code identification} and an {@code ability} to run.
      *
