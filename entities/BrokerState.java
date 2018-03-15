@@ -6,8 +6,8 @@ package entities;
  * @author Hugo Fragata
  * @author Rui Lopes
  * @see Broker#run()
- * @since 1.0
- * @version 1.0
+ * @since 0.1
+ * @version 0.1
  */
 public enum BrokerState {
     /**

@@ -9,7 +9,7 @@
  * @see concepts
  * @see entities
  * @see hippodrome
- * @since 1.0
- * @version 1.0
+ * @since 0.1
+ * @version 0.1
  */
 package stage;

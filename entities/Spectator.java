@@ -14,8 +14,8 @@ import hippodrome.Paddock;
  * @author Rui Lopes
  * @see Broker
  * @see HorseJockey
- * @since 1.0
- * @version 1.0
+ * @since 0.1
+ * @version 0.1
  */
 public class Spectator extends Thread implements Runnable {
     /**
