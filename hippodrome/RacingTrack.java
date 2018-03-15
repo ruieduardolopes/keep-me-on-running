@@ -31,16 +31,11 @@ public class RacingTrack {
      *
      * @param horse the pair Horse/Jockey which wants to make a move.
      */
-    public static void makeAMove(HorseJockey horse) {
-        //TODO implement condition to change state
-        //if last horse
-        ((Broker)Thread.currentThread()).setBrokerState(BrokerState.SETTLING_ACCOUNTS);
-
-        //TODO make horses move
+    public static void makeAMove(HorseJockey horse, boolean isLastPairHorseJockey) {
+        if (isLastPairHorseJockey) {
+            ((Broker) Thread.currentThread()).setBrokerState(BrokerState.SETTLING_ACCOUNTS);
+        }
         ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.RUNNING);
-        //TODO implement condition to change hasFinishLineBeenCrossed
-        ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_FINNISH_LINE);
-
     }
 
     /**
@@ -51,9 +46,6 @@ public class RacingTrack {
      * @return {@code true} if the pair Horse/Jockey had crossed the finish line; otherwise it will return {@code false}.
      */
     public static boolean hasFinishLineBeenCrossed(HorseJockey horse) {
-        //TODO implement condition to change hasFinishLineBeenCrossed
-        ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.RUNNING);
-        //TODO implement condition to change hasFinishLineBeenCrossed
         ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_FINNISH_LINE);
 
         return false;
