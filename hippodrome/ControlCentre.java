@@ -91,15 +91,6 @@ public class ControlCentre {
     }
 
     /**
-     * Verification of bet's winners.
-     *
-     * @return {@code true} if anybody had won indeed; otherwise it will return {@code false}.
-     */
-    public static boolean areThereAnyWinners() {
-        return false;
-    }
-
-    /**
      * Signal given by the {@link entities.Broker} to summon all the horses from the {@link Stable} to the
      * {@link Paddock}.
      */
