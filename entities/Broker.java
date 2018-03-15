@@ -20,7 +20,7 @@ import hippodrome.Stable;
  */
 public class Broker implements Runnable {
     /**
-     * Constructs a Broker.
+     * Creates a Broker.
      */
     public Broker() {
 
