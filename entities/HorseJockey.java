@@ -47,7 +47,7 @@ public class HorseJockey extends Thread implements Runnable {
         }                                                           //
         RacingTrack.proceedToStartLine();                           // Racing track's call for horses on the start line;
         while (!RacingTrack.hasFinishLineBeenCrossed(this)) {       // while this horse has not crossed the finish line
-            RacingTrack.makeAMove(this);                            //    it should make a move forward, to reach it;
+            RacingTrack.makeAMove(this, isLastPair);                //    it should make a move forward, to reach it;
         }                                                           //
         Stable.proceedToStable();                                   // finished the run, the pair must return to Stable.
     }

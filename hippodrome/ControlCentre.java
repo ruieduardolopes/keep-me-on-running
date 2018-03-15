@@ -1,8 +1,6 @@
 package hippodrome;
 
-import entities.Broker;
-import entities.BrokerState;
-import entities.Spectator;
+import entities.*;
 import hippodrome.actions.Race;
 
 /**
@@ -53,6 +51,8 @@ public class ControlCentre {
      * @return {@code true} if the next race is still not prepared to begin; otherwise {@code false}.
      */
     public static boolean waitForTheNextRace(int raceNumber) {
+        //TODO check race number condition
+        ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.WAITING_FOR_A_RACE_TO_START);
         return false;
     }
 
@@ -62,7 +62,8 @@ public class ControlCentre {
      * @param raceNumber number identification of the {@link Race} which is about to start.
      */
     public static void goWatchTheRace(int raceNumber) {
-
+        //TODO check raceNumber condition
+        ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.WATCHING_A_RACE);
     }
 
     /**
@@ -73,14 +74,20 @@ public class ControlCentre {
      * @return {@code true} if {@code spectator} has won his (or hers) bet; otherwise, it will return {@code false}.
      */
     public static boolean haveIWon(Spectator spectator) {
-        return false;
+        //TODO check if won
+        if(true) {
+            ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.WATCHING_A_RACE);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
      * Relax a bit from the games, as this is could be the final transition of a {@link Spectator} lifecycle.
      */
     public static void relaxABit() {
-
+        ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.CELEBRATING);
     }
 
     /**
@@ -110,6 +117,6 @@ public class ControlCentre {
      * a bet.
      */
     public static void goCheckHorses() {
-
+        ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.APPRAISING_THE_HORSES);
     }
 }
