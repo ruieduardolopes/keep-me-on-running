@@ -1,5 +1,7 @@
 package hippodrome;
 
+import entities.Broker;
+import entities.BrokerState;
 import entities.Spectator;
 import hippodrome.actions.Race;
 
@@ -102,7 +104,7 @@ public class ControlCentre {
      * {@link Paddock}.
      */
     public static void summonHorsesToPaddock() {
-
+        ((Broker)Thread.currentThread()).setBrokerState(BrokerState.ANNOUNCING_NEXT_RACE);
     }
 
     /**

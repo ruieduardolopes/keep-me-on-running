@@ -17,7 +17,7 @@ import hippodrome.Paddock;
  * @since 1.0
  * @version 1.0
  */
-public class Spectator implements Runnable {
+public class Spectator extends Thread implements Runnable {
     /**
      * Definition of the Spectator's lifecycle.
      *
@@ -56,8 +56,18 @@ public class Spectator implements Runnable {
      * @return the current spectator {@link SpectatorState}.
      * @see SpectatorState
      */
-    public SpectatorState getState() {
+    public SpectatorState getSpectatorState() {
         return state;
+    }
+
+    /**
+     * Sets the Spectator's state, from the possible available {@link SpectatorState}
+     * enumeration.
+     *
+     * @param state Enumeration value represented by {@link SpectatorState}
+     */
+    public void setSpectatorState(SpectatorState state) {
+        this.state = state;
     }
 
     /**

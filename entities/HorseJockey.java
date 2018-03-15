@@ -18,7 +18,7 @@ import hippodrome.Stable;
  * @since 1.0
  * @version 1.0
  */
-public class HorseJockey implements Runnable {
+public class HorseJockey extends Thread implements Runnable {
     /**
      * Definition of the HorseJockey's lifecycle.
      *
@@ -48,8 +48,18 @@ public class HorseJockey implements Runnable {
      * @return the current spectator {@link HorseJockeyState}.
      * @see HorseJockeyState
      */
-    public HorseJockeyState getState() {
+    public HorseJockeyState getHorseJockeyState() {
         return state;
+    }
+
+    /**
+     * Sets the HorseJockey's state, from the possible available {@link HorseJockeyState}
+     * enumeration.
+     *
+     * @param state Enumeration value represented by {@link HorseJockeyState}
+     */
+    public void setHorseJockeyState(HorseJockeyState state) {
+        this.state = state;
     }
 
     /**

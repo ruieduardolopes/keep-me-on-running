@@ -18,7 +18,7 @@ import hippodrome.Stable;
  * @since 1.0
  * @version 1.0
  */
-public class Broker implements Runnable {
+public class Broker extends Thread implements Runnable {
     /**
      * Definition of the Broker's lifecycle.
      *
@@ -48,8 +48,18 @@ public class Broker implements Runnable {
      * @return the current broker {@link BrokerState}.
      * @see BrokerState
      */
-    public BrokerState getState() {
+    public BrokerState getBrokerState() {
         return state;
+    }
+
+    /**
+     * Sets the Broker's state, from the possible available {@link BrokerState}
+     * enumeration.
+     *
+     * @param state Enumeration value represented by {@link BrokerState}
+     */
+    public void setBrokerState(BrokerState state) {
+        this.state = state;
     }
 
     /**
