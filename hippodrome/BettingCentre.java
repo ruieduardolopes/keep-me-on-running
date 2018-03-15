@@ -1,9 +1,6 @@
 package hippodrome;
 
-import entities.Broker;
-import entities.BrokerState;
-import entities.HorseJockey;
-import entities.Spectator;
+import entities.*;
 
 /**
  * This class needs a Queue implementation in order to accomplish the creation of such a
@@ -52,6 +49,7 @@ public class BettingCentre {
      * @return the amount of money which was accepted by the {@link Broker} to place the bet.
      */
     public static int placeABet(Spectator spectator, int bet, int horse) {
+        ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.PLACING_A_BET);
         return 0;
     }
 
@@ -63,6 +61,8 @@ public class BettingCentre {
      * @return the amount of money collected by the {@code spectator}.
      */
     public static int goCollectTheGains(Spectator spectator) {
+        //TODO check which spectator is
+        ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.COLLECTING_THE_GAINS);
         return 0;
     }
 
