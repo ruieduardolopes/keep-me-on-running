@@ -1,6 +1,7 @@
 package hippodrome;
 
 import entities.Broker;
+import entities.BrokerState;
 import entities.HorseJockey;
 import entities.Spectator;
 
@@ -29,14 +30,14 @@ public class BettingCentre {
      * Accept all the bets done by the {@link Spectator}s.
      */
     public static void acceptTheBets() {
-
+        ((Broker)Thread.currentThread()).setBrokerState(BrokerState.WAITING_FOR_BETS);
     }
 
     /**
      * Give all the money to the respective betting parts - the {@link Spectator}s.
      */
     public static void honourTheBets() {
-
+        ((Broker)Thread.currentThread()).setBrokerState(BrokerState.SETTLING_ACCOUNTS);
     }
 
     /**

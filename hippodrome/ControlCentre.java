@@ -33,7 +33,7 @@ public class ControlCentre {
      * @param raceNumber number idenitification of the next {@link Race} to be started as of this instant.
      */
     public static void startTheRace(int raceNumber) {
-
+        ((Broker)Thread.currentThread()).setBrokerState(BrokerState.SUPERVISING_THE_RACE);
     }
 
     /**
@@ -41,7 +41,7 @@ public class ControlCentre {
      * can be considered as terminated.
      */
     public static void entertainTheGuests() {
-
+        ((Broker)Thread.currentThread()).setBrokerState(BrokerState.PLAYING_HOST_AT_THE_BAR);
     }
 
     /**
