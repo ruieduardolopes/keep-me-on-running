@@ -2,6 +2,7 @@ package hippodrome;
 
 import entities.Broker;
 import entities.BrokerState;
+import entities.HorseJockeyState;
 import hippodrome.actions.Race;
 import entities.HorseJockey;
 
@@ -21,6 +22,7 @@ public class RacingTrack {
      * on the {@link Paddock} to the Racing Track's start line.
      */
     public static void proceedToStartLine() {
+        ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_START_LINE);
 
     }
 
@@ -33,6 +35,12 @@ public class RacingTrack {
         //TODO implement condition to change state
         //if last horse
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.SETTLING_ACCOUNTS);
+
+        //TODO make horses move
+        ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.RUNNING);
+        //TODO implement condition to change hasFinishLineBeenCrossed
+        ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_FINNISH_LINE);
+
     }
 
     /**
@@ -43,6 +51,11 @@ public class RacingTrack {
      * @return {@code true} if the pair Horse/Jockey had crossed the finish line; otherwise it will return {@code false}.
      */
     public static boolean hasFinishLineBeenCrossed(HorseJockey horse) {
+        //TODO implement condition to change hasFinishLineBeenCrossed
+        ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.RUNNING);
+        //TODO implement condition to change hasFinishLineBeenCrossed
+        ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_FINNISH_LINE);
+
         return false;
     }
 

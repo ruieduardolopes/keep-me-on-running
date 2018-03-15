@@ -1,5 +1,8 @@
 package hippodrome;
 
+import entities.HorseJockey;
+import entities.HorseJockeyState;
+
 /**
  * Place where the horses rest waiting their turn to enter the competition.
  *
@@ -14,6 +17,7 @@ public class Stable {
      * to this place (the {@link Stable}).
      */
     public static void proceedToStable() {
+        ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_STABLE);
 
     }
 

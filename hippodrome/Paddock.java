@@ -1,5 +1,7 @@
 package hippodrome;
 
+import entities.HorseJockey;
+import entities.HorseJockeyState;
 import hippodrome.actions.Race;
 
 /**
@@ -24,6 +26,8 @@ public class Paddock {
      * {@code false}.
      */
     public static boolean proceedToPaddock(int raceNumber) {
+
+        ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_PADDOCK);
         return false;
     }
 
