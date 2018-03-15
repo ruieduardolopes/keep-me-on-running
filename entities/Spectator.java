@@ -19,6 +19,18 @@ import hippodrome.Paddock;
  */
 public class Spectator extends Thread implements Runnable {
     /**
+     * Creates a Spectator with an {@code identification} and a given amount of {@code money}.
+     *
+     * @param identification number which identifies this {@code Spectator}.
+     * @param money amount of money given to this {@code Spectator}.
+     */
+    public Spectator(int identification, int money) {
+        this.identification = identification;
+        this.money = money;
+        tired = false;
+    }
+
+    /**
      * Definition of the Spectator's lifecycle.
      *
      * In a technical perspective this is reasoned by a thread definition function which

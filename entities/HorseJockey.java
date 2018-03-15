@@ -20,6 +20,17 @@ import hippodrome.Stable;
  */
 public class HorseJockey extends Thread implements Runnable {
     /**
+     * Creates a pair Horse/Jockey with a given {@code identification} and an {@code ability} to run.
+     *
+     * @param identification number which identifies this pair Horse/Jockey.
+     * @param ability number with characterizes the Horse ability to run.
+     */
+    public HorseJockey(int identification, int ability) {
+        this.identification = identification;
+        this.ability = ability;
+    }
+
+    /**
      * Definition of the HorseJockey's lifecycle.
      *
      * In a technical perspective this is reasoned by a thread definition function which

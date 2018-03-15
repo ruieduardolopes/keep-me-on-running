@@ -20,6 +20,13 @@ import hippodrome.Stable;
  */
 public class Broker extends Thread implements Runnable {
     /**
+     * Constructs a Broker.
+     */
+    public Broker() {
+
+    }
+
+    /**
      * Definition of the Broker's lifecycle.
      *
      * In a technical perspective this is reasoned by a thread definition function which
