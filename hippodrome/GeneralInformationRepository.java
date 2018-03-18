@@ -90,20 +90,20 @@ public class GeneralInformationRepository {
      */
     private static void printEntitiesLine() {
         String line = " ";
-        line += String.format("%6s", brokerStatus);                     /* Stat */
+        line += String.format("%6s", brokerStatus);                             /* Stat */
         line += " ";
         for (Spectator spectator : spectators) {
-            line += String.format("%4s", spectator.getStatus());        /* St# */
+            line += String.format("%4s", spectator.getStatus());                /* St# */
             line += "-";
-            line += String.format("%3d", spectator.getAmountOfMoney()); /* Am# */
+            line += String.format("%3d", spectator.getAmountOfMoney());         /* Am# */
             line += " ";
         }
-        line += String.format("%2d", raceNumber);
+        line += String.format("%2d", raceNumber);                               /* RN */
         line += " ";
         for (HorseJockey horseJockey : horseJockeys) {
-            line += String.format("%4s", horseJockey.getStatus());      /* St# */
+            line += String.format("%4s", horseJockey.getStatus());              /* St# */
             line += "-";
-            line += String.format("%4d", horseJockey.getAbility());     /* Len# */
+            line += String.format("%4d", horseJockey.getAbility());             /* Len# */
             line += " ";
         }
         GenericIO.writelnString(line);
@@ -114,7 +114,30 @@ public class GeneralInformationRepository {
      * Makes a snapshot of the race at a given time.
      */
     private static void printRaceLine() {
-
+        String line = " ";
+        line += String.format("%2d", raceNumber);                                   /* RN */
+        line += " ";
+        line += String.format("%4d", currentRaceDistance);                          /* Dist */
+        line += " ";
+        for (Spectator spectator : spectators) {
+            line += String.format("%4d", spectator.getBetSelection());              /* BS# */
+            line += "-";
+            line += String.format("%3d", spectator.getBetAmount());                 /* BA# */
+            line += " ";
+        }
+        line += " ";
+        for (HorseJockey horseJockey : horseJockeys) {
+            line += String.format("%4f", horseJockey.getProbabilityToWin());        /* Od# */
+            line += "-";
+            line += String.format("%2d", horseJockey.getNumberOfIncrementsDid());   /* N# */
+            line += "-";
+            line += String.format("%3d", horseJockey.getPositionOnTrack());         /* Ps# */
+            line += "-";
+            line += String.format("%3d", horseJockey.getFinalStandPosition());      /* SD# */
+            line += " ";
+        }
+        GenericIO.writelnString(line);
+        file.writelnString(line);
     }
 
     /**

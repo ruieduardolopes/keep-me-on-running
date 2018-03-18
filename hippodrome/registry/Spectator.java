@@ -32,6 +32,15 @@ public class Spectator {
     }
 
     /**
+     * Get the current amount of money spent betting on a pair Horse/Jockey.
+     *
+     * @return the amount of money bet.
+     */
+    public int getBetAmount() {
+        return betAmount;
+    }
+
+    /**
      * Sets a new amount of money of a spectator.
      *
      * @param amountOfMoney new amount of money available to bet.
