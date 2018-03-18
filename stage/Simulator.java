@@ -49,19 +49,52 @@ public class Simulator {
         }
     }
 
+    /**
+     * Generate money between a value of 1 and 999.
+     *
+     * @return a money value between 1 and 999.
+     */
     private static int generateMoney() {
-        return (int)(Math.random()*1000);
+        return (int)(Math.random()*1000) + 1;
     }
 
+    /**
+     * Generate a value for representation of pair Horse/Jockey's ability.
+     *
+     * @return a value between 0 and 5 which must be considered as the step
+     * of the horse on track, while running.
+     */
     private static int generateAbility() {
         return (int)(Math.random()*5);
     }
 
+    /**
+     * Number of horses competing with each other.
+     */
     private static int numberOfHorses = 4;
+
+    /**
+     * Number of races happening at the same event.
+     */
     private static int numberOfRaces = 4;
-    private static int numberOfRacingTracks = 4;
+
+    /**
+     * Number of spectators appearing on the hippodrome.
+     */
     private static int numberOfSpectators = 4;
+
+    /**
+     * The sets' Broker instance.
+     */
     private static Broker broker = null;
+
+    /**
+     * The sets' array of spectators' instance.
+     */
     private static Spectator[] spectators = null;
+
+    /**
+     * The sets' array of pairs Horse/Jockey instance.
+     */
     private static HorseJockey[] horseJockeys = null;
 }
