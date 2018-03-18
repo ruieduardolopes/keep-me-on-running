@@ -32,7 +32,6 @@ public class GeneralInformationRepository {
             System.err.println("The exception says: " + ife.getMessage());
             System.err.println("Stack Trace:\n");
             ife.printStackTrace();
-        } finally {
             System.err.println("Quitting...");
             System.exit(1);
         }
@@ -44,7 +43,7 @@ public class GeneralInformationRepository {
      * followed by the UNIX timestamp of when this method is executed
      * and the extension {@code .log}.
      */
-    public static void giveFileAName() {
+    private static void giveFileAName() {
         filename = "horse-run-" + Instant.now().getEpochSecond() + ".log";
     }
 
@@ -54,7 +53,7 @@ public class GeneralInformationRepository {
      * @throws InaccessibleFileException if the file does not grant any permission for the current user to be written on.
      * The same behavior could occur if the directory where this file resides cannot be written by the current user.
      */
-    public static void printHeaders() throws InaccessibleFileException {
+    private static void printHeaders() throws InaccessibleFileException {
         boolean actionSucceeded = file.openForWriting(null, filename);
         if (!actionSucceeded) {
             throw new exceptions.InaccessibleFileException("The requested file \"" + filename + "\" is currently unaccessible or this user does not have permissions to write on this directory.");
@@ -75,6 +74,8 @@ public class GeneralInformationRepository {
         GenericIO.writelnString(header2);
         file.writelnString(header2);
     }
+
+    public
 
     /**
      * Name of the file where the log is to be saved.
