@@ -51,7 +51,8 @@ public class GeneralInformationRepository {
     /**
      * Method to print the headers of the log files.
      *
-     * @throws InaccessibleFileException
+     * @throws InaccessibleFileException if the file does not grant any permission for the current user to be written on.
+     * The same behavior could occur if the directory where this file resides cannot be written by the current user.
      */
     public static void printHeaders() throws InaccessibleFileException {
         boolean actionSucceeded = file.openForWriting(null, filename);
