@@ -68,7 +68,7 @@ public class GeneralInformationRepository {
 
         /* print the column headers */ // TODO - make this generic
         String header1 = "MAN/BRK           SPECTATOR/BETTER              HORSE/JOCKEY PAIR at Race RN\n" +
-                         "  Stat  St0  Am0 St1  Am1 St2  Am2 St3  Am3 RN St0 Len0 St1 Len1 St2 Len2 St3 Len3";
+                         "  Stat  St0  Am0 St1  Am1 St2  Am2 St3  Am3 RN St0  Len0 St1  Len1 St2  Len2 St3  Len3";
         String header2 = "                                        Race RN Status\n" +
                          " RN Dist BS0  BA0 BS1  BA1 BS2  BA2 BS3  BA3  Od0 N0 Ps0 SD0 Od1 N1 Ps1 Sd1 Od2 N2 Ps2 Sd2 Od3 N3 Ps3 St3";
         GenericIO.writelnString(header1);
@@ -78,16 +78,42 @@ public class GeneralInformationRepository {
     }
 
     /**
+     * Adds a new snapshot of the race to log it.
+     */
+    public static void newSnapshot() {
+        printEntitiesLine();
+        printRaceLine();
+    }
+
+    /**
      * Makes a snapshot of the entities at a given time.
      */
-    public static void printEntitiesLine() {
-
+    private static void printEntitiesLine() {
+        String line = " ";
+        line += String.format("%6s", brokerStatus);                     /* Stat */
+        line += " ";
+        for (Spectator spectator : spectators) {
+            line += String.format("%4s", spectator.getStatus());        /* St# */
+            line += "-";
+            line += String.format("%3d", spectator.getAmountOfMoney()); /* Am# */
+            line += " ";
+        }
+        line += String.format("%2d", raceNumber);
+        line += " ";
+        for (HorseJockey horseJockey : horseJockeys) {
+            line += String.format("%4s", horseJockey.getStatus());      /* St# */
+            line += "-";
+            line += String.format("%4d", horseJockey.getAbility());     /* Len# */
+            line += " ";
+        }
+        GenericIO.writelnString(line);
+        file.writelnString(line);
     }
 
     /**
      * Makes a snapshot of the race at a given time.
      */
-    public static void printRaceLine() {
+    private static void printRaceLine() {
 
     }
 
