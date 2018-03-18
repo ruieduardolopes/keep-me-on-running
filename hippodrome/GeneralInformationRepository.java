@@ -3,6 +3,8 @@ package hippodrome;
 import exceptions.InaccessibleFileException;
 import genclass.GenericIO;
 import genclass.TextFile;
+import hippodrome.registry.HorseJockey;
+import hippodrome.registry.Spectator;
 
 import java.time.Instant;
 
@@ -48,7 +50,7 @@ public class GeneralInformationRepository {
     }
 
     /**
-     * Method to print the headers of the log files.
+     * Print the headers of the log files.
      *
      * @throws InaccessibleFileException if the file does not grant any permission for the current user to be written on.
      * The same behavior could occur if the directory where this file resides cannot be written by the current user.
@@ -64,7 +66,7 @@ public class GeneralInformationRepository {
         GenericIO.writelnString(title);
         file.writelnString(title);
 
-        /* print the column headers */
+        /* print the column headers */ // TODO - make this generic
         String header1 = "MAN/BRK           SPECTATOR/BETTER              HORSE/JOCKEY PAIR at Race RN\n" +
                          "  Stat  St0  Am0 St1  Am1 St2  Am2 St3  Am3 RN St0 Len0 St1 Len1 St2 Len2 St3 Len3";
         String header2 = "                                        Race RN Status\n" +
@@ -75,7 +77,24 @@ public class GeneralInformationRepository {
         file.writelnString(header2);
     }
 
-    public
+    /**
+     * Makes a snapshot of the entities at a given time.
+     */
+    public static void printEntitiesLine() {
+
+    }
+
+    /**
+     * Makes a snapshot of the race at a given time.
+     */
+    public static void printRaceLine() {
+
+    }
+
+    private static String brokerStatus;
+    private static Spectator[] spectators;
+    private static HorseJockey[] horseJockeys;
+    private static int raceNumber;
 
     /**
      * Name of the file where the log is to be saved.
