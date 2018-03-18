@@ -91,10 +91,29 @@ public class GeneralInformationRepository {
 
     }
 
+    /**
+     * Last taken snapshot of the {@link entities.Broker} entity.
+     */
     private static String brokerStatus;
+
+    /**
+     * Last taken snapshot of the {@link entities.Spectator} entity.
+     */
     private static Spectator[] spectators;
+
+    /**
+     * Last taken snapshot of the pairs Horse/Jockey ({@link entities.HorseJockey}) entities.
+     */
     private static HorseJockey[] horseJockeys;
+
+    /**
+     * Last taken snapshot of the race number.
+     */
     private static int raceNumber;
+
+    /**
+     * Last taken snapshot of the current race distance of track.
+     */
     private static int currentRaceDistance;
 
     /**
