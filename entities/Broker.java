@@ -18,7 +18,7 @@ import hippodrome.Stable;
  * @since 0.1
  * @version 0.1
  */
-public class Broker implements Runnable {
+public class Broker extends Thread {
     /**
      * Creates a Broker.
      */

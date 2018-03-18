@@ -17,7 +17,7 @@ import hippodrome.Paddock;
  * @since 0.1
  * @version 0.1
  */
-public class Spectator implements Runnable {
+public class Spectator extends Thread {
     /**
      * Creates a Spectator with an {@code identification} and a given amount of {@code money}.
      *
