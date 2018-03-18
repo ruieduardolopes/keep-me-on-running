@@ -75,6 +75,14 @@ public class GeneralInformationRepository {
         file.writelnString(header2);
     }
 
+    /**
+     * Name of the file where the log is to be saved.
+     */
     private static String filename;
+
+    /**
+     * File object {@code file} from the external class {@link TextFile} which
+     * allows us to control a file as IO for the log.
+     */
     private static TextFile file = new TextFile();
 }
