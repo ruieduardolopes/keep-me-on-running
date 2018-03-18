@@ -2,6 +2,15 @@ package hippodrome.registry;
 
 import entities.SpectatorState;
 
+/**
+ * Class which saves a snapshot of a Spectator.
+ *
+ * @author Hugo Fragata
+ * @author Rui Lopes
+ * @see HorseJockey
+ * @version 0.1
+ * @since 0.1
+ */
 public class Spectator {
     /**
      * Get the status of a {@code Spectator}.

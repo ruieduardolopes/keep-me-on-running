@@ -2,6 +2,15 @@ package hippodrome.registry;
 
 import entities.HorseJockeyState;
 
+/**
+ * Class which saves a snapshot of a pair Horse/Jockey statuses.
+ *
+ * @author Hugo Fragata
+ * @author Rui Lopes
+ * @see Spectator
+ * @version 0.1
+ * @since 0.1
+ */
 public class HorseJockey {
     /**
      * Get the status of this pair Horse/Jockey ({@link HorseJockey}).
