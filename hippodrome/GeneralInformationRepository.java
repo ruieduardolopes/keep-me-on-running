@@ -95,6 +95,7 @@ public class GeneralInformationRepository {
     private static Spectator[] spectators;
     private static HorseJockey[] horseJockeys;
     private static int raceNumber;
+    private static int currentRaceDistance;
 
     /**
      * Name of the file where the log is to be saved.
