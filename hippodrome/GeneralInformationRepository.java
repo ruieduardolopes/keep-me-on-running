@@ -257,6 +257,91 @@ public class GeneralInformationRepository {
     }
 
     /**
+     * Sets a new ability for the {@code horseJockeyId} {@link HorseJockey}.
+     *
+     * @param horseJockeyId the identification of the pair {@link HorseJockey}.
+     * @param ability the current ability.
+     *
+     * @throws UnknownHorseJockeyException if a {@link HorseJockey} is non-existent and is indexed over our
+     * {@code horseJockeys} array.
+     */
+    public static void setHorseJockeyAbility(int horseJockeyId, int ability) throws UnknownHorseJockeyException {
+        try {
+            horseJockeys[horseJockeyId].setAbility(ability);
+        } catch (IndexOutOfBoundsException ioobe) {
+            throw new UnknownHorseJockeyException(horseJockeyId);
+        }
+    }
+
+    /**
+     * Sets a new probability to win for the {@code horseJockeyId} {@link HorseJockey}.
+     *
+     * @param horseJockeyId the identification of the pair {@link HorseJockey}.
+     * @param probability the current probability to win.
+     *
+     * @throws UnknownHorseJockeyException if a {@link HorseJockey} is non-existent and is indexed over our
+     * {@code horseJockeys} array.
+     */
+    public static void setHorseJockeyProbabilityToWin(int horseJockeyId, double probability) throws UnknownHorseJockeyException {
+        try {
+            horseJockeys[horseJockeyId].setProbabilityToWin(probability);
+        } catch (IndexOutOfBoundsException ioobe) {
+            throw new UnknownHorseJockeyException(horseJockeyId);
+        }
+    }
+
+    /**
+     * Sets a new number of increments (iterations) for the {@code horseJockeyId} {@link HorseJockey}.
+     *
+     * @param horseJockeyId the identification of the pair {@link HorseJockey}.
+     * @param iterations the current number of increments.
+     *
+     * @throws UnknownHorseJockeyException if a {@link HorseJockey} is non-existent and is indexed over our
+     * {@code horseJockeys} array.
+     */
+    public static void setHorseJockeyNumberOfIncrementsDid(int horseJockeyId, int iterations) throws UnknownHorseJockeyException {
+        try {
+            horseJockeys[horseJockeyId].setNumberOfIncrementsDid(iterations);
+        } catch (IndexOutOfBoundsException ioobe) {
+            throw new UnknownHorseJockeyException(horseJockeyId);
+        }
+    }
+
+    /**
+     * Sets a new position on track for the {@code horseJockeyId} {@link HorseJockey}.
+     *
+     * @param horseJockeyId the identification of the pair {@link HorseJockey}.
+     * @param position the current pair Horse/Jockey position on track.
+     *
+     * @throws UnknownHorseJockeyException if a {@link HorseJockey} is non-existent and is indexed over our
+     * {@code horseJockeys} array.
+     */
+    public static void setHorseJockeyPositionOnTrack(int horseJockeyId, int position) throws UnknownHorseJockeyException {
+        try {
+            horseJockeys[horseJockeyId].setPositionOnTrack(position);
+        } catch (IndexOutOfBoundsException ioobe) {
+            throw new UnknownHorseJockeyException(horseJockeyId);
+        }
+    }
+
+    /**
+     * Sets a new final stand position for the {@code horseJockeyId} {@link HorseJockey}, given by a {@link HorseJockeyState}.
+     *
+     * @param horseJockeyId the identification of the pair {@link HorseJockey}.
+     * @param position the current final stand position.
+     *
+     * @throws UnknownHorseJockeyException if a {@link HorseJockey} is non-existent and is indexed over our
+     * {@code horseJockeys} array.
+     */
+    public static void setHorseJockeyFinalStandPosition(int horseJockeyId, int position) throws UnknownHorseJockeyException {
+        try {
+            horseJockeys[horseJockeyId].setFinalStandPosition(position);
+        } catch (IndexOutOfBoundsException ioobe) {
+            throw new UnknownHorseJockeyException(horseJockeyId);
+        }
+    }
+
+    /**
      * Gets the value of the race number.
      *
      * @return the identification of the last snapshot's race number.
