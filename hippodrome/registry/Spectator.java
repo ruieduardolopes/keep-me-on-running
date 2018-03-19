@@ -64,6 +64,7 @@ public class Spectator {
      * @param status the new status (Enumeration of the type {@link entities.SpectatorState} of this {@link Spectator}.
      */
     public void setStatus(SpectatorState status) {
+        this.status = "";
         for (String word : status.name().split("_")) {
             this.status += word.charAt(0);
         }

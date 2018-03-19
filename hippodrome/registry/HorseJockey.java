@@ -72,6 +72,7 @@ public class HorseJockey {
      * @param status the new status (Enumeration of the type {@link entities.HorseJockeyState} of this pair Horse/Jockey ({@link HorseJockey}).
      */
     public void setStatus(HorseJockeyState status) {
+        this.status = "";
         for (String word : status.name().split("_")) {
             this.status += word.charAt(0);
         }

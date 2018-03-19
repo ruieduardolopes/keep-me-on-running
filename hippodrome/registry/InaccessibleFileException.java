@@ -1,4 +1,4 @@
-package exceptions;
+package hippodrome.registry;
 
 /**
  * This exception exists to be thrown when a file cannot be accessed with

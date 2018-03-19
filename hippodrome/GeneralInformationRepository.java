@@ -1,10 +1,11 @@
 package hippodrome;
 
-import exceptions.InaccessibleFileException;
+import entities.BrokerState;
+import entities.HorseJockeyState;
+import entities.SpectatorState;
+import hippodrome.registry.*;
 import genclass.GenericIO;
 import genclass.TextFile;
-import hippodrome.registry.HorseJockey;
-import hippodrome.registry.Spectator;
 
 import java.time.Instant;
 
@@ -58,7 +59,7 @@ public class GeneralInformationRepository {
     private static void printHeaders() throws InaccessibleFileException {
         boolean actionSucceeded = file.openForWriting(null, filename);
         if (!actionSucceeded) {
-            throw new exceptions.InaccessibleFileException("The requested file \"" + filename + "\" is currently unaccessible or this user does not have permissions to write on this directory.");
+            throw new InaccessibleFileException("The requested file \"" + filename + "\" is currently unaccessible or this user does not have permissions to write on this directory.");
         }
 
         /* print the title */
@@ -138,6 +139,88 @@ public class GeneralInformationRepository {
         }
         GenericIO.writelnString(line);
         file.writelnString(line);
+    }
+
+    /**
+     * Sets a new race number as the last race number.
+     *
+     * @param number the new race number identification.
+     */
+    public static void setRaceNumber(int number) {
+        raceNumber = number;
+    }
+
+    /**
+     * Sets a new race distance as the last race distance.
+     *
+     * @param distance the new race distance.
+     */
+    public static void setRaceDistance(int distance) {
+        currentRaceDistance = distance;
+    }
+
+    /**
+     * Sets a new status for the {@link entities.Broker}, given by a {@link BrokerState}.
+     *
+     * @param status the current state represented by a {@link BrokerState} enumeration value.
+     */
+    public static void setBrokerStatus(BrokerState status) {
+        brokerStatus = "";
+        for (String word : status.name().split("_")) {
+            brokerStatus += word.charAt(0);
+        }
+    }
+
+    /**
+     * Sets a new status for the {@code spectatorId} {@link Spectator}, given by a {@link SpectatorState}.
+     *
+     * @param spectatorId the identification of the {@link Spectator}.
+     * @param status the current state represented by a {@link SpectatorState} enumeration value.
+     *
+     * @throws UnknownSpectatorException if a {@link Spectator} is non-existent and is indexed over our
+     * {@code spectators} array.
+     */
+    public static void setSpectatorStatus(int spectatorId, SpectatorState status) throws UnknownSpectatorException {
+        try {
+            spectators[spectatorId].setStatus(status);
+        } catch (IndexOutOfBoundsException ioobe) {
+            throw new UnknownSpectatorException(spectatorId);
+        }
+    }
+
+    /**
+     * Sets a new status for the {@code horseJockeyId} {@link HorseJockey}, given by a {@link HorseJockeyState}.
+     *
+     * @param horseJockeyId the identification of the pair {@link HorseJockey}.
+     * @param status the current state represented by a {@link HorseJockeyState} enumeration value.
+     *
+     * @throws UnknownHorseJockeyException if a {@link HorseJockey} is non-existent and is indexed over our
+     * {@code horseJockeys} array.
+     */
+    public static void setHorseJockeyStatus(int horseJockeyId, HorseJockeyState status) throws UnknownHorseJockeyException {
+        try {
+            horseJockeys[horseJockeyId].setStatus(status);
+        } catch (IndexOutOfBoundsException ioobe) {
+            throw new UnknownHorseJockeyException(horseJockeyId);
+        }
+    }
+
+    /**
+     * Gets the value of the race number.
+     *
+     * @return the identification of the last snapshot's race number.
+     */
+    public static int getRaceNumber() {
+        return raceNumber;
+    }
+
+    /**
+     * Gets the value of the race distance.
+     *
+     * @return the distance of the last snapshot's race.
+     */
+    public static int getCurrentRaceDistance() {
+        return currentRaceDistance;
     }
 
     /**
