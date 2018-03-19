@@ -22,29 +22,46 @@ public class Simulator {
         spectators = new Spectator[numberOfSpectators];
         horseJockeys = new HorseJockey[numberOfHorses];
 
+
         /* for each race run each thread */
-        new Thread(broker).start();
+        brokerThread = new Thread(broker);
+        brokerThread.start();
+
+        spectatorsThreads = new Thread[numberOfSpectators];
+        horseJockeysThreads = new Thread[numberOfHorses];
+
         for (int race = 0; race < numberOfRaces; race++) {
             for (int i = 0; i != numberOfSpectators; i++) {
                 spectators[i] = new Spectator(i, generateMoney());
-                new Thread(spectators[i]).start();
+                spectatorsThreads[i] = new Thread(spectators[i]);
+                spectatorsThreads[i].start();
             }
             for (int i = 0; i != numberOfHorses; race++) {
                 horseJockeys[i] = new HorseJockey(i, generateAbility());
-                new Thread(horseJockeys[i]).start();
+                horseJockeysThreads[i] = new Thread(horseJockeys[i]);
+                horseJockeysThreads[i].start();
             }
-            // TODO - wait till the race is over...
+
+            //wait till the race is over...
             try {
+                brokerThread.join();
+                broker = null;
+                brokerThread = null;
+
                 for (int i = 0; i != numberOfSpectators; i++) {
-                    new Thread(spectators[i]).join();
+                    spectatorsThreads[i].join();
                 }
                 spectators = null;
+                spectatorsThreads = null;
+
                 for (int i = 0; i != numberOfHorses; i++) {
-                    new Thread(horseJockeys[i]).join();
+                    horseJockeysThreads[i].join();
                 }
                 horseJockeys = null;
+                horseJockeysThreads = null;
+
             } catch (InterruptedException ie) {
-                ie.printStackTrace(); // TODO - handle the exception...
+                ie.printStackTrace();
             }
         }
     }
@@ -97,4 +114,19 @@ public class Simulator {
      * The sets' array of pairs Horse/Jockey instance.
      */
     private static HorseJockey[] horseJockeys = null;
+
+    /**
+     * The broker's thread instance.
+     */
+    private static Thread brokerThread = null;
+
+    /**
+     * The sets' array of spectators' thread instance.
+     */
+    private static Thread[] spectatorsThreads = null;
+
+    /**
+     * The sets' array of pairs Horse/Jockey's thread instance.
+     */
+    private static Thread[] horseJockeysThreads = null;
 }
