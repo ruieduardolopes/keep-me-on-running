@@ -189,6 +189,57 @@ public class GeneralInformationRepository {
     }
 
     /**
+     * Sets a new amount of money for the {@code spectatorId} {@link Spectator}.
+     *
+     * @param spectatorId the identification of the {@link Spectator}.
+     * @param amount the current amount of money represented by a {@code Integer}.
+     *
+     * @throws UnknownSpectatorException if a {@link Spectator} is non-existent and is indexed over our
+     * {@code spectators} array.
+     */
+    public static void setSpectatorAmountOfMoney(int spectatorId, int amount) throws UnknownSpectatorException {
+        try {
+            spectators[spectatorId].setAmountOfMoney(amount);
+        } catch (IndexOutOfBoundsException ioobe) {
+            throw new UnknownSpectatorException(spectatorId);
+        }
+    }
+
+    /**
+     * Sets a new betting selection for the {@code spectatorId} {@link Spectator}.
+     *
+     * @param spectatorId the identification of the {@link Spectator}.
+     * @param selection the current selection of a pair Horse/Jockey represented its identification number.
+     *
+     * @throws UnknownSpectatorException if a {@link Spectator} is non-existent and is indexed over our
+     * {@code spectators} array.
+     */
+    public static void setSpectatorBetSelection(int spectatorId, int selection) throws UnknownSpectatorException {
+        try {
+            spectators[spectatorId].setBetSelection(selection);
+        } catch (IndexOutOfBoundsException ioobe) {
+            throw new UnknownSpectatorException(spectatorId);
+        }
+    }
+
+    /**
+     * Sets a new betting amount of the {@code spectatorId} {@link Spectator}.
+     *
+     * @param spectatorId the identification of the {@link Spectator}.
+     * @param bet the current betting amount on a pair Horse/Jockey.
+     *
+     * @throws UnknownSpectatorException if a {@link Spectator} is non-existent and is indexed over our
+     * {@code spectators} array.
+     */
+    public static void setSpectatorBetAmount(int spectatorId, int bet) throws UnknownSpectatorException {
+        try {
+            spectators[spectatorId].setBetAmount(bet);
+        } catch (IndexOutOfBoundsException ioobe) {
+            throw new UnknownSpectatorException(spectatorId);
+        }
+    }
+
+    /**
      * Sets a new status for the {@code horseJockeyId} {@link HorseJockey}, given by a {@link HorseJockeyState}.
      *
      * @param horseJockeyId the identification of the pair {@link HorseJockey}.
