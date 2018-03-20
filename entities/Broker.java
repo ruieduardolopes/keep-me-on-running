@@ -22,8 +22,10 @@ public class Broker extends Thread {
     /**
      * Creates a Broker.
      */
-    public Broker() {
-
+    public Broker(BettingCentre bettingCentre, ControlCentre controlCentre, Stable stable) {
+        this.bettingCentre = bettingCentre;
+        this.controlCentre = controlCentre;
+        this.stable = stable;
     }
 
     /**
@@ -38,11 +40,11 @@ public class Broker extends Thread {
         for (int raceNumber = 0; raceNumber < totalOfRaces; raceNumber++) { // for each race planned on the agenda
             Stable.summonHorsesToPaddock(raceNumber);                       //    a call must be done to Stable, asking Horses to go to Paddock
             ControlCentre.summonHorsesToPaddock();                          //    after which the Broker can proceed;
-            BettingCentre.acceptTheBets();                                  // the Broker must accept all the bets on the Betting Center;
+            bettingCentre.acceptTheBets();                                  // the Broker must accept all the bets on the Betting Center;
             ControlCentre.startTheRace(raceNumber);                         // then alerting everybody that the race starts (on the Control Centre);
             ControlCentre.reportResults();                                  // as soon as it is over, the results must be reported at the same place;
-            if (BettingCentre.areThereAnyWinners()) {                       // if there are any betting winners then
-                BettingCentre.honourTheBets();                              //    these bets must be honoured;
+            if (bettingCentre.areThereAnyWinners()) {                       // if there are any betting winners then
+                bettingCentre.honourTheBets();                              //    these bets must be honoured;
             }                                                               //
         }                                                                   //
         ControlCentre.entertainTheGuests();                                 // Having the races concluded, the Broker should entertain the guests.
@@ -79,4 +81,19 @@ public class Broker extends Thread {
      * Broker's knowledge of how many races are about to be performed today.
      */
     private int totalOfRaces;
+
+    /**
+     * The {@link BettingCentre} instance where this {@link Broker} will perform its actions.
+     */
+    private BettingCentre bettingCentre;
+
+    /**
+     * The {@link ControlCentre} instance where this {@link Broker} will perform its actions.
+     */
+    private ControlCentre controlCentre;
+
+    /**
+     * The {@link Stable} instance where this {@link Broker} will perform its actions.
+     */
+    private Stable stable;
 }
