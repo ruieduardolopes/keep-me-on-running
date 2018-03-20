@@ -92,6 +92,24 @@ public class BettingCentre {
     }
 
     /**
+     * Verification if a given Spectator identified with {@code spectatorId} has won his (or hers) bet.
+     *
+     * @param spectatorId identification of {@link Spectator} who has placed a bet earlier and wants to verify if it did
+     *                    win indeed or not.
+     *
+     * @return {@code true} if {@code spectator} has won his (or hers) bet; otherwise, it will return {@code false}.
+     */
+    public boolean haveIWon(int spectatorId) {
+        ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.WATCHING_A_RACE);
+        for (int winner : winners) {
+            if (winner == spectatorId) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Verification of bet's winners.
      *
      * @return {@code true} if anybody had won indeed; otherwise it will return {@code false}.

@@ -45,26 +45,26 @@ public class Spectator extends Thread {
      */
     @Override
     public void run() {
-        while (ControlCentre.waitForTheNextRace(raceNumber)) {  // while the next race has not started yet
-            boolean isLastSpectator = Paddock.goCheckHorses();  //       the Paddock rises an alert for Spectators to go check the horses
-            Paddock.goCheckHorses(isLastSpectator);             //       the Paddock also wants to know if there is more Spectators to come
-            if (isLastSpectator) {                              //       if this is the last Spectator to come
-                ControlCentre.goCheckHorses();                  //          the Broker on the Control Centre can proceed
-            }                                                   //           its actions;
-            bettingCentre.placeABet(identification, bet, horse);//       on the Betting Centre the Spectator can place its bet
-            ControlCentre.goWatchTheRace(raceNumber);           //       then we go to the Control Centre (Watching Stand) to watch the race
-            if (ControlCentre.haveIWon(this) && !tired) {       //       if the Control Centre approves that I won and if I am not tired
-                bettingCentre.goCollectTheGains(identification);//          then I must go to the Betting Centre and collect my gains;
-            } else if (ControlCentre.haveIWon(this) && tired) { //       if the Control Centre approves that I won and if I am tired
-                bettingCentre.goCollectTheGains(identification);//          then I must go to the Betting Centre collect my gains
-                break;                                          //          stop for this round and relax...
-            } else {                                            //       if I have not won
-                if (tired) {                                    //          but I feel tired
-                    break;                                      //              then I should stop;
-                }                                               //
-            }                                                   //
-        }                                                       // ;
-        ControlCentre.relaxABit();                              // having all set, then I must relax;
+        while (controlCentre.waitForTheNextRace(raceNumber)) {              // while the next race has not started yet
+            boolean isLastSpectator = Paddock.goCheckHorses();              //       the Paddock rises an alert for Spectators to go check the horses
+            Paddock.goCheckHorses(isLastSpectator);                         //       the Paddock also wants to know if there is more Spectators to come
+            if (isLastSpectator) {                                          //       if this is the last Spectator to come
+                controlCentre.goCheckHorses();                              //          the Broker on the Control Centre can proceed
+            }                                                               //           its actions;
+            bettingCentre.placeABet(identification, bet, horse);            //       on the Betting Centre the Spectator can place its bet
+            controlCentre.goWatchTheRace(raceNumber);                       //       then we go to the Control Centre (Watching Stand) to watch the race
+            if (bettingCentre.haveIWon(identification) && !tired) {         //       if the Control Centre approves that I won and if I am not tired
+                bettingCentre.goCollectTheGains(identification);            //          then I must go to the Betting Centre and collect my gains;
+            } else if (bettingCentre.haveIWon(identification) && tired) {   //       if the Control Centre approves that I won and if I am tired
+                bettingCentre.goCollectTheGains(identification);            //          then I must go to the Betting Centre collect my gains
+                break;                                                      //          stop for this round and relax...
+            } else {                                                        //       if I have not won
+                if (tired) {                                                //          but I feel tired
+                    break;                                                  //              then I should stop;
+                }                                                           //
+            }                                                               //
+        }                                                                   // ;
+        controlCentre.relaxABit();                                          // having all set, then I must relax;
     }
 
     /**

@@ -13,6 +13,10 @@ import hippodrome.actions.Race;
  * @version 0.1
  */
 public class ControlCentre {
+    public ControlCentre() {
+
+    }
+
     /**
      * Signal given by the {@link entities.Broker} to summon all the horses from the {@link Stable} to the
      * {@link Paddock}. Such horses, representation of pairs Horse/Jockey's, must be identified by a race
@@ -22,7 +26,7 @@ public class ControlCentre {
      * @param raceNumber number identification of the next {@link Race}.
      */
     public void summonHorsesToPaddock(int raceNumber) {
-
+        // SYNC - signal the horses on Stable to go to Paddock.
     }
 
     /**
@@ -67,23 +71,6 @@ public class ControlCentre {
     }
 
     /**
-     * Verification if a given {@code spectator} has won his (or hers) bet.
-     *
-     * @param spectator {@link Spectator} who has placed a bet earlier and wants to verify if it did win indeed or not.
-     *
-     * @return {@code true} if {@code spectator} has won his (or hers) bet; otherwise, it will return {@code false}.
-     */
-    public boolean haveIWon(Spectator spectator) {
-        //TODO check if won
-        if(true) {
-            ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.WATCHING_A_RACE);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * Relax a bit from the games, as this is could be the final transition of a {@link Spectator} lifecycle.
      */
     public void relaxABit() {
@@ -119,4 +106,8 @@ public class ControlCentre {
     public void goCheckHorses() {
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.APPRAISING_THE_HORSES);
     }
+
+    private int numberOfHorses;
+
+    private int[] winners;
 }
