@@ -76,14 +76,20 @@ public class GeneralInformationRepository {
         file.writelnString(header1);
         GenericIO.writelnString(header2);
         file.writelnString(header2);
+        file.close();
     }
 
     /**
      * Adds a new snapshot of the race to log it.
      */
     public void newSnapshot() {
+        boolean actionSucceeded = file.openForAppending(null, filename);
+        if (!actionSucceeded) {
+            throw new InaccessibleFileException("The requested file \"" + filename + "\" is currently unaccessible or this user does not have permissions to write on this directory.");
+        }
         printEntitiesLine();
         printRaceLine();
+        file.close();
     }
 
     /**
