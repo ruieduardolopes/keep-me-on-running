@@ -23,14 +23,20 @@ public class Spectator extends Thread {
      *
      * @param identification number which identifies this {@code Spectator}.
      * @param money amount of money given to this {@code Spectator}.
+     * @param bettingCentre the {@link BettingCentre} instance where this {@link Spectator} will perform its actions.
+     * @param controlCentre the {@link ControlCentre} instance where this {@link Spectator} will perform its actions.
+     * @param paddock the {@link Paddock} instance where this {@link Spectator} will perform its actions.
      */
-    public Spectator(int identification, int money) {
+    public Spectator(int identification, int money, BettingCentre bettingCentre, ControlCentre controlCentre, Paddock paddock) {
         this.identification = identification;
         this.money = money;
         tired = false;
+        this.bettingCentre = bettingCentre;
+        this.controlCentre = controlCentre;
+        this.paddock = paddock;
     }
 
-    /**
+    /** //TODO - Fix the static methods (already fixed the Betting Centre)
      * Definition of the Spectator's lifecycle.
      *
      * In a technical perspective this is reasoned by a thread definition function which
@@ -45,12 +51,12 @@ public class Spectator extends Thread {
             if (isLastSpectator) {                              //       if this is the last Spectator to come
                 ControlCentre.goCheckHorses();                  //          the Broker on the Control Centre can proceed
             }                                                   //           its actions;
-            BettingCentre.placeABet(identification, bet, horse);//       on the Betting Centre the Spectator can place its bet
+            bettingCentre.placeABet(identification, bet, horse);//       on the Betting Centre the Spectator can place its bet
             ControlCentre.goWatchTheRace(raceNumber);           //       then we go to the Control Centre (Watching Stand) to watch the race
             if (ControlCentre.haveIWon(this) && !tired) {       //       if the Control Centre approves that I won and if I am not tired
-                BettingCentre.goCollectTheGains(identification);//          then I must go to the Betting Centre and collect my gains;
+                bettingCentre.goCollectTheGains(identification);//          then I must go to the Betting Centre and collect my gains;
             } else if (ControlCentre.haveIWon(this) && tired) { //       if the Control Centre approves that I won and if I am tired
-                BettingCentre.goCollectTheGains(identification);//          then I must go to the Betting Centre collect my gains
+                bettingCentre.goCollectTheGains(identification);//          then I must go to the Betting Centre collect my gains
                 break;                                          //          stop for this round and relax...
             } else {                                            //       if I have not won
                 if (tired) {                                    //          but I feel tired
@@ -135,4 +141,19 @@ public class Spectator extends Thread {
      * The identification of the race which the Spectators want to bet and watch. TODO - probably is to remove...
      */
     private int raceNumber;
+
+    /**
+     * The {@link BettingCentre} instance where this {@link Spectator} will perform its actions.
+     */
+    private BettingCentre bettingCentre;
+
+    /**
+     * The {@link ControlCentre} instance where this {@link Spectator} will perform its actions.
+     */
+    private ControlCentre controlCentre;
+
+    /**
+     * The {@link Paddock} instance where this {@link Spectator} will perform its actions.
+     */
+    private Paddock paddock;
 }
