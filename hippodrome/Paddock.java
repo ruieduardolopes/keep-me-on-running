@@ -25,7 +25,7 @@ public class Paddock {
      * @return {@code true} if the last pair Horse/Jockey has been moved to the {@link Paddock}; otherwise
      * {@code false}.
      */
-    public static boolean proceedToPaddock(int raceNumber) {
+    public boolean proceedToPaddock(int raceNumber) {
 
         ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_PADDOCK);
         return false;
@@ -37,7 +37,7 @@ public class Paddock {
      * @param isTheLastSpectator {@code boolean} variable which identifies when the last {@link entities.Spectator}
      *                                          has reached the premises.
      */
-    public static void goCheckHorses(boolean isTheLastSpectator) {
+    public void goCheckHorses(boolean isTheLastSpectator) {
 
     }
 
@@ -49,7 +49,7 @@ public class Paddock {
      * @return {@code true} if the last {@link entities.Spectator} has moved to the {@link Paddock}; otherwise
      * {@code false}.
      */
-    public static boolean goCheckHorses() {
+    public boolean goCheckHorses() {
         return false;
     }
 

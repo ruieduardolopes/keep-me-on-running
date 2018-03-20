@@ -46,7 +46,7 @@ public class GeneralInformationRepository {
      * followed by the UNIX timestamp of when this method is executed
      * and the extension {@code .log}.
      */
-    private static void giveFileAName() {
+    private void giveFileAName() {
         filename = "horse-run-" + Instant.now().getEpochSecond() + ".log";
     }
 
@@ -56,7 +56,7 @@ public class GeneralInformationRepository {
      * @throws InaccessibleFileException if the file does not grant any permission for the current user to be written on.
      * The same behavior could occur if the directory where this file resides cannot be written by the current user.
      */
-    private static void printHeaders() throws InaccessibleFileException {
+    private void printHeaders() throws InaccessibleFileException {
         boolean actionSucceeded = file.openForWriting(null, filename);
         if (!actionSucceeded) {
             throw new InaccessibleFileException("The requested file \"" + filename + "\" is currently unaccessible or this user does not have permissions to write on this directory.");
@@ -81,7 +81,7 @@ public class GeneralInformationRepository {
     /**
      * Adds a new snapshot of the race to log it.
      */
-    public static void newSnapshot() {
+    public void newSnapshot() {
         printEntitiesLine();
         printRaceLine();
     }
@@ -89,7 +89,7 @@ public class GeneralInformationRepository {
     /**
      * Makes a snapshot of the entities at a given time.
      */
-    private static void printEntitiesLine() {
+    private void printEntitiesLine() {
         String line = " ";
         line += String.format("%6s", brokerStatus);                             /* Stat */
         line += " ";
@@ -114,7 +114,7 @@ public class GeneralInformationRepository {
     /**
      * Makes a snapshot of the race at a given time.
      */
-    private static void printRaceLine() {
+    private void printRaceLine() {
         String line = " ";
         line += String.format("%2d", raceNumber);                                   /* RN */
         line += " ";
@@ -146,7 +146,7 @@ public class GeneralInformationRepository {
      *
      * @param number the new race number identification.
      */
-    public static void setRaceNumber(int number) {
+    public void setRaceNumber(int number) {
         raceNumber = number;
     }
 
@@ -155,7 +155,7 @@ public class GeneralInformationRepository {
      *
      * @param distance the new race distance.
      */
-    public static void setRaceDistance(int distance) {
+    public void setRaceDistance(int distance) {
         currentRaceDistance = distance;
     }
 
@@ -164,7 +164,7 @@ public class GeneralInformationRepository {
      *
      * @param status the current state represented by a {@link BrokerState} enumeration value.
      */
-    public static void setBrokerStatus(BrokerState status) {
+    public void setBrokerStatus(BrokerState status) {
         brokerStatus = "";
         for (String word : status.name().split("_")) {
             brokerStatus += word.charAt(0);
@@ -180,7 +180,7 @@ public class GeneralInformationRepository {
      * @throws UnknownSpectatorException if a {@link Spectator} is non-existent and is indexed over our
      * {@code spectators} array.
      */
-    public static void setSpectatorStatus(int spectatorId, SpectatorState status) throws UnknownSpectatorException {
+    public void setSpectatorStatus(int spectatorId, SpectatorState status) throws UnknownSpectatorException {
         try {
             spectators[spectatorId].setStatus(status);
         } catch (IndexOutOfBoundsException ioobe) {
@@ -197,7 +197,7 @@ public class GeneralInformationRepository {
      * @throws UnknownSpectatorException if a {@link Spectator} is non-existent and is indexed over our
      * {@code spectators} array.
      */
-    public static void setSpectatorAmountOfMoney(int spectatorId, int amount) throws UnknownSpectatorException {
+    public void setSpectatorAmountOfMoney(int spectatorId, int amount) throws UnknownSpectatorException {
         try {
             spectators[spectatorId].setAmountOfMoney(amount);
         } catch (IndexOutOfBoundsException ioobe) {
@@ -214,7 +214,7 @@ public class GeneralInformationRepository {
      * @throws UnknownSpectatorException if a {@link Spectator} is non-existent and is indexed over our
      * {@code spectators} array.
      */
-    public static void setSpectatorBetSelection(int spectatorId, int selection) throws UnknownSpectatorException {
+    public void setSpectatorBetSelection(int spectatorId, int selection) throws UnknownSpectatorException {
         try {
             spectators[spectatorId].setBetSelection(selection);
         } catch (IndexOutOfBoundsException ioobe) {
@@ -231,7 +231,7 @@ public class GeneralInformationRepository {
      * @throws UnknownSpectatorException if a {@link Spectator} is non-existent and is indexed over our
      * {@code spectators} array.
      */
-    public static void setSpectatorBetAmount(int spectatorId, int bet) throws UnknownSpectatorException {
+    public void setSpectatorBetAmount(int spectatorId, int bet) throws UnknownSpectatorException {
         try {
             spectators[spectatorId].setBetAmount(bet);
         } catch (IndexOutOfBoundsException ioobe) {
@@ -248,7 +248,7 @@ public class GeneralInformationRepository {
      * @throws UnknownHorseJockeyException if a {@link HorseJockey} is non-existent and is indexed over our
      * {@code horseJockeys} array.
      */
-    public static void setHorseJockeyStatus(int horseJockeyId, HorseJockeyState status) throws UnknownHorseJockeyException {
+    public void setHorseJockeyStatus(int horseJockeyId, HorseJockeyState status) throws UnknownHorseJockeyException {
         try {
             horseJockeys[horseJockeyId].setStatus(status);
         } catch (IndexOutOfBoundsException ioobe) {
@@ -265,7 +265,7 @@ public class GeneralInformationRepository {
      * @throws UnknownHorseJockeyException if a {@link HorseJockey} is non-existent and is indexed over our
      * {@code horseJockeys} array.
      */
-    public static void setHorseJockeyAbility(int horseJockeyId, int ability) throws UnknownHorseJockeyException {
+    public void setHorseJockeyAbility(int horseJockeyId, int ability) throws UnknownHorseJockeyException {
         try {
             horseJockeys[horseJockeyId].setAbility(ability);
         } catch (IndexOutOfBoundsException ioobe) {
@@ -282,7 +282,7 @@ public class GeneralInformationRepository {
      * @throws UnknownHorseJockeyException if a {@link HorseJockey} is non-existent and is indexed over our
      * {@code horseJockeys} array.
      */
-    public static void setHorseJockeyProbabilityToWin(int horseJockeyId, double probability) throws UnknownHorseJockeyException {
+    public void setHorseJockeyProbabilityToWin(int horseJockeyId, double probability) throws UnknownHorseJockeyException {
         try {
             horseJockeys[horseJockeyId].setProbabilityToWin(probability);
         } catch (IndexOutOfBoundsException ioobe) {
@@ -299,7 +299,7 @@ public class GeneralInformationRepository {
      * @throws UnknownHorseJockeyException if a {@link HorseJockey} is non-existent and is indexed over our
      * {@code horseJockeys} array.
      */
-    public static void setHorseJockeyNumberOfIncrementsDid(int horseJockeyId, int iterations) throws UnknownHorseJockeyException {
+    public void setHorseJockeyNumberOfIncrementsDid(int horseJockeyId, int iterations) throws UnknownHorseJockeyException {
         try {
             horseJockeys[horseJockeyId].setNumberOfIncrementsDid(iterations);
         } catch (IndexOutOfBoundsException ioobe) {
@@ -316,7 +316,7 @@ public class GeneralInformationRepository {
      * @throws UnknownHorseJockeyException if a {@link HorseJockey} is non-existent and is indexed over our
      * {@code horseJockeys} array.
      */
-    public static void setHorseJockeyPositionOnTrack(int horseJockeyId, int position) throws UnknownHorseJockeyException {
+    public void setHorseJockeyPositionOnTrack(int horseJockeyId, int position) throws UnknownHorseJockeyException {
         try {
             horseJockeys[horseJockeyId].setPositionOnTrack(position);
         } catch (IndexOutOfBoundsException ioobe) {
@@ -333,7 +333,7 @@ public class GeneralInformationRepository {
      * @throws UnknownHorseJockeyException if a {@link HorseJockey} is non-existent and is indexed over our
      * {@code horseJockeys} array.
      */
-    public static void setHorseJockeyFinalStandPosition(int horseJockeyId, int position) throws UnknownHorseJockeyException {
+    public void setHorseJockeyFinalStandPosition(int horseJockeyId, int position) throws UnknownHorseJockeyException {
         try {
             horseJockeys[horseJockeyId].setFinalStandPosition(position);
         } catch (IndexOutOfBoundsException ioobe) {
@@ -346,7 +346,7 @@ public class GeneralInformationRepository {
      *
      * @return the identification of the last snapshot's race number.
      */
-    public static int getRaceNumber() {
+    public int getRaceNumber() {
         return raceNumber;
     }
 
@@ -355,43 +355,43 @@ public class GeneralInformationRepository {
      *
      * @return the distance of the last snapshot's race.
      */
-    public static int getCurrentRaceDistance() {
+    public int getCurrentRaceDistance() {
         return currentRaceDistance;
     }
 
     /**
      * Last taken snapshot of the {@link entities.Broker} entity.
      */
-    private static String brokerStatus;
+    private String brokerStatus;
 
     /**
      * Last taken snapshot of the {@link entities.Spectator} entity.
      */
-    private static Spectator[] spectators;
+    private Spectator[] spectators;
 
     /**
      * Last taken snapshot of the pairs Horse/Jockey ({@link entities.HorseJockey}) entities.
      */
-    private static HorseJockey[] horseJockeys;
+    private HorseJockey[] horseJockeys;
 
     /**
      * Last taken snapshot of the race number.
      */
-    private static int raceNumber;
+    private int raceNumber;
 
     /**
      * Last taken snapshot of the current race distance of track.
      */
-    private static int currentRaceDistance;
+    private int currentRaceDistance;
 
     /**
      * Name of the file where the log is to be saved.
      */
-    private static String filename;
+    private String filename;
 
     /**
      * File object {@code file} from the external class {@link TextFile} which
      * allows us to control a file as IO for the log.
      */
-    private static TextFile file = new TextFile();
+    private TextFile file = new TextFile();
 }

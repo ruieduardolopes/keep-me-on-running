@@ -17,11 +17,15 @@ import entities.HorseJockey;
  * @version 0.1
  */
 public class RacingTrack {
+    public RacingTrack(Race race) {
+        this.race = race;
+    }
+
     /**
      * Signal given by the {@link entities.Broker} in order to call all the paradded pairs Horse/Jockey
      * on the {@link Paddock} to the Racing Track's start line.
      */
-    public static void proceedToStartLine() {
+    public void proceedToStartLine() {
         ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_START_LINE);
     }
 
@@ -31,7 +35,7 @@ public class RacingTrack {
      * @param horse the pair Horse/Jockey which wants to make a move.
      * @param isLastPairHorseJockey boolean value which validates if {@code horse} is the last one arriving.
      */
-    public static void makeAMove(HorseJockey horse, boolean isLastPairHorseJockey) {
+    public void makeAMove(HorseJockey horse, boolean isLastPairHorseJockey) {
         if (isLastPairHorseJockey) {
             ((Broker) Thread.currentThread()).setBrokerState(BrokerState.SETTLING_ACCOUNTS);
         }
@@ -45,7 +49,7 @@ public class RacingTrack {
      *
      * @return {@code true} if the pair Horse/Jockey had crossed the finish line; otherwise it will return {@code false}.
      */
-    public static boolean hasFinishLineBeenCrossed(HorseJockey horse) {
+    public boolean hasFinishLineBeenCrossed(HorseJockey horse) {
         ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_FINNISH_LINE);
 
         return false;
@@ -55,5 +59,5 @@ public class RacingTrack {
      * A representation of a race with an identification, a distance and a number of tracks. This is made using the class
      * {@link Race}.
      */
-    private static Race race = null;
+    private Race race = null;
 }

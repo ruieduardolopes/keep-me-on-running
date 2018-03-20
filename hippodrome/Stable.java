@@ -16,7 +16,7 @@ public class Stable {
      * Signal given by the {@link entities.Broker} in order to allow the pair Horse/Jockey to move
      * to this place (the {@link Stable}).
      */
-    public static void proceedToStable() {
+    public void proceedToStable() {
         ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_STABLE);
 
     }
@@ -28,14 +28,14 @@ public class Stable {
      * @param raceNumber number identification of the next race, where the called pairs Horse/Jockey will be competing
      *                   against each other.
      */
-    public static void summonHorsesToPaddock(int raceNumber) {
+    public void summonHorsesToPaddock(int raceNumber) {
 
     }
 
     /**
      * Allows the pairs Horse/Jockey to move from the {@link Stable} to the {@link Paddock}.
      */
-    public static void proceedToPaddock() {
+    public void proceedToPaddock() {
 
     }
 
