@@ -21,6 +21,10 @@ import hippodrome.Stable;
 public class Broker extends Thread {
     /**
      * Creates a Broker.
+     *
+     * @param bettingCentre the {@link BettingCentre} instance where this {@link Broker} will perform its actions.
+     * @param controlCentre the {@link ControlCentre} instance where this {@link Broker} will perform its actions.
+     * @param stable the {@link Stable} instance where this {@link Broker} will perform its actions.
      */
     public Broker(BettingCentre bettingCentre, ControlCentre controlCentre, Stable stable) {
         this.bettingCentre = bettingCentre;
