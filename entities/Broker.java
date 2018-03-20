@@ -32,7 +32,7 @@ public class Broker extends Thread {
         this.stable = stable;
     }
 
-    /** //TODO - Fix the static methods (already fixed the Betting Centre, Control Centre)
+    /**
      * Definition of the Broker's lifecycle.
      *
      * In a technical perspective this is reasoned by a thread definition function which
@@ -42,7 +42,7 @@ public class Broker extends Thread {
     @Override
     public void run() {
         for (int raceNumber = 0; raceNumber < totalOfRaces; raceNumber++) { // for each race planned on the agenda
-            Stable.summonHorsesToPaddock(raceNumber);                       //    a call must be done to Stable, asking Horses to go to Paddock
+            stable.summonHorsesToPaddock(raceNumber);                       //    a call must be done to Stable, asking Horses to go to Paddock
             controlCentre.summonHorsesToPaddock();                          //    after which the Broker can proceed;
             bettingCentre.acceptTheBets();                                  // the Broker must accept all the bets on the Betting Center;
             controlCentre.startTheRace(raceNumber);                         // then alerting everybody that the race starts (on the Control Centre);

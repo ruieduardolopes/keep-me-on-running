@@ -36,7 +36,7 @@ public class Spectator extends Thread {
         this.paddock = paddock;
     }
 
-    /** //TODO - Fix the static methods (already fixed the Betting Centre, Control Centre)
+    /**
      * Definition of the Spectator's lifecycle.
      *
      * In a technical perspective this is reasoned by a thread definition function which
@@ -46,8 +46,8 @@ public class Spectator extends Thread {
     @Override
     public void run() {
         while (controlCentre.waitForTheNextRace(raceNumber)) {              // while the next race has not started yet
-            boolean isLastSpectator = Paddock.goCheckHorses();              //       the Paddock rises an alert for Spectators to go check the horses
-            Paddock.goCheckHorses(isLastSpectator);                         //       the Paddock also wants to know if there is more Spectators to come
+            boolean isLastSpectator = paddock.goCheckHorses();              //       the Paddock rises an alert for Spectators to go check the horses
+            paddock.goCheckHorses(isLastSpectator);                         //       the Paddock also wants to know if there is more Spectators to come
             if (isLastSpectator) {                                          //       if this is the last Spectator to come
                 controlCentre.goCheckHorses();                              //          the Broker on the Control Centre can proceed
             }                                                               //           its actions;

@@ -25,10 +25,13 @@ public class HorseJockey extends Thread {
      * @param identification number which identifies this pair Horse/Jockey.
      * @param ability number with characterizes the Horse ability to run.
      */
-    public HorseJockey(int identification, int ability, ControlCentre controlCentre) {
+    public HorseJockey(int identification, int ability, ControlCentre controlCentre, Paddock paddock, RacingTrack racingTrack, Stable stable) {
         this.identification = identification;
         this.ability = ability;
         this.controlCentre = controlCentre;
+        this.paddock = paddock;
+        this.racingTrack = racingTrack;
+        this.stable = stable;
     }
 
     /**
@@ -40,17 +43,17 @@ public class HorseJockey extends Thread {
      */
     @Override
     public void run() {
-        Stable.proceedToStable();                                   // Stable's call for this pair Horse/Jockey;
-        Stable.proceedToPaddock();                                  // alarm the Horses on Stable to go to the Paddock;
-        boolean isLastPair = Paddock.proceedToPaddock(raceNumber);  // verify if this Horse is the last on his go;
+        stable.proceedToStable();                                   // Stable's call for this pair Horse/Jockey;
+        stable.proceedToPaddock();                                  // alarm the Horses on Stable to go to the Paddock;
+        boolean isLastPair = paddock.proceedToPaddock(raceNumber);  // verify if this Horse is the last on his go;
         if (isLastPair) {                                           // if this is the last Horse to go to Paddock then
             controlCentre.proceedToPaddock();                       //    the Control Centre must know it can proceed;
         }                                                           //
-        RacingTrack.proceedToStartLine();                           // Racing track's call for horses on the start line;
-        while (!RacingTrack.hasFinishLineBeenCrossed(this)) {       // while this horse has not crossed the finish line
-            RacingTrack.makeAMove(this, isLastPair);                //    it should make a move forward, to reach it;
+        racingTrack.proceedToStartLine();                           // Racing track's call for horses on the start line;
+        while (!racingTrack.hasFinishLineBeenCrossed(this)) {       // while this horse has not crossed the finish line
+            racingTrack.makeAMove(this, isLastPair);                //    it should make a move forward, to reach it;
         }                                                           //
-        Stable.proceedToStable();                                   // finished the run, the pair must return to Stable.
+        stable.proceedToStable();                                   // finished the run, the pair must return to Stable.
     }
 
     /**
@@ -138,4 +141,19 @@ public class HorseJockey extends Thread {
      * The {@link ControlCentre} instance where this pair Horse/Jockey ({@link HorseJockey}) will perform its actions.
      */
     private ControlCentre controlCentre;
+
+    /**
+     * The {@link Paddock} instance where this pair Horse/Jockey ({@link HorseJockey}) will perform its actions.
+     */
+    private Paddock paddock;
+
+    /**
+     * The {@link RacingTrack} instance where this pair Horse/Jockey ({@link HorseJockey}) will perform its actions.
+     */
+    private RacingTrack racingTrack;
+
+    /**
+     * The {@link Stable} instance where this pair Horse/Jockey ({@link HorseJockey}) will perform its actions.
+     */
+    private Stable stable;
 }
