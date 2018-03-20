@@ -10,7 +10,6 @@
  *
  * @author Hugo Fragata
  * @author Rui Lopes
- * @see concepts
  * @see entities
  * @see stage
  * @see hippodrome.actions

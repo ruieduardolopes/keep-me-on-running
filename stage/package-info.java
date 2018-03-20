@@ -6,7 +6,6 @@
  *
  * @author Hugo Fragata
  * @author Rui Lopes
- * @see concepts
  * @see entities
  * @see hippodrome
  * @since 0.1

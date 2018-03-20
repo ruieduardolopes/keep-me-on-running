@@ -25,6 +25,9 @@ public class GeneralInformationRepository {
      * Creates a General Repository of Information which saves a
      * snapshot of all instants of time throughout a horse run
      * game.
+     *
+     * @param numberOfHorses number of pairs Horse/Jockey to run on track.
+     * @param numberOfSpectators number of Spectators to attend on track.
      */
     public GeneralInformationRepository(int numberOfHorses, int numberOfSpectators) {
         this.numberOfHorses = numberOfHorses;
