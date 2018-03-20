@@ -32,7 +32,7 @@ public class Broker extends Thread {
         this.stable = stable;
     }
 
-    /** //TODO - Fix the static methods (already fixed the Betting Centre)
+    /** //TODO - Fix the static methods (already fixed the Betting Centre, Control Centre)
      * Definition of the Broker's lifecycle.
      *
      * In a technical perspective this is reasoned by a thread definition function which
@@ -43,15 +43,15 @@ public class Broker extends Thread {
     public void run() {
         for (int raceNumber = 0; raceNumber < totalOfRaces; raceNumber++) { // for each race planned on the agenda
             Stable.summonHorsesToPaddock(raceNumber);                       //    a call must be done to Stable, asking Horses to go to Paddock
-            ControlCentre.summonHorsesToPaddock();                          //    after which the Broker can proceed;
+            controlCentre.summonHorsesToPaddock();                          //    after which the Broker can proceed;
             bettingCentre.acceptTheBets();                                  // the Broker must accept all the bets on the Betting Center;
-            ControlCentre.startTheRace(raceNumber);                         // then alerting everybody that the race starts (on the Control Centre);
-            ControlCentre.reportResults();                                  // as soon as it is over, the results must be reported at the same place;
+            controlCentre.startTheRace(raceNumber);                         // then alerting everybody that the race starts (on the Control Centre);
+            controlCentre.reportResults();                                  // as soon as it is over, the results must be reported at the same place;
             if (bettingCentre.areThereAnyWinners()) {                       // if there are any betting winners then
                 bettingCentre.honourTheBets();                              //    these bets must be honoured;
             }                                                               //
         }                                                                   //
-        ControlCentre.entertainTheGuests();                                 // Having the races concluded, the Broker should entertain the guests.
+        controlCentre.entertainTheGuests();                                 // Having the races concluded, the Broker should entertain the guests.
     }
 
     /**

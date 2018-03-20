@@ -36,7 +36,7 @@ public class Spectator extends Thread {
         this.paddock = paddock;
     }
 
-    /** //TODO - Fix the static methods (already fixed the Betting Centre)
+    /** //TODO - Fix the static methods (already fixed the Betting Centre, Control Centre)
      * Definition of the Spectator's lifecycle.
      *
      * In a technical perspective this is reasoned by a thread definition function which

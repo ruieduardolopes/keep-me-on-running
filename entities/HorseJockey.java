@@ -25,9 +25,10 @@ public class HorseJockey extends Thread {
      * @param identification number which identifies this pair Horse/Jockey.
      * @param ability number with characterizes the Horse ability to run.
      */
-    public HorseJockey(int identification, int ability) {
+    public HorseJockey(int identification, int ability, ControlCentre controlCentre) {
         this.identification = identification;
         this.ability = ability;
+        this.controlCentre = controlCentre;
     }
 
     /**
@@ -43,7 +44,7 @@ public class HorseJockey extends Thread {
         Stable.proceedToPaddock();                                  // alarm the Horses on Stable to go to the Paddock;
         boolean isLastPair = Paddock.proceedToPaddock(raceNumber);  // verify if this Horse is the last on his go;
         if (isLastPair) {                                           // if this is the last Horse to go to Paddock then
-            ControlCentre.proceedToPaddock();                       //    the Control Centre must know it can proceed;
+            controlCentre.proceedToPaddock();                       //    the Control Centre must know it can proceed;
         }                                                           //
         RacingTrack.proceedToStartLine();                           // Racing track's call for horses on the start line;
         while (!RacingTrack.hasFinishLineBeenCrossed(this)) {       // while this horse has not crossed the finish line
@@ -132,4 +133,9 @@ public class HorseJockey extends Thread {
      * compete. This value can be updated via its setter method {@link HorseJockey#setRaceNumber}.
      */
     private int raceNumber;
+
+    /**
+     * The {@link ControlCentre} instance where this pair Horse/Jockey ({@link HorseJockey}) will perform its actions.
+     */
+    private ControlCentre controlCentre;
 }
