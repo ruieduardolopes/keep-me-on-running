@@ -1,6 +1,8 @@
 package hippodrome;
 
 import entities.*;
+import hippodrome.actions.Bet;
+import hippodrome.registry.UnknownSpectatorException;
 
 /**
  * This class needs a Queue implementation in order to accomplish the creation of such a
@@ -23,17 +25,25 @@ import java.util.Queue;
  * @version 0.1
  */
 public class BettingCentre {
+    public BettingCentre(int numberOfHorses, int numberOfSpectators) {
+        this.numberOfHorses = numberOfHorses;
+        this.numberOfSpectators = numberOfSpectators;
+        this.bets = new Bet[numberOfSpectators];
+        this.moneyOnSafe = 0;
+        this.amountPerWinner = 0;
+    }
+
     /**
      * Accept all the bets done by the {@link Spectator}s.
      */
-    public static void acceptTheBets() {
+    public void acceptTheBets() {
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.WAITING_FOR_BETS);
     }
 
     /**
      * Give all the money to the respective betting parts - the {@link Spectator}s.
      */
-    public static void honourTheBets() {
+    public void honourTheBets() {
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.SETTLING_ACCOUNTS);
     }
 
@@ -42,13 +52,18 @@ public class BettingCentre {
      * This {@code bet}, made by a specific {@code spectator} is done respecting a proper
      * {@code horse}, which represents a pair Horse/Jockey.
      *
-     * @param spectator an object of class {@link Spectator} which represents a better.
+     * @param spectator an identification of a {@link Spectator} which represents a better.
      * @param bet an amount of money represented as an integer, which the {@code spectator} wants to bet.
      * @param horse the identification of the pair Horse/Jockey in which the {@code spectator} wants to bet.
      *
      * @return the amount of money which was accepted by the {@link Broker} to place the bet.
      */
-    public static int placeABet(Spectator spectator, int bet, int horse) {
+    public int placeABet(int spectator, int bet, int horse) {
+        try {
+            bets[spectator] = new Bet(horse, bet);
+        } catch (IndexOutOfBoundsException ioobe) {
+            throw new UnknownSpectatorException(spectator);
+        }
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.PLACING_A_BET);
         return 0;
     }
@@ -60,9 +75,16 @@ public class BettingCentre {
      *
      * @return the amount of money collected by the {@code spectator}.
      */
-    public static int goCollectTheGains(Spectator spectator) {
-        //TODO check which spectator is
+    public int goCollectTheGains(int spectator) {
+        for (int person : winners) {
+            if (spectator == person) {
+                moneyOnSafe -= amountPerWinner;
+                return amountPerWinner;
+            }
+        }
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.COLLECTING_THE_GAINS);
+        moneyOnSafe = 0;
+        amountPerWinner = 0;
         return 0;
     }
 
@@ -71,13 +93,25 @@ public class BettingCentre {
      *
      * @return {@code true} if anybody had won indeed; otherwise it will return {@code false}.
      */
-    public static boolean areThereAnyWinners() {
-        return false;
+    public boolean areThereAnyWinners() {
+        return winners.length != 0;
     }
 
     /**
      * The waiting queue to contact the {@link Broker} on its tasks. This could be used while waiting to a {@link Spectator}
      * place a bet, or while wainting to a {@link Spectator} go collect his (or hers) gains.
      */
-    private static Queue<Spectator> bettingQueue = null;
+    private Queue<Spectator> bettingQueue = null;
+
+    private Bet[] bets = null;
+
+    private int[] winners;
+
+    private int numberOfHorses;
+
+    private int numberOfSpectators;
+
+    private int moneyOnSafe;
+
+    private int amountPerWinner;
 }

@@ -45,12 +45,12 @@ public class Spectator extends Thread {
             if (isLastSpectator) {                              //       if this is the last Spectator to come
                 ControlCentre.goCheckHorses();                  //          the Broker on the Control Centre can proceed
             }                                                   //           its actions;
-            BettingCentre.placeABet(this, bet, horse);          //       on the Betting Centre the Spectator can place its bet
+            BettingCentre.placeABet(identification, bet, horse);//       on the Betting Centre the Spectator can place its bet
             ControlCentre.goWatchTheRace(raceNumber);           //       then we go to the Control Centre (Watching Stand) to watch the race
             if (ControlCentre.haveIWon(this) && !tired) {       //       if the Control Centre approves that I won and if I am not tired
-                BettingCentre.goCollectTheGains(this);          //          then I must go to the Betting Centre and collect my gains;
+                BettingCentre.goCollectTheGains(identification);//          then I must go to the Betting Centre and collect my gains;
             } else if (ControlCentre.haveIWon(this) && tired) { //       if the Control Centre approves that I won and if I am tired
-                BettingCentre.goCollectTheGains(this);          //          then I must go to the Betting Centre collect my gains
+                BettingCentre.goCollectTheGains(identification);//          then I must go to the Betting Centre collect my gains
                 break;                                          //          stop for this round and relax...
             } else {                                            //       if I have not won
                 if (tired) {                                    //          but I feel tired
