@@ -22,6 +22,10 @@ public class Race {
         this.positionOnTrack = new int[numberOfTracks];
     }
 
+    public static int generateDistance() {
+        return (int)(Math.random()*1000);
+    }
+
     /**
      * The number of tracks this race will have in use.
      */

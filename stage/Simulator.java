@@ -1,6 +1,8 @@
 package stage;
 
 import entities.*;
+import hippodrome.*;
+import hippodrome.actions.Race;
 
 /**
  * Creation of a Horse Race simulation placed on a Hippodrome.
@@ -17,8 +19,16 @@ public class Simulator {
      * @param args input arguments to the simulation execution.
      */
     public static void main(String[] args) {
+        /* initialize shared regions */
+        GeneralInformationRepository repository = new GeneralInformationRepository();
+        BettingCentre bettingCentre = new BettingCentre(numberOfHorses, numberOfSpectators);
+        ControlCentre controlCentre = new ControlCentre();
+        Paddock paddock = new Paddock();
+        RacingTrack racingTrack;
+        Stable stable = new Stable();
+
         /* initialize a broker and the other arrays of entities */
-        broker = new Broker();
+        broker = new Broker(bettingCentre, controlCentre, stable);
         spectators = new Spectator[numberOfSpectators];
         horseJockeys = new HorseJockey[numberOfHorses];
 
@@ -26,11 +36,12 @@ public class Simulator {
         new Thread(broker).start();
         for (int race = 0; race < numberOfRaces; race++) {
             for (int i = 0; i != numberOfSpectators; i++) {
-                spectators[i] = new Spectator(i, generateMoney());
+                spectators[i] = new Spectator(i, generateMoney(), bettingCentre, controlCentre, paddock);
                 new Thread(spectators[i]).start();
             }
+            racingTrack = new RacingTrack(new Race(numberOfHorses, race, Race.generateDistance()));
             for (int i = 0; i != numberOfHorses; race++) {
-                horseJockeys[i] = new HorseJockey(i, generateAbility());
+                horseJockeys[i] = new HorseJockey(i, generateAbility(), controlCentre, paddock, racingTrack, stable);
                 new Thread(horseJockeys[i]).start();
             }
             // TODO - wait till the race is over...
