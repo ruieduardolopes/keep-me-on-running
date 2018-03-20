@@ -26,7 +26,11 @@ public class GeneralInformationRepository {
      * snapshot of all instants of time throughout a horse run
      * game.
      */
-    public GeneralInformationRepository() {
+    public GeneralInformationRepository(int numberOfHorses, int numberOfSpectators) {
+        this.numberOfHorses = numberOfHorses;
+        this.numberOfSpectators = numberOfSpectators;
+        this.spectators = new Spectator[this.numberOfSpectators];
+        this.horseJockeys = new HorseJockey[this.numberOfHorses];
         giveFileAName();
         try {
             printHeaders();
@@ -56,7 +60,7 @@ public class GeneralInformationRepository {
      * @throws InaccessibleFileException if the file does not grant any permission for the current user to be written on.
      * The same behavior could occur if the directory where this file resides cannot be written by the current user.
      */
-    private void printHeaders() throws InaccessibleFileException {
+    private synchronized void printHeaders() throws InaccessibleFileException {
         boolean actionSucceeded = file.openForWriting(null, filename);
         if (!actionSucceeded) {
             throw new InaccessibleFileException("The requested file \"" + filename + "\" is currently unaccessible or this user does not have permissions to write on this directory.");
@@ -67,11 +71,26 @@ public class GeneralInformationRepository {
         GenericIO.writelnString(title);
         file.writelnString(title);
 
-        /* print the column headers */ // TODO - make this generic
-        String header1 = "MAN/BRK           SPECTATOR/BETTER              HORSE/JOCKEY PAIR at Race RN\n" +
-                         "  Stat  St0  Am0 St1  Am1 St2  Am2 St3  Am3 RN St0  Len0 St1  Len1 St2  Len2 St3  Len3";
+        /* print the column headers */
+        String header1 = "MAN/BRK           SPECTATOR/BETTER              HORSE/JOCKEY PAIR at Race RN\n";
+        header1 += "  Stat  ";
+        for (int i = 0; i != numberOfSpectators; i++) {
+            header1 += "St" + i + "  Am" + i + " ";
+        }
+        header1 += "RN ";
+        for (int i = 0; i != numberOfHorses; i++) {
+            header1 += "St" + i + "  Len" + i + " ";
+        }
         String header2 = "                                        Race RN Status\n" +
                          " RN Dist BS0  BA0 BS1  BA1 BS2  BA2 BS3  BA3  Od0 N0 Ps0 SD0 Od1 N1 Ps1 Sd1 Od2 N2 Ps2 Sd2 Od3 N3 Ps3 St3";
+        header2 += " RN Dist ";
+        for (int i = 0; i != numberOfSpectators; i++) {
+            header2 += "BS" + i + "  BA" + i + " ";
+        }
+        header2 += " ";
+        for (int i = 0; i != numberOfHorses; i++) {
+            header2 += "Od" + i + " N" + i + " Ps" + i + " SD" + i + " ";
+        }
         GenericIO.writelnString(header1);
         file.writelnString(header1);
         GenericIO.writelnString(header2);
@@ -400,4 +419,8 @@ public class GeneralInformationRepository {
      * allows us to control a file as IO for the log.
      */
     private TextFile file = new TextFile();
+
+    private int numberOfHorses;
+
+    private int numberOfSpectators;
 }

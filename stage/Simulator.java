@@ -20,7 +20,7 @@ public class Simulator {
      */
     public static void main(String[] args) {
         /* initialize shared regions */
-        GeneralInformationRepository repository = new GeneralInformationRepository();
+        GeneralInformationRepository repository = new GeneralInformationRepository(numberOfHorses, numberOfSpectators);
         BettingCentre bettingCentre = new BettingCentre(numberOfHorses, numberOfSpectators);
         ControlCentre controlCentre = new ControlCentre();
         Paddock paddock = new Paddock();
@@ -55,7 +55,11 @@ public class Simulator {
                 }
                 horseJockeys = null;
             } catch (InterruptedException ie) {
-                ie.printStackTrace(); // TODO - handle the exception...
+                System.err.println("An error occurred while terminating the threads.");
+                System.err.println("The last program status was such as follows:");
+                ie.printStackTrace();
+                System.err.println("This program will now quit.");
+                System.exit(2);
             }
         }
     }
