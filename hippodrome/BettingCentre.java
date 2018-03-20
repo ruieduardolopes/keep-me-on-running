@@ -47,6 +47,8 @@ public class BettingCentre {
      */
     public void honourTheBets() {
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.SETTLING_ACCOUNTS);
+        moneyOnSafe = 0;
+        amountPerWinner = 0;
     }
 
     /**
@@ -79,16 +81,15 @@ public class BettingCentre {
      * @return the amount of money collected by the {@code spectator}.
      */
     public int goCollectTheGains(int spectator) {
+        int gains = 0;
         for (int person : winners) {
             if (spectator == person) {
                 moneyOnSafe -= amountPerWinner;
-                return amountPerWinner;
+                gains = amountPerWinner;
             }
         }
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.COLLECTING_THE_GAINS);
-        moneyOnSafe = 0;
-        amountPerWinner = 0;
-        return 0;
+        return gains;
     }
 
     /**
