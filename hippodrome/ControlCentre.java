@@ -21,7 +21,7 @@ public class ControlCentre {
      *
      * @param raceNumber number identification of the next {@link Race}.
      */
-    public static void summonHorsesToPaddock(int raceNumber) {
+    public void summonHorsesToPaddock(int raceNumber) {
 
     }
 
@@ -30,7 +30,7 @@ public class ControlCentre {
      *
      * @param raceNumber number idenitification of the next {@link Race} to be started as of this instant.
      */
-    public static void startTheRace(int raceNumber) {
+    public void startTheRace(int raceNumber) {
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.SUPERVISING_THE_RACE);
     }
 
@@ -38,7 +38,7 @@ public class ControlCentre {
      * Start entertaining the guests (representation of the {@link Spectator}s), as the {@link entities.Broker}'s actions
      * can be considered as terminated.
      */
-    public static void entertainTheGuests() {
+    public void entertainTheGuests() {
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.PLAYING_HOST_AT_THE_BAR);
     }
 
@@ -50,7 +50,7 @@ public class ControlCentre {
      *
      * @return {@code true} if the next race is still not prepared to begin; otherwise {@code false}.
      */
-    public static boolean waitForTheNextRace(int raceNumber) {
+    public boolean waitForTheNextRace(int raceNumber) {
         //TODO check race number condition
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.WAITING_FOR_A_RACE_TO_START);
         return false;
@@ -61,7 +61,7 @@ public class ControlCentre {
      *
      * @param raceNumber number identification of the {@link Race} which is about to start.
      */
-    public static void goWatchTheRace(int raceNumber) {
+    public void goWatchTheRace(int raceNumber) {
         //TODO check raceNumber condition
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.WATCHING_A_RACE);
     }
@@ -73,7 +73,7 @@ public class ControlCentre {
      *
      * @return {@code true} if {@code spectator} has won his (or hers) bet; otherwise, it will return {@code false}.
      */
-    public static boolean haveIWon(Spectator spectator) {
+    public boolean haveIWon(Spectator spectator) {
         //TODO check if won
         if(true) {
             ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.WATCHING_A_RACE);
@@ -86,14 +86,14 @@ public class ControlCentre {
     /**
      * Relax a bit from the games, as this is could be the final transition of a {@link Spectator} lifecycle.
      */
-    public static void relaxABit() {
+    public void relaxABit() {
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.CELEBRATING);
     }
 
     /**
      * Publishing of the results by the {@link entities.Broker} performing its job.
      */
-    public static void reportResults() {
+    public void reportResults() {
 
     }
 
@@ -101,14 +101,14 @@ public class ControlCentre {
      * Signal given by the {@link entities.Broker} to summon all the horses from the {@link Stable} to the
      * {@link Paddock}.
      */
-    public static void summonHorsesToPaddock() {
+    public void summonHorsesToPaddock() {
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.ANNOUNCING_NEXT_RACE);
     }
 
     /**
      * Signal given by the last pair Horse/Jockey which exits the {@link Stable} in direction to the {@link Paddock}.
      */
-    public static void proceedToPaddock() {
+    public void proceedToPaddock() {
 
     }
 
@@ -116,7 +116,7 @@ public class ControlCentre {
      * Signal given by the last {@link Spectator} which arrives at the {@link Paddock} to watch the horses, before placing
      * a bet.
      */
-    public static void goCheckHorses() {
+    public void goCheckHorses() {
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.APPRAISING_THE_HORSES);
     }
 }
