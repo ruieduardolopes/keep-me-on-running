@@ -13,6 +13,7 @@ import hippodrome.registry.UnknownSpectatorException;
  * Further documentation on this matter could be accessed here: {@link Queue}.
  */
 import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Place where the {@link Spectator}s place their bets on the winning horse. As they come here
@@ -31,6 +32,7 @@ public class BettingCentre {
         this.bets = new Bet[numberOfSpectators];
         this.moneyOnSafe = 0;
         this.amountPerWinner = 0;
+        this.bettingQueue = new LinkedBlockingQueue<>();
     }
 
     /**
@@ -99,7 +101,8 @@ public class BettingCentre {
 
     /**
      * The waiting queue to contact the {@link Broker} on its tasks. This could be used while waiting to a {@link Spectator}
-     * place a bet, or while wainting to a {@link Spectator} go collect his (or hers) gains.
+     * place a bet, or while wainting to a {@link Spectator} go collect his (or hers) gains. This structure is granted by a
+     * {@link LinkedBlockingQueue} Java class, which performs a blocking queue under the logic of a linked list.
      */
     private Queue<Spectator> bettingQueue = null;
 
