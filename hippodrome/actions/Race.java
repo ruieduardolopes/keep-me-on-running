@@ -14,6 +14,7 @@ public class Race {
      *
      * @param numberOfTracks the number of tracks to be used on this race.
      * @param identification the race number identification.
+     * @param distance the distance of the race.
      */
     public Race(int numberOfTracks, int identification, int distance) {
         this.numberOfTracks = numberOfTracks;

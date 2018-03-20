@@ -24,6 +24,10 @@ public class HorseJockey extends Thread {
      *
      * @param identification number which identifies this pair Horse/Jockey.
      * @param ability number with characterizes the Horse ability to run.
+     * @param controlCentre the {@link ControlCentre} instance where this pair Horse/Jockey ({@link HorseJockey}) will perform its actions.
+     * @param paddock the {@link Paddock} instance where this pair Horse/Jockey ({@link HorseJockey}) will perform its actions.
+     * @param racingTrack the {@link RacingTrack} instance where this pair Horse/Jockey ({@link HorseJockey}) will perform its actions.
+     * @param stable the {@link Stable} instance where this pair Horse/Jockey ({@link HorseJockey}) will perform its actions.
      */
     public HorseJockey(int identification, int ability, ControlCentre controlCentre, Paddock paddock, RacingTrack racingTrack, Stable stable) {
         this.identification = identification;
