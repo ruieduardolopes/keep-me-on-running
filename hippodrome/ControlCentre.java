@@ -109,5 +109,5 @@ public class ControlCentre {
 
     private int numberOfHorses;
 
-    private int[] winners;
+    private int winnerHorseJockey;
 }
