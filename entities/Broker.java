@@ -61,7 +61,7 @@ public class Broker extends Thread {
      * @return the current broker {@link BrokerState}.
      * @see BrokerState
      */
-    public BrokerState getBrokerState() {
+    public synchronized BrokerState getBrokerState() {
         return state;
     }
 
@@ -71,7 +71,7 @@ public class Broker extends Thread {
      *
      * @param state Enumeration value represented by {@link BrokerState}
      */
-    public void setBrokerState(BrokerState state) {
+    public synchronized void setBrokerState(BrokerState state) {
         this.state = state;
     }
 

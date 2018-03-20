@@ -67,7 +67,7 @@ public class HorseJockey extends Thread {
      * @return the current spectator {@link HorseJockeyState}.
      * @see HorseJockeyState
      */
-    public HorseJockeyState getHorseJockeyState() {
+    public synchronized HorseJockeyState getHorseJockeyState() {
         return state;
     }
 
@@ -77,7 +77,7 @@ public class HorseJockey extends Thread {
      *
      * @param state Enumeration value represented by {@link HorseJockeyState}
      */
-    public void setHorseJockeyState(HorseJockeyState state) {
+    public synchronized void setHorseJockeyState(HorseJockeyState state) {
         this.state = state;
     }
 
@@ -86,7 +86,7 @@ public class HorseJockey extends Thread {
      *
      * @return a number represented by an integer.
      */
-    public int getIdentification() {
+    public synchronized int getIdentification() {
         return identification;
     }
 
@@ -95,7 +95,7 @@ public class HorseJockey extends Thread {
      *
      * @return an integer representation of the ability.
      */
-    public int getAbility() {
+    public synchronized int getAbility() {
         return ability;
     }
 
@@ -104,7 +104,7 @@ public class HorseJockey extends Thread {
      *
      * @return an integer representing the identification.
      */
-    public int getRaceNumber() {
+    public synchronized int getRaceNumber() {
         return raceNumber;
     }
 
@@ -114,7 +114,7 @@ public class HorseJockey extends Thread {
      *
      * @param raceNumber an integer representing the identification.
      */
-    public void setRaceNumber(int raceNumber) {
+    public synchronized void setRaceNumber(int raceNumber) {
         this.raceNumber = raceNumber;
     }
 

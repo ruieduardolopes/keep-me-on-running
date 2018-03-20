@@ -74,7 +74,7 @@ public class Spectator extends Thread {
      * @return the current spectator {@link SpectatorState}.
      * @see SpectatorState
      */
-    public SpectatorState getSpectatorState() {
+    public synchronized SpectatorState getSpectatorState() {
         return state;
     }
 
@@ -84,7 +84,7 @@ public class Spectator extends Thread {
      *
      * @param state Enumeration value represented by {@link SpectatorState}
      */
-    public void setSpectatorState(SpectatorState state) {
+    public synchronized void setSpectatorState(SpectatorState state) {
         this.state = state;
     }
 
@@ -93,7 +93,7 @@ public class Spectator extends Thread {
      *
      * @return a numerical identification represented as an integer.
      */
-    public int getIdentification() {
+    public synchronized int getIdentification() {
         return identification;
     }
 
@@ -102,7 +102,7 @@ public class Spectator extends Thread {
      *
      * @return the current amount of money, as an integer.
      */
-    public int getMoney() {
+    public synchronized int getMoney() {
         return money;
     }
 

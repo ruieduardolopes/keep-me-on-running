@@ -38,14 +38,14 @@ public class BettingCentre {
     /**
      * Accept all the bets done by the {@link Spectator}s.
      */
-    public void acceptTheBets() {
+    public synchronized void acceptTheBets() {
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.WAITING_FOR_BETS);
     }
 
     /**
      * Give all the money to the respective betting parts - the {@link Spectator}s.
      */
-    public void honourTheBets() {
+    public synchronized void honourTheBets() {
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.SETTLING_ACCOUNTS);
         moneyOnSafe = 0;
         amountPerWinner = 0;
@@ -62,7 +62,7 @@ public class BettingCentre {
      *
      * @return the amount of money which was accepted by the {@link Broker} to place the bet.
      */
-    public int placeABet(int spectator, int bet, int horse) {
+    public synchronized int placeABet(int spectator, int bet, int horse) {
         try {
             bets[spectator] = new Bet(horse, bet);
         } catch (IndexOutOfBoundsException ioobe) {
@@ -80,7 +80,7 @@ public class BettingCentre {
      *
      * @return the amount of money collected by the {@code spectator}.
      */
-    public int goCollectTheGains(int spectator) {
+    public synchronized int goCollectTheGains(int spectator) {
         int gains = 0;
         for (int person : winners) {
             if (spectator == person) {
@@ -100,7 +100,7 @@ public class BettingCentre {
      *
      * @return {@code true} if {@code spectator} has won his (or hers) bet; otherwise, it will return {@code false}.
      */
-    public boolean haveIWon(int spectatorId) {
+    public synchronized boolean haveIWon(int spectatorId) {
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.WATCHING_A_RACE);
         for (int winner : winners) {
             if (winner == spectatorId) {
@@ -115,7 +115,7 @@ public class BettingCentre {
      *
      * @return {@code true} if anybody had won indeed; otherwise it will return {@code false}.
      */
-    public boolean areThereAnyWinners() {
+    public synchronized boolean areThereAnyWinners() {
         return winners.length != 0;
     }
 
