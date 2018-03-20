@@ -53,4 +53,15 @@ public class Paddock {
         return false;
     }
 
+    /**
+     * Internal Structure for saving horses on {@code Paddock}. Each index is a pair Horse/Jockey and each index content
+     * have {@code true} if horse is on {@code Paddock}; otherwise {@code false}.
+     */
+    private boolean[] horses;
+
+    /**
+     * Internal Structure for saving spectators on {@code Paddock}. Each index is a Spectators and each index content
+     * have {@code true} if spectator is on {@code Paddock}; otherwise {@code false}.
+     */
+    private boolean[] spectators;
 }
