@@ -38,4 +38,11 @@ public class Stable {
     public static void proceedToPaddock() {
 
     }
+
+    /**
+     * Internal Structure for saving horses on {@code Stable}. Each index is a pair Horse/Jockey and each index content
+     * have {@code true} if horse is on {@code Stable}; otherwise {@code false}.
+     */
+    private boolean[] horses;
+
 }
