@@ -67,34 +67,41 @@ public class GeneralInformationRepository {
         }
 
         /* print the title */
-        String title = "AFTERNOON AT THE RACE TRACK - Description of the internal state of the problem";
+        String title = Color.ANSI_BLUE_BOLD + "AFTERNOON AT THE RACE TRACK - Description of the internal state of the problem" + Color.ANSI_RESET;
         GenericIO.writelnString(title);
-        file.writelnString(title);
+        file.writelnString(cleanString(title));
 
         /* print the column headers */
-        String header1 = "MAN/BRK           SPECTATOR/BETTER              HORSE/JOCKEY PAIR at Race RN\n";
-        header1 += "  Stat  ";
+        String header1 = Color.ANSI_GREEN + "MAN/BRK" + Color.ANSI_RESET + "           " + Color.ANSI_CYAN + "SPECTATOR/BETTER" + Color.ANSI_RESET + "              " + Color.ANSI_YELLOW + "HORSE/JOCKEY PAIR at Race RN" + Color.ANSI_RESET + "\n";
+        header1 += Color.ANSI_GREEN + "  Stat  " + Color.ANSI_RESET;
         for (int i = 0; i != numberOfSpectators; i++) {
+            header1 += Color.ANSI_CYAN;
             header1 += "St" + i + "  Am" + i + " ";
+            header1 += Color.ANSI_RESET;
         }
         header1 += "RN ";
         for (int i = 0; i != numberOfHorses; i++) {
+            header1 += Color.ANSI_YELLOW;
             header1 += "St" + i + "  Len" + i + " ";
+            header1 += Color.ANSI_RESET;
         }
-        String header2 = "                                        Race RN Status\n" +
-                         " RN Dist BS0  BA0 BS1  BA1 BS2  BA2 BS3  BA3  Od0 N0 Ps0 SD0 Od1 N1 Ps1 Sd1 Od2 N2 Ps2 Sd2 Od3 N3 Ps3 St3";
+        String header2 = Color.ANSI_BLUE_BOLD + "                                        Race RN Status\n" + Color.ANSI_RESET;
         header2 += " RN Dist ";
         for (int i = 0; i != numberOfSpectators; i++) {
+            header2 += Color.ANSI_PURPLE;
             header2 += "BS" + i + "  BA" + i + " ";
+            header2 += Color.ANSI_RESET;
         }
         header2 += " ";
         for (int i = 0; i != numberOfHorses; i++) {
+            header2 += Color.ANSI_RED;
             header2 += "Od" + i + " N" + i + " Ps" + i + " SD" + i + " ";
+            header2 += Color.ANSI_RESET;
         }
         GenericIO.writelnString(header1);
-        file.writelnString(header1);
+        file.writelnString(cleanString(header1));
         GenericIO.writelnString(header2);
-        file.writelnString(header2);
+        file.writelnString(cleanString(header2));
         file.close();
     }
 
@@ -112,28 +119,51 @@ public class GeneralInformationRepository {
     }
 
     /**
+     * Cleans a colorful ASCII'd {@code String}, in order to print strings without color characters.
+     *
+     * @param colorfulString the ASCII'd {@code String}.
+     * @return a cleaned {@code String}.
+     */
+    private String cleanString(String colorfulString) {
+        return colorfulString.replace(Color.ANSI_RESET, "").replace(Color.ANSI_BLACK, "").
+                              replace(Color.ANSI_RED, "").replace(Color.ANSI_GREEN, "").
+                              replace(Color.ANSI_YELLOW, "").replace(Color.ANSI_BLUE, "").
+                              replace(Color.ANSI_PURPLE, "").replace(Color.ANSI_CYAN, "").
+                              replace(Color.ANSI_WHITE, "").replace(Color.ANSI_BLACK_BOLD, "").
+                              replace(Color.ANSI_RED_BOLD, "").replace(Color.ANSI_GREEN_BOLD , "").
+                              replace(Color.ANSI_YELLOW_BOLD, "").replace(Color.ANSI_BLUE_BOLD, "").
+                              replace(Color.ANSI_PURPLE_BOLD, "").replace(Color.ANSI_CYAN_BOLD, "");
+    }
+
+    /**
      * Makes a snapshot of the entities at a given time.
      */
     private void printEntitiesLine() {
         String line = " ";
+        line += Color.ANSI_GREEN;
         line += String.format("%6s", brokerStatus);                             /* Stat */
+        line += Color.ANSI_RESET;
         line += " ";
+        line += Color.ANSI_CYAN;
         for (Spectator spectator : spectators) {
             line += String.format("%4s", spectator.getStatus());                /* St# */
             line += "-";
             line += String.format("%3d", spectator.getAmountOfMoney());         /* Am# */
             line += " ";
         }
+        line += Color.ANSI_RESET;
         line += String.format("%2d", raceNumber);                               /* RN */
         line += " ";
+        line += Color.ANSI_YELLOW;
         for (HorseJockey horseJockey : horseJockeys) {
             line += String.format("%4s", horseJockey.getStatus());              /* St# */
             line += "-";
             line += String.format("%4d", horseJockey.getAbility());             /* Len# */
             line += " ";
         }
+        line += Color.ANSI_RESET;
         GenericIO.writelnString(line);
-        file.writelnString(line);
+        file.writelnString(cleanString(line));
     }
 
     /**
@@ -145,13 +175,16 @@ public class GeneralInformationRepository {
         line += " ";
         line += String.format("%4d", currentRaceDistance);                          /* Dist */
         line += " ";
+        line += Color.ANSI_PURPLE;
         for (Spectator spectator : spectators) {
             line += String.format("%4d", spectator.getBetSelection());              /* BS# */
             line += "-";
             line += String.format("%3d", spectator.getBetAmount());                 /* BA# */
             line += " ";
         }
+        line += Color.ANSI_RESET;
         line += " ";
+        line += Color.ANSI_RED;
         for (HorseJockey horseJockey : horseJockeys) {
             line += String.format("%4f", horseJockey.getProbabilityToWin());        /* Od# */
             line += "-";
@@ -162,8 +195,9 @@ public class GeneralInformationRepository {
             line += String.format("%3d", horseJockey.getFinalStandPosition());      /* SD# */
             line += " ";
         }
+        line += Color.ANSI_RESET;
         GenericIO.writelnString(line);
-        file.writelnString(line);
+        file.writelnString(cleanString(line));
     }
 
     /**
