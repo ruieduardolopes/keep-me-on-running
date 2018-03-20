@@ -28,7 +28,7 @@ public class Broker extends Thread {
         this.stable = stable;
     }
 
-    /**
+    /** //TODO - Fix the static methods (already fixed the Betting Centre)
      * Definition of the Broker's lifecycle.
      *
      * In a technical perspective this is reasoned by a thread definition function which
