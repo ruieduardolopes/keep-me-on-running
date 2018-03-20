@@ -66,6 +66,7 @@ public class BettingCentre {
         } catch (IndexOutOfBoundsException ioobe) {
             throw new UnknownSpectatorException(spectator);
         }
+        moneyOnSafe += bet;
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.PLACING_A_BET);
         return 0;
     }
