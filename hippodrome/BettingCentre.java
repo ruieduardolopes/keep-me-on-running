@@ -22,7 +22,7 @@ import java.util.Queue;
  * @author Hugo Fragata
  * @author Rui Lopes
  * @since 0.1
- * @version 0.1
+ * @version 0.2
  */
 public class BettingCentre {
     public BettingCentre(int numberOfHorses, int numberOfSpectators) {
@@ -103,15 +103,38 @@ public class BettingCentre {
      */
     private Queue<Spectator> bettingQueue = null;
 
+    /**
+     * Internal structure of bets. This is an array of bets (issued by an entity called {@link Bet}). Here, each index
+     * is related to a specific {@link Spectator} with its identification number. This is applicable since we consider
+     * that the {@code Spectators} have sequential numbers.
+     */
     private Bet[] bets = null;
 
+    /**
+     * Array of {@code Spectator}'s identification numbers to whom the betting money should go. Its length represents the
+     * number of winners and its content is the set of {@code Spectator}'s IDs of who won the bet.
+     */
     private int[] winners;
 
+    /**
+     * Internal knowledge of the number of horses which are competing on track.
+     */
     private int numberOfHorses;
 
+    /**
+     * Internal knowledge of the number of spectators which are attendind and betting on the races.
+     */
     private int numberOfSpectators;
 
+    /**
+     * Internal attribute of the Betting Centre which represents the amount of money which we have on our account, to
+     * perform the bets from the {@code Spectator}'s.
+     */
     private int moneyOnSafe;
 
+    /**
+     * Internal attribute of the Betting Centre which must contain the amount of money which should be given per winner,
+     * on a bet.
+     */
     private int amountPerWinner;
 }
