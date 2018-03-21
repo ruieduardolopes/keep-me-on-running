@@ -2,6 +2,7 @@ package entities;
 
 import hippodrome.BettingCentre;
 import hippodrome.ControlCentre;
+import hippodrome.GeneralInformationRepository;
 import hippodrome.Paddock;
 
 /**
@@ -27,13 +28,15 @@ public class Spectator extends Thread {
      * @param controlCentre the {@link ControlCentre} instance where this {@link Spectator} will perform its actions.
      * @param paddock the {@link Paddock} instance where this {@link Spectator} will perform its actions.
      */
-    public Spectator(int identification, int money, BettingCentre bettingCentre, ControlCentre controlCentre, Paddock paddock) {
+    public Spectator(int identification, int money, BettingCentre bettingCentre, ControlCentre controlCentre, Paddock paddock, GeneralInformationRepository repository) {
         this.identification = identification;
         this.money = money;
+        repository.setSpectatorAmountOfMoney(this.identification, this.money);
         tired = false;
         this.bettingCentre = bettingCentre;
         this.controlCentre = controlCentre;
         this.paddock = paddock;
+        this.repository = repository;
     }
 
     /**
@@ -51,12 +54,12 @@ public class Spectator extends Thread {
             if (isLastSpectator) {                                                  //       if this is the last Spectator to come
                 controlCentre.goCheckHorses();                                      //          the Broker on the Control Centre can proceed
             }                                                                       //           its actions;
-            bettingCentre.placeABet(identification, bet, horse);                    //       on the Betting Centre the Spectator can place its bet
+            money -= bettingCentre.placeABet(identification, bet, horse);           //       on the Betting Centre the Spectator can place its bet
             controlCentre.goWatchTheRace(raceNumber);                               //       then we go to the Control Centre (Watching Stand) to watch the race
             if (bettingCentre.haveIWon(identification) && !tired) {                 //       if the Control Centre approves that I won and if I am not tired
-                bettingCentre.goCollectTheGains(identification);                    //          then I must go to the Betting Centre and collect my gains;
+                money += bettingCentre.goCollectTheGains(identification);           //          then I must go to the Betting Centre and collect my gains;
             } else if (bettingCentre.haveIWon(identification) && tired) {           //       if the Control Centre approves that I won and if I am tired
-                bettingCentre.goCollectTheGains(identification);                    //          then I must go to the Betting Centre collect my gains
+                money += bettingCentre.goCollectTheGains(identification);           //          then I must go to the Betting Centre collect my gains
                 break;                                                              //          stop for this round and relax...
             } else {                                                                //       if I have not won
                 if (tired) {                                                        //          but I feel tired
@@ -86,6 +89,7 @@ public class Spectator extends Thread {
      */
     public synchronized void setSpectatorState(SpectatorState state) {
         this.state = state;
+        repository.setSpectatorStatus(this.identification, state);
     }
 
     /**
@@ -156,4 +160,6 @@ public class Spectator extends Thread {
      * The {@link Paddock} instance where this {@link Spectator} will perform its actions.
      */
     private Paddock paddock;
+
+    private GeneralInformationRepository repository;
 }

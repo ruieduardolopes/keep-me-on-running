@@ -1,9 +1,6 @@
 package entities;
 
-import hippodrome.ControlCentre;
-import hippodrome.Paddock;
-import hippodrome.RacingTrack;
-import hippodrome.Stable;
+import hippodrome.*;
 
 /**
  * Implementation of a pair Horse/Jockey, the main horse race character. This entity,
@@ -29,13 +26,15 @@ public class HorseJockey extends Thread {
      * @param racingTrack the {@link RacingTrack} instance where this pair Horse/Jockey ({@link HorseJockey}) will perform its actions.
      * @param stable the {@link Stable} instance where this pair Horse/Jockey ({@link HorseJockey}) will perform its actions.
      */
-    public HorseJockey(int identification, int ability, ControlCentre controlCentre, Paddock paddock, RacingTrack racingTrack, Stable stable) {
+    public HorseJockey(int identification, int ability, ControlCentre controlCentre, Paddock paddock, RacingTrack racingTrack, Stable stable, GeneralInformationRepository repository) {
         this.identification = identification;
         this.ability = ability;
+        repository.setHorseJockeyAbility(this.identification, this.ability);
         this.controlCentre = controlCentre;
         this.paddock = paddock;
         this.racingTrack = racingTrack;
         this.stable = stable;
+        this.repository = repository;
     }
 
     /**
@@ -79,6 +78,7 @@ public class HorseJockey extends Thread {
      */
     public synchronized void setHorseJockeyState(HorseJockeyState state) {
         this.state = state;
+        repository.setHorseJockeyStatus(identification, state);
     }
 
     /**
@@ -109,7 +109,7 @@ public class HorseJockey extends Thread {
     }
 
     /**
-     * Sets a new race number identification for this pair Horse/Jockey, appliable when this same entity runs in
+     * Sets a new race number identification for this pair Horse/Jockey, applicable when this same entity runs in
      * different occasions.
      *
      * @param raceNumber an integer representing the identification.
@@ -160,4 +160,6 @@ public class HorseJockey extends Thread {
      * The {@link Stable} instance where this pair Horse/Jockey ({@link HorseJockey}) will perform its actions.
      */
     private Stable stable;
+
+    private GeneralInformationRepository repository;
 }

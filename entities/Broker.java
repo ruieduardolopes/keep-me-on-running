@@ -1,9 +1,6 @@
 package entities;
 
-import hippodrome.BettingCentre;
-import hippodrome.ControlCentre;
-import hippodrome.Paddock;
-import hippodrome.Stable;
+import hippodrome.*;
 
 /**
  * Implementation of a Broker, an essential character on a horse race action. This
@@ -25,11 +22,13 @@ public class Broker extends Thread {
      * @param bettingCentre the {@link BettingCentre} instance where this {@link Broker} will perform its actions.
      * @param controlCentre the {@link ControlCentre} instance where this {@link Broker} will perform its actions.
      * @param stable the {@link Stable} instance where this {@link Broker} will perform its actions.
+     * @param repository the {@link GeneralInformationRepository} instance to snapshot each action performed.
      */
-    public Broker(BettingCentre bettingCentre, ControlCentre controlCentre, Stable stable) {
+    public Broker(BettingCentre bettingCentre, ControlCentre controlCentre, Stable stable, GeneralInformationRepository repository) {
         this.bettingCentre = bettingCentre;
         this.controlCentre = controlCentre;
         this.stable = stable;
+        this.repository = repository;
     }
 
     /**
@@ -73,6 +72,7 @@ public class Broker extends Thread {
      */
     public synchronized void setBrokerState(BrokerState state) {
         this.state = state;
+        repository.setBrokerStatus(state);
     }
 
     /**
@@ -100,4 +100,6 @@ public class Broker extends Thread {
      * The {@link Stable} instance where this {@link Broker} will perform its actions.
      */
     private Stable stable;
+
+    private GeneralInformationRepository repository;
 }
