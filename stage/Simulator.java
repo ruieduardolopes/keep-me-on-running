@@ -20,7 +20,7 @@ public class Simulator {
      */
     public static void main(String[] args) {
         /* initialize shared regions */
-        GeneralInformationRepository repository = new GeneralInformationRepository(numberOfHorses, numberOfSpectators);
+        GeneralInformationRepository repository = new GeneralInformationRepository(numberOfHorses, numberOfSpectators, onlyOnLogFile);
         BettingCentre bettingCentre = new BettingCentre(numberOfHorses, numberOfSpectators, repository);
         ControlCentre controlCentre = new ControlCentre(repository);
         Paddock paddock = new Paddock(repository);
@@ -34,31 +34,34 @@ public class Simulator {
         
         /* initialize broker thread */
         broker.start();
-        
+
+        repository.newSnapshot();
+
         /* initialize races */
         for (int race = 0; race < numberOfRaces; race++) {
             for (int i = 0; i != numberOfSpectators; i++) {
                 spectators[i] = new Spectator(i, generateMoney(), bettingCentre, controlCentre, paddock, repository);
                 spectators[i].start();
+                repository.newSnapshot();
             }
             racingTrack = new RacingTrack(new Race(numberOfHorses, race, Race.generateDistance()), repository);
             for (int i = 0; i != numberOfHorses; i++) {
                 horseJockeys[i] = new HorseJockey(i, generateAbility(), controlCentre, paddock, racingTrack, stable, repository);
                 horseJockeys[i].start();
+                repository.newSnapshot();
             }
+            repository.newSnapshot();
             // TODO - wait till the race is over...
             try {
                 for (int i = 0; i != numberOfSpectators; i++) {
                     spectators[i].join();
                 }
                 spectators = null;
-                spectatorsThreads = null;
 
                 for (int i = 0; i != numberOfHorses; i++) {
                     horseJockeys[i].join();
                 }
                 horseJockeys = null;
-                horseJockeysThreads = null;
 
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
@@ -130,18 +133,5 @@ public class Simulator {
      */
     private static HorseJockey[] horseJockeys = null;
 
-    /**
-     * The broker's thread instance.
-     */
-    private static Thread brokerThread = null;
-
-    /**
-     * The sets' array of spectators' thread instance.
-     */
-    private static Thread[] spectatorsThreads = null;
-
-    /**
-     * The sets' array of pairs Horse/Jockey's thread instance.
-     */
-    private static Thread[] horseJockeysThreads = null;
+    private static boolean onlyOnLogFile = true;
 }
