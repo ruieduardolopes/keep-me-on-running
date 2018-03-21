@@ -28,6 +28,7 @@ public class HorseJockey extends Thread {
      */
     public HorseJockey(int identification, int ability, ControlCentre controlCentre, Paddock paddock, RacingTrack racingTrack, Stable stable, GeneralInformationRepository repository) {
         this.identification = identification;
+        repository.setHorseJockeyStatus(identification, state);
         this.ability = ability;
         repository.setHorseJockeyAbility(this.identification, this.ability);
         this.controlCentre = controlCentre;

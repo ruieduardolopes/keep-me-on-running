@@ -30,6 +30,7 @@ public class Broker extends Thread {
         this.stable = stable;
         this.repository = repository;
         this.totalOfRaces = numberOfRaces;
+        repository.setBrokerStatus(state);
     }
 
     /**

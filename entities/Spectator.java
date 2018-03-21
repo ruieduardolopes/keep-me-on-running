@@ -32,6 +32,7 @@ public class Spectator extends Thread {
      */
     public Spectator(int identification, int money, BettingCentre bettingCentre, ControlCentre controlCentre, Paddock paddock, GeneralInformationRepository repository) {
         this.identification = identification;
+        repository.setSpectatorStatus(identification, state);
         this.money = money;
         repository.setSpectatorAmountOfMoney(this.identification, this.money);
         tired = false;
