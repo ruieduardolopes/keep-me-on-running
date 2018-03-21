@@ -8,6 +8,7 @@ import genclass.GenericIO;
 import genclass.TextFile;
 
 import java.time.Instant;
+import java.util.Arrays;
 
 /**
  * Class which represents an archive of all hippodrome's actions
@@ -33,7 +34,13 @@ public class GeneralInformationRepository {
         this.numberOfHorses = numberOfHorses;
         this.numberOfSpectators = numberOfSpectators;
         this.spectators = new Spectator[this.numberOfSpectators];
+        for (int i = 0; i != spectators.length; i++) {
+            spectators[i] = new Spectator();
+        }
         this.horseJockeys = new HorseJockey[this.numberOfHorses];
+        for (int i = 0; i != horseJockeys.length; i++) {
+            horseJockeys[i] = new HorseJockey();
+        }
         giveFileAName();
         try {
             printHeaders();
