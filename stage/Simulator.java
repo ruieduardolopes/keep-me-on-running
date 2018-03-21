@@ -27,40 +27,57 @@ public class Simulator {
         RacingTrack racingTrack;
         Stable stable = new Stable();
 
-        /* initialize a broker and the other arrays of entities */
+        /* initialize the main entities */
         broker = new Broker(bettingCentre, controlCentre, stable);
         spectators = new Spectator[numberOfSpectators];
         horseJockeys = new HorseJockey[numberOfHorses];
-
-        /* for each race run each thread */
-        new Thread(broker).start();
+        
+        /* initialize broker thread */
+        broker.start();
+        
+        /* initialize races */
         for (int race = 0; race < numberOfRaces; race++) {
             for (int i = 0; i != numberOfSpectators; i++) {
                 spectators[i] = new Spectator(i, generateMoney(), bettingCentre, controlCentre, paddock);
-                new Thread(spectators[i]).start();
+                spectators[i].start();
             }
             racingTrack = new RacingTrack(new Race(numberOfHorses, race, Race.generateDistance()));
-            for (int i = 0; i != numberOfHorses; race++) {
+            for (int i = 0; i != numberOfHorses; i++) {
                 horseJockeys[i] = new HorseJockey(i, generateAbility(), controlCentre, paddock, racingTrack, stable);
-                new Thread(horseJockeys[i]).start();
+                horseJockeys[i].start();
             }
             // TODO - wait till the race is over...
             try {
                 for (int i = 0; i != numberOfSpectators; i++) {
-                    new Thread(spectators[i]).join();
+                    spectators[i].join();
                 }
                 spectators = null;
+                spectatorsThreads = null;
+
                 for (int i = 0; i != numberOfHorses; i++) {
-                    new Thread(horseJockeys[i]).join();
+                    horseJockeys[i].join();
                 }
                 horseJockeys = null;
+                horseJockeysThreads = null;
+
             } catch (InterruptedException ie) {
+                ie.printStackTrace();
                 System.err.println("An error occurred while terminating the threads.");
                 System.err.println("The last program status was such as follows:");
                 ie.printStackTrace();
                 System.err.println("This program will now quit.");
                 System.exit(2);
             }
+        }
+        try {
+            broker.join();
+        } catch (InterruptedException ie) {
+            ie.printStackTrace();
+            System.err.println("An error occurred while terminating the threads.");
+            System.err.println("The last program status was such as follows:");
+            ie.printStackTrace();
+            System.err.println("This program will now quit.");
+            System.exit(3);
         }
     }
 
@@ -112,4 +129,19 @@ public class Simulator {
      * The sets' array of pairs Horse/Jockey instance.
      */
     private static HorseJockey[] horseJockeys = null;
+
+    /**
+     * The broker's thread instance.
+     */
+    private static Thread brokerThread = null;
+
+    /**
+     * The sets' array of spectators' thread instance.
+     */
+    private static Thread[] spectatorsThreads = null;
+
+    /**
+     * The sets' array of pairs Horse/Jockey's thread instance.
+     */
+    private static Thread[] horseJockeysThreads = null;
 }
