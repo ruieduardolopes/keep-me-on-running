@@ -28,7 +28,7 @@ public class Simulator {
         Stable stable = new Stable(repository);
 
         /* initialize the main entities */
-        broker = new Broker(bettingCentre, controlCentre, stable, repository);
+        broker = new Broker(numberOfRaces, bettingCentre, controlCentre, stable, repository);
         spectators = new Spectator[numberOfSpectators];
         horseJockeys = new HorseJockey[numberOfHorses];
         

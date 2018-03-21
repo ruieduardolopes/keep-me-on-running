@@ -24,11 +24,12 @@ public class Broker extends Thread {
      * @param stable the {@link Stable} instance where this {@link Broker} will perform its actions.
      * @param repository the {@link GeneralInformationRepository} instance to snapshot each action performed.
      */
-    public Broker(BettingCentre bettingCentre, ControlCentre controlCentre, Stable stable, GeneralInformationRepository repository) {
+    public Broker(int numberOfRaces, BettingCentre bettingCentre, ControlCentre controlCentre, Stable stable, GeneralInformationRepository repository) {
         this.bettingCentre = bettingCentre;
         this.controlCentre = controlCentre;
         this.stable = stable;
         this.repository = repository;
+        this.totalOfRaces = numberOfRaces;
     }
 
     /**
