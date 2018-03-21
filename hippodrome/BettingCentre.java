@@ -34,6 +34,7 @@ public class BettingCentre {
         this.amountPerWinner = 0;
         this.bettingQueue = new LinkedBlockingQueue<>();
         this.repository = repository;
+        this.winners = new int[numberOfSpectators];
     }
 
     /**
