@@ -18,7 +18,6 @@ public class Stable {
      */
     public synchronized void proceedToStable() {
         ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_STABLE);
-
     }
 
     /**
