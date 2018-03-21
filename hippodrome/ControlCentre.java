@@ -89,6 +89,18 @@ public class ControlCentre {
      * {@link Paddock}.
      */
     public synchronized void summonHorsesToPaddock() {
+        while (lastSpectatorHasNotArrivedOnPaddock) {
+            try {
+                wait();
+            } catch (InterruptedException ie) {
+                ie.printStackTrace();
+                System.err.println("An error occurred while terminating the threads.");
+                System.err.println("The last program status was such as follows:");
+                ie.printStackTrace();
+                System.err.println("This program will now quit.");
+                System.exit(4);
+            }
+        }
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.ANNOUNCING_NEXT_RACE);
     }
 
@@ -104,6 +116,8 @@ public class ControlCentre {
      * a bet.
      */
     public synchronized void goCheckHorses() {
+        lastSpectatorHasNotArrivedOnPaddock = false;
+        notifyAll();
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.APPRAISING_THE_HORSES);
     }
 
@@ -112,4 +126,9 @@ public class ControlCentre {
     private int winnerHorseJockey;
 
     private GeneralInformationRepository repository;
+
+    /**
+     * Condition variable to control wait for last {@link ControlCentre#goCheckHorses()}.
+     */
+    private boolean lastSpectatorHasNotArrivedOnPaddock = true;
 }

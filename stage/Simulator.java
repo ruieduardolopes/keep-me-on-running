@@ -51,7 +51,6 @@ public class Simulator {
                 repository.newSnapshot();
             }
             repository.newSnapshot();
-            // TODO - wait till the race is over...
             try {
                 for (int i = 0; i != numberOfSpectators; i++) {
                     spectators[i].join();
@@ -82,6 +81,7 @@ public class Simulator {
             System.err.println("This program will now quit.");
             System.exit(3);
         }
+        repository.newSnapshot();
     }
 
     /**
