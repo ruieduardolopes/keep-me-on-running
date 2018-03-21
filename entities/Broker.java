@@ -73,6 +73,7 @@ public class Broker extends Thread {
     public synchronized void setBrokerState(BrokerState state) {
         this.state = state;
         repository.setBrokerStatus(state);
+        repository.newSnapshot();
     }
 
     /**

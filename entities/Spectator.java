@@ -5,6 +5,8 @@ import hippodrome.ControlCentre;
 import hippodrome.GeneralInformationRepository;
 import hippodrome.Paddock;
 
+import java.util.Random;
+
 /**
  * Implementation of a Spectator which will be watching an horse race and betting on it. This entity,
  * belonging to the {@link entities} package, must coordinate its actions throughout several shared
@@ -48,13 +50,14 @@ public class Spectator extends Thread {
      */
     @Override
     public void run() {
+        tired = false;
         while (controlCentre.waitForTheNextRace(raceNumber)) {                      // while the next race has not started yet
             boolean isLastSpectator = paddock.goCheckHorses();                      //       the Paddock rises an alert for Spectators to go check the horses
             paddock.goCheckHorses(isLastSpectator);                                 //       the Paddock also wants to know if there is more Spectators to come
             if (isLastSpectator) {                                                  //       if this is the last Spectator to come
                 controlCentre.goCheckHorses();                                      //          the Broker on the Control Centre can proceed
             }                                                                       //           its actions;
-            money -= bettingCentre.placeABet(identification, bet, horse);           //       on the Betting Centre the Spectator can place its bet
+            money -= bettingCentre.placeABet(identification, bet(), horse());       //       on the Betting Centre the Spectator can place its bet
             controlCentre.goWatchTheRace(raceNumber);                               //       then we go to the Control Centre (Watching Stand) to watch the race
             if (bettingCentre.haveIWon(identification) && !tired) {                 //       if the Control Centre approves that I won and if I am not tired
                 money += bettingCentre.goCollectTheGains(identification);           //          then I must go to the Betting Centre and collect my gains;
@@ -66,6 +69,7 @@ public class Spectator extends Thread {
                     break;                                                          //              then I should stop;
                 }                                                                   //
             }                                                                       //
+            tired = (Math.random()*2+1) > 1.8;                                      //
         }                                                                           // ;
         controlCentre.relaxABit();                                                  // having all set, then I must relax;
     }
@@ -90,6 +94,7 @@ public class Spectator extends Thread {
     public synchronized void setSpectatorState(SpectatorState state) {
         this.state = state;
         repository.setSpectatorStatus(this.identification, state);
+        repository.newSnapshot();
     }
 
     /**
@@ -108,6 +113,16 @@ public class Spectator extends Thread {
      */
     public synchronized int getMoney() {
         return money;
+    }
+
+    private int bet() {
+        double[] portion = {0.25, 0.375, 0.0625};
+        Random random = new Random();
+        return (int)(money * portion[random.nextInt(portion.length)]);
+    }
+
+    private int horse() {
+        return (new Random()).nextInt(bettingCentre.getNumberOfHorses());
     }
 
     /**

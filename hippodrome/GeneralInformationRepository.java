@@ -30,7 +30,8 @@ public class GeneralInformationRepository {
      * @param numberOfHorses number of pairs Horse/Jockey to run on track.
      * @param numberOfSpectators number of Spectators to attend on track.
      */
-    public GeneralInformationRepository(int numberOfHorses, int numberOfSpectators) {
+    public GeneralInformationRepository(int numberOfHorses, int numberOfSpectators, boolean onlyLogonFile) {
+        this.onlyLogOnFile = onlyLogonFile;
         this.numberOfHorses = numberOfHorses;
         this.numberOfSpectators = numberOfSpectators;
         this.spectators = new Spectator[this.numberOfSpectators];
@@ -78,7 +79,9 @@ public class GeneralInformationRepository {
 
         /* print the title */
         String title = Color.ANSI_BLUE_BOLD + "AFTERNOON AT THE RACE TRACK - Description of the internal state of the problem" + Color.ANSI_RESET;
-        GenericIO.writelnString(title);
+        if (!onlyLogOnFile) {
+            GenericIO.writelnString(title);
+        }
         file.writelnString(cleanString(title));
 
         /* print the column headers */
@@ -108,9 +111,13 @@ public class GeneralInformationRepository {
             header2 += "Od" + i + " N" + i + " Ps" + i + " SD" + i + " ";
             header2 += Color.ANSI_RESET;
         }
-        GenericIO.writelnString(header1);
+        if (!onlyLogOnFile) {
+            GenericIO.writelnString(header1);
+        }
         file.writelnString(cleanString(header1));
-        GenericIO.writelnString(header2);
+        if (!onlyLogOnFile) {
+            GenericIO.writelnString(header2);
+        }
         file.writelnString(cleanString(header2));
         file.close();
     }
@@ -153,11 +160,11 @@ public class GeneralInformationRepository {
         line += Color.ANSI_GREEN;
         line += String.format("%6s", brokerStatus);                             /* Stat */
         line += Color.ANSI_RESET;
-        line += " ";
+        //line += " ";
         line += Color.ANSI_CYAN;
         for (Spectator spectator : spectators) {
             line += String.format("%4s", spectator.getStatus());                /* St# */
-            line += "-";
+            line += " ";
             line += String.format("%3d", spectator.getAmountOfMoney());         /* Am# */
             line += " ";
         }
@@ -167,12 +174,14 @@ public class GeneralInformationRepository {
         line += Color.ANSI_YELLOW;
         for (HorseJockey horseJockey : horseJockeys) {
             line += String.format("%4s", horseJockey.getStatus());              /* St# */
-            line += "-";
+            line += " ";
             line += String.format("%4d", horseJockey.getAbility());             /* Len# */
             line += " ";
         }
         line += Color.ANSI_RESET;
-        GenericIO.writelnString(line);
+        if (!onlyLogOnFile) {
+            GenericIO.writelnString(line);
+        }
         file.writelnString(cleanString(line));
     }
 
@@ -181,32 +190,32 @@ public class GeneralInformationRepository {
      */
     private synchronized void printRaceLine() {
         String line = " ";
-        line += String.format("%2d", raceNumber);                                   /* RN */
+        line += String.format("%2d", raceNumber);                                    /* RN */
         line += " ";
-        line += String.format("%4d", currentRaceDistance);                          /* Dist */
+        line += String.format("%4d", currentRaceDistance);                           /* Dist */
         line += " ";
         line += Color.ANSI_PURPLE;
         for (Spectator spectator : spectators) {
-            line += String.format("%4d", spectator.getBetSelection());              /* BS# */
-            line += "-";
-            line += String.format("%3d", spectator.getBetAmount());                 /* BA# */
+            line += String.format("%4d", spectator.getBetSelection());               /* BS# */
+            line += " ";
+            line += String.format("%3d", spectator.getBetAmount());                  /* BA# */
             line += " ";
         }
         line += Color.ANSI_RESET;
-        line += " ";
         line += Color.ANSI_RED;
         for (HorseJockey horseJockey : horseJockeys) {
-            line += String.format("%4f", horseJockey.getProbabilityToWin());        /* Od# */
-            line += "-";
-            line += String.format("%2d", horseJockey.getNumberOfIncrementsDid());   /* N# */
-            line += "-";
-            line += String.format("%3d", horseJockey.getPositionOnTrack());         /* Ps# */
-            line += "-";
-            line += String.format("%3d", horseJockey.getFinalStandPosition());      /* SD# */
+            line += String.format("%4d", (int)horseJockey.getProbabilityToWin()*100);/* Od# */
             line += " ";
+            line += String.format("%2d", horseJockey.getNumberOfIncrementsDid());    /* N# */
+            line += " ";
+            line += String.format("%3d", horseJockey.getPositionOnTrack());          /* Ps# */
+            line += " ";
+            line += String.format("%3d", horseJockey.getFinalStandPosition());       /* SD# */
         }
         line += Color.ANSI_RESET;
-        GenericIO.writelnString(line);
+        if (!onlyLogOnFile) {
+            GenericIO.writelnString(line);
+        }
         file.writelnString(cleanString(line));
     }
 
@@ -467,4 +476,6 @@ public class GeneralInformationRepository {
     private int numberOfHorses;
 
     private int numberOfSpectators;
+
+    private boolean onlyLogOnFile;
 }

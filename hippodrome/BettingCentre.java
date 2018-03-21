@@ -123,6 +123,14 @@ public class BettingCentre {
     }
 
     /**
+     *
+     * @return
+     */
+    public synchronized int getNumberOfHorses() {
+        return numberOfHorses;
+    }
+
+    /**
      * The waiting queue to contact the {@link Broker} on its tasks. This could be used while waiting to a {@link Spectator}
      * place a bet, or while wainting to a {@link Spectator} go collect his (or hers) gains. This structure is granted by a
      * {@link LinkedBlockingQueue} Java class, which performs a blocking queue under the logic of a linked list.
