@@ -22,8 +22,8 @@ public class Simulator {
         /* initialize shared regions */
         GeneralInformationRepository repository = new GeneralInformationRepository(numberOfHorses, numberOfSpectators, onlyOnLogFile);
         BettingCentre bettingCentre = new BettingCentre(numberOfHorses, numberOfSpectators, repository);
-        ControlCentre controlCentre = new ControlCentre(repository);
-        Paddock paddock = new Paddock(repository);
+        ControlCentre controlCentre = new ControlCentre(repository, numberOfSpectators, numberOfHorses);
+        Paddock paddock = new Paddock(numberOfHorses, repository);
         RacingTrack racingTrack;
         Stable stable = new Stable(repository);
 
@@ -34,34 +34,25 @@ public class Simulator {
         
         /* initialize broker thread */
         broker.start();
-
         repository.newSnapshot();
+        for (int i = 0; i != numberOfSpectators; i++) {
+            spectators[i] = new Spectator(i, generateMoney(), bettingCentre, controlCentre, paddock, repository);
+            spectators[i].start();
+            repository.newSnapshot();
+        }
 
         /* initialize races */
         for (int race = 0; race < numberOfRaces; race++) {
-            for (int i = 0; i != numberOfSpectators; i++) {
-                spectators[i] = new Spectator(i, generateMoney(), bettingCentre, controlCentre, paddock, repository);
-                spectators[i].start();
-                repository.newSnapshot();
-            }
             racingTrack = new RacingTrack(new Race(numberOfHorses, race, Race.generateDistance()), repository);
             for (int i = 0; i != numberOfHorses; i++) {
                 horseJockeys[i] = new HorseJockey(i, generateAbility(), controlCentre, paddock, racingTrack, stable, repository);
                 horseJockeys[i].start();
                 repository.newSnapshot();
             }
-            repository.newSnapshot();
             try {
-                for (int i = 0; i != numberOfSpectators; i++) {
-                    spectators[i].join();
-                }
-                spectators = null;
-
                 for (int i = 0; i != numberOfHorses; i++) {
                     horseJockeys[i].join();
                 }
-                horseJockeys = null;
-
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
                 System.err.println("An error occurred while terminating the threads.");
@@ -73,6 +64,9 @@ public class Simulator {
         }
         try {
             broker.join();
+            for (int i = 0; i != numberOfSpectators; i++) {
+                spectators[i].join();
+            }
         } catch (InterruptedException ie) {
             ie.printStackTrace();
             System.err.println("An error occurred while terminating the threads.");
@@ -133,5 +127,5 @@ public class Simulator {
      */
     private static HorseJockey[] horseJockeys = null;
 
-    private static boolean onlyOnLogFile = true;
+    private static boolean onlyOnLogFile = false;
 }
