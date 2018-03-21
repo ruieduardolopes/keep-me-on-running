@@ -15,6 +15,9 @@ import hippodrome.actions.Race;
  * @version 0.1
  */
 public class Paddock {
+    public Paddock(GeneralInformationRepository repository) {
+        this.repository = repository;
+    }
     /**
      * Signal given by the {@link entities.Broker} in order to proceed to here (the {@link Paddock}).
      * This signal is given calling only the pairs Horse/Jockey which are supposed to run on the next {@link Race},
@@ -64,4 +67,6 @@ public class Paddock {
      * have {@code true} if spectator is on {@code Paddock}; otherwise {@code false}.
      */
     private boolean[] spectators;
+
+    private GeneralInformationRepository repository;
 }

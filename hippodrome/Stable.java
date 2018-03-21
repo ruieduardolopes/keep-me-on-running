@@ -12,6 +12,10 @@ import entities.HorseJockeyState;
  * @version 0.1
  */
 public class Stable {
+    public Stable(GeneralInformationRepository repository) {
+        this.repository = repository;
+    }
+
     /**
      * Signal given by the {@link entities.Broker} in order to allow the pair Horse/Jockey to move
      * to this place (the {@link Stable}).
@@ -44,4 +48,5 @@ public class Stable {
      */
     private boolean[] horses;
 
+    private GeneralInformationRepository repository;
 }

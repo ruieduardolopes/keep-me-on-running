@@ -26,13 +26,14 @@ import java.util.concurrent.LinkedBlockingQueue;
  * @version 0.2
  */
 public class BettingCentre {
-    public BettingCentre(int numberOfHorses, int numberOfSpectators) {
+    public BettingCentre(int numberOfHorses, int numberOfSpectators, GeneralInformationRepository repository) {
         this.numberOfHorses = numberOfHorses;
         this.numberOfSpectators = numberOfSpectators;
         this.bets = new Bet[numberOfSpectators];
         this.moneyOnSafe = 0;
         this.amountPerWinner = 0;
         this.bettingQueue = new LinkedBlockingQueue<>();
+        this.repository = repository;
     }
 
     /**
@@ -160,4 +161,9 @@ public class BettingCentre {
      * on a bet.
      */
     private int amountPerWinner;
+
+    /**
+     * Instance of the global repository of information given by the {@code Simulation}.
+     */
+    private GeneralInformationRepository repository;
 }

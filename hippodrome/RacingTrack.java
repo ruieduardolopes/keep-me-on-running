@@ -17,8 +17,9 @@ import entities.HorseJockey;
  * @version 0.1
  */
 public class RacingTrack {
-    public RacingTrack(Race race) {
+    public RacingTrack(Race race, GeneralInformationRepository repository) {
         this.race = race;
+        this.repository = repository;
     }
 
     /**
@@ -60,4 +61,9 @@ public class RacingTrack {
      * {@link Race}.
      */
     private Race race = null;
+
+    /**
+     *
+     */
+    private GeneralInformationRepository repository;
 }

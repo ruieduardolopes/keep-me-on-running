@@ -21,11 +21,11 @@ public class Simulator {
     public static void main(String[] args) {
         /* initialize shared regions */
         GeneralInformationRepository repository = new GeneralInformationRepository(numberOfHorses, numberOfSpectators);
-        BettingCentre bettingCentre = new BettingCentre(numberOfHorses, numberOfSpectators);
-        ControlCentre controlCentre = new ControlCentre();
-        Paddock paddock = new Paddock();
+        BettingCentre bettingCentre = new BettingCentre(numberOfHorses, numberOfSpectators, repository);
+        ControlCentre controlCentre = new ControlCentre(repository);
+        Paddock paddock = new Paddock(repository);
         RacingTrack racingTrack;
-        Stable stable = new Stable();
+        Stable stable = new Stable(repository);
 
         /* initialize the main entities */
         broker = new Broker(bettingCentre, controlCentre, stable);
@@ -41,7 +41,7 @@ public class Simulator {
                 spectators[i] = new Spectator(i, generateMoney(), bettingCentre, controlCentre, paddock);
                 spectators[i].start();
             }
-            racingTrack = new RacingTrack(new Race(numberOfHorses, race, Race.generateDistance()));
+            racingTrack = new RacingTrack(new Race(numberOfHorses, race, Race.generateDistance()), repository);
             for (int i = 0; i != numberOfHorses; i++) {
                 horseJockeys[i] = new HorseJockey(i, generateAbility(), controlCentre, paddock, racingTrack, stable);
                 horseJockeys[i].start();

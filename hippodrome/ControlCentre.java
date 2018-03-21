@@ -13,8 +13,8 @@ import hippodrome.actions.Race;
  * @version 0.1
  */
 public class ControlCentre {
-    public ControlCentre() {
-
+    public ControlCentre(GeneralInformationRepository repository) {
+        this.repository = repository;
     }
 
     /**
@@ -110,4 +110,6 @@ public class ControlCentre {
     private int numberOfHorses;
 
     private int winnerHorseJockey;
+
+    private GeneralInformationRepository repository;
 }
