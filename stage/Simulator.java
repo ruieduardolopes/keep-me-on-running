@@ -28,7 +28,7 @@ public class Simulator {
         Stable stable = new Stable(repository);
 
         /* initialize the main entities */
-        broker = new Broker(bettingCentre, controlCentre, stable);
+        broker = new Broker(bettingCentre, controlCentre, stable, repository);
         spectators = new Spectator[numberOfSpectators];
         horseJockeys = new HorseJockey[numberOfHorses];
         
@@ -38,12 +38,12 @@ public class Simulator {
         /* initialize races */
         for (int race = 0; race < numberOfRaces; race++) {
             for (int i = 0; i != numberOfSpectators; i++) {
-                spectators[i] = new Spectator(i, generateMoney(), bettingCentre, controlCentre, paddock);
+                spectators[i] = new Spectator(i, generateMoney(), bettingCentre, controlCentre, paddock, repository);
                 spectators[i].start();
             }
             racingTrack = new RacingTrack(new Race(numberOfHorses, race, Race.generateDistance()), repository);
             for (int i = 0; i != numberOfHorses; i++) {
-                horseJockeys[i] = new HorseJockey(i, generateAbility(), controlCentre, paddock, racingTrack, stable);
+                horseJockeys[i] = new HorseJockey(i, generateAbility(), controlCentre, paddock, racingTrack, stable, repository);
                 horseJockeys[i].start();
             }
             // TODO - wait till the race is over...

@@ -66,12 +66,14 @@ public class BettingCentre {
     public synchronized int placeABet(int spectator, int bet, int horse) {
         try {
             bets[spectator] = new Bet(horse, bet);
+            repository.setSpectatorBetAmount(spectator, bet);
+            repository.setSpectatorBetSelection(spectator, horse);
         } catch (IndexOutOfBoundsException ioobe) {
             throw new UnknownSpectatorException(spectator);
         }
         moneyOnSafe += bet;
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.PLACING_A_BET);
-        return 0;
+        return bet;
     }
 
     /**
