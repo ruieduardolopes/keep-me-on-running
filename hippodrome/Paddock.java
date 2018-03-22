@@ -34,24 +34,25 @@ public class Paddock {
      */
     public synchronized void proceedToPaddock(int raceNumber) {
         currentNumberOfHorses++;
+        while (currentNumberOfHorses < numberOfHorses) {
+            try {
+                wait();
+            } catch (InterruptedException ie) {
+                ie.printStackTrace();
+                System.err.println("An error occurred while terminating the threads.");
+                System.err.println("The last program status was such as follows:");
+                ie.printStackTrace();
+                System.err.println("This program will now quit.");
+                System.exit(6);
+            }
+        }
         HorseJockey horse = ((HorseJockey)Thread.currentThread());
         if (horse.getRaceNumber() == raceNumber) {
             horse.setHorseJockeyState(HorseJockeyState.AT_THE_PADDOCK);
-            while (currentNumberOfHorses == numberOfHorses) {
-                try {
-                    wait();
-                } catch (InterruptedException ie) {
-                    ie.printStackTrace();
-                    System.err.println("An error occurred while terminating the threads.");
-                    System.err.println("The last program status was such as follows:");
-                    ie.printStackTrace();
-                    System.err.println("This program will now quit.");
-                    System.exit(6);
-                }
-            }
         }
         // wait fot goCheckHorses() from Spectators on Paddock
         // switch HJ state to ATP
+        // done
     }
 
     /**
@@ -61,15 +62,34 @@ public class Paddock {
      *                           has reached the premises.
      */
     public synchronized void goCheckHorses(boolean isTheLastSpectator) {
+        while (lastHorseDidNotProceedToStartLine) {
+            try {
+                wait();
+            } catch (InterruptedException ie) {
+                ie.printStackTrace();
+                System.err.println("An error occurred while terminating the threads.");
+                System.err.println("The last program status was such as follows:");
+                ie.printStackTrace();
+                System.err.println("This program will now quit.");
+                System.exit(14);
+            }
+        }
         if (isTheLastSpectator) {
-            notifyAll();
+            ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.APPRAISING_THE_HORSES);
         }
         // wait till APH from Horses launches its last PTSL()
         // change S state to ATH
+        // done // TODO - verify this condition
     }
 
     public synchronized void proceedToStartLine() {
+        currentNumberOfHorses--;
+        if (currentNumberOfHorses == 0) {
+            lastHorseDidNotProceedToStartLine = false;
+            notifyAll();
+        }
         // if I'm the last HJ, then wake up Spectators at ATH
+        // done
     }
 
     /**
@@ -86,6 +106,7 @@ public class Paddock {
         return currentNumberOfSpectators == numberOfSpectators;
         // wake up horses at the paddock to free ATP state of HJ
         // return if this is the last spectator
+        // TODO
     }
 
     /**
@@ -109,4 +130,6 @@ public class Paddock {
     private int numberOfHorses;
 
     private int numberOfSpectators;
+
+    private boolean lastHorseDidNotProceedToStartLine = true;
 }

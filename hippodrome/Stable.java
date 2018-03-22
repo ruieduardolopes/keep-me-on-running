@@ -36,6 +36,7 @@ public class Stable {
         ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_STABLE);
         // wait for SHTP of the Broker
         // switch HJ state to ATS
+        // done
     }
 
     /**
@@ -49,6 +50,7 @@ public class Stable {
         currentRaceNumber = raceNumber;
         notifyAll();
         // notify : wake ATS of horses
+        // done
     }
 
     /**

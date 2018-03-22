@@ -1,7 +1,5 @@
 package hippodrome;
 
-import entities.Broker;
-import entities.BrokerState;
 import entities.HorseJockeyState;
 import hippodrome.actions.Race;
 import entities.HorseJockey;
@@ -29,9 +27,22 @@ public class RacingTrack {
      * on the {@link Paddock} to the Racing Track's start line.
      */
     public synchronized void proceedToStartLine() {
+        while (brokerDidNotOrderedToStartTheRace) {
+            try {
+                wait();
+            } catch (InterruptedException ie) {
+                ie.printStackTrace();
+                System.err.println("An error occurred while terminating the threads.");
+                System.err.println("The last program status was such as follows:");
+                ie.printStackTrace();
+                System.err.println("This program will now quit.");
+                System.exit(9);
+            }
+        }
         ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_START_LINE);
         // wait for Broker to start the race with STR()
         // change the HJ's state to ATSL
+        // done
     }
 
     /**
@@ -46,6 +57,7 @@ public class RacingTrack {
         // increment our position on array currentPosition and increment the index on modulo.
         // i.e. currentIndex += (currentIndex + 1) % currentHorsesPosition.length;
         // notify the next horse
+        // TODO
     }
 
     /**
@@ -58,11 +70,15 @@ public class RacingTrack {
     public synchronized boolean hasFinishLineBeenCrossed(int horseJockeyId) {
         ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_FINNISH_LINE);
         // if displacement of this horse is equal to race distance return true; otherwise false. check array
+        // TODO
         return false;
     }
 
     public synchronized void startTheRace() {
+        brokerDidNotOrderedToStartTheRace = false;
+        notifyAll();
         // notify first horse to unlock the starting line (ATSL state)
+        // done
     }
 
     public synchronized Race getRace() {
@@ -85,4 +101,6 @@ public class RacingTrack {
     private int numberOfHorses;
 
     private int currentIndex;
+
+    private boolean brokerDidNotOrderedToStartTheRace = true;
 }

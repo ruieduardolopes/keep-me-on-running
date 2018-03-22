@@ -37,9 +37,22 @@ public class ControlCentre {
      * @param raceNumber number idenitification of the next {@link Race} to be started as of this instant.
      */
     public synchronized void startTheRace(int raceNumber) {
+        while (thereIsStillHorsesToFinishRace) {
+            try {
+                wait();
+            } catch (InterruptedException ie) {
+                ie.printStackTrace();
+                System.err.println("An error occurred while terminating the threads.");
+                System.err.println("The last program status was such as follows:");
+                ie.printStackTrace();
+                System.err.println("This program will now quit.");
+                System.exit(10);
+            }
+        }
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.SUPERVISING_THE_RACE);
         // wait for last makeAMove() of HJ
         // change B state to STR
+        // done
     }
 
     /**
@@ -49,6 +62,7 @@ public class ControlCentre {
     public synchronized void entertainTheGuests() {
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.PLAYING_HOST_AT_THE_BAR);
         // non-blocking
+        // done
     }
 
     /**
@@ -63,6 +77,7 @@ public class ControlCentre {
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.WAITING_FOR_A_RACE_TO_START);
         // wait till Horses free us with PTP() — the last horse
         // when wait is ignored, then return true
+        // TODO
         return true;
     }
 
@@ -72,9 +87,22 @@ public class ControlCentre {
      * @param raceNumber number identification of the {@link Race} which is about to start.
      */
     public synchronized void goWatchTheRace(int raceNumber) {
+        while (brokerDidNotReportResults) {
+            try {
+                wait();
+            } catch (InterruptedException ie) {
+                ie.printStackTrace();
+                System.err.println("An error occurred while terminating the threads.");
+                System.err.println("The last program status was such as follows:");
+                ie.printStackTrace();
+                System.err.println("This program will now quit.");
+                System.exit(11);
+            }
+        }
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.WATCHING_A_RACE);
         // waits for report results of the broker
         // changes state to WAR of S
+        // done
     }
 
     /**
@@ -82,13 +110,17 @@ public class ControlCentre {
      */
     public synchronized void relaxABit() {
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.CELEBRATING);
+        // done
     }
 
     /**
      * Publishing of the results by the {@link entities.Broker} performing its job.
      */
     public synchronized void reportResults() {
-        // notify S to unlock WAR
+        brokerDidNotReportResults = false;
+        notifyAll();
+        // notify S to unleash WAR
+        // done
     }
 
     /**
@@ -111,14 +143,21 @@ public class ControlCentre {
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.ANNOUNCING_NEXT_RACE);
         // wait for final goCheckHorses of CC
         // change B state to ANR
+        // done
     }
 
     /**
      * Signal given by the last pair Horse/Jockey which exits the {@link Stable} in direction to the {@link Paddock}.
      */
     public synchronized void proceedToPaddock() {
+        numberOfHorseJockeysOnPaddock++;
+        if (numberOfHorseJockeysOnPaddock == numberOfHorses) {
+            notifyAll();
+            numberOfHorseJockeysOnPaddock = 0; // resetted for the next race
+        }
         // notify (as the last HJ) Spectators at WFARTS state
         // i.e. if I'm the last HJ, then notify
+        // done
     }
 
     /**
@@ -129,10 +168,13 @@ public class ControlCentre {
         lastSpectatorHasNotArrivedOnPaddock = false;
         notifyAll();
         // notify broker on ANR that the last spectator is done
+        // TODO
     }
 
     public synchronized void makeAMove() {
-        // unlock STR state on Broker
+        thereIsStillHorsesToFinishRace = false;
+        notifyAll();
+        // done
     }
 
     private int numberOfSpectators;
@@ -151,4 +193,8 @@ public class ControlCentre {
      * Condition variable to control wait for last {@link ControlCentre#goCheckHorses()}.
      */
     private boolean lastSpectatorHasNotArrivedOnPaddock = true;
+
+    private boolean thereIsStillHorsesToFinishRace = true;
+
+    private boolean brokerDidNotReportResults = true;
 }
