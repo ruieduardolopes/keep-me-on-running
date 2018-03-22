@@ -2,6 +2,8 @@ package hippodrome;
 
 import entities.HorseJockey;
 import entities.HorseJockeyState;
+import entities.Spectator;
+import entities.SpectatorState;
 import hippodrome.actions.Race;
 
 /**
@@ -15,7 +17,9 @@ import hippodrome.actions.Race;
  * @version 0.1
  */
 public class Paddock {
-    public Paddock(GeneralInformationRepository repository) {
+    public Paddock(int numberOfSpectators, int numberOfHorses, GeneralInformationRepository repository) {
+        this.numberOfSpectators = numberOfSpectators;
+        this.numberOfHorses = numberOfHorses;
         this.repository = repository;
     }
     /**
@@ -28,20 +32,44 @@ public class Paddock {
      * @return {@code true} if the last pair Horse/Jockey has been moved to the {@link Paddock}; otherwise
      * {@code false}.
      */
-    public synchronized boolean proceedToPaddock(int raceNumber) {
-
-        ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_PADDOCK);
-        return false;
+    public synchronized void proceedToPaddock(int raceNumber) {
+        currentNumberOfHorses++;
+        HorseJockey horse = ((HorseJockey)Thread.currentThread());
+        if (horse.getRaceNumber() == raceNumber) {
+            horse.setHorseJockeyState(HorseJockeyState.AT_THE_PADDOCK);
+            while (currentNumberOfHorses == numberOfHorses) {
+                try {
+                    wait();
+                } catch (InterruptedException ie) {
+                    ie.printStackTrace();
+                    System.err.println("An error occurred while terminating the threads.");
+                    System.err.println("The last program status was such as follows:");
+                    ie.printStackTrace();
+                    System.err.println("This program will now quit.");
+                    System.exit(6);
+                }
+            }
+        }
+        // wait fot goCheckHorses() from Spectators on Paddock
+        // switch HJ state to ATP
     }
 
     /**
      * Signal that the last {@link entities.Spectator} has reached the {@link Paddock}.
      *
      * @param isTheLastSpectator {@code boolean} variable which identifies when the last {@link entities.Spectator}
-     *                                          has reached the premises.
+     *                           has reached the premises.
      */
     public synchronized void goCheckHorses(boolean isTheLastSpectator) {
+        if (isTheLastSpectator) {
+            notifyAll();
+        }
+        // wait till APH from Horses launches its last PTSL()
+        // change S state to ATH
+    }
 
+    public synchronized void proceedToStartLine() {
+        // if I'm the last HJ, then wake up Spectators at ATH
     }
 
     /**
@@ -53,7 +81,11 @@ public class Paddock {
      * {@code false}.
      */
     public synchronized boolean goCheckHorses() {
-        return false;
+        currentNumberOfSpectators++;
+        ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.APPRAISING_THE_HORSES);
+        return currentNumberOfSpectators == numberOfSpectators;
+        // wake up horses at the paddock to free ATP state of HJ
+        // return if this is the last spectator
     }
 
     /**
@@ -69,4 +101,12 @@ public class Paddock {
     private boolean[] spectators;
 
     private GeneralInformationRepository repository;
+
+    private int currentNumberOfHorses;
+
+    private int currentNumberOfSpectators;
+
+    private int numberOfHorses;
+
+    private int numberOfSpectators;
 }

@@ -23,15 +23,17 @@ public class Simulator {
         GeneralInformationRepository repository = new GeneralInformationRepository(numberOfHorses, numberOfSpectators, onlyOnLogFile);
         BettingCentre bettingCentre = new BettingCentre(numberOfHorses, numberOfSpectators, repository);
         ControlCentre controlCentre = new ControlCentre(repository, numberOfSpectators, numberOfHorses);
-        Paddock paddock = new Paddock(numberOfHorses, repository);
+        Paddock paddock = new Paddock(numberOfSpectators, numberOfHorses, repository);
         RacingTrack racingTrack;
         Stable stable = new Stable(repository);
 
+        Race race = new Race(numberOfHorses, 0, Race.generateDistance());
+
         /* initialize the main entities */
-        broker = new Broker(numberOfRaces, bettingCentre, controlCentre, stable, repository);
+        broker = new Broker(numberOfRaces, bettingCentre, controlCentre, new RacingTrack(race, repository), stable, repository);
         spectators = new Spectator[numberOfSpectators];
         horseJockeys = new HorseJockey[numberOfHorses];
-        
+
         /* initialize broker thread */
         broker.start();
         repository.newSnapshot();
@@ -40,32 +42,28 @@ public class Simulator {
             spectators[i].start();
             repository.newSnapshot();
         }
+        for (int i = 0; i != numberOfHorses; i++) {
+            horseJockeys[i] = new HorseJockey(i, generateAbility(), controlCentre, paddock, new RacingTrack(race, repository), stable, repository);
+            horseJockeys[i].start();
+            repository.newSnapshot();
+        }
 
         /* initialize races */
-        for (int race = 0; race < numberOfRaces; race++) {
-            racingTrack = new RacingTrack(new Race(numberOfHorses, race, Race.generateDistance()), repository);
-            for (int i = 0; i != numberOfHorses; i++) {
-                horseJockeys[i] = new HorseJockey(i, generateAbility(), controlCentre, paddock, racingTrack, stable, repository);
-                horseJockeys[i].start();
-                repository.newSnapshot();
-            }
-            try {
-                for (int i = 0; i != numberOfHorses; i++) {
-                    horseJockeys[i].join();
-                }
-            } catch (InterruptedException ie) {
-                ie.printStackTrace();
-                System.err.println("An error occurred while terminating the threads.");
-                System.err.println("The last program status was such as follows:");
-                ie.printStackTrace();
-                System.err.println("This program will now quit.");
-                System.exit(2);
+        for (int i = 1; i < numberOfRaces; i++) {
+            race = new Race(numberOfHorses, i, Race.generateDistance());
+            racingTrack = new RacingTrack(race, repository);
+            broker.setRacingTrack(racingTrack);
+            for (int j = 0; j != numberOfHorses; j++) {
+                horseJockeys[j].setRacingTrack(racingTrack);
             }
         }
         try {
             broker.join();
             for (int i = 0; i != numberOfSpectators; i++) {
                 spectators[i].join();
+            }
+            for (int i = 0; i != numberOfHorses; i++) {
+                horseJockeys[i].join();
             }
         } catch (InterruptedException ie) {
             ie.printStackTrace();

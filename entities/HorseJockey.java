@@ -34,6 +34,7 @@ public class HorseJockey extends Thread {
         this.controlCentre = controlCentre;
         this.paddock = paddock;
         this.racingTrack = racingTrack;
+        this.raceNumber = this.racingTrack.getRace().getIdentification();
         this.stable = stable;
         this.repository = repository;
     }
@@ -48,15 +49,14 @@ public class HorseJockey extends Thread {
     @Override
     public void run() {
         stable.proceedToStable();                                   // Stable's call for this pair Horse/Jockey;
-        stable.proceedToPaddock();                                  // alarm the Horses on Stable to go to the Paddock;
-        boolean isLastPair = paddock.proceedToPaddock(raceNumber);  // verify if this Horse is the last on his go;
-        if (isLastPair) {                                           // if this is the last Horse to go to Paddock then
-            controlCentre.proceedToPaddock();                       //    the Control Centre must know it can proceed;
-        }                                                           //
+        controlCentre.proceedToPaddock();                           // alarm the Horses on Stable to go to the Paddock;
+        paddock.proceedToPaddock(raceNumber);                       // verify if this Horse is the last on his go;                                                         //
+        paddock.proceedToStartLine();                               //
         racingTrack.proceedToStartLine();                           // Racing track's call for horses on the start line;
-        while (!racingTrack.hasFinishLineBeenCrossed(this)) {       // while this horse has not crossed the finish line
-            racingTrack.makeAMove(this, isLastPair);                //    it should make a move forward, to reach it;
+        while (!racingTrack.hasFinishLineBeenCrossed(identification)) {       // while this horse has not crossed the finish line
+            racingTrack.makeAMove(identification);                //    it should make a move forward, to reach it;
         }                                                           //
+        controlCentre.makeAMove();
         stable.proceedToStable();                                   // finished the run, the pair must return to Stable.
     }
 
@@ -118,6 +118,10 @@ public class HorseJockey extends Thread {
      */
     public synchronized void setRaceNumber(int raceNumber) {
         this.raceNumber = raceNumber;
+    }
+
+    public synchronized void setRacingTrack(RacingTrack racingTrack) {
+        this.racingTrack = racingTrack;
     }
 
     /**

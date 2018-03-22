@@ -21,7 +21,21 @@ public class Stable {
      * to this place (the {@link Stable}).
      */
     public synchronized void proceedToStable() {
+        while (currentRaceNumber != ((HorseJockey)(Thread.currentThread())).getRaceNumber()) {
+            try {
+                wait();
+            } catch (InterruptedException ie) {
+                ie.printStackTrace();
+                System.err.println("An error occurred while terminating the threads.");
+                System.err.println("The last program status was such as follows:");
+                ie.printStackTrace();
+                System.err.println("This program will now quit.");
+                System.exit(5);
+            }
+        }
         ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_STABLE);
+        // wait for SHTP of the Broker
+        // switch HJ state to ATS
     }
 
     /**
@@ -32,7 +46,9 @@ public class Stable {
      *                   against each other.
      */
     public synchronized void summonHorsesToPaddock(int raceNumber) {
-
+        currentRaceNumber = raceNumber;
+        notifyAll();
+        // notify : wake ATS of horses
     }
 
     /**
@@ -49,4 +65,6 @@ public class Stable {
     private boolean[] horses;
 
     private GeneralInformationRepository repository;
+
+    private int currentRaceNumber;
 }

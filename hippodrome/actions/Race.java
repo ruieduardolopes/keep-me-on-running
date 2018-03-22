@@ -32,6 +32,14 @@ public class Race {
         return (int)(Math.random()*1000) + 500;
     }
 
+    public int getIdentification() {
+        return identification;
+    }
+
+    public int getNumberOfTracks() {
+        return numberOfTracks;
+    }
+
     /**
      * The number of tracks this race will have in use.
      */

@@ -42,6 +42,9 @@ public class BettingCentre {
      */
     public synchronized void acceptTheBets() {
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.WAITING_FOR_BETS);
+        // wait for final placeABet() of S
+        // change B state to WFB
+        // notify S to unlock PAB state
     }
 
     /**
@@ -51,6 +54,8 @@ public class BettingCentre {
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.SETTLING_ACCOUNTS);
         moneyOnSafe = 0;
         amountPerWinner = 0;
+        // wait for goCollectTheGains() of each winning Spect.. It blocks until the last has been paid.
+        // switch B state to SA
     }
 
     /**
@@ -75,6 +80,9 @@ public class BettingCentre {
         moneyOnSafe += bet;
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.PLACING_A_BET);
         return bet;
+        // wait till the Broker accepts this bet with ATB() on WFB state.
+        // set state to Place+ing A Bet of S
+        // if last spectator, then free ANR of Broker
     }
 
     /**
@@ -94,6 +102,9 @@ public class BettingCentre {
         }
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.COLLECTING_THE_GAINS);
         return gains;
+        // wait for honor the bets from the Broker
+        // change state to CTG
+        // if last spectator, then notify/unlock Broker on SA
     }
 
     /**
@@ -112,6 +123,7 @@ public class BettingCentre {
             }
         }
         return false;
+        // check if I won
     }
 
     /**

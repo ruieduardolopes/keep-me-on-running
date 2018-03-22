@@ -20,6 +20,8 @@ public class RacingTrack {
     public RacingTrack(Race race, GeneralInformationRepository repository) {
         this.race = race;
         this.repository = repository;
+        this.numberOfHorses = race.getNumberOfTracks();
+        this.currentHorsesPositions = new int[this.numberOfHorses];
     }
 
     /**
@@ -28,32 +30,43 @@ public class RacingTrack {
      */
     public synchronized void proceedToStartLine() {
         ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_START_LINE);
+        // wait for Broker to start the race with STR()
+        // change the HJ's state to ATSL
     }
 
     /**
      * Let a pair Horse/Jockey {@code horse} make a move on the track, accordingly to its abilities to move.
      *
-     * @param horse the pair Horse/Jockey which wants to make a move.
-     * @param isLastPairHorseJockey boolean value which validates if {@code horse} is the last one arriving.
+     * @param horseId the identification of the pair Horse/Jockey which wants to make a move.
      */
-    public synchronized void makeAMove(HorseJockey horse, boolean isLastPairHorseJockey) {
-        if (isLastPairHorseJockey) {
-            ((Broker) Thread.currentThread()).setBrokerState(BrokerState.SETTLING_ACCOUNTS);
-        }
+    public synchronized void makeAMove(int horseId) {
         ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.RUNNING);
+        // wait while this thread ID is different than the currentIndex;
+        // if this horse crossed the line, change the state to ATFL
+        // increment our position on array currentPosition and increment the index on modulo.
+        // i.e. currentIndex += (currentIndex + 1) % currentHorsesPosition.length;
+        // notify the next horse
     }
 
     /**
      * Verification if the pair Horse/Jockey {@code horse} has crossed the finish line.
      *
-     * @param horse the pair Horse/Jockey which we want to verify if had crossed the finish line.
+     * @param horseJockeyId the pair Horse/Jockey which we want to verify if had crossed the finish line.
      *
      * @return {@code true} if the pair Horse/Jockey had crossed the finish line; otherwise it will return {@code false}.
      */
-    public synchronized boolean hasFinishLineBeenCrossed(HorseJockey horse) {
+    public synchronized boolean hasFinishLineBeenCrossed(int horseJockeyId) {
         ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_FINNISH_LINE);
-
+        // if displacement of this horse is equal to race distance return true; otherwise false. check array
         return false;
+    }
+
+    public synchronized void startTheRace() {
+        // notify first horse to unlock the starting line (ATSL state)
+    }
+
+    public synchronized Race getRace() {
+        return race;
     }
 
     /**
@@ -66,4 +79,10 @@ public class RacingTrack {
      *
      */
     private GeneralInformationRepository repository;
+
+    private int[] currentHorsesPositions;
+
+    private int numberOfHorses;
+
+    private int currentIndex;
 }

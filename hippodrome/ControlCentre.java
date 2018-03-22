@@ -13,7 +13,9 @@ import hippodrome.actions.Race;
  * @version 0.1
  */
 public class ControlCentre {
-    public ControlCentre(GeneralInformationRepository repository) {
+    public ControlCentre(GeneralInformationRepository repository, int numberOfSpectators, int numberOfHorses) {
+        this.numberOfSpectators = numberOfSpectators;
+        this.numberOfHorses = numberOfHorses;
         this.repository = repository;
     }
 
@@ -36,6 +38,8 @@ public class ControlCentre {
      */
     public synchronized void startTheRace(int raceNumber) {
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.SUPERVISING_THE_RACE);
+        // wait for last makeAMove() of HJ
+        // change B state to STR
     }
 
     /**
@@ -44,6 +48,7 @@ public class ControlCentre {
      */
     public synchronized void entertainTheGuests() {
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.PLAYING_HOST_AT_THE_BAR);
+        // non-blocking
     }
 
     /**
@@ -55,9 +60,10 @@ public class ControlCentre {
      * @return {@code true} if the next race is still not prepared to begin; otherwise {@code false}.
      */
     public synchronized boolean waitForTheNextRace(int raceNumber) {
-        //TODO check race number condition
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.WAITING_FOR_A_RACE_TO_START);
-        return false;
+        // wait till Horses free us with PTP() — the last horse
+        // when wait is ignored, then return true
+        return true;
     }
 
     /**
@@ -66,8 +72,9 @@ public class ControlCentre {
      * @param raceNumber number identification of the {@link Race} which is about to start.
      */
     public synchronized void goWatchTheRace(int raceNumber) {
-        //TODO check raceNumber condition
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.WATCHING_A_RACE);
+        // waits for report results of the broker
+        // changes state to WAR of S
     }
 
     /**
@@ -81,7 +88,7 @@ public class ControlCentre {
      * Publishing of the results by the {@link entities.Broker} performing its job.
      */
     public synchronized void reportResults() {
-
+        // notify S to unlock WAR
     }
 
     /**
@@ -102,24 +109,37 @@ public class ControlCentre {
             }
         }
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.ANNOUNCING_NEXT_RACE);
+        // wait for final goCheckHorses of CC
+        // change B state to ANR
     }
 
     /**
      * Signal given by the last pair Horse/Jockey which exits the {@link Stable} in direction to the {@link Paddock}.
      */
     public synchronized void proceedToPaddock() {
-
+        // notify (as the last HJ) Spectators at WFARTS state
+        // i.e. if I'm the last HJ, then notify
     }
 
     /**
      * Signal given by the last {@link Spectator} which arrives at the {@link Paddock} to watch the horses, before placing
-     * a bet.
+     * a bet, to alert the {@link Broker}.
      */
     public synchronized void goCheckHorses() {
         lastSpectatorHasNotArrivedOnPaddock = false;
         notifyAll();
-        ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.APPRAISING_THE_HORSES);
+        // notify broker on ANR that the last spectator is done
     }
+
+    public synchronized void makeAMove() {
+        // unlock STR state on Broker
+    }
+
+    private int numberOfSpectators;
+
+    private int numberOfSpectatorsOnPaddock = 0;
+
+    private int numberOfHorseJockeysOnPaddock = 0;
 
     private int numberOfHorses;
 
