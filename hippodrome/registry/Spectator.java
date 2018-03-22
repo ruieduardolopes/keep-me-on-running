@@ -66,7 +66,9 @@ public class Spectator {
     public void setStatus(SpectatorState status) {
         this.status = "";
         for (String word : status.name().split("_")) {
-            this.status += word.charAt(0);
+            if (word.length() != 1) {
+                this.status += word.charAt(0);
+            }
         }
     }
 

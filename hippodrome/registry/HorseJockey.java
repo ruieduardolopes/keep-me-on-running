@@ -74,7 +74,9 @@ public class HorseJockey {
     public void setStatus(HorseJockeyState status) {
         this.status = "";
         for (String word : status.name().split("_")) {
-            this.status += word.charAt(0);
+            if (word.length() != 1) {
+                this.status += word.charAt(0);
+            }
         }
     }
 

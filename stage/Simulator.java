@@ -35,8 +35,6 @@ public class Simulator {
         horseJockeys = new HorseJockey[numberOfHorses];
 
         /* initialize broker thread */
-        broker.start();
-        repository.newSnapshot();
         for (int i = 0; i != numberOfSpectators; i++) {
             spectators[i] = new Spectator(i, generateMoney(), bettingCentre, controlCentre, paddock, repository);
             spectators[i].start();
@@ -47,6 +45,8 @@ public class Simulator {
             horseJockeys[i].start();
             repository.newSnapshot();
         }
+        broker.start();
+        repository.newSnapshot();
 
         /* initialize races */
         for (int i = 1; i < numberOfRaces; i++) {

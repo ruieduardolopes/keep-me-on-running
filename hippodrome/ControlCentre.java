@@ -166,7 +166,6 @@ public class ControlCentre {
         if (numberOfHorseJockeysOnPaddock == numberOfHorses) {
             notifyAll();
             lastHorseJockeyHasNotArrivedOnPaddock = false;
-            numberOfHorseJockeysOnPaddock = 0; // resetted for the next race
         }
         // notify (as the last HJ) Spectators at WFARTS state
         // i.e. if I'm the last HJ, then notify
@@ -178,8 +177,10 @@ public class ControlCentre {
      * a bet, to alert the {@link Broker}.
      */
     public synchronized void goCheckHorses() {
-        lastSpectatorHasNotArrivedOnPaddock = false;
-        notifyAll();
+        if (numberOfHorseJockeysOnPaddock == numberOfHorses) {
+            lastSpectatorHasNotArrivedOnPaddock = false;
+            notifyAll();
+        }
         // notify broker on ANR that the last spectator is done
         // done
     }

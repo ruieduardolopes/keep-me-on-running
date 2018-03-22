@@ -15,7 +15,7 @@ public class Stable {
     public Stable(GeneralInformationRepository repository) {
         this.repository = repository;
     }
-
+int a;
     /**
      * Signal given by the {@link entities.Broker} in order to allow the pair Horse/Jockey to move
      * to this place (the {@link Stable}).

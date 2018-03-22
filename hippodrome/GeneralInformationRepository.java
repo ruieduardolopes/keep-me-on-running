@@ -160,7 +160,7 @@ public class GeneralInformationRepository {
         line += Color.ANSI_GREEN;
         line += String.format("%6s", brokerStatus);                             /* Stat */
         line += Color.ANSI_RESET;
-        //line += " ";
+        line += " ";
         line += Color.ANSI_CYAN;
         for (Spectator spectator : spectators) {
             line += String.format("%4s", spectator.getStatus());                /* St# */

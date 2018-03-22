@@ -46,6 +46,7 @@ public class Paddock {
                 System.exit(6);
             }
         }
+        notifyAll();
         HorseJockey horse = ((HorseJockey)Thread.currentThread());
         if (horse.getRaceNumber() == raceNumber) {
             horse.setHorseJockeyState(HorseJockeyState.AT_THE_PADDOCK);
@@ -62,6 +63,10 @@ public class Paddock {
      *                           has reached the premises.
      */
     public synchronized void goCheckHorses(boolean isTheLastSpectator) {
+        ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.APPRAISING_THE_HORSES);
+        if (isTheLastSpectator) {
+            notifyAll();
+        }
         while (lastHorseDidNotProceedToStartLine) {
             try {
                 wait();
@@ -74,17 +79,14 @@ public class Paddock {
                 System.exit(14);
             }
         }
-        if (isTheLastSpectator) {
-            ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.APPRAISING_THE_HORSES);
-        }
-        // wait till APH from Horses launches its last PTSL()
+        // wait till ATP from Horses launches its last PTSL()
         // change S state to ATH
         // done
     }
 
     public synchronized void proceedToStartLine() {
-        currentNumberOfHorses--;
-        if (currentNumberOfHorses == 0) {
+        currentNumberOfHorses++;
+        if (currentNumberOfHorses == numberOfHorses*2) {
             lastHorseDidNotProceedToStartLine = false;
             notifyAll();
         }
@@ -102,8 +104,11 @@ public class Paddock {
      */
     public synchronized boolean goCheckHorses() {
         currentNumberOfSpectators++;
-        notifyAll();
-        return currentNumberOfSpectators == numberOfSpectators;
+        if (currentNumberOfSpectators == numberOfSpectators) {
+            notifyAll();
+            return true;
+        }
+        return false;
         // wake up horses at the paddock to free ATP state of HJ
         // return if this is the last spectator
         // done

@@ -57,7 +57,7 @@ public class BettingCentre {
         }
         lastSpectatorHasNotBetted = true;
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.WAITING_FOR_BETS);
-        brokerDidNotAcceptAllBets = false;
+        brokerIsNotAcceptingBets = false;
         notifyAll();
         // wait for final placeABet() of S
         // change B state to WFB
@@ -102,7 +102,8 @@ public class BettingCentre {
      * @return the amount of money which was accepted by the {@link Broker} to place the bet.
      */
     public synchronized int placeABet(int spectator, int bet, int horse) {
-        while (brokerDidNotAcceptAllBets) {
+        bettingQueue.add(spectator);
+        while (brokerIsNotAcceptingBets || spectator != bettingQueue.peek()) {//brokerIsNotAcceptingBets) {
             try {
                 wait();
             } catch (InterruptedException ie) {
@@ -114,8 +115,9 @@ public class BettingCentre {
                 System.exit(8);
             }
         }
-        brokerDidNotAcceptAllBets = true;
+        brokerIsNotAcceptingBets = true;
         numberOfBetters++;
+        bettingQueue.remove();
         try {
             bets[spectator] = new Bet(horse, bet);
             repository.setSpectatorBetAmount(spectator, bet);
@@ -229,7 +231,7 @@ public class BettingCentre {
      * place a bet, or while wainting to a {@link Spectator} go collect his (or hers) gains. This structure is granted by a
      * {@link LinkedBlockingQueue} Java class, which performs a blocking queue under the logic of a linked list.
      */
-    private Queue<Spectator> bettingQueue = null;
+    private Queue<Integer> bettingQueue = null;
 
     /**
      * Internal structure of bets. This is an array of bets (issued by an entity called {@link Bet}). Here, each index
@@ -275,7 +277,7 @@ public class BettingCentre {
 
     private boolean lastSpectatorHasNotBetted = true;
 
-    private boolean brokerDidNotAcceptAllBets = true;
+    private boolean brokerIsNotAcceptingBets = true;
 
     private boolean brokerStillHasToPayToSpectators = true;
 
