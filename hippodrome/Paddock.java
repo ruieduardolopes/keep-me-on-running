@@ -79,7 +79,7 @@ public class Paddock {
         }
         // wait till APH from Horses launches its last PTSL()
         // change S state to ATH
-        // done // TODO - verify this condition
+        // done
     }
 
     public synchronized void proceedToStartLine() {
@@ -102,11 +102,11 @@ public class Paddock {
      */
     public synchronized boolean goCheckHorses() {
         currentNumberOfSpectators++;
-        ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.APPRAISING_THE_HORSES);
+        notifyAll();
         return currentNumberOfSpectators == numberOfSpectators;
         // wake up horses at the paddock to free ATP state of HJ
         // return if this is the last spectator
-        // TODO
+        // done
     }
 
     /**

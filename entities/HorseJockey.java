@@ -26,7 +26,7 @@ public class HorseJockey extends Thread {
      * @param racingTrack the {@link RacingTrack} instance where this pair Horse/Jockey ({@link HorseJockey}) will perform its actions.
      * @param stable the {@link Stable} instance where this pair Horse/Jockey ({@link HorseJockey}) will perform its actions.
      */
-    public HorseJockey(int identification, int ability, ControlCentre controlCentre, Paddock paddock, RacingTrack racingTrack, Stable stable, GeneralInformationRepository repository) {
+    public HorseJockey(int identification, int ability, BettingCentre bettingCentre, ControlCentre controlCentre, Paddock paddock, RacingTrack racingTrack, Stable stable, GeneralInformationRepository repository) {
         this.identification = identification;
         repository.setHorseJockeyStatus(identification, state);
         this.ability = ability;
@@ -54,6 +54,7 @@ public class HorseJockey extends Thread {
         paddock.proceedToStartLine();                               //
         racingTrack.proceedToStartLine();                           // Racing track's call for horses on the start line;
         while (!racingTrack.hasFinishLineBeenCrossed(identification)) {       // while this horse has not crossed the finish line
+            bettingCentre.setHorseJockeyWinner(racingTrack.getWinner());
             racingTrack.makeAMove(identification);                //    it should make a move forward, to reach it;
         }                                                           //
         controlCentre.makeAMove();
@@ -168,4 +169,6 @@ public class HorseJockey extends Thread {
     private Stable stable;
 
     private GeneralInformationRepository repository;
+
+    private BettingCentre bettingCentre;
 }

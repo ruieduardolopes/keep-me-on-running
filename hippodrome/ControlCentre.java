@@ -74,10 +74,22 @@ public class ControlCentre {
      * @return {@code true} if the next race is still not prepared to begin; otherwise {@code false}.
      */
     public synchronized boolean waitForTheNextRace(int raceNumber) {
+        while (lastHorseJockeyHasNotArrivedOnPaddock) {
+            try {
+                wait();
+            } catch (InterruptedException ie) {
+                ie.printStackTrace();
+                System.err.println("An error occurred while terminating the threads.");
+                System.err.println("The last program status was such as follows:");
+                ie.printStackTrace();
+                System.err.println("This program will now quit.");
+                System.exit(15);
+            }
+        }
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.WAITING_FOR_A_RACE_TO_START);
         // wait till Horses free us with PTP() — the last horse
         // when wait is ignored, then return true
-        // TODO
+        // done
         return true;
     }
 
@@ -153,6 +165,7 @@ public class ControlCentre {
         numberOfHorseJockeysOnPaddock++;
         if (numberOfHorseJockeysOnPaddock == numberOfHorses) {
             notifyAll();
+            lastHorseJockeyHasNotArrivedOnPaddock = false;
             numberOfHorseJockeysOnPaddock = 0; // resetted for the next race
         }
         // notify (as the last HJ) Spectators at WFARTS state
@@ -168,7 +181,7 @@ public class ControlCentre {
         lastSpectatorHasNotArrivedOnPaddock = false;
         notifyAll();
         // notify broker on ANR that the last spectator is done
-        // TODO
+        // done
     }
 
     public synchronized void makeAMove() {
@@ -193,6 +206,8 @@ public class ControlCentre {
      * Condition variable to control wait for last {@link ControlCentre#goCheckHorses()}.
      */
     private boolean lastSpectatorHasNotArrivedOnPaddock = true;
+
+    private boolean lastHorseJockeyHasNotArrivedOnPaddock = true;
 
     private boolean thereIsStillHorsesToFinishRace = true;
 

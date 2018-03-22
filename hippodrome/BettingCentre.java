@@ -12,6 +12,7 @@ import hippodrome.registry.UnknownSpectatorException;
  *
  * Further documentation on this matter could be accessed here: {@link Queue}.
  */
+import java.util.ArrayList;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -173,6 +174,12 @@ public class BettingCentre {
         // done
     }
 
+    public synchronized void setHorseJockeyWinner(int winner) {
+        if (winner != -1) {
+            this.winner = winner;   // HJ winner
+        }
+    }
+
     /**
      * Verification if a given Spectator identified with {@code spectatorId} has won his (or hers) bet.
      *
@@ -182,7 +189,6 @@ public class BettingCentre {
      * @return {@code true} if {@code spectator} has won his (or hers) bet; otherwise, it will return {@code false}.
      */
     public synchronized boolean haveIWon(int spectatorId) {
-        ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.WATCHING_A_RACE);
         for (int winner : winners) {
             if (winner == spectatorId) {
                 return true;
@@ -190,7 +196,7 @@ public class BettingCentre {
         }
         return false;
         // check if I won
-        // TODO
+        // done
     }
 
     /**
@@ -199,7 +205,15 @@ public class BettingCentre {
      * @return {@code true} if anybody had won indeed; otherwise it will return {@code false}.
      */
     public synchronized boolean areThereAnyWinners() {
+        ArrayList<Integer> winningList = new ArrayList<>();
+        for (int i = 0; i != bets.length; i++) {
+            if (bets[i].getHorseJockeyId() == winner) {
+                winningList.add(i);
+            }
+        }
+        winners = winningList.stream().mapToInt(Integer::intValue).toArray();
         return winners.length != 0;
+        // done
     }
 
     /**
@@ -266,4 +280,6 @@ public class BettingCentre {
     private boolean brokerStillHasToPayToSpectators = true;
 
     private boolean brokerStillHasToHonorTheBets = true;
+
+    private int winner;
 }

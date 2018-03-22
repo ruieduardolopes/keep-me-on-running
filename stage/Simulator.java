@@ -43,7 +43,7 @@ public class Simulator {
             repository.newSnapshot();
         }
         for (int i = 0; i != numberOfHorses; i++) {
-            horseJockeys[i] = new HorseJockey(i, generateAbility(), controlCentre, paddock, new RacingTrack(race, repository), stable, repository);
+            horseJockeys[i] = new HorseJockey(i, generateAbility(), bettingCentre, controlCentre, paddock, new RacingTrack(race, repository), stable, repository);
             horseJockeys[i].start();
             repository.newSnapshot();
         }

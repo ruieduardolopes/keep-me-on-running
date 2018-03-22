@@ -40,6 +40,10 @@ public class Race {
         return numberOfTracks;
     }
 
+    public int getDistance() {
+        return distance;
+    }
+
     /**
      * The number of tracks this race will have in use.
      */

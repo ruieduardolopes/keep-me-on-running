@@ -51,13 +51,32 @@ public class RacingTrack {
      * @param horseId the identification of the pair Horse/Jockey which wants to make a move.
      */
     public synchronized void makeAMove(int horseId) {
+        while (currentIndex != horseId) {
+            try {
+                wait();
+            } catch (InterruptedException ie) {
+                ie.printStackTrace();
+                System.err.println("An error occurred while terminating the threads.");
+                System.err.println("The last program status was such as follows:");
+                ie.printStackTrace();
+                System.err.println("This program will now quit.");
+                System.exit(16);
+            }
+        }
+        currentHorsesPositions[currentIndex]++;
+        currentIndex += currentIndex + 1 % currentHorsesPositions.length;
         ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.RUNNING);
+        notifyAll();
+        if (hasFirstHorseCrossedTheFinishLine) {
+            winner = ((HorseJockey)Thread.currentThread()).getIdentification();
+        }
         // wait while this thread ID is different than the currentIndex;
         // if this horse crossed the line, change the state to ATFL
         // increment our position on array currentPosition and increment the index on modulo.
         // i.e. currentIndex += (currentIndex + 1) % currentHorsesPosition.length;
         // notify the next horse
-        // TODO
+        // on the last make a move do this:
+        // done
     }
 
     /**
@@ -68,10 +87,13 @@ public class RacingTrack {
      * @return {@code true} if the pair Horse/Jockey had crossed the finish line; otherwise it will return {@code false}.
      */
     public synchronized boolean hasFinishLineBeenCrossed(int horseJockeyId) {
-        ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_FINNISH_LINE);
-        // if displacement of this horse is equal to race distance return true; otherwise false. check array
-        // TODO
+        if (currentHorsesPositions[horseJockeyId] >= race.getDistance()) {
+            ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_FINNISH_LINE);
+            return true;
+        }
         return false;
+        // if displacement of this horse is equal to race distance return true; otherwise false. check array
+        // done
     }
 
     public synchronized void startTheRace() {
@@ -83,6 +105,10 @@ public class RacingTrack {
 
     public synchronized Race getRace() {
         return race;
+    }
+
+    public int getWinner() {
+        return winner;
     }
 
     /**
@@ -102,5 +128,11 @@ public class RacingTrack {
 
     private int currentIndex;
 
+    private boolean hasFirstHorseCrossedTheFinishLine = false;
+
+    private int winner = -1;
+
     private boolean brokerDidNotOrderedToStartTheRace = true;
+
+    private boolean someCondition = true;
 }
