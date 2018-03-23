@@ -24,15 +24,15 @@ public class Simulator {
         BettingCentre bettingCentre = new BettingCentre(numberOfHorses, numberOfSpectators, repository);
         ControlCentre controlCentre = new ControlCentre(repository, numberOfSpectators, numberOfHorses);
         Paddock paddock = new Paddock(numberOfSpectators, numberOfHorses, repository);
-        RacingTrack racingTrack;
         Stable stable = new Stable(repository);
-
         Race race = new Race(numberOfHorses, 0, Race.generateDistance());
+        RacingTrack racingTrack = new RacingTrack(race, repository);
+
         repository.setRaceDistance(race.getDistance());
         repository.setRaceNumber(race.getIdentification());
 
         /* initialize the main entities */
-        broker = new Broker(numberOfRaces, bettingCentre, controlCentre, new RacingTrack(race, repository), stable, repository);
+        broker = new Broker(numberOfRaces, bettingCentre, controlCentre, racingTrack, stable, repository);
         spectators = new Spectator[numberOfSpectators];
         horseJockeys = new HorseJockey[numberOfHorses];
 
@@ -43,7 +43,7 @@ public class Simulator {
             repository.newSnapshot();
         }
         for (int i = 0; i != numberOfHorses; i++) {
-            horseJockeys[i] = new HorseJockey(i, generateAbility(), bettingCentre, controlCentre, paddock, new RacingTrack(race, repository), stable, repository);
+            horseJockeys[i] = new HorseJockey(i, generateAbility(), bettingCentre, controlCentre, paddock, racingTrack, stable, repository);
             horseJockeys[i].start();
             repository.newSnapshot();
         }
