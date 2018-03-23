@@ -8,7 +8,7 @@ import hippodrome.actions.Race;
  * Creation of a Horse Race simulation placed on a Hippodrome.
  * This class has a {@link entities.Broker}, a set of {@link entities.Spectator}s
  * and a set of pairs Horse/Jockey ({@link entities.HorseJockey}s).
- */ // TODO - recover last version
+ */
 public class Simulator {
     /**
      * Main function which contemplates the execution of the simulation.
@@ -52,19 +52,23 @@ public class Simulator {
                 racingTrack = new RacingTrack(race, repository);
                 broker.setRacingTrack(racingTrack);
             }
+            System.out.println("BEGIN START ----");
             for (int j = 0; j != numberOfHorses; j++) {
                 horseJockeys[j] = new HorseJockey(j, generateAbility(), bettingCentre, controlCentre, paddock, racingTrack, stable, repository);
                 horseJockeys[j].start();
                 repository.newSnapshot();
             }
+            System.out.println("END START ----");
             if (i == 0) {
                 broker.start();
                 repository.newSnapshot();
             }
             try {
+                System.out.println("BEGIN JOIN ----");
                 for (int j = 0; j != numberOfHorses; j++) {
                     horseJockeys[j].join();
                 }
+                System.out.println("END JOIN ----");
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
                 System.err.println("An error occurred while terminating the threads.");

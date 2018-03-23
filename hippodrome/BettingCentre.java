@@ -134,6 +134,7 @@ public class BettingCentre {
         numberOfBetters++;
         if (numberOfBetters == numberOfSpectators) {
             lastSpectatorHasNotBetted = false;
+            //numberOfBetters = 0;
         }
         notifyAll();
         return bet;
@@ -224,7 +225,11 @@ public class BettingCentre {
         for (int i = 0; i != winners.length; i++) {
             winners[i] = winningList.get(i);
         }
-        amountPerWinner = moneyOnSafe / winners.length;
+        if (winners.length != 0) {
+            amountPerWinner = moneyOnSafe / winners.length;
+        } else {
+            amountPerWinner = 0;
+        }
         return winners.length != 0;
         // done
     }

@@ -100,20 +100,14 @@ public class RacingTrack {
      */
     public synchronized boolean hasFinishLineBeenCrossed(int horseJockeyId) {
         if (currentHorsesPositions[horseJockeyId] >= race.getDistance()) {
+            // TODO - fazer reset a variáveis da racing track
+            // variável para proceed to start line
+            brokerDidNotOrderToStartTheRace = true;
             return true;
         }
         return false;
         // if displacement of this horse is equal to race distance return true; otherwise false. check array
         // done
-    }
-
-    private synchronized boolean allHorsesHaveFinishedRunning() {
-        for (int i = 0; i != currentHorsesPositions.length; i++) {
-            if (currentHorsesPositions[i] != -1) {
-                return false;
-            }
-        }
-        return true;
     }
 
     public synchronized void startTheRace() {

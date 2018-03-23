@@ -86,9 +86,11 @@ public class Paddock {
     }
 
     public synchronized void proceedToStartLine() {
+        currentNumberOfSpectators = 0;
         currentNumberOfHorses++;
         if (currentNumberOfHorses == numberOfHorses*2) {
             lastHorseDidNotProceedToStartLine = false;
+            currentNumberOfHorses = 0;
             notifyAll();
         }
         // if I'm the last HJ, then wake up Spectators at ATH

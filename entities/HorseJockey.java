@@ -60,7 +60,7 @@ public class HorseJockey extends Thread {
             racingTrack.makeAMove(identification);                //    it should make a move forward, to reach it;
         }                                                           //
         controlCentre.makeAMove();
-        stable.proceedToStable();                                   // finished the run, the pair must return to Stable.
+        //stable.proceedToStable();                                   // finished the run, the pair must return to Stable.
     }
 
     /**
