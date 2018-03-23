@@ -195,7 +195,7 @@ public class GeneralInformationRepository {
         line += " ";
         line += Color.ANSI_PURPLE;
         for (Spectator spectator : spectators) {
-            line += String.format("%4d", spectator.getBetSelection());               /* BS# */
+            line += String.format("%4d", spectator.getBetSelection()+1);             /* BS# */
             line += " ";
             line += String.format("%3d", spectator.getBetAmount());                  /* BA# */
             line += " ";

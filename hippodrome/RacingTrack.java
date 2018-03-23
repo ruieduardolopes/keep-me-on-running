@@ -4,6 +4,9 @@ import entities.HorseJockeyState;
 import hippodrome.actions.Race;
 import entities.HorseJockey;
 
+import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
+
 /**
  * Place where the races take place. Here each race is represented by an element
  * of the class {@link Race}, described by a given number of tracks, an identification
@@ -20,6 +23,7 @@ public class RacingTrack {
         this.repository = repository;
         this.numberOfHorses = race.getNumberOfTracks();
         this.currentHorsesPositions = new int[this.numberOfHorses];
+        this.finishedHorses = new boolean[this.numberOfHorses];
     }
 
     /**
@@ -28,9 +32,9 @@ public class RacingTrack {
      */
     public synchronized void proceedToStartLine() {
         ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_START_LINE);
+        horsesToRun.add(((HorseJockey)Thread.currentThread()).getIdentification());
         while (brokerDidNotOrderToStartTheRace) {
             try {
-                System.out.println("Hello!");
                 wait();
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
@@ -41,7 +45,6 @@ public class RacingTrack {
                 System.exit(9);
             }
         }
-        System.out.println("khgfdsfghjkljhgfdsghjk");
         // wait for Broker to start the race with STR()
         // change the HJ's state to ATSL
         // done
@@ -53,8 +56,7 @@ public class RacingTrack {
      * @param horseId the identification of the pair Horse/Jockey which wants to make a move.
      */
     public synchronized void makeAMove(int horseId) {
-        ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.RUNNING);
-        while (currentIndex != horseId) {
+        while (horsesToRun.peek() != horseId) {
             try {
                 wait();
             } catch (InterruptedException ie) {
@@ -66,10 +68,19 @@ public class RacingTrack {
                 System.exit(16);
             }
         }
-        currentHorsesPositions[currentIndex]++;
-        currentIndex += currentIndex + 1 % currentHorsesPositions.length;
+        ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.RUNNING);
+        int thisHorse = horsesToRun.remove();
+        currentHorsesPositions[thisHorse] += (int)(Math.random()*((HorseJockey) Thread.currentThread()).getAbility());
+        repository.setHorseJockeyPositionOnTrack(horseId, currentHorsesPositions[thisHorse]);
+        if (currentHorsesPositions[thisHorse] >= race.getDistance()) {
+            ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_FINNISH_LINE);
+            hasFirstHorseCrossedTheFinishLine = true;
+        } else {
+            horsesToRun.add(thisHorse);
+        }
         notifyAll();
-        if (hasFirstHorseCrossedTheFinishLine) {
+        if (hasFirstHorseCrossedTheFinishLine && raceIsAboutToEnd) {
+            raceIsAboutToEnd = false;
             winner = ((HorseJockey)Thread.currentThread()).getIdentification();
         }
         // wait while this thread ID is different than the currentIndex;
@@ -90,12 +101,20 @@ public class RacingTrack {
      */
     public synchronized boolean hasFinishLineBeenCrossed(int horseJockeyId) {
         if (currentHorsesPositions[horseJockeyId] >= race.getDistance()) {
-            ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_FINNISH_LINE);
             return true;
         }
         return false;
         // if displacement of this horse is equal to race distance return true; otherwise false. check array
         // done
+    }
+
+    private synchronized boolean allHorsesHaveFinishedRunning() {
+        for (int i = 0; i != currentHorsesPositions.length; i++) {
+            if (currentHorsesPositions[i] != -1) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public synchronized void startTheRace() {
@@ -124,7 +143,11 @@ public class RacingTrack {
      */
     private GeneralInformationRepository repository;
 
+    private Queue<Integer> horsesToRun = new LinkedBlockingQueue<>();
+
     private int[] currentHorsesPositions;
+
+    private boolean[] finishedHorses;
 
     private int numberOfHorses;
 
@@ -132,9 +155,15 @@ public class RacingTrack {
 
     private boolean hasFirstHorseCrossedTheFinishLine = false;
 
+    private int horsesWhichCrossedTheLine = 0;
+
     private int winner = -1;
 
     private boolean brokerDidNotOrderToStartTheRace = true;
 
     private boolean someCondition = true;
+
+    private boolean raceIsAboutToEnd = true;
 }
+
+

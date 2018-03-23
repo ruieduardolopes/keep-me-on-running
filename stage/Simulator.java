@@ -42,33 +42,44 @@ public class Simulator {
             spectators[i].start();
             repository.newSnapshot();
         }
-        for (int i = 0; i != numberOfHorses; i++) {
-            horseJockeys[i] = new HorseJockey(i, generateAbility(), bettingCentre, controlCentre, paddock, racingTrack, stable, repository);
-            horseJockeys[i].start();
-            repository.newSnapshot();
-        }
-        broker.start();
-        repository.newSnapshot();
 
-        /* initialize races */ // TODO - verify race creations
-        /*for (int i = 1; i < numberOfRaces; i++) {
-            race = new Race(numberOfHorses, i, Race.generateDistance());
-            repository.setRaceDistance(race.getDistance());
-            repository.setRaceNumber(race.getIdentification());
-            racingTrack = new RacingTrack(race, repository);
-            broker.setRacingTrack(racingTrack);
-            for (int j = 0; j != numberOfHorses; j++) {
-                horseJockeys[j].setRacingTrack(racingTrack);
+        /* initialize races */
+        for (int i = 0; i < numberOfRaces; i++) {
+            if (i >= 1) {
+                race = new Race(numberOfHorses, i, Race.generateDistance());
+                repository.setRaceDistance(race.getDistance());
+                repository.setRaceNumber(race.getIdentification());
+                racingTrack = new RacingTrack(race, repository);
+                broker.setRacingTrack(racingTrack);
             }
-        }*/
+            for (int j = 0; j != numberOfHorses; j++) {
+                horseJockeys[j] = new HorseJockey(j, generateAbility(), bettingCentre, controlCentre, paddock, racingTrack, stable, repository);
+                horseJockeys[j].start();
+                repository.newSnapshot();
+            }
+            if (i == 0) {
+                broker.start();
+                repository.newSnapshot();
+            }
+            try {
+                for (int j = 0; j != numberOfHorses; j++) {
+                    horseJockeys[j].join();
+                }
+            } catch (InterruptedException ie) {
+                ie.printStackTrace();
+                System.err.println("An error occurred while terminating the threads.");
+                System.err.println("The last program status was such as follows:");
+                ie.printStackTrace();
+                System.err.println("This program will now quit.");
+                System.exit(2);
+            }
+        }
         try {
             broker.join();
             for (int i = 0; i != numberOfSpectators; i++) {
                 spectators[i].join();
             }
-            for (int i = 0; i != numberOfHorses; i++) {
-                horseJockeys[i].join();
-            }
+
         } catch (InterruptedException ie) {
             ie.printStackTrace();
             System.err.println("An error occurred while terminating the threads.");
@@ -96,7 +107,7 @@ public class Simulator {
      * of the horse on track, while running.
      */
     private static int generateAbility() {
-        return (int)(Math.random()*5);
+        return (int)(Math.random()*10)+1;
     }
 
     /**

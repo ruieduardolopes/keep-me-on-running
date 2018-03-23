@@ -38,6 +38,7 @@ public class HorseJockey extends Thread {
         this.stable = stable;
         this.repository = repository;
         this.bettingCentre = bettingCentre;
+        repository.setHorseJockeyProbabilityToWin(identification, 0); // TODO - adjust the probability
     }
 
     /**
@@ -124,6 +125,10 @@ public class HorseJockey extends Thread {
 
     public synchronized void setRacingTrack(RacingTrack racingTrack) {
         this.racingTrack = racingTrack;
+    }
+
+    public HorseJockeyState getThisState() {
+        return state;
     }
 
     /**
