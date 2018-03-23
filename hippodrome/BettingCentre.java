@@ -13,6 +13,7 @@ import hippodrome.registry.UnknownSpectatorException;
  * Further documentation on this matter could be accessed here: {@link Queue}.
  */
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -72,6 +73,8 @@ public class BettingCentre {
      */
     public synchronized void honourTheBets() {
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.SETTLING_ACCOUNTS);
+        brokerStillHasToHonorTheBets = false;
+        notifyAll();
         while (brokerStillHasToPayToSpectators) {
             try {
                 wait();
@@ -148,8 +151,9 @@ public class BettingCentre {
      * @return the amount of money collected by the {@code spectator}.
      */
     public synchronized int goCollectTheGains(int spectator) {
+        bettingQueue.add(spectator);
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.COLLECTING_THE_GAINS);
-        while (brokerStillHasToHonorTheBets) {
+        while (brokerStillHasToHonorTheBets || spectator != bettingQueue.peek()) {
             try {
                 wait();
             } catch (InterruptedException ie) {
@@ -162,9 +166,10 @@ public class BettingCentre {
             }
         }
         brokerStillHasToHonorTheBets = true;
+        bettingQueue.remove();
         int gains = 0;
-        for (int person : winners) {
-            if (spectator == person) {
+        for (int i = 0; i != winners.length; i++) {
+            if (spectator == winners[i]) {
                 moneyOnSafe -= amountPerWinner;
                 gains = amountPerWinner;
             }
@@ -215,7 +220,11 @@ public class BettingCentre {
                 winningList.add(i);
             }
         }
-        winners = winningList.stream().mapToInt(Integer::intValue).toArray();
+        winners = new int[winningList.size()];
+        for (int i = 0; i != winners.length; i++) {
+            winners[i] = winningList.get(i);
+        }
+        amountPerWinner = moneyOnSafe / winners.length;
         return winners.length != 0;
         // done
     }

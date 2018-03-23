@@ -13,9 +13,10 @@ import hippodrome.actions.Race;
  * @version 0.1
  */
 public class ControlCentre {
-    public ControlCentre(GeneralInformationRepository repository, int numberOfSpectators, int numberOfHorses) {
+    public ControlCentre(GeneralInformationRepository repository, int numberOfSpectators, int numberOfHorses, int numberOfRaces) {
         this.numberOfSpectators = numberOfSpectators;
         this.numberOfHorses = numberOfHorses;
+        this.numberOfRaces = numberOfRaces;
         this.repository = repository;
     }
 
@@ -34,7 +35,7 @@ public class ControlCentre {
     /**
      * Signal given by the {@link entities.Broker} to start a {@link Race} identified by {@code raceNumber}.
      *
-     * @param raceNumber number idenitification of the next {@link Race} to be started as of this instant.
+     * @param raceNumber number identification of the next {@link Race} to be started as of this instant.
      */
     public synchronized void startTheRace(int raceNumber) {
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.SUPERVISING_THE_RACE);
@@ -75,7 +76,7 @@ public class ControlCentre {
      */
     public synchronized boolean waitForTheNextRace(int raceNumber) {
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.WAITING_FOR_A_RACE_TO_START);
-        while (lastHorseJockeyHasNotArrivedOnPaddock) {
+        while (lastHorseJockeyHasNotArrivedOnPaddock && raceNumber != numberOfRaces) {
             try {
                 wait();
             } catch (InterruptedException ie) {
@@ -143,7 +144,6 @@ public class ControlCentre {
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.ANNOUNCING_NEXT_RACE);
         while (lastSpectatorHasNotArrivedOnPaddock) {
             try {
-                System.out.println("Cwsa");
                 wait();
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
@@ -168,6 +168,7 @@ public class ControlCentre {
         if (numberOfHorseJockeysOnPaddock == numberOfHorses) {
             lastHorseJockeyHasNotArrivedOnPaddock = false;
             notifyAll();
+            numberOfHorseJockeysOnPaddock = 0;
         }
         // notify (as the last HJ) Spectators at WFARTS state
         // i.e. if I'm the last HJ, then notify
@@ -180,14 +181,18 @@ public class ControlCentre {
      */
     public synchronized void goCheckHorses() {
         lastSpectatorHasNotArrivedOnPaddock = false;
+        lastHorseJockeyHasNotArrivedOnPaddock = true;
         notifyAll();
         // notify broker on ANR that the last spectator is done
         // done
     }
 
     public synchronized void makeAMove() {
-        thereIsStillHorsesToFinishRace = false;
-        notifyAll();
+        finishedHorses++;
+        if (finishedHorses == numberOfHorses) {
+            thereIsStillHorsesToFinishRace = false;
+            notifyAll();
+        }
         // done
     }
 
@@ -198,6 +203,8 @@ public class ControlCentre {
     private int numberOfHorseJockeysOnPaddock = 0;
 
     private int numberOfHorses;
+
+    private int finishedHorses = 0;
 
     private int winnerHorseJockey;
 
@@ -213,4 +220,6 @@ public class ControlCentre {
     private boolean thereIsStillHorsesToFinishRace = true;
 
     private boolean brokerDidNotReportResults = true;
+
+    private int numberOfRaces;
 }

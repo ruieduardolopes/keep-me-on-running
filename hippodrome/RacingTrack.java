@@ -23,7 +23,6 @@ public class RacingTrack {
         this.repository = repository;
         this.numberOfHorses = race.getNumberOfTracks();
         this.currentHorsesPositions = new int[this.numberOfHorses];
-        this.finishedHorses = new boolean[this.numberOfHorses];
     }
 
     /**
@@ -70,7 +69,7 @@ public class RacingTrack {
         }
         ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.RUNNING);
         int thisHorse = horsesToRun.remove();
-        currentHorsesPositions[thisHorse] += (int)(Math.random()*((HorseJockey) Thread.currentThread()).getAbility());
+        currentHorsesPositions[thisHorse] += (int)(Math.random()*((HorseJockey) Thread.currentThread()).getAbility()) + 1;
         repository.setHorseJockeyPositionOnTrack(horseId, currentHorsesPositions[thisHorse]);
         if (currentHorsesPositions[thisHorse] >= race.getDistance()) {
             ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_FINNISH_LINE);
@@ -147,9 +146,9 @@ public class RacingTrack {
 
     private int[] currentHorsesPositions;
 
-    private boolean[] finishedHorses;
-
     private int numberOfHorses;
+
+    private int finishedHorses = 0;
 
     private int currentIndex;
 
