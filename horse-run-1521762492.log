@@ -1,0 +1,65 @@
+AFTERNOON AT THE RACE TRACK - Description of the internal state of the problem
+MAN/BRK           SPECTATOR/BETTER              HORSE/JOCKEY PAIR at Race RN
+  Stat  St0  Am0 St1  Am1 St2  Am2 St3  Am3 RN St0  Len0 St1  Len1 St2  Len2 St3  Len3 
+                                        Race RN Status
+ RN Dist BS0  BA0 BS1  BA1 BS2  BA2 BS3  BA3  Od0 N0 Ps0 SD0 Od1 N1 Ps1 SD1 Od2 N2 Ps2 SD2 Od3 N3 Ps3 SD3 
+    OTE WFRTS  30        0        0        0  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS  30 WFRTS   5        0        0  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS  30 WFRTS   5 WFRTS 453        0  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS  30 WFRTS   5 WFRTS 453 WFRTS 945  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS  30 WFRTS   5 WFRTS 453 WFRTS 945  0  ATS    0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS  30 WFRTS   5 WFRTS 453 WFRTS 945  0  ATS    0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS  30 WFRTS   5 WFRTS 453 WFRTS 945  0  ATS    0  ATS    0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS  30 WFRTS   5 WFRTS 453 WFRTS 945  0  ATS    0  ATS    0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS  30 WFRTS   5 WFRTS 453 WFRTS 945  0  ATS    0  ATS    0  ATS    3         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS  30 WFRTS   5 WFRTS 453 WFRTS 945  0  ATS    0  ATS    0  ATS    3         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS  30 WFRTS   5 WFRTS 453 WFRTS 945  0  ATS    0  ATS    0  ATS    3  ATS    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS  30 WFRTS   5 WFRTS 453 WFRTS 945  0  ATS    0  ATS    0  ATS    3  ATS    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH  30 WFRTS   5 WFRTS 453 WFRTS 945  0  ATS    0  ATS    0  ATS    3  ATS    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH  30 WFRTS   5 WFRTS 453 WFRTS 945  0  ATS    0  ATS    0  ATS    3  ATS    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH  30 WFRTS   5 WFRTS 453 WFRTS 945  0  ATS    0  ATS    0  ATS    3  ATS    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH  30 WFRTS   5 WFRTS 453 WFRTS 945  0  ATS    0  ATS    0  ATS    3  ATS    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH  30 WFRTS   5 WFRTS 453 WFRTS 945  0  ATS    0  ATS    0  ATS    3  ATS    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH  30  ATH   5 WFRTS 453 WFRTS 945  0  ATS    0  ATS    0  ATS    3  ATS    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH  30  ATH   5  ATH 453 WFRTS 945  0  ATS    0  ATS    0  ATS    3  ATS    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR  ATH  30  ATH   5  ATH 453  ATH 945  0  ATS    0  ATS    0  ATS    3  ATS    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR  ATH  30  ATH   5  ATH 453  ATH 945  0  ATP    0  ATS    0  ATS    3  ATS    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR  ATH  30  ATH   5  ATH 453  ATH 945  0  ATP    0  ATS    0  ATS    3  ATP    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR  ATH  30  ATH   5  ATH 453  ATH 945  0  ATP    0  ATS    0  ATP    3  ATP    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR  ATH  30  ATH   5  ATH 453  ATH 945  0  ATP    0  ATP    0  ATP    3  ATP    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR   PB  30  ATH   5  ATH 453  ATH 945  0  ATP    0  ATP    0  ATP    3  ATP    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR   PB  30  ATH   5  ATH 453   PB 945  0  ATP    0  ATP    0  ATP    3  ATP    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR   PB  30   PB   5  ATH 453   PB 945  0  ATP    0  ATP    0  ATP    3  ATP    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR   PB  30   PB   5   PB 453   PB 945  0  ATP    0  ATP    0  ATP    3  ATP    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR   PB  30   PB   5   PB 453   PB 945  0  ATP    0  ATP    0  ATP    3  ATP    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR   PB  30   PB   5   PB 453   PB 945  0  ATP    0  ATP    0  ATP    3  ATP    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0

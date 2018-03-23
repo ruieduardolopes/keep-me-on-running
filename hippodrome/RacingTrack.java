@@ -27,8 +27,10 @@ public class RacingTrack {
      * on the {@link Paddock} to the Racing Track's start line.
      */
     public synchronized void proceedToStartLine() {
-        while (brokerDidNotOrderedToStartTheRace) {
+        ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_START_LINE);
+        while (brokerDidNotOrderToStartTheRace) {
             try {
+                System.out.println("Hello!");
                 wait();
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
@@ -39,7 +41,7 @@ public class RacingTrack {
                 System.exit(9);
             }
         }
-        ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_START_LINE);
+        System.out.println("khgfdsfghjkljhgfdsghjk");
         // wait for Broker to start the race with STR()
         // change the HJ's state to ATSL
         // done
@@ -51,6 +53,7 @@ public class RacingTrack {
      * @param horseId the identification of the pair Horse/Jockey which wants to make a move.
      */
     public synchronized void makeAMove(int horseId) {
+        ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.RUNNING);
         while (currentIndex != horseId) {
             try {
                 wait();
@@ -65,7 +68,6 @@ public class RacingTrack {
         }
         currentHorsesPositions[currentIndex]++;
         currentIndex += currentIndex + 1 % currentHorsesPositions.length;
-        ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.RUNNING);
         notifyAll();
         if (hasFirstHorseCrossedTheFinishLine) {
             winner = ((HorseJockey)Thread.currentThread()).getIdentification();
@@ -97,7 +99,7 @@ public class RacingTrack {
     }
 
     public synchronized void startTheRace() {
-        brokerDidNotOrderedToStartTheRace = false;
+        brokerDidNotOrderToStartTheRace = false;
         notifyAll();
         // notify first horse to unlock the starting line (ATSL state)
         // done
@@ -107,7 +109,7 @@ public class RacingTrack {
         return race;
     }
 
-    public int getWinner() {
+    public synchronized int getWinner() {
         return winner;
     }
 
@@ -132,7 +134,7 @@ public class RacingTrack {
 
     private int winner = -1;
 
-    private boolean brokerDidNotOrderedToStartTheRace = true;
+    private boolean brokerDidNotOrderToStartTheRace = true;
 
     private boolean someCondition = true;
 }

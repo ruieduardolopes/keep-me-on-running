@@ -43,6 +43,9 @@ public class BettingCentre {
      * Accept all the bets done by the {@link Spectator}s.
      */
     public synchronized void acceptTheBets() {
+        ((Broker)Thread.currentThread()).setBrokerState(BrokerState.WAITING_FOR_BETS);
+        brokerIsNotAcceptingBets = false;
+        notifyAll();
         while (lastSpectatorHasNotBetted) {
             try {
                 wait();
@@ -54,11 +57,10 @@ public class BettingCentre {
                 System.err.println("This program will now quit.");
                 System.exit(7);
             }
+            brokerIsNotAcceptingBets = false;
+            notifyAll();
         }
         lastSpectatorHasNotBetted = true;
-        ((Broker)Thread.currentThread()).setBrokerState(BrokerState.WAITING_FOR_BETS);
-        brokerIsNotAcceptingBets = false;
-        notifyAll();
         // wait for final placeABet() of S
         // change B state to WFB
         // notify S to unlock PAB state
@@ -69,6 +71,7 @@ public class BettingCentre {
      * Give all the money to the respective betting parts - the {@link Spectator}s.
      */
     public synchronized void honourTheBets() {
+        ((Broker)Thread.currentThread()).setBrokerState(BrokerState.SETTLING_ACCOUNTS);
         while (brokerStillHasToPayToSpectators) {
             try {
                 wait();
@@ -82,7 +85,6 @@ public class BettingCentre {
             }
         }
         brokerStillHasToPayToSpectators = true;
-        ((Broker)Thread.currentThread()).setBrokerState(BrokerState.SETTLING_ACCOUNTS);
         brokerStillHasToHonorTheBets = false;
         notifyAll();
         // wait for goCollectTheGains() of each winning Spect.. It blocks until the last has been paid.
@@ -103,7 +105,8 @@ public class BettingCentre {
      */
     public synchronized int placeABet(int spectator, int bet, int horse) {
         bettingQueue.add(spectator);
-        while (brokerIsNotAcceptingBets || spectator != bettingQueue.peek()) {//brokerIsNotAcceptingBets) {
+        ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.PLACING_A_BET);
+        while (brokerIsNotAcceptingBets || spectator != bettingQueue.peek()) {
             try {
                 wait();
             } catch (InterruptedException ie) {
@@ -116,7 +119,6 @@ public class BettingCentre {
             }
         }
         brokerIsNotAcceptingBets = true;
-        numberOfBetters++;
         bettingQueue.remove();
         try {
             bets[spectator] = new Bet(horse, bet);
@@ -126,11 +128,11 @@ public class BettingCentre {
             throw new UnknownSpectatorException(spectator);
         }
         moneyOnSafe += bet;
-        ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.PLACING_A_BET);
+        numberOfBetters++;
         if (numberOfBetters == numberOfSpectators) {
             lastSpectatorHasNotBetted = false;
-            notifyAll();
         }
+        notifyAll();
         return bet;
         // wait till the Broker accepts this bet with ATB() on WFB state.
         // set state to Place+ing A Bet of S
@@ -146,6 +148,7 @@ public class BettingCentre {
      * @return the amount of money collected by the {@code spectator}.
      */
     public synchronized int goCollectTheGains(int spectator) {
+        ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.COLLECTING_THE_GAINS);
         while (brokerStillHasToHonorTheBets) {
             try {
                 wait();
@@ -166,7 +169,6 @@ public class BettingCentre {
                 gains = amountPerWinner;
             }
         }
-        ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.COLLECTING_THE_GAINS);
         brokerStillHasToPayToSpectators = false;
         notifyAll();
         return gains;

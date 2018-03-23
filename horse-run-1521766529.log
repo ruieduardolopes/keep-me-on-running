@@ -1,0 +1,85 @@
+AFTERNOON AT THE RACE TRACK - Description of the internal state of the problem
+MAN/BRK           SPECTATOR/BETTER              HORSE/JOCKEY PAIR at Race RN
+  Stat  St0  Am0 St1  Am1 St2  Am2 St3  Am3 RN St0  Len0 St1  Len1 St2  Len2 St3  Len3 
+                                        Race RN Status
+ RN Dist BS0  BA0 BS1  BA1 BS2  BA2 BS3  BA3  Od0 N0 Ps0 SD0 Od1 N1 Ps1 SD1 Od2 N2 Ps2 SD2 Od3 N3 Ps3 SD3 
+    OTE WFRTS 368        0        0        0  0         0         0         0         0 
+  0  583    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 368        0        0        0  0         0         0         0         0 
+  0  583    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 368 WFRTS 315        0        0  0         0         0         0         0 
+  0  583    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 368 WFRTS 315        0        0  0         0         0         0         0 
+  0  583    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 368 WFRTS 315 WFRTS   6        0  0         0         0         0         0 
+  0  583    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 368 WFRTS 315 WFRTS   6        0  0         0         0         0         0 
+  0  583    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 368 WFRTS 315 WFRTS   6 WFRTS 929  0         0         0         0         0 
+  0  583    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 368 WFRTS 315 WFRTS   6 WFRTS 929  0         0         0         0         0 
+  0  583    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 368 WFRTS 315 WFRTS   6 WFRTS 929  0  ATS    4         0         0         0 
+  0  583    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 368 WFRTS 315 WFRTS   6 WFRTS 929  0  ATS    4  ATS    0         0         0 
+  0  583    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 368 WFRTS 315 WFRTS   6 WFRTS 929  0  ATS    4  ATS    1         0         0 
+  0  583    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 368 WFRTS 315 WFRTS   6 WFRTS 929  0  ATS    4  ATS    1  ATS    3         0 
+  0  583    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 368 WFRTS 315 WFRTS   6 WFRTS 929  0  ATS    4  ATS    1  ATS    3         0 
+  0  583    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 368 WFRTS 315 WFRTS   6 WFRTS 929  0  ATS    4  ATS    1  ATS    3         0 
+  0  583    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 368 WFRTS 315 WFRTS   6 WFRTS 929  0  ATS    4  ATS    1  ATS    3  ATS    0 
+  0  583    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 368 WFRTS 315 WFRTS   6 WFRTS 929  0  ATS    4  ATS    1  ATS    3  ATS    0 
+  0  583    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 368 WFRTS 315 WFRTS   6 WFRTS 929  0  ATS    4  ATS    1  ATS    3  ATS    0 
+  0  583    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR WFRTS 368 WFRTS 315 WFRTS   6 WFRTS 929  0  ATS    4  ATS    1  ATS    3  ATS    0 
+  0  583    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR  ATH 368 WFRTS 315 WFRTS   6 WFRTS 929  0  ATS    4  ATS    1  ATS    3  ATS    0 
+  0  583    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR  ATH 368 WFRTS 315  ATH   6 WFRTS 929  0  ATS    4  ATS    1  ATS    3  ATS    0 
+  0  583    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 368 WFRTS 315  ATH   6  ATH 929  0  ATS    4  ATS    1  ATS    3  ATS    0 
+  0  583    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 368 WFRTS 315  ATH   6  ATH 929  0  ATS    4  ATS    1  ATS    3  ATS    0 
+  0  583    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 368  ATH 315  ATH   6  ATH 929  0  ATS    4  ATS    1  ATS    3  ATS    0 
+  0  583    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 368  ATH 315  ATH   6  ATH 929  0  ATP    4  ATS    1  ATS    3  ATS    0 
+  0  583    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 368  ATH 315  ATH   6  ATH 929  0 ATSL    4  ATS    1  ATS    3  ATP    0 
+  0  583    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 368  ATH 315  ATH   6  ATH 929  0 ATSL    4  ATS    1  ATS    3  ATP    0 
+  0  583    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 368  ATH 315  ATH   6  ATH 929  0 ATSL    4  ATS    1  ATP    3 ATSL    0 
+  0  583    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 368  ATH 315  ATH   6  ATH 929  0 ATSL    4  ATS    1  ATP    3 ATSL    0 
+  0  583    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 368  ATH 315  ATH   6  ATH 929  0 ATSL    4  ATP    1 ATSL    3 ATSL    0 
+  0  583    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 368  ATH 315  ATH   6  ATH 929  0 ATSL    4  ATP    1 ATSL    3 ATSL    0 
+  0  583    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 368  ATH 315  ATH   6  ATH 929  0 ATSL    4 ATSL    1 ATSL    3 ATSL    0 
+  0  583    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 368   PB 315  ATH   6  ATH 929  0 ATSL    4 ATSL    1 ATSL    3 ATSL    0 
+  0  583    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 368   WR 315  ATH   6  ATH 929  0 ATSL    4 ATSL    1 ATSL    3 ATSL    0 
+  0  583    0   0    0 118    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 368   WR 315   PB   6  ATH 929  0 ATSL    4 ATSL    1 ATSL    3 ATSL    0 
+  0  583    0   0    0 118    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 368   WR 315   WR   6   PB 929  0 ATSL    4 ATSL    1 ATSL    3 ATSL    0 
+  0  583    0   0    0 118    1   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 368   WR 315   WR   6   PB 929  0 ATSL    4 ATSL    1 ATSL    3 ATSL    0 
+  0  583    0   0    0 118    1   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   PB 368   WR 315   WR   6   PB 929  0 ATSL    4 ATSL    1 ATSL    3 ATSL    0 
+  0  583    0   0    0 118    1   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   PB 368   WR 315   WR   6   WR 929  0 ATSL    4 ATSL    1 ATSL    3 ATSL    0 
+  0  583    0  23    0 118    1   0    3 232    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   WR 368   WR 315   WR   6   WR 929  0 ATSL    4 ATSL    1 ATSL    3 ATSL    0 
+  0  583    3  23    0 118    1   0    3 232    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    STR   WR 368   WR 315   WR   6   WR 929  0 ATSL    4 ATSL    1 ATSL    3 ATSL    0 
+  0  583    3  23    0 118    1   0    3 232    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0

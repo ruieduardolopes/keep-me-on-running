@@ -1,0 +1,83 @@
+AFTERNOON AT THE RACE TRACK - Description of the internal state of the problem
+MAN/BRK           SPECTATOR/BETTER              HORSE/JOCKEY PAIR at Race RN
+  Stat  St0  Am0 St1  Am1 St2  Am2 St3  Am3 RN St0  Len0 St1  Len1 St2  Len2 St3  Len3 
+                                        Race RN Status
+ RN Dist BS0  BA0 BS1  BA1 BS2  BA2 BS3  BA3  Od0 N0 Ps0 SD0 Od1 N1 Ps1 SD1 Od2 N2 Ps2 SD2 Od3 N3 Ps3 SD3 
+    OTE WFRTS 345        0        0        0  0         0         0         0         0 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 345        0        0        0  0         0         0         0         0 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 345 WFRTS  15        0        0  0         0         0         0         0 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 345 WFRTS  15        0        0  0         0         0         0         0 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 345 WFRTS  15 WFRTS 904        0  0         0         0         0         0 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 345 WFRTS  15 WFRTS 904        0  0         0         0         0         0 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 345 WFRTS  15 WFRTS 904 WFRTS 450  0         0         0         0         0 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 345 WFRTS  15 WFRTS 904 WFRTS 450  0         0         0         0         0 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 345 WFRTS  15 WFRTS 904 WFRTS 450  0  ATS    1         0         0         0 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 345 WFRTS  15 WFRTS 904 WFRTS 450  0  ATS    1         0         0         0 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 345 WFRTS  15 WFRTS 904 WFRTS 450  0  ATS    1  ATS    0         0         0 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 345 WFRTS  15 WFRTS 904 WFRTS 450  0  ATS    1  ATS    0         0         0 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 345 WFRTS  15 WFRTS 904 WFRTS 450  0  ATS    1  ATS    0  ATS    2         0 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 345 WFRTS  15 WFRTS 904 WFRTS 450  0  ATS    1  ATS    0  ATS    2         0 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 345 WFRTS  15 WFRTS 904 WFRTS 450  0  ATS    1  ATS    0  ATS    2  ATS    4 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 345 WFRTS  15 WFRTS 904 WFRTS 450  0  ATS    1  ATS    0  ATS    2  ATS    4 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 345  ATH  15 WFRTS 904 WFRTS 450  0  ATS    1  ATS    0  ATS    2  ATS    4 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 345  ATH  15 WFRTS 904  ATH 450  0  ATS    1  ATS    0  ATS    2  ATS    4 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 345  ATH  15  ATH 904  ATH 450  0  ATS    1  ATS    0  ATS    2  ATS    4 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 345  ATH  15  ATH 904  ATH 450  0  ATP    1  ATS    0  ATS    2  ATS    4 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 345  ATH  15  ATH 904  ATH 450  0 ATSL    1  ATS    0  ATS    2  ATP    4 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 345  ATH  15  ATH 904  ATH 450  0 ATSL    1  ATS    0  ATS    2  ATP    4 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 345  ATH  15  ATH 904  ATH 450  0 ATSL    1  ATS    0  ATS    2  ATP    4 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 345  ATH  15  ATH 904  ATH 450  0 ATSL    1  ATS    0  ATP    2 ATSL    4 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 345  ATH  15  ATH 904  ATH 450  0 ATSL    1  ATS    0  ATP    2 ATSL    4 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 345  ATH  15  ATH 904  ATH 450  0 ATSL    1  ATP    0 ATSL    2 ATSL    4 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 345  ATH  15  ATH 904  ATH 450  0 ATSL    1  ATP    0 ATSL    2 ATSL    4 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 345  ATH  15  ATH 904  ATH 450  0 ATSL    1 ATSL    0 ATSL    2 ATSL    4 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE   PB 345  ATH  15  ATH 904  ATH 450  0 ATSL    1 ATSL    0 ATSL    2 ATSL    4 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE   PB 345  ATH  15   PB 904  ATH 450  0 ATSL    1 ATSL    0 ATSL    2 ATSL    4 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE   PB 345   PB  15   PB 904  ATH 450  0 ATSL    1 ATSL    0 ATSL    2 ATSL    4 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE   PB 345   PB  15   PB 904   PB 450  0 ATSL    1 ATSL    0 ATSL    2 ATSL    4 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR   PB 345   PB  15   PB 904   PB 450  0 ATSL    1 ATSL    0 ATSL    2 ATSL    4 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   PB 345   PB  15   PB 904   PB 450  0 ATSL    1 ATSL    0 ATSL    2 ATSL    4 
+  0 1333    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   WR 345   PB  15   PB 904   PB 450  0 ATSL    1 ATSL    0 ATSL    2 ATSL    4 
+  0 1333    2  21    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   WR 345   PB  15   WR 904   PB 450  0 ATSL    1 ATSL    0 ATSL    2 ATSL    4 
+  0 1333    2  21    0   3    3  56    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   WR 345   PB  15   WR 904   PB 450  0 ATSL    1 ATSL    0 ATSL    2 ATSL    4 
+  0 1333    2  21    0   3    3  56    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   WR 345   WR  15   WR 904   PB 450  0 ATSL    1 ATSL    0 ATSL    2 ATSL    4 
+  0 1333    2  21    3   3    3  56    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   WR 345   WR  15   WR 904   WR 450  0 ATSL    1 ATSL    0 ATSL    2 ATSL    4 
+  0 1333    2  21    3   3    3  56    2 168    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0

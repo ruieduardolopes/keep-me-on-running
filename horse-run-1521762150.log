@@ -1,0 +1,57 @@
+AFTERNOON AT THE RACE TRACK - Description of the internal state of the problem
+MAN/BRK           SPECTATOR/BETTER              HORSE/JOCKEY PAIR at Race RN
+  Stat  St0  Am0 St1  Am1 St2  Am2 St3  Am3 RN St0  Len0 St1  Len1 St2  Len2 St3  Len3 
+                                        Race RN Status
+ RN Dist BS0  BA0 BS1  BA1 BS2  BA2 BS3  BA3  Od0 N0 Ps0 SD0 Od1 N1 Ps1 SD1 Od2 N2 Ps2 SD2 Od3 N3 Ps3 SD3 
+    OTE WFRTS 496        0        0        0  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 496 WFRTS 721        0        0  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 496 WFRTS 721 WFRTS 577        0  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 496 WFRTS 721 WFRTS 577 WFRTS  68  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 496 WFRTS 721 WFRTS 577 WFRTS  68  0  ATS    1         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 496 WFRTS 721 WFRTS 577 WFRTS  68  0  ATS    1         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 496 WFRTS 721 WFRTS 577 WFRTS  68  0  ATS    1  ATS    0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 496 WFRTS 721 WFRTS 577 WFRTS  68  0  ATS    1  ATS    0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 496 WFRTS 721 WFRTS 577 WFRTS  68  0  ATS    1  ATS    0  ATS    0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 496 WFRTS 721 WFRTS 577 WFRTS  68  0  ATS    1  ATS    0  ATS    0  ATS    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 496 WFRTS 721 WFRTS 577 WFRTS  68  0  ATS    1  ATS    0  ATS    0  ATS    4 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 496 WFRTS 721 WFRTS 577 WFRTS  68  0  ATS    1  ATS    0  ATS    0  ATS    4 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 496 WFRTS 721 WFRTS 577 WFRTS  68  0  ATS    1  ATS    0  ATS    0  ATS    4 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 496 WFRTS 721 WFRTS 577 WFRTS  68  0  ATS    1  ATS    0  ATS    0  ATS    4 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 496 WFRTS 721 WFRTS 577 WFRTS  68  0  ATS    1  ATS    0  ATS    0  ATS    4 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 496 WFRTS 721 WFRTS 577 WFRTS  68  0  ATS    1  ATS    0  ATS    0  ATS    4 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 496 WFRTS 721 WFRTS 577 WFRTS  68  0  ATS    1  ATS    0  ATS    0  ATS    4 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 496 WFRTS 721 WFRTS 577 WFRTS  68  0  ATS    1  ATS    0  ATS    0  ATS    4 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 496  ATH 721 WFRTS 577 WFRTS  68  0  ATS    1  ATS    0  ATS    0  ATS    4 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 496  ATH 721  ATH 577 WFRTS  68  0  ATS    1  ATS    0  ATS    0  ATS    4 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 496  ATH 721  ATH 577  ATH  68  0  ATS    1  ATS    0  ATS    0  ATS    4 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR  ATH 496  ATH 721  ATH 577  ATH  68  0  ATS    1  ATS    0  ATS    0  ATS    4 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR  ATH 496  ATH 721  ATH 577  ATH  68  0  ATP    1  ATS    0  ATS    0  ATS    4 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR  ATH 496  ATH 721  ATH 577  ATH  68  0  ATP    1  ATS    0  ATS    0  ATP    4 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR  ATH 496  ATH 721  ATH 577  ATH  68  0  ATP    1  ATS    0  ATP    0  ATP    4 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR  ATH 496  ATH 721  ATH 577  ATH  68  0  ATP    1  ATP    0  ATP    0  ATP    4 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0

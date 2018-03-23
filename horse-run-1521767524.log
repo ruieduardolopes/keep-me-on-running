@@ -1,0 +1,83 @@
+AFTERNOON AT THE RACE TRACK - Description of the internal state of the problem
+MAN/BRK           SPECTATOR/BETTER              HORSE/JOCKEY PAIR at Race RN
+  Stat  St0  Am0 St1  Am1 St2  Am2 St3  Am3 RN St0  Len0 St1  Len1 St2  Len2 St3  Len3 
+                                        Race RN Status
+ RN Dist BS0  BA0 BS1  BA1 BS2  BA2 BS3  BA3  Od0 N0 Ps0 SD0 Od1 N1 Ps1 SD1 Od2 N2 Ps2 SD2 Od3 N3 Ps3 SD3 
+    OTE WFRTS 168        0        0        0  0         0         0         0         0 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 168        0        0        0  0         0         0         0         0 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 168 WFRTS  70        0        0  0         0         0         0         0 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 168 WFRTS  70        0        0  0         0         0         0         0 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 168 WFRTS  70 WFRTS 605        0  0         0         0         0         0 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 168 WFRTS  70 WFRTS 605        0  0         0         0         0         0 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 168 WFRTS  70 WFRTS 605 WFRTS 271  0         0         0         0         0 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 168 WFRTS  70 WFRTS 605 WFRTS 271  0         0         0         0         0 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 168 WFRTS  70 WFRTS 605 WFRTS 271  0  ATS    0         0         0         0 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 168 WFRTS  70 WFRTS 605 WFRTS 271  0  ATS    0  ATS    0         0         0 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 168 WFRTS  70 WFRTS 605 WFRTS 271  0  ATS    0  ATS    0         0         0 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 168 WFRTS  70 WFRTS 605 WFRTS 271  0  ATS    0  ATS    0         0         0 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 168 WFRTS  70 WFRTS 605 WFRTS 271  0  ATS    0  ATS    0  ATS    4         0 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 168 WFRTS  70 WFRTS 605 WFRTS 271  0  ATS    0  ATS    0  ATS    4         0 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 168 WFRTS  70 WFRTS 605 WFRTS 271  0  ATS    0  ATS    0  ATS    4  ATS    1 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 168 WFRTS  70 WFRTS 605 WFRTS 271  0  ATS    0  ATS    0  ATS    4  ATS    1 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 168 WFRTS  70  ATH 605 WFRTS 271  0  ATS    0  ATS    0  ATS    4  ATS    1 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 168  ATH  70  ATH 605 WFRTS 271  0  ATS    0  ATS    0  ATS    4  ATS    1 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 168  ATH  70  ATH 605  ATH 271  0  ATS    0  ATS    0  ATS    4  ATS    1 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 168  ATH  70  ATH 605  ATH 271  0  ATP    0  ATS    0  ATS    4  ATS    1 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 168  ATH  70  ATH 605  ATH 271  0 ATSL    0  ATS    0  ATS    4  ATP    1 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 168  ATH  70  ATH 605  ATH 271  0 ATSL    0  ATS    0  ATS    4  ATP    1 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 168  ATH  70  ATH 605  ATH 271  0 ATSL    0  ATS    0  ATS    4  ATP    1 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 168  ATH  70  ATH 605  ATH 271  0 ATSL    0  ATS    0  ATP    4 ATSL    1 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 168  ATH  70  ATH 605  ATH 271  0 ATSL    0  ATS    0  ATP    4 ATSL    1 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 168  ATH  70  ATH 605  ATH 271  0 ATSL    0  ATP    0 ATSL    4 ATSL    1 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 168  ATH  70  ATH 605  ATH 271  0 ATSL    0  ATP    0 ATSL    4 ATSL    1 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 168  ATH  70  ATH 605  ATH 271  0 ATSL    0 ATSL    0 ATSL    4 ATSL    1 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE   PB 168  ATH  70  ATH 605  ATH 271  0 ATSL    0 ATSL    0 ATSL    4 ATSL    1 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE   PB 168  ATH  70   PB 605  ATH 271  0 ATSL    0 ATSL    0 ATSL    4 ATSL    1 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE   PB 168  ATH  70   PB 605   PB 271  0 ATSL    0 ATSL    0 ATSL    4 ATSL    1 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE   PB 168   PB  70   PB 605   PB 271  0 ATSL    0 ATSL    0 ATSL    4 ATSL    1 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR   PB 168   PB  70   PB 605   PB 271  0 ATSL    0 ATSL    0 ATSL    4 ATSL    1 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   PB 168   PB  70   PB 605   PB 271  0 ATSL    0 ATSL    0 ATSL    4 ATSL    1 
+  0  728    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   WR 168   PB  70   PB 605   PB 271  0 ATSL    0 ATSL    0 ATSL    4 ATSL    1 
+  0  728    1  10    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   WR 168   PB  70   WR 605   PB 271  0 ATSL    0 ATSL    0 ATSL    4 ATSL    1 
+  0  728    1  10    0   0    3 151    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   WR 168   PB  70   WR 605   PB 271  0 ATSL    0 ATSL    0 ATSL    4 ATSL    1 
+  0  728    1  10    0   0    3 151    1  67    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   WR 168   PB  70   WR 605   WR 271  0 ATSL    0 ATSL    0 ATSL    4 ATSL    1 
+  0  728    1  10    3   4    3 151    1  67    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   WR 168   WR  70   WR 605   WR 271  0 ATSL    0 ATSL    0 ATSL    4 ATSL    1 
+  0  728    1  10    3   4    3 151    1  67    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0

@@ -8,7 +8,6 @@ import genclass.GenericIO;
 import genclass.TextFile;
 
 import java.time.Instant;
-import java.util.Arrays;
 
 /**
  * Class which represents an archive of all hippodrome's actions
@@ -206,7 +205,7 @@ public class GeneralInformationRepository {
         for (HorseJockey horseJockey : horseJockeys) {
             line += String.format("%4d", (int)horseJockey.getProbabilityToWin()*100);/* Od# */
             line += " ";
-            line += String.format("%2d", horseJockey.getNumberOfIncrementsDid());    /* N# */
+            line += String.format("%2d", horseJockey.getNumberOfIncrementsDone());    /* N# */
             line += " ";
             line += String.format("%3d", horseJockey.getPositionOnTrack());          /* Ps# */
             line += " ";

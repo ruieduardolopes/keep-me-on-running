@@ -44,7 +44,7 @@ public class HorseJockey {
      *
      * @return the number of iterations this pair Horse/Jockey ({@link HorseJockey}) to reach the current position on track.
      */
-    public int getNumberOfIncrementsDid() {
+    public int getNumberOfIncrementsDone() {
         return numberOfIncrementsDid;
     }
 

@@ -1,0 +1,69 @@
+AFTERNOON AT THE RACE TRACK - Description of the internal state of the problem
+MAN/BRK           SPECTATOR/BETTER              HORSE/JOCKEY PAIR at Race RN
+  Stat  St0  Am0 St1  Am1 St2  Am2 St3  Am3 RN St0  Len0 St1  Len1 St2  Len2 St3  Len3 
+                                        Race RN Status
+ RN Dist BS0  BA0 BS1  BA1 BS2  BA2 BS3  BA3  Od0 N0 Ps0 SD0 Od1 N1 Ps1 SD1 Od2 N2 Ps2 SD2 Od3 N3 Ps3 SD3 
+    OTE WFRTS 196        0        0        0  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 196 WFRTS 537        0        0  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 196 WFRTS 537 WFRTS 725        0  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 196 WFRTS 537 WFRTS 725 WFRTS 285  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 196 WFRTS 537 WFRTS 725 WFRTS 285  0  ATS    2         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 196 WFRTS 537 WFRTS 725 WFRTS 285  0  ATS    2         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 196 WFRTS 537 WFRTS 725 WFRTS 285  0  ATS    2  ATS    1         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 196 WFRTS 537 WFRTS 725 WFRTS 285  0  ATS    2  ATS    1         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 196 WFRTS 537 WFRTS 725 WFRTS 285  0  ATS    2  ATS    1  ATS    3         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 196 WFRTS 537 WFRTS 725 WFRTS 285  0  ATS    2  ATS    1  ATS    3         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 196 WFRTS 537 WFRTS 725 WFRTS 285  0  ATS    2  ATS    1  ATS    3  ATS    1 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 196 WFRTS 537 WFRTS 725 WFRTS 285  0  ATS    2  ATS    1  ATS    3  ATS    1 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 196 WFRTS 537 WFRTS 725 WFRTS 285  0  ATS    2  ATS    1  ATS    3  ATS    1 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 196 WFRTS 537 WFRTS 725 WFRTS 285  0  ATS    2  ATS    1  ATS    3  ATS    1 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 196 WFRTS 537 WFRTS 725 WFRTS 285  0  ATS    2  ATS    1  ATS    3  ATS    1 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 196 WFRTS 537 WFRTS 725  ATH 285  0  ATS    2  ATS    1  ATS    3  ATS    1 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 196 WFRTS 537 WFRTS 725  ATH 285  0  ATS    2  ATS    1  ATS    3  ATS    1 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 196 WFRTS 537 WFRTS 725  ATH 285  0  ATS    2  ATS    1  ATS    3  ATS    1 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 196 WFRTS 537  ATH 725  ATH 285  0  ATS    2  ATS    1  ATS    3  ATS    1 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 196 WFRTS 537  ATH 725  ATH 285  0  ATS    2  ATS    1  ATS    3  ATS    1 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR  ATH 196  ATH 537  ATH 725  ATH 285  0  ATS    2  ATS    1  ATS    3  ATS    1 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR  ATH 196  ATH 537  ATH 725  ATH 285  0  ATS    2  ATS    1  ATS    3  ATS    1 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 196  ATH 537  ATH 725  ATH 285  0  ATP    2  ATS    1  ATS    3  ATS    1 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 196  ATH 537  ATH 725  ATH 285  0  ATP    2  ATS    1  ATS    3  ATS    1 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 196  ATH 537  ATH 725  ATH 285  0  ATP    2  ATS    1  ATS    3  ATP    1 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 196  ATH 537  ATH 725  ATH 285  0  ATP    2  ATS    1  ATP    3  ATP    1 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 196  ATH 537  ATH 725  ATH 285  0  ATP    2  ATP    1  ATP    3  ATP    1 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 196  ATH 537  ATH 725   PB 285  0  ATP    2  ATP    1  ATP    3  ATP    1 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   PB 196  ATH 537  ATH 725   PB 285  0  ATP    2  ATP    1  ATP    3  ATP    1 
+  0    0    0   0    0   0    0   0    2  17    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   PB 196  ATH 537   PB 725   PB 285  0  ATP    2  ATP    1  ATP    3  ATP    1 
+  0    0    2  12    0   0    0   0    2  17    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   PB 196   PB 537   PB 725   PB 285  0  ATP    2  ATP    1  ATP    3  ATP    1 
+  0    0    2  12    0   0    0   0    2  17    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   PB 196   PB 537   PB 725   PB 285  0  ATP    2 ATSL    1  ATP    3  ATP    1 
+  0    0    2  12    3  33    2  45    2  17    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0

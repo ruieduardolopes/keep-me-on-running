@@ -1,0 +1,67 @@
+AFTERNOON AT THE RACE TRACK - Description of the internal state of the problem
+MAN/BRK           SPECTATOR/BETTER              HORSE/JOCKEY PAIR at Race RN
+  Stat  St0  Am0 St1  Am1 St2  Am2 St3  Am3 RN St0  Len0 St1  Len1 St2  Len2 St3  Len3 
+                                        Race RN Status
+ RN Dist BS0  BA0 BS1  BA1 BS2  BA2 BS3  BA3  Od0 N0 Ps0 SD0 Od1 N1 Ps1 SD1 Od2 N2 Ps2 SD2 Od3 N3 Ps3 SD3 
+    OTE WFRTS 573        0        0        0  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 573 WFRTS 153        0        0  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 573 WFRTS 153 WFRTS 635        0  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 573 WFRTS 153 WFRTS 635 WFRTS 710  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 573 WFRTS 153 WFRTS 635 WFRTS 710  0  ATS    4         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 573 WFRTS 153 WFRTS 635 WFRTS 710  0  ATS    4         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 573 WFRTS 153 WFRTS 635 WFRTS 710  0  ATS    4  ATS    2         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 573 WFRTS 153 WFRTS 635 WFRTS 710  0  ATS    4  ATS    2         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 573 WFRTS 153 WFRTS 635 WFRTS 710  0  ATS    4  ATS    2  ATS    4         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 573 WFRTS 153 WFRTS 635 WFRTS 710  0  ATS    4  ATS    2  ATS    4         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 573 WFRTS 153 WFRTS 635 WFRTS 710  0  ATS    4  ATS    2  ATS    4  ATS    2 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 573 WFRTS 153 WFRTS 635 WFRTS 710  0  ATS    4  ATS    2  ATS    4  ATS    2 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 573 WFRTS 153 WFRTS 635 WFRTS 710  0  ATS    4  ATS    2  ATS    4  ATS    2 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 573 WFRTS 153 WFRTS 635 WFRTS 710  0  ATS    4  ATS    2  ATS    4  ATS    2 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 573 WFRTS 153 WFRTS 635 WFRTS 710  0  ATS    4  ATS    2  ATS    4  ATS    2 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 573 WFRTS 153 WFRTS 635 WFRTS 710  0  ATS    4  ATS    2  ATS    4  ATS    2 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 573 WFRTS 153 WFRTS 635 WFRTS 710  0  ATS    4  ATS    2  ATS    4  ATS    2 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 573  ATH 153 WFRTS 635 WFRTS 710  0  ATS    4  ATS    2  ATS    4  ATS    2 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 573  ATH 153  ATH 635 WFRTS 710  0  ATS    4  ATS    2  ATS    4  ATS    2 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 573  ATH 153  ATH 635  ATH 710  0  ATS    4  ATS    2  ATS    4  ATS    2 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 573  ATH 153  ATH 635  ATH 710  0  ATP    4  ATS    2  ATS    4  ATS    2 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 573  ATH 153  ATH 635  ATH 710  0  ATP    4  ATS    2  ATS    4  ATP    2 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 573  ATH 153  ATH 635  ATH 710  0  ATP    4  ATS    2  ATP    4  ATP    2 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 573  ATH 153  ATH 635  ATH 710  0  ATP    4  ATP    2  ATP    4  ATP    2 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE   PB 573  ATH 153  ATH 635  ATH 710  0  ATP    4  ATP    2  ATP    4  ATP    2 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE   PB 573  ATH 153  ATH 635   PB 710  0  ATP    4  ATP    2  ATP    4  ATP    2 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE   PB 573   PB 153  ATH 635   PB 710  0  ATP    4  ATP    2  ATP    4  ATP    2 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE   PB 573   PB 153   PB 635   PB 710  0  ATP    4  ATP    2  ATP    4  ATP    2 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE   PB 573   PB 153   PB 635   PB 710  0  ATP    4  ATP    2  ATP    4  ATP    2 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR   PB 573   PB 153   PB 635   PB 710  0  ATP    4  ATP    2  ATP    4  ATP    2 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   PB 573   PB 153   PB 635   PB 710  0  ATP    4  ATP    2  ATP    4  ATP    2 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0

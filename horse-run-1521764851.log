@@ -1,0 +1,91 @@
+AFTERNOON AT THE RACE TRACK - Description of the internal state of the problem
+MAN/BRK           SPECTATOR/BETTER              HORSE/JOCKEY PAIR at Race RN
+  Stat  St0  Am0 St1  Am1 St2  Am2 St3  Am3 RN St0  Len0 St1  Len1 St2  Len2 St3  Len3 
+                                        Race RN Status
+ RN Dist BS0  BA0 BS1  BA1 BS2  BA2 BS3  BA3  Od0 N0 Ps0 SD0 Od1 N1 Ps1 SD1 Od2 N2 Ps2 SD2 Od3 N3 Ps3 SD3 
+    OTE WFRTS 906        0        0        0  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 906        0        0        0  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 906 WFRTS 856        0        0  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 906 WFRTS 856        0        0  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 906 WFRTS 856 WFRTS 979        0  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 906 WFRTS 856 WFRTS 979        0  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 906 WFRTS 856 WFRTS 979 WFRTS  80  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 906 WFRTS 856 WFRTS 979 WFRTS  80  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 906 WFRTS 856 WFRTS 979 WFRTS  80  0  ATS    4         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 906 WFRTS 856 WFRTS 979 WFRTS  80  0  ATS    4  ATS    0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 906 WFRTS 856 WFRTS 979 WFRTS  80  0  ATS    4  ATS    0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 906 WFRTS 856 WFRTS 979 WFRTS  80  0  ATS    4  ATS    0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 906 WFRTS 856 WFRTS 979 WFRTS  80  0  ATS    4  ATS    0  ATS    1         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 906 WFRTS 856 WFRTS 979 WFRTS  80  0  ATS    4  ATS    0  ATS    1         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 906 WFRTS 856 WFRTS 979 WFRTS  80  0  ATS    4  ATS    0  ATS    1  ATS    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 906 WFRTS 856 WFRTS 979 WFRTS  80  0  ATS    4  ATS    0  ATS    1  ATS    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 906 WFRTS 856 WFRTS 979 WFRTS  80  0  ATS    4  ATS    0  ATS    1  ATS    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR  ATH 906 WFRTS 856 WFRTS 979 WFRTS  80  0  ATS    4  ATS    0  ATS    1  ATS    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR  ATH 906 WFRTS 856 WFRTS 979 WFRTS  80  0  ATS    4  ATS    0  ATS    1  ATS    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR  ATH 906  ATH 856 WFRTS 979 WFRTS  80  0  ATS    4  ATS    0  ATS    1  ATS    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 906  ATH 856 WFRTS 979  ATH  80  0  ATS    4  ATS    0  ATS    1  ATS    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 906  ATH 856 WFRTS 979  ATH  80  0  ATS    4  ATS    0  ATS    1  ATS    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 906  ATH 856  ATH 979  ATH  80  0  ATS    4  ATS    0  ATS    1  ATS    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 906  ATH 856  ATH 979  ATH  80  0  ATP    4  ATS    0  ATS    1  ATS    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 906  ATH 856  ATH 979  ATH  80  0 ATSL    4  ATS    0  ATS    1  ATS    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 906  ATH 856  ATH 979  ATH  80  0 ATSL    4  ATS    0  ATS    1  ATP    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 906  ATH 856  ATH 979  ATH  80  0 ATSL    4  ATS    0  ATP    1 ATSL    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 906  ATH 856  ATH 979  ATH  80  0 ATSL    4  ATS    0  ATP    1 ATSL    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 906  ATH 856  ATH 979  ATH  80  0 ATSL    4  ATP    0 ATSL    1 ATSL    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 906  ATH 856  ATH 979  ATH  80  0 ATSL    4  ATP    0 ATSL    1 ATSL    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 906  ATH 856  ATH 979  ATH  80  0 ATSL    4 ATSL    0 ATSL    1 ATSL    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   PB 906  ATH 856  ATH 979  ATH  80  0 ATSL    4 ATSL    0 ATSL    1 ATSL    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   WR 906  ATH 856  ATH 979  ATH  80  0 ATSL    4 ATSL    0 ATSL    1 ATSL    0 
+  0    0    2 339    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   WR 906  ATH 856   PB 979  ATH  80  0 ATSL    4 ATSL    0 ATSL    1 ATSL    0 
+  0    0    2 339    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   WR 906   PB 856   WR 979  ATH  80  0 ATSL    4 ATSL    0 ATSL    1 ATSL    0 
+  0    0    2 339    0   0    3 367    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   WR 906   PB 856   WR 979  ATH  80  0 ATSL    4 ATSL    0 ATSL    1 ATSL    0 
+  0    0    2 339    0   0    3 367    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   WR 906   PB 856   WR 979   PB  80  0 ATSL    4 ATSL    0 ATSL    1 ATSL    0 
+  0    0    2 339    0   0    3 367    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   WR 906   WR 856   WR 979   PB  80  0 ATSL    4 ATSL    0 ATSL    1 ATSL    0 
+  0    0    2 339    3 214    3 367    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   WR 906   WR 856   WR 979   WR  80  0 ATSL    4 ATSL    0 ATSL    1 ATSL    0 
+  0    0    2 339    3 214    3 367    0   5    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    STR   WR 906   WR 856   WR 979   WR  80  0    R    4 ATSL    0 ATSL    1 ATSL    0 
+  0    0    2 339    3 214    3 367    0   5    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    STR   WR 906   WR 856   WR 979   WR  80  0    R    4 ATSL    0 ATSL    1 ATSL    0 
+  0    0    2 339    3 214    3 367    0   5    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    STR   WR 906   WR 856   WR 979   WR  80  0    R    4    R    0 ATSL    1 ATSL    0 
+  0    0    2 339    3 214    3 367    0   5    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    STR   WR 906   WR 856   WR 979   WR  80  0    R    4    R    0 ATSL    1    R    0 
+  0    0    2 339    3 214    3 367    0   5    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0

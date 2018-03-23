@@ -1,0 +1,85 @@
+AFTERNOON AT THE RACE TRACK - Description of the internal state of the problem
+MAN/BRK           SPECTATOR/BETTER              HORSE/JOCKEY PAIR at Race RN
+  Stat  St0  Am0 St1  Am1 St2  Am2 St3  Am3 RN St0  Len0 St1  Len1 St2  Len2 St3  Len3 
+                                        Race RN Status
+ RN Dist BS0  BA0 BS1  BA1 BS2  BA2 BS3  BA3  Od0 N0 Ps0 SD0 Od1 N1 Ps1 SD1 Od2 N2 Ps2 SD2 Od3 N3 Ps3 SD3 
+    OTE WFRTS 261        0        0        0  0         0         0         0         0 
+  0  708    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 261        0        0        0  0         0         0         0         0 
+  0  708    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 261 WFRTS 459        0        0  0         0         0         0         0 
+  0  708    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 261 WFRTS 459        0        0  0         0         0         0         0 
+  0  708    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 261 WFRTS 459 WFRTS 555        0  0         0         0         0         0 
+  0  708    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 261 WFRTS 459 WFRTS 555        0  0         0         0         0         0 
+  0  708    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 261 WFRTS 459 WFRTS 555 WFRTS 651  0         0         0         0         0 
+  0  708    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 261 WFRTS 459 WFRTS 555 WFRTS 651  0         0         0         0         0 
+  0  708    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 261 WFRTS 459 WFRTS 555 WFRTS 651  0  ATS    0         0         0         0 
+  0  708    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 261 WFRTS 459 WFRTS 555 WFRTS 651  0  ATS    0         0         0         0 
+  0  708    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 261 WFRTS 459 WFRTS 555 WFRTS 651  0  ATS    0  ATS    1         0         0 
+  0  708    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 261 WFRTS 459 WFRTS 555 WFRTS 651  0  ATS    0  ATS    1  ATS    0         0 
+  0  708    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 261 WFRTS 459 WFRTS 555 WFRTS 651  0  ATS    0  ATS    1  ATS    2         0 
+  0  708    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 261 WFRTS 459 WFRTS 555 WFRTS 651  0  ATS    0  ATS    1  ATS    2         0 
+  0  708    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 261 WFRTS 459 WFRTS 555 WFRTS 651  0  ATS    0  ATS    1  ATS    2  ATS    4 
+  0  708    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 261 WFRTS 459 WFRTS 555 WFRTS 651  0  ATS    0  ATS    1  ATS    2  ATS    4 
+  0  708    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 261 WFRTS 459  ATH 555 WFRTS 651  0  ATS    0  ATS    1  ATS    2  ATS    4 
+  0  708    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 261 WFRTS 459  ATH 555 WFRTS 651  0  ATS    0  ATS    1  ATS    2  ATS    4 
+  0  708    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 261  ATH 459  ATH 555 WFRTS 651  0  ATS    0  ATS    1  ATS    2  ATS    4 
+  0  708    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR  ATH 261  ATH 459  ATH 555  ATH 651  0  ATS    0  ATS    1  ATS    2  ATS    4 
+  0  708    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 261  ATH 459  ATH 555  ATH 651  0  ATS    0  ATS    1  ATS    2  ATS    4 
+  0  708    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 261  ATH 459  ATH 555  ATH 651  0  ATS    0  ATS    1  ATS    2  ATS    4 
+  0  708    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 261  ATH 459  ATH 555  ATH 651  0  ATS    0  ATS    1  ATS    2  ATS    4 
+  0  708    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 261  ATH 459  ATH 555  ATH 651  0  ATS    0  ATS    1  ATS    2  ATP    4 
+  0  708    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 261  ATH 459  ATH 555  ATH 651  0  ATS    0  ATS    1  ATP    2  ATP    4 
+  0  708    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 261  ATH 459  ATH 555  ATH 651  0  ATS    0  ATP    1 ATSL    2  ATP    4 
+  0  708    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 261  ATH 459  ATH 555  ATH 651  0  ATS    0  ATP    1 ATSL    2  ATP    4 
+  0  708    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 261  ATH 459  ATH 555  ATH 651  0  ATP    0  ATP    1 ATSL    2  ATP    4 
+  0  708    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 261  ATH 459  ATH 555  ATH 651  0 ATSL    0 ATSL    1 ATSL    2 ATSL    4 
+  0  708    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 261  ATH 459  ATH 555   PB 651  0 ATSL    0 ATSL    1 ATSL    2 ATSL    4 
+  0  708    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 261  ATH 459  ATH 555   PB 651  0 ATSL    0 ATSL    1 ATSL    2 ATSL    4 
+  0  708    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 261  ATH 459  ATH 555   PB 651  0 ATSL    0 ATSL    1 ATSL    2 ATSL    4 
+  0  708    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 261  ATH 459  ATH 555   WR 651  0 ATSL    0 ATSL    1 ATSL    2 ATSL    4 
+  0  708    0   0    0   0    0   0    1 244    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   PB 261  ATH 459  ATH 555   WR 651  0 ATSL    0 ATSL    1 ATSL    2 ATSL    4 
+  0  708    0   0    0   0    0   0    1 244    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   WR 261   PB 459  ATH 555   WR 651  0 ATSL    0 ATSL    1 ATSL    2 ATSL    4 
+  0  708    1  65    0   0    0   0    1 244    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   WR 261   PB 459  ATH 555   WR 651  0 ATSL    0 ATSL    1 ATSL    2 ATSL    4 
+  0  708    1  65    0   0    0   0    1 244    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   WR 261   PB 459   PB 555   WR 651  0 ATSL    0 ATSL    1 ATSL    2 ATSL    4 
+  0  708    1  65    0   0    0   0    1 244    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   WR 261   WR 459   PB 555   WR 651  0 ATSL    0 ATSL    1 ATSL    2 ATSL    4 
+  0  708    1  65    2  28    0 138    1 244    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   WR 261   WR 459   WR 555   WR 651  0 ATSL    0 ATSL    1 ATSL    2 ATSL    4 
+  0  708    1  65    2  28    2 138    1 244    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    STR   WR 261   WR 459   WR 555   WR 651  0 ATSL    0 ATSL    1 ATSL    2 ATSL    4 
+  0  708    1  65    2  28    2 138    1 244    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0

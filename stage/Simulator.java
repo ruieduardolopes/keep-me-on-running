@@ -8,7 +8,7 @@ import hippodrome.actions.Race;
  * Creation of a Horse Race simulation placed on a Hippodrome.
  * This class has a {@link entities.Broker}, a set of {@link entities.Spectator}s
  * and a set of pairs Horse/Jockey ({@link entities.HorseJockey}s).
- */
+ */ // TODO - recover last version
 public class Simulator {
     /**
      * Main function which contemplates the execution of the simulation.
@@ -28,6 +28,8 @@ public class Simulator {
         Stable stable = new Stable(repository);
 
         Race race = new Race(numberOfHorses, 0, Race.generateDistance());
+        repository.setRaceDistance(race.getDistance());
+        repository.setRaceNumber(race.getIdentification());
 
         /* initialize the main entities */
         broker = new Broker(numberOfRaces, bettingCentre, controlCentre, new RacingTrack(race, repository), stable, repository);
@@ -48,15 +50,17 @@ public class Simulator {
         broker.start();
         repository.newSnapshot();
 
-        /* initialize races */
-        for (int i = 1; i < numberOfRaces; i++) {
+        /* initialize races */ // TODO - verify race creations
+        /*for (int i = 1; i < numberOfRaces; i++) {
             race = new Race(numberOfHorses, i, Race.generateDistance());
+            repository.setRaceDistance(race.getDistance());
+            repository.setRaceNumber(race.getIdentification());
             racingTrack = new RacingTrack(race, repository);
             broker.setRacingTrack(racingTrack);
             for (int j = 0; j != numberOfHorses; j++) {
                 horseJockeys[j].setRacingTrack(racingTrack);
             }
-        }
+        }*/
         try {
             broker.join();
             for (int i = 0; i != numberOfSpectators; i++) {

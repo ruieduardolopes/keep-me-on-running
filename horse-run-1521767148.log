@@ -1,0 +1,95 @@
+AFTERNOON AT THE RACE TRACK - Description of the internal state of the problem
+MAN/BRK           SPECTATOR/BETTER              HORSE/JOCKEY PAIR at Race RN
+  Stat  St0  Am0 St1  Am1 St2  Am2 St3  Am3 RN St0  Len0 St1  Len1 St2  Len2 St3  Len3 
+                                        Race RN Status
+ RN Dist BS0  BA0 BS1  BA1 BS2  BA2 BS3  BA3  Od0 N0 Ps0 SD0 Od1 N1 Ps1 SD1 Od2 N2 Ps2 SD2 Od3 N3 Ps3 SD3 
+    OTE WFRTS 155        0        0        0  0         0         0         0         0 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 155        0        0        0  0         0         0         0         0 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 155 WFRTS 886        0        0  0         0         0         0         0 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 155 WFRTS 886        0        0  0         0         0         0         0 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 155 WFRTS 886 WFRTS 771        0  0         0         0         0         0 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 155 WFRTS 886 WFRTS 771        0  0         0         0         0         0 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 155 WFRTS 886 WFRTS 771 WFRTS 559  0         0         0         0         0 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 155 WFRTS 886 WFRTS 771 WFRTS 559  0         0         0         0         0 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 155 WFRTS 886 WFRTS 771 WFRTS 559  0  ATS    1         0         0         0 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 155 WFRTS 886 WFRTS 771 WFRTS 559  0  ATS    1         0         0         0 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 155 WFRTS 886 WFRTS 771 WFRTS 559  0  ATS    1  ATS    2         0         0 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 155 WFRTS 886 WFRTS 771 WFRTS 559  0  ATS    1  ATS    2         0         0 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 155 WFRTS 886 WFRTS 771 WFRTS 559  0  ATS    1  ATS    2  ATS    3         0 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 155 WFRTS 886 WFRTS 771 WFRTS 559  0  ATS    1  ATS    2  ATS    3  ATS    0 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 155 WFRTS 886 WFRTS 771 WFRTS 559  0  ATS    1  ATS    2  ATS    3  ATS    4 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 155 WFRTS 886 WFRTS 771 WFRTS 559  0  ATS    1  ATS    2  ATS    3  ATS    4 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 155 WFRTS 886 WFRTS 771 WFRTS 559  0  ATS    1  ATS    2  ATS    3  ATS    4 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 155 WFRTS 886 WFRTS 771  ATH 559  0  ATS    1  ATS    2  ATS    3  ATS    4 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 155  ATH 886 WFRTS 771  ATH 559  0  ATS    1  ATS    2  ATS    3  ATS    4 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 155  ATH 886 WFRTS 771  ATH 559  0  ATS    1  ATS    2  ATS    3  ATS    4 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR  ATH 155  ATH 886 WFRTS 771  ATH 559  0  ATS    1  ATS    2  ATS    3  ATS    4 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 155  ATH 886  ATH 771  ATH 559  0  ATS    1  ATS    2  ATS    3  ATS    4 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 155  ATH 886  ATH 771  ATH 559  0  ATS    1  ATS    2  ATS    3  ATS    4 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 155  ATH 886  ATH 771  ATH 559  0  ATP    1  ATS    2  ATS    3  ATS    4 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 155  ATH 886  ATH 771  ATH 559  0 ATSL    1  ATS    2  ATS    3  ATP    4 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 155  ATH 886  ATH 771  ATH 559  0 ATSL    1  ATS    2  ATS    3  ATP    4 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 155  ATH 886  ATH 771  ATH 559  0    R    1  ATS    2  ATP    3  ATP    4 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 155  ATH 886  ATH 771  ATH 559  0    R    1  ATS    2  ATP    3  ATP    4 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 155  ATH 886  ATH 771  ATH 559  0    R    1  ATP    2  ATP    3 ATSL    4 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 155  ATH 886  ATH 771  ATH 559  0    R    1  ATP    2  ATP    3 ATSL    4 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 155  ATH 886  ATH 771  ATH 559  0    R    1 ATSL    2  ATP    3 ATSL    4 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 155  ATH 886  ATH 771  ATH 559  0    R    1 ATSL    2 ATSL    3 ATSL    4 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 155  ATH 886  ATH 771  ATH 559  0    R    1 ATSL    2 ATSL    3 ATSL    4 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 155  ATH 886  ATH 771   PB 559  0    R    1 ATSL    2 ATSL    3 ATSL    4 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 155  ATH 886  ATH 771   PB 559  0    R    1 ATSL    2 ATSL    3    R    4 
+  0  765    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 155  ATH 886  ATH 771   WR 559  0    R    1 ATSL    2    R    3    R    4 
+  0  765    0   0    0   0    0   0    0 209    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 155   PB 886  ATH 771   WR 559  0    R    1 ATSL    2    R    3    R    4 
+  0  765    0   0    0   0    0   0    0 209    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 155   PB 886  ATH 771   WR 559  0    R    1 ATSL    2    R    3    R    4 
+  0  765    0   0    0   0    0   0    0 209    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 155   PB 886  ATH 771   WR 559  0    R    1    R    2    R    3    R    4 
+  0  765    0   0    0   0    0   0    0 209    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 155   WR 886   PB 771   WR 559  0    R    1    R    2    R    3    R    4 
+  0  765    0   0    2 332    0   0    0 209    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 155   WR 886   PB 771   WR 559  0    R    1    R    2    R    3    R    4 
+  0  765    0   0    2 332    0   0    0 209    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   PB 155   WR 886   PB 771   WR 559  0    R    1    R    2    R    3    R    4 
+  0  765    0   0    2 332    0   0    0 209    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   PB 155   WR 886   WR 771   WR 559  0    R    1    R    2    R    3    R    4 
+  0  765    0   0    2 332    0 289    0 209    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   WR 155   WR 886   WR 771   WR 559  0    R    1    R    2    R    3    R    4 
+  0  765    0  58    2 332    0 289    0 209    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    STR   WR 155   WR 886   WR 771   WR 559  0    R    1    R    2    R    3    R    4 
+  0  765    0  58    2 332    0 289    0 209    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0

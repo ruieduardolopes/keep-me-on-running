@@ -37,6 +37,7 @@ public class ControlCentre {
      * @param raceNumber number idenitification of the next {@link Race} to be started as of this instant.
      */
     public synchronized void startTheRace(int raceNumber) {
+        ((Broker)Thread.currentThread()).setBrokerState(BrokerState.SUPERVISING_THE_RACE);
         while (thereIsStillHorsesToFinishRace) {
             try {
                 wait();
@@ -49,7 +50,6 @@ public class ControlCentre {
                 System.exit(10);
             }
         }
-        ((Broker)Thread.currentThread()).setBrokerState(BrokerState.SUPERVISING_THE_RACE);
         // wait for last makeAMove() of HJ
         // change B state to STR
         // done
@@ -74,6 +74,7 @@ public class ControlCentre {
      * @return {@code true} if the next race is still not prepared to begin; otherwise {@code false}.
      */
     public synchronized boolean waitForTheNextRace(int raceNumber) {
+        ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.WAITING_FOR_A_RACE_TO_START);
         while (lastHorseJockeyHasNotArrivedOnPaddock) {
             try {
                 wait();
@@ -86,7 +87,6 @@ public class ControlCentre {
                 System.exit(15);
             }
         }
-        ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.WAITING_FOR_A_RACE_TO_START);
         // wait till Horses free us with PTP() — the last horse
         // when wait is ignored, then return true
         // done
@@ -99,6 +99,7 @@ public class ControlCentre {
      * @param raceNumber number identification of the {@link Race} which is about to start.
      */
     public synchronized void goWatchTheRace(int raceNumber) {
+        ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.WATCHING_A_RACE);
         while (brokerDidNotReportResults) {
             try {
                 wait();
@@ -111,7 +112,6 @@ public class ControlCentre {
                 System.exit(11);
             }
         }
-        ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.WATCHING_A_RACE);
         // waits for report results of the broker
         // changes state to WAR of S
         // done
@@ -140,8 +140,10 @@ public class ControlCentre {
      * {@link Paddock}.
      */
     public synchronized void summonHorsesToPaddock() {
+        ((Broker)Thread.currentThread()).setBrokerState(BrokerState.ANNOUNCING_NEXT_RACE);
         while (lastSpectatorHasNotArrivedOnPaddock) {
             try {
+                System.out.println("Cwsa");
                 wait();
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
@@ -152,7 +154,7 @@ public class ControlCentre {
                 System.exit(4);
             }
         }
-        ((Broker)Thread.currentThread()).setBrokerState(BrokerState.ANNOUNCING_NEXT_RACE);
+        lastSpectatorHasNotArrivedOnPaddock = true;
         // wait for final goCheckHorses of CC
         // change B state to ANR
         // done
@@ -164,8 +166,8 @@ public class ControlCentre {
     public synchronized void proceedToPaddock() {
         numberOfHorseJockeysOnPaddock++;
         if (numberOfHorseJockeysOnPaddock == numberOfHorses) {
-            notifyAll();
             lastHorseJockeyHasNotArrivedOnPaddock = false;
+            notifyAll();
         }
         // notify (as the last HJ) Spectators at WFARTS state
         // i.e. if I'm the last HJ, then notify
@@ -177,10 +179,8 @@ public class ControlCentre {
      * a bet, to alert the {@link Broker}.
      */
     public synchronized void goCheckHorses() {
-        if (numberOfHorseJockeysOnPaddock == numberOfHorses) {
-            lastSpectatorHasNotArrivedOnPaddock = false;
-            notifyAll();
-        }
+        lastSpectatorHasNotArrivedOnPaddock = false;
+        notifyAll();
         // notify broker on ANR that the last spectator is done
         // done
     }

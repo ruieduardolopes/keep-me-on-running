@@ -37,6 +37,7 @@ public class HorseJockey extends Thread {
         this.raceNumber = this.racingTrack.getRace().getIdentification();
         this.stable = stable;
         this.repository = repository;
+        this.bettingCentre = bettingCentre;
     }
 
     /**
@@ -50,7 +51,7 @@ public class HorseJockey extends Thread {
     public void run() {
         stable.proceedToStable();                                   // Stable's call for this pair Horse/Jockey;
         controlCentre.proceedToPaddock();                           // alarm the Horses on Stable to go to the Paddock;
-        paddock.proceedToPaddock(raceNumber);                       // verify if this Horse is the last on his go;                                                         //
+        paddock.proceedToPaddock(raceNumber);                       // verify if this Horse is the last on his go;
         paddock.proceedToStartLine();                               //
         racingTrack.proceedToStartLine();                           // Racing track's call for horses on the start line;
         while (!racingTrack.hasFinishLineBeenCrossed(identification)) {       // while this horse has not crossed the finish line

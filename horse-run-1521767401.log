@@ -1,0 +1,85 @@
+AFTERNOON AT THE RACE TRACK - Description of the internal state of the problem
+MAN/BRK           SPECTATOR/BETTER              HORSE/JOCKEY PAIR at Race RN
+  Stat  St0  Am0 St1  Am1 St2  Am2 St3  Am3 RN St0  Len0 St1  Len1 St2  Len2 St3  Len3 
+                                        Race RN Status
+ RN Dist BS0  BA0 BS1  BA1 BS2  BA2 BS3  BA3  Od0 N0 Ps0 SD0 Od1 N1 Ps1 SD1 Od2 N2 Ps2 SD2 Od3 N3 Ps3 SD3 
+    OTE WFRTS 904        0        0        0  0         0         0         0         0 
+  0  922    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 904 WFRTS 483        0        0  0         0         0         0         0 
+  0  922    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 904 WFRTS 483        0        0  0         0         0         0         0 
+  0  922    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 904 WFRTS 483        0        0  0         0         0         0         0 
+  0  922    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 904 WFRTS 483 WFRTS 151        0  0         0         0         0         0 
+  0  922    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 904 WFRTS 483 WFRTS 151        0  0         0         0         0         0 
+  0  922    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 904 WFRTS 483 WFRTS 151 WFRTS 875  0         0         0         0         0 
+  0  922    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 904 WFRTS 483 WFRTS 151 WFRTS 875  0         0         0         0         0 
+  0  922    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 904 WFRTS 483 WFRTS 151 WFRTS 875  0  ATS    2         0         0         0 
+  0  922    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 904 WFRTS 483 WFRTS 151 WFRTS 875  0  ATS    2         0         0         0 
+  0  922    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 904 WFRTS 483 WFRTS 151 WFRTS 875  0  ATS    2  ATS    1         0         0 
+  0  922    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 904 WFRTS 483 WFRTS 151 WFRTS 875  0  ATS    2  ATS    1         0         0 
+  0  922    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 904 WFRTS 483 WFRTS 151 WFRTS 875  0  ATS    2  ATS    1  ATS    1         0 
+  0  922    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 904 WFRTS 483 WFRTS 151 WFRTS 875  0  ATS    2  ATS    1  ATS    1         0 
+  0  922    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 904 WFRTS 483 WFRTS 151 WFRTS 875  0  ATS    2  ATS    1  ATS    1  ATS    1 
+  0  922    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 904 WFRTS 483 WFRTS 151 WFRTS 875  0  ATS    2  ATS    1  ATS    1  ATS    1 
+  0  922    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 904 WFRTS 483 WFRTS 151 WFRTS 875  0  ATS    2  ATS    1  ATS    1  ATS    1 
+  0  922    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR  ATH 904  ATH 483 WFRTS 151 WFRTS 875  0  ATS    2  ATS    1  ATS    1  ATS    1 
+  0  922    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR  ATH 904  ATH 483 WFRTS 151 WFRTS 875  0  ATS    2  ATS    1  ATS    1  ATS    1 
+  0  922    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR  ATH 904  ATH 483 WFRTS 151  ATH 875  0  ATS    2  ATS    1  ATS    1  ATS    1 
+  0  922    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR  ATH 904  ATH 483 WFRTS 151  ATH 875  0  ATS    2  ATS    1  ATS    1  ATS    1 
+  0  922    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR  ATH 904  ATH 483  ATH 151  ATH 875  0  ATS    2  ATS    1  ATS    1  ATS    1 
+  0  922    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 904  ATH 483  ATH 151  ATH 875  0  ATP    2  ATS    1  ATS    1  ATS    1 
+  0  922    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 904  ATH 483  ATH 151  ATH 875  0  ATP    2  ATS    1  ATS    1  ATS    1 
+  0  922    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 904  ATH 483  ATH 151  ATH 875  0 ATSL    2  ATS    1  ATS    1  ATS    1 
+  0  922    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 904  ATH 483  ATH 151  ATH 875  0 ATSL    2  ATS    1  ATS    1  ATP    1 
+  0  922    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 904  ATH 483  ATH 151  ATH 875  0 ATSL    2  ATS    1  ATP    1 ATSL    1 
+  0  922    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 904  ATH 483  ATH 151  ATH 875  0 ATSL    2  ATS    1  ATP    1 ATSL    1 
+  0  922    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 904  ATH 483  ATH 151  ATH 875  0 ATSL    2  ATP    1 ATSL    1 ATSL    1 
+  0  922    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 904  ATH 483  ATH 151  ATH 875  0 ATSL    2  ATP    1 ATSL    1 ATSL    1 
+  0  922    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 904  ATH 483  ATH 151  ATH 875  0 ATSL    2 ATSL    1 ATSL    1 ATSL    1 
+  0  922    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 904  ATH 483  ATH 151   PB 875  0 ATSL    2 ATSL    1 ATSL    1 ATSL    1 
+  0  922    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 904  ATH 483  ATH 151   WR 875  0 ATSL    2 ATSL    1 ATSL    1 ATSL    1 
+  0  922    0   0    0   0    0   0    2  54    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 904  ATH 483   PB 151   WR 875  0 ATSL    2 ATSL    1 ATSL    1 ATSL    1 
+  0  922    0   0    0   0    0   0    2  54    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 904   PB 483   WR 151   WR 875  0 ATSL    2 ATSL    1 ATSL    1 ATSL    1 
+  0  922    0   0    0   0    2  56    2  54    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 904   PB 483   WR 151   WR 875  0 ATSL    2 ATSL    1 ATSL    1 ATSL    1 
+  0  922    0   0    0   0    2  56    2  54    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   PB 904   PB 483   WR 151   WR 875  0 ATSL    2 ATSL    1 ATSL    1 ATSL    1 
+  0  922    0   0    0   0    2  56    2  54    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   PB 904   WR 483   WR 151   WR 875  0 ATSL    2 ATSL    1 ATSL    1 ATSL    1 
+  0  922    0 339    3 181    2  56    2  54    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   WR 904   WR 483   WR 151   WR 875  0 ATSL    2 ATSL    1 ATSL    1 ATSL    1 
+  0  922    0 339    3 181    2  56    2  54    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    STR   WR 904   WR 483   WR 151   WR 875  0 ATSL    2 ATSL    1 ATSL    1 ATSL    1 
+  0  922    0 339    3 181    2  56    2  54    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0

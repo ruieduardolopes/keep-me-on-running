@@ -34,7 +34,7 @@ public class Paddock {
      */
     public synchronized void proceedToPaddock(int raceNumber) {
         currentNumberOfHorses++;
-        while (currentNumberOfHorses < numberOfHorses) {
+        while (lastSpectatorHasNotArrivedOnPaddock) {
             try {
                 wait();
             } catch (InterruptedException ie) {
@@ -65,6 +65,7 @@ public class Paddock {
     public synchronized void goCheckHorses(boolean isTheLastSpectator) {
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.APPRAISING_THE_HORSES);
         if (isTheLastSpectator) {
+            lastSpectatorHasNotArrivedOnPaddock = false;
             notifyAll();
         }
         while (lastHorseDidNotProceedToStartLine) {
@@ -104,11 +105,7 @@ public class Paddock {
      */
     public synchronized boolean goCheckHorses() {
         currentNumberOfSpectators++;
-        if (currentNumberOfSpectators == numberOfSpectators) {
-            notifyAll();
-            return true;
-        }
-        return false;
+        return currentNumberOfSpectators == numberOfSpectators;
         // wake up horses at the paddock to free ATP state of HJ
         // return if this is the last spectator
         // done
@@ -137,4 +134,6 @@ public class Paddock {
     private int numberOfSpectators;
 
     private boolean lastHorseDidNotProceedToStartLine = true;
+
+    private boolean lastSpectatorHasNotArrivedOnPaddock = true;
 }

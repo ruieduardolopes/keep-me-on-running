@@ -1,0 +1,91 @@
+AFTERNOON AT THE RACE TRACK - Description of the internal state of the problem
+MAN/BRK           SPECTATOR/BETTER              HORSE/JOCKEY PAIR at Race RN
+  Stat  St0  Am0 St1  Am1 St2  Am2 St3  Am3 RN St0  Len0 St1  Len1 St2  Len2 St3  Len3 
+                                        Race RN Status
+ RN Dist BS0  BA0 BS1  BA1 BS2  BA2 BS3  BA3  Od0 N0 Ps0 SD0 Od1 N1 Ps1 SD1 Od2 N2 Ps2 SD2 Od3 N3 Ps3 SD3 
+    OTE WFRTS 495        0        0        0  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 495        0        0        0  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 495 WFRTS 350        0        0  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 495 WFRTS 350        0        0  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 495 WFRTS 350 WFRTS 245        0  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 495 WFRTS 350 WFRTS 245 WFRTS   0  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 495 WFRTS 350 WFRTS 245 WFRTS 354  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 495 WFRTS 350 WFRTS 245 WFRTS 354  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 495 WFRTS 350 WFRTS 245 WFRTS 354  0  ATS    1         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 495 WFRTS 350 WFRTS 245 WFRTS 354  0  ATS    1  ATS    0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 495 WFRTS 350 WFRTS 245 WFRTS 354  0  ATS    1  ATS    1         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 495 WFRTS 350 WFRTS 245 WFRTS 354  0  ATS    1  ATS    1  ATS    0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 495 WFRTS 350 WFRTS 245 WFRTS 354  0  ATS    1  ATS    1  ATS    1         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 495 WFRTS 350 WFRTS 245 WFRTS 354  0  ATS    1  ATS    1  ATS    1  ATS    0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 495 WFRTS 350 WFRTS 245 WFRTS 354  0  ATS    1  ATS    1  ATS    1  ATS    2 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 495 WFRTS 350 WFRTS 245 WFRTS 354  0  ATS    1  ATS    1  ATS    1  ATS    2 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR WFRTS 495 WFRTS 350 WFRTS 245 WFRTS 354  0  ATS    1  ATS    1  ATS    1  ATS    2 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR WFRTS 495 WFRTS 350 WFRTS 245  ATH 354  0  ATS    1  ATS    1  ATS    1  ATS    2 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR  ATH 495 WFRTS 350 WFRTS 245  ATH 354  0  ATS    1  ATS    1  ATS    1  ATS    2 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR  ATH 495 WFRTS 350 WFRTS 245  ATH 354  3  ATS    1  ATS    1  ATS    1  ATS    2 
+  3 1120    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR  ATH 495  ATH 350 WFRTS 245  ATH 354  3  ATS    1  ATS    1  ATS    1  ATS    2 
+  3 1120    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 495  ATH 350  ATH 245  ATH 354  3  ATS    1  ATS    1  ATS    1  ATS    2 
+  3 1120    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 495  ATH 350  ATH 245  ATH 354  3  ATS    1  ATS    1  ATS    1  ATS    2 
+  3 1120    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 495  ATH 350  ATH 245  ATH 354  3  ATP    1  ATS    1  ATS    1  ATS    2 
+  3 1120    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 495  ATH 350  ATH 245  ATH 354  3 ATSL    1  ATS    1  ATS    1  ATP    2 
+  3 1120    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 495  ATH 350  ATH 245  ATH 354  3 ATSL    1  ATS    1  ATS    1  ATP    2 
+  3 1120    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 495  ATH 350  ATH 245  ATH 354  3 ATSL    1  ATS    1  ATP    1 ATSL    2 
+  3 1120    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 495  ATH 350  ATH 245  ATH 354  3 ATSL    1  ATS    1  ATP    1 ATSL    2 
+  3 1120    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 495  ATH 350  ATH 245  ATH 354  3 ATSL    1  ATP    1 ATSL    1 ATSL    2 
+  3 1120    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 495  ATH 350  ATH 245  ATH 354  3 ATSL    1  ATP    1 ATSL    1 ATSL    2 
+  3 1120    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 495  ATH 350  ATH 245  ATH 354  3 ATSL    1 ATSL    1 ATSL    1 ATSL    2 
+  3 1120    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 495  ATH 350  ATH 245   PB 354  3 ATSL    1 ATSL    1 ATSL    1 ATSL    2 
+  3 1120    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 495  ATH 350  ATH 245   WR 354  3 ATSL    1 ATSL    1 ATSL    1 ATSL    2 
+  3 1120    0   0    0   0    0   0    1  22    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   PB 495  ATH 350  ATH 245   WR 354  3 ATSL    1 ATSL    1 ATSL    1 ATSL    2 
+  3 1120    0   0    0   0    0   0    1  22    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   WR 495  ATH 350  ATH 245   WR 354  3 ATSL    1 ATSL    1 ATSL    1 ATSL    2 
+  3 1120    1  30    0   0    0   0    1  22    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   WR 495  ATH 350   PB 245   WR 354  3 ATSL    1 ATSL    1 ATSL    1 ATSL    2 
+  3 1120    1  30    0   0    0   0    1  22    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   WR 495  ATH 350   WR 245   WR 354  3 ATSL    1 ATSL    1 ATSL    1 ATSL    2 
+  3 1120    1  30    0   0    2  91    1  22    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   WR 495   PB 350   WR 245   WR 354  3 ATSL    1 ATSL    1 ATSL    1 ATSL    2 
+  3 1120    1  30    0   0    2  91    1  22    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   WR 495   WR 350   WR 245   WR 354  3 ATSL    1 ATSL    1 ATSL    1 ATSL    2 
+  3 1120    1  30    3 131    2  91    1  22    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    STR   WR 495   WR 350   WR 245   WR 354  3    R    1 ATSL    1 ATSL    1 ATSL    2 
+  3 1120    1  30    3 131    2  91    1  22    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    STR   WR 495   WR 350   WR 245   WR 354  3    R    1 ATSL    1 ATSL    1 ATSL    2 
+  3 1120    1  30    3 131    2  91    1  22    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    STR   WR 495   WR 350   WR 245   WR 354  3    R    1    R    1 ATSL    1 ATSL    2 
+  3 1120    1  30    3 131    2  91    1  22    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    STR   WR 495   WR 350   WR 245   WR 354  3    R    1    R    1 ATSL    1    R    2 
+  3 1120    1  30    3 131    2  91    1  22    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0

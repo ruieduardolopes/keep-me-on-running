@@ -1,0 +1,75 @@
+AFTERNOON AT THE RACE TRACK - Description of the internal state of the problem
+MAN/BRK           SPECTATOR/BETTER              HORSE/JOCKEY PAIR at Race RN
+  Stat  St0  Am0 St1  Am1 St2  Am2 St3  Am3 RN St0  Len0 St1  Len1 St2  Len2 St3  Len3 
+                                        Race RN Status
+ RN Dist BS0  BA0 BS1  BA1 BS2  BA2 BS3  BA3  Od0 N0 Ps0 SD0 Od1 N1 Ps1 SD1 Od2 N2 Ps2 SD2 Od3 N3 Ps3 SD3 
+    OTE WFRTS 198        0        0        0  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 198 WFRTS 795        0        0  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 198 WFRTS 795 WFRTS  31        0  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 198 WFRTS 795 WFRTS  31 WFRTS 850  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 198 WFRTS 795 WFRTS  31 WFRTS 850  0  ATS    1         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 198 WFRTS 795 WFRTS  31 WFRTS 850  0  ATS    1         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 198 WFRTS 795 WFRTS  31 WFRTS 850  0  ATS    1  ATS    0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 198 WFRTS 795 WFRTS  31 WFRTS 850  0  ATS    1  ATS    0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 198 WFRTS 795 WFRTS  31 WFRTS 850  0  ATS    1  ATS    0  ATS    4         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 198 WFRTS 795 WFRTS  31 WFRTS 850  0  ATS    1  ATS    0  ATS    4         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 198 WFRTS 795 WFRTS  31 WFRTS 850  0  ATS    1  ATS    0  ATS    4  ATS    3 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 198 WFRTS 795 WFRTS  31 WFRTS 850  0  ATS    1  ATS    0  ATS    4  ATS    3 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 198 WFRTS 795 WFRTS  31 WFRTS 850  0  ATS    1  ATS    0  ATS    4  ATS    3 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 198 WFRTS 795 WFRTS  31 WFRTS 850  0  ATS    1  ATS    0  ATS    4  ATS    3 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 198 WFRTS 795 WFRTS  31 WFRTS 850  0  ATS    1  ATS    0  ATS    4  ATS    3 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 198 WFRTS 795 WFRTS  31  ATH 850  0  ATS    1  ATS    0  ATS    4  ATS    3 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 198 WFRTS 795 WFRTS  31  ATH 850  0  ATS    1  ATS    0  ATS    4  ATS    3 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 198 WFRTS 795 WFRTS  31  ATH 850  0  ATS    1  ATS    0  ATS    4  ATS    3 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 198 WFRTS 795  ATH  31  ATH 850  0  ATS    1  ATS    0  ATS    4  ATS    3 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 198 WFRTS 795  ATH  31  ATH 850  0  ATS    1  ATS    0  ATS    4  ATS    3 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR  ATH 198  ATH 795  ATH  31  ATH 850  0  ATS    1  ATS    0  ATS    4  ATS    3 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    ANR  ATH 198  ATH 795  ATH  31  ATH 850  0  ATS    1  ATS    0  ATS    4  ATS    3 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 198  ATH 795  ATH  31  ATH 850  0  ATP    1  ATS    0  ATS    4  ATS    3 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 198  ATH 795  ATH  31  ATH 850  0  ATP    1  ATS    0  ATS    4  ATS    3 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 198  ATH 795  ATH  31  ATH 850  0  ATP    1  ATS    0  ATS    4  ATP    3 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 198  ATH 795  ATH  31  ATH 850  0  ATP    1  ATS    0  ATP    4  ATP    3 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 198  ATH 795  ATH  31  ATH 850  0  ATP    1  ATP    0  ATP    4  ATP    3 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 198  ATH 795  ATH  31   PB 850  0  ATP    1  ATP    0  ATP    4  ATP    3 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB  ATH 198   PB 795  ATH  31   PB 850  0  ATP    1  ATP    0  ATP    4  ATP    3 
+  0    0    0   0    0   0    0   0    2 318    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   PB 198   PB 795  ATH  31   PB 850  0  ATP    1  ATP    0  ATP    4  ATP    3 
+  0    0    0   0    2 298    0   0    2 318    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   PB 198   PB 795   PB  31   PB 850  0  ATP    1  ATP    0  ATP    4  ATP    3 
+  0    0    0   0    2 298    0   0    2 318    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   PB 198   PB 795   PB  31   PB 850  0 ATSL    1  ATP    0  ATP    4  ATP    3 
+  0    0    3  12    2 298    3   7    2 318    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   PB 198   PB 795   PB  31   PB 850  0 ATSL    1 ATSL    0  ATP    4  ATP    3 
+  0    0    3  12    2 298    3   7    2 318    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   PB 198   PB 795   PB  31   PB 850  0 ATSL    1 ATSL    0 ATSL    4  ATP    3 
+  0    0    3  12    2 298    3   7    2 318    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    WFB   PB 198   PB 795   PB  31   PB 850  0 ATSL    1 ATSL    0 ATSL    4 ATSL    3 
+  0    0    3  12    2 298    3   7    2 318    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0

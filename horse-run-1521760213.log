@@ -1,0 +1,55 @@
+AFTERNOON AT THE RACE TRACK - Description of the internal state of the problem
+MAN/BRK           SPECTATOR/BETTER              HORSE/JOCKEY PAIR at Race RN
+  Stat  St0  Am0 St1  Am1 St2  Am2 St3  Am3 RN St0  Len0 St1  Len1 St2  Len2 St3  Len3 
+                                        Race RN Status
+ RN Dist BS0  BA0 BS1  BA1 BS2  BA2 BS3  BA3  Od0 N0 Ps0 SD0 Od1 N1 Ps1 SD1 Od2 N2 Ps2 SD2 Od3 N3 Ps3 SD3 
+    OTE WFRTS 976        0        0        0  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 976 WFRTS 152        0        0  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 976 WFRTS 152 WFRTS   5        0  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 976 WFRTS 152 WFRTS   5 WFRTS 580  0         0         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 976 WFRTS 152 WFRTS   5 WFRTS 580  0  ATS    3         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 976 WFRTS 152 WFRTS   5 WFRTS 580  0  ATS    3         0         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 976 WFRTS 152 WFRTS   5 WFRTS 580  0  ATS    3  ATS    4         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 976 WFRTS 152 WFRTS   5 WFRTS 580  0  ATS    3  ATS    4         0         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 976 WFRTS 152 WFRTS   5 WFRTS 580  0  ATS    3  ATS    4  ATS    2         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 976 WFRTS 152 WFRTS   5 WFRTS 580  0  ATS    3  ATS    4  ATS    2         0 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 976 WFRTS 152 WFRTS   5 WFRTS 580  0  ATS    3  ATS    4  ATS    2  ATS    4 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 976 WFRTS 152 WFRTS   5 WFRTS 580  0  ATS    3  ATS    4  ATS    2  ATS    4 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 976 WFRTS 152 WFRTS   5 WFRTS 580  0  ATS    3  ATS    4  ATS    2  ATP    4 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 976 WFRTS 152 WFRTS   5 WFRTS 580  0  ATP    3  ATS    4  ATS    2  ATP    4 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 976 WFRTS 152 WFRTS   5 WFRTS 580  0  ATP    3  ATS    4  ATP    2  ATP    4 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 976 WFRTS 152 WFRTS   5 WFRTS 580  0  ATP    3  ATP    4  ATP    2  ATP    4 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 976 WFRTS 152 WFRTS   5 WFRTS 580  0  ATP    3  ATP    4  ATP    2  ATP    4 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE WFRTS 976 WFRTS 152 WFRTS   5 WFRTS 580  0  ATP    3  ATP    4  ATP    2  ATP    4 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 976 WFRTS 152 WFRTS   5 WFRTS 580  0  ATP    3  ATP    4  ATP    2  ATP    4 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 976 WFRTS 152 WFRTS   5 WFRTS 580  0  ATP    3  ATP    4  ATP    2  ATP    4 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 976 WFRTS 152 WFRTS   5  ATH 580  0  ATP    3  ATP    4  ATP    2  ATP    4 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 976 WFRTS 152 WFRTS   5  ATH 580  0  ATP    3  ATP    4  ATP    2  ATP    4 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 976 WFRTS 152  ATH   5  ATH 580  0  ATP    3  ATP    4  ATP    2  ATP    4 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 976 WFRTS 152  ATH   5  ATH 580  0  ATP    3  ATP    4  ATP    2  ATP    4 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
+    OTE  ATH 976  ATH 152  ATH   5  ATH 580  0  ATP    3  ATP    4  ATP    2  ATP    4 
+  0    0    0   0    0   0    0   0    0   0    0  0   0   0   0  0   0   0   0  0   0   0   0  0   0   0
