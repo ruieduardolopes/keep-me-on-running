@@ -110,8 +110,9 @@ public class BettingCentre {
         // switch B state to SA
         // done*/
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.SETTLING_ACCOUNTS);
-        while (bettingQueue.size() != winners.length) {
+        while (allWinnersAreNotOnBettingCentre) {
             try {
+                System.out.println("BROKER: the number of Winners is " + winners.length);
                 wait();
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
@@ -122,8 +123,8 @@ public class BettingCentre {
                 System.exit(12);
             }
         }
-        brokerDoesNotGiveMoney = false;
-        bettingQueue = new LinkedBlockingQueue<>();
+        System.out.println("BROKER: I'll give the money to the ones.");
+        winnersMustNotReceiveTheirMoney = false;
     }
 
     /**
@@ -238,9 +239,15 @@ public class BettingCentre {
         // if last spectator, then notify/unlock Broker on SA
         // done*/
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.COLLECTING_THE_GAINS);
-        bettingQueue.add(spectator);
-        while (brokerDoesNotGiveMoney) {
+        winnersArrived++;
+        System.out.println("SP: I am the winner no " + winnersArrived);
+        if (winnersArrived == winners.length) {
+            System.out.println("SP: All winners are here: " + winnersArrived);
+            allWinnersAreNotOnBettingCentre = false;
+        }
+        while (winnersMustNotReceiveTheirMoney) {
             try {
+                System.out.println("SP: I am waiting!!");
                 wait();
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
@@ -251,7 +258,7 @@ public class BettingCentre {
                 System.exit(13);
             }
         }
-        moneyOnSafe -= amountPerWinner;
+        System.out.println("I received " + amountPerWinner);
         return amountPerWinner;
     }
 
@@ -286,6 +293,7 @@ public class BettingCentre {
      * @return {@code true} if anybody had won indeed; otherwise it will return {@code false}.
      */
     public synchronized boolean areThereAnyWinners() {
+        winnersArrived = 0;
         ArrayList<Integer> winningList = new ArrayList<>();
         for (int i = 0; i != bets.length; i++) {
             if (bets[i].getHorseJockeyId() == winner) {
@@ -374,5 +382,9 @@ public class BettingCentre {
 
     private boolean brokerHaveNotAcceptedTheBet = true;
 
-    private boolean brokerDoesNotGiveMoney = true;
+    private boolean winnersMustNotReceiveTheirMoney = true;
+
+    private boolean allWinnersAreNotOnBettingCentre = true;
+
+    private int winnersArrived = 0;
 }
