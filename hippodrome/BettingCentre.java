@@ -44,28 +44,6 @@ public class BettingCentre {
      * Accept all the bets done by the {@link Spectator}s.
      */
     public synchronized void acceptTheBets() {
-        /*((Broker)Thread.currentThread()).setBrokerState(BrokerState.WAITING_FOR_BETS);
-        brokerIsNotAcceptingBets = false;
-        notifyAll();
-        while (lastSpectatorHasNotBetted) {
-            try {
-                wait();
-            } catch (InterruptedException ie) {
-                ie.printStackTrace();
-                System.err.println("An error occurred while terminating the threads.");
-                System.err.println("The last program status was such as follows:");
-                ie.printStackTrace();
-                System.err.println("This program will now quit.");
-                System.exit(7);
-            }
-            brokerIsNotAcceptingBets = false;
-            notifyAll();
-        }
-        lastSpectatorHasNotBetted = true;
-        // wait for final placeABet() of S
-        // change B state to WFB
-        // notify S to unlock PAB state
-        // done*/
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.WAITING_FOR_BETS);
         while (bettingQueue.size() !=  numberOfSpectators) {
             try {
@@ -88,31 +66,9 @@ public class BettingCentre {
      * Give all the money to the respective betting parts - the {@link Spectator}s.
      */
     public synchronized void honourTheBets() {
-        /*((Broker)Thread.currentThread()).setBrokerState(BrokerState.SETTLING_ACCOUNTS);
-        brokerStillHasToHonorTheBets = false;
-        notifyAll();
-        while (brokerStillHasToPayToSpectators) {
-            try {
-                wait();
-            } catch (InterruptedException ie) {
-                ie.printStackTrace();
-                System.err.println("An error occurred while terminating the threads.");
-                System.err.println("The last program status was such as follows:");
-                ie.printStackTrace();
-                System.err.println("This program will now quit.");
-                System.exit(12);
-            }
-        }
-        brokerStillHasToPayToSpectators = true;
-        brokerStillHasToHonorTheBets = false;
-        notifyAll();
-        // wait for goCollectTheGains() of each winning Spect.. It blocks until the last has been paid.
-        // switch B state to SA
-        // done*/
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.SETTLING_ACCOUNTS);
         while (allWinnersAreNotOnBettingCentre) {
             try {
-                System.out.println("BROKER: the number of Winners is " + winners.length);
                 wait();
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
@@ -123,8 +79,8 @@ public class BettingCentre {
                 System.exit(12);
             }
         }
-        System.out.println("BROKER: I'll give the money to the ones.");
         winnersMustNotReceiveTheirMoney = false;
+        notifyAll();
     }
 
     /**
@@ -139,41 +95,6 @@ public class BettingCentre {
      * @return the amount of money which was accepted by the {@link Broker} to place the bet.
      */
     public synchronized int placeABet(int spectator, int bet, int horse) {
-        /*bettingQueue.add(spectator);
-        ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.PLACING_A_BET);
-        while (brokerIsNotAcceptingBets || spectator != bettingQueue.peek()) {
-            try {
-                wait();
-            } catch (InterruptedException ie) {
-                ie.printStackTrace();
-                System.err.println("An error occurred while terminating the threads.");
-                System.err.println("The last program status was such as follows:");
-                ie.printStackTrace();
-                System.err.println("This program will now quit.");
-                System.exit(8);
-            }
-        }
-        brokerIsNotAcceptingBets = true;
-        bettingQueue.remove();
-        try {
-            bets[spectator] = new Bet(horse, bet);
-            repository.setSpectatorBetAmount(spectator, bet);
-            repository.setSpectatorBetSelection(spectator, horse);
-        } catch (IndexOutOfBoundsException ioobe) {
-            throw new UnknownSpectatorException(spectator);
-        }
-        moneyOnSafe += bet;
-        numberOfBetters++;
-        if (numberOfBetters == numberOfSpectators) {
-            lastSpectatorHasNotBetted = false;
-            //numberOfBetters = 0;
-        }
-        notifyAll();
-        return bet;
-        // wait till the Broker accepts this bet with ATB() on WFB state.
-        // set state to Place+ing A Bet of S
-        // if last spectator, then free ANR of Broker
-        // done*/
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.PLACING_A_BET);
         bettingQueue.add(spectator);
         try {
@@ -208,46 +129,14 @@ public class BettingCentre {
      * @return the amount of money collected by the {@code spectator}.
      */
     public synchronized int goCollectTheGains(int spectator) {
-        /*bettingQueue.add(spectator);
-        ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.COLLECTING_THE_GAINS);
-        while (brokerStillHasToHonorTheBets || spectator != bettingQueue.peek()) {
-            try {
-                wait();
-            } catch (InterruptedException ie) {
-                ie.printStackTrace();
-                System.err.println("An error occurred while terminating the threads.");
-                System.err.println("The last program status was such as follows:");
-                ie.printStackTrace();
-                System.err.println("This program will now quit.");
-                System.exit(13);
-            }
-        }
-        brokerStillHasToHonorTheBets = true;
-        bettingQueue.remove();
-        int gains = 0;
-        for (int i = 0; i != winners.length; i++) {
-            if (spectator == winners[i]) {
-                moneyOnSafe -= amountPerWinner;
-                gains = amountPerWinner;
-            }
-        }
-        brokerStillHasToPayToSpectators = false;
-        notifyAll();
-        return gains;
-        // wait for honor the bets from the Broker
-        // change state to CTG
-        // if last spectator, then notify/unlock Broker on SA
-        // done*/
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.COLLECTING_THE_GAINS);
         winnersArrived++;
-        System.out.println("SP: I am the winner no " + winnersArrived);
         if (winnersArrived == winners.length) {
-            System.out.println("SP: All winners are here: " + winnersArrived);
             allWinnersAreNotOnBettingCentre = false;
+            notifyAll();
         }
         while (winnersMustNotReceiveTheirMoney) {
             try {
-                System.out.println("SP: I am waiting!!");
                 wait();
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
@@ -258,7 +147,6 @@ public class BettingCentre {
                 System.exit(13);
             }
         }
-        System.out.println("I received " + amountPerWinner);
         return amountPerWinner;
     }
 
