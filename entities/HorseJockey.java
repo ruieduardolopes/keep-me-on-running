@@ -13,7 +13,7 @@ import hippodrome.*;
  * @see Broker
  * @see Spectator
  * @since 0.1
- * @version 0.1
+ * @version 1.0
  */
 public class HorseJockey extends Thread {
     /**

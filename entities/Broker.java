@@ -16,14 +16,6 @@ import hippodrome.*;
  * @version 1.0
  */
 public class Broker extends Thread {
-    /**
-     * Creates a Broker.
-     *
-     * @param bettingCentre the {@link BettingCentre} instance where this {@link Broker} will perform its actions.
-     * @param controlCentre the {@link ControlCentre} instance where this {@link Broker} will perform its actions.
-     * @param stable the {@link Stable} instance where this {@link Broker} will perform its actions.
-     * @param repository the {@link GeneralInformationRepository} instance to snapshot each action performed.
-     */
 
     /**
      * Creates a Broker.
