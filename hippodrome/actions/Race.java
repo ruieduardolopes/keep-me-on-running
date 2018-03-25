@@ -6,7 +6,7 @@ package hippodrome.actions;
  * @author Hugo Fragata
  * @author Rui Lopes
  * @since 0.1
- * @version 0.1
+ * @version 1.0
  */
 public class Race {
     /**
@@ -20,7 +20,6 @@ public class Race {
         this.numberOfTracks = numberOfTracks;
         this.identification = identification;
         this.distance = distance;
-        this.positionOnTrack = new int[numberOfTracks];
     }
 
     /**
@@ -32,14 +31,34 @@ public class Race {
         return (int)(Math.random()*1000) + 500;
     }
 
+    /**
+     * Gets the identification of this race.
+     * <br>
+     * This value is usually read as the number of this race).
+     *
+     * @return an integer value representing the identification of this race.
+     */
     public int getIdentification() {
         return identification;
     }
 
+    /**
+     * Gets the number of tracks which this race has.
+     * <br>
+     * Usually, this number of tracks is equal to the number of horses attending a race, but this should not be
+     * interpreted as a global rule.
+     *
+     * @return the number of tracks of this race.
+     */
     public int getNumberOfTracks() {
         return numberOfTracks;
     }
 
+    /**
+     * Gets the distance of this track's race.
+     *
+     * @return the distance of this race.
+     */
     public int getDistance() {
         return distance;
     }
@@ -58,9 +77,4 @@ public class Race {
      * This race distance.
      */
     private int distance;
-
-    /**
-     * Current position of pairs Horse/Jockey on track.
-     */
-    private int[] positionOnTrack;
 }
