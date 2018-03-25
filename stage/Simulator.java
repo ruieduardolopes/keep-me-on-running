@@ -52,23 +52,19 @@ public class Simulator {
                 racingTrack = new RacingTrack(race, repository);
                 broker.setRacingTrack(racingTrack);
             }
-            System.out.println("BEGIN START ----");
             for (int j = 0; j != numberOfHorses; j++) {
                 horseJockeys[j] = new HorseJockey(j, generateAbility(), bettingCentre, controlCentre, paddock, racingTrack, stable, repository);
                 horseJockeys[j].start();
                 repository.newSnapshot();
             }
-            System.out.println("END START ----");
             if (i == 0) {
                 broker.start();
                 repository.newSnapshot();
             }
             try {
-                System.out.println("BEGIN JOIN ----");
                 for (int j = 0; j != numberOfHorses; j++) {
                     horseJockeys[j].join();
                 }
-                System.out.println("END JOIN ----");
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
                 System.err.println("An error occurred while terminating the threads.");
@@ -144,5 +140,10 @@ public class Simulator {
      */
     private static HorseJockey[] horseJockeys = null;
 
+    /**
+     * Flag to control if user wants to have colored information about the system's status on the {@code stdout} and
+     * simple one on file (behavior activated if {@code false}); otherwise, with {@code true}, only on file, without
+     * colors.
+     */
     private static boolean onlyOnLogFile = false;
 }
