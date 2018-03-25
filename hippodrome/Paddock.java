@@ -170,7 +170,7 @@ public class Paddock {
     /**
      * Condition variable for noticing when the last pair Horse/Jockey have (or have not) proceeded to the
      * start line.
-     *
+     * <br>
      * This is a condition variable of the {@link Paddock#goCheckHorses(boolean)} method and it is reset on the
      * {@link Paddock#proceedToPaddock(int)} method.
      */
@@ -178,7 +178,7 @@ public class Paddock {
 
     /**
      * Condition variable for noticing when the last Spectator has (or has not) arrived to the Paddock.
-     *
+     * <br>
      * This is a condition variable of the {@link Paddock#proceedToPaddock(int)} method and it is reset on the
      * {@link Paddock#goCheckHorses(boolean)} method.
      */
