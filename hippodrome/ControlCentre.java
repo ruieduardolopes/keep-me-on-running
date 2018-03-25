@@ -76,7 +76,7 @@ public class ControlCentre {
      */
     public synchronized boolean waitForTheNextRace(int raceNumber) {
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.WAITING_FOR_A_RACE_TO_START);
-        while (lastHorseJockeyHasNotArrivedOnPaddock && raceNumber != numberOfRaces) {
+        while (lastHorseJockeyHasNotArrivedOnPaddock) {
             try {
                 wait();
             } catch (InterruptedException ie) {
@@ -101,6 +101,9 @@ public class ControlCentre {
      */
     public synchronized void goWatchTheRace(int raceNumber) {
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.WATCHING_A_RACE);
+        brokerDidNotReportResults = true;
+        finishedHorses = 0;
+        thereIsStillHorsesToFinishRace = true;
         while (brokerDidNotReportResults) {
             try {
                 wait();

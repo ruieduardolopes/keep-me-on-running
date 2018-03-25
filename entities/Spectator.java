@@ -62,6 +62,7 @@ public class Spectator extends Thread {
             if (bettingCentre.haveIWon(identification)) {                               //       if the Control Centre approves that I won and if I am not tired
                 money += bettingCentre.goCollectTheGains(identification);               //          then I must go to the Betting Centre and collect my gains;
             }
+            raceNumber++;
         }
         controlCentre.relaxABit();                                                  // having all set, then I must relax;
     }
