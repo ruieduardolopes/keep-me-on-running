@@ -224,7 +224,7 @@ public class ControlCentre {
 
     /**
      * Condition variable for the last pair Horse/Jockey to finish the race.
-     *
+     * <br>
      * This is a condition variable of the {@link ControlCentre#startTheRace()} and it is reset on the
      * {@link ControlCentre#goWatchTheRace()} method.
      */
@@ -232,7 +232,7 @@ public class ControlCentre {
 
     /**
      * Condition variable for the Broker to report the results of the race.
-     *
+     * <br>
      * This is a condition variable of the {@link ControlCentre#goWatchTheRace()} and it is reset on the
      * {@link ControlCentre#goWatchTheRace()} method itself.
      */
