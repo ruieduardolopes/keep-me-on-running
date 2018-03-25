@@ -151,6 +151,10 @@ public class Spectator extends Thread {
      */
     private Paddock paddock;
 
+    /**
+     * The {@link GeneralInformationRepository} instance where this {@link Spectator}
+     * will write its current {@link SpectatorState}.
+     */
     private GeneralInformationRepository repository;
 
     private int numberOfRaces;
