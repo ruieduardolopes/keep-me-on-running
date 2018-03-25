@@ -22,7 +22,7 @@ public class Simulator {
         /* initialize shared regions */
         GeneralInformationRepository repository = new GeneralInformationRepository(numberOfHorses, numberOfSpectators, onlyOnLogFile);
         BettingCentre bettingCentre = new BettingCentre(numberOfHorses, numberOfSpectators, repository);
-        ControlCentre controlCentre = new ControlCentre(repository, numberOfSpectators, numberOfHorses, numberOfRaces);
+        ControlCentre controlCentre = new ControlCentre(repository, numberOfHorses);
         Paddock paddock = new Paddock(numberOfSpectators, numberOfHorses, repository);
         Stable stable = new Stable(repository);
         Race race = new Race(numberOfHorses, 0, Race.generateDistance());
