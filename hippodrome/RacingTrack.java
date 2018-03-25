@@ -43,6 +43,8 @@ public class RacingTrack {
     public synchronized void proceedToStartLine() throws InterruptedException {
         ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_START_LINE);
         horsesToRun.add(((HorseJockey)Thread.currentThread()).getIdentification());
+        numberOfFinishedHorses = 0;
+        repository.setHorseJockeyFinalStandPosition(((HorseJockey)Thread.currentThread()).getIdentification(), 0);
         while (brokerDidNotOrderToStartTheRace) {
             try {
                 wait();
@@ -76,6 +78,7 @@ public class RacingTrack {
         int thisHorse = horsesToRun.remove();
         currentHorsesPositions[thisHorse] += (int)(Math.random()*((HorseJockey) Thread.currentThread()).getAbility()) + 1;
         repository.setHorseJockeyPositionOnTrack(horseId, currentHorsesPositions[thisHorse]);
+        repository.setHorseJockeyNumberOfIncrementsDid(horseId, repository.getHorseJockeyNumberOfIncrementsDid(horseId)+1);
         if (currentHorsesPositions[thisHorse] >= race.getDistance()) {
             ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_FINNISH_LINE);
             hasFirstHorseCrossedTheFinishLine = true;
@@ -101,6 +104,7 @@ public class RacingTrack {
     public synchronized boolean hasFinishLineBeenCrossed(int horseJockeyId) {
         if (currentHorsesPositions[horseJockeyId] >= race.getDistance()) {
             brokerDidNotOrderToStartTheRace = true;
+            markFinalPosition(horseJockeyId);
             return true;
         }
         return false;
@@ -135,6 +139,11 @@ public class RacingTrack {
         return winner;
     }
 
+    private synchronized void markFinalPosition(int horse) {
+        numberOfFinishedHorses++;
+        repository.setHorseJockeyFinalStandPosition(horse, numberOfFinishedHorses);
+    }
+
     /**
      * A representation of a race with an identification, a distance and a number of tracks. This is made using the class
      * {@link Race}.
@@ -146,6 +155,11 @@ public class RacingTrack {
      * {@link LinkedBlockingQueue} of Java's Collections Library.
      */
     private Queue<Integer> horsesToRun = new LinkedBlockingQueue<>();
+
+    /**
+     * Internal structure correspondent to the horses which have completed the race.
+     */
+    private int numberOfFinishedHorses;
 
     /**
      * An array with all the positions of the pairs Horse/Jockeys currently on action.

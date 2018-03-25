@@ -205,13 +205,13 @@ public class GeneralInformationRepository {
         line += Color.ANSI_RED;
         line += "   ";
         for (HorseJockey horseJockey : horseJockeys) {
-            line += String.format("%3d", horseJockey.getProbabilityToWin());/* Od# */
+            line += String.format("%3d", horseJockey.getProbabilityToWin());          /* Od# */
             line += " ";
             line += String.format("%2d", horseJockey.getNumberOfIncrementsDone());    /* N# */
             line += " ";
-            line += String.format("%3d", horseJockey.getPositionOnTrack());          /* Ps# */
+            line += String.format("%3d", horseJockey.getPositionOnTrack());           /* Ps# */
             line += " ";
-            line += String.format("%4d", horseJockey.getFinalStandPosition());       /* SD# */
+            line += String.format("%4d", horseJockey.getFinalStandPosition());        /* SD# */
             line += " ";
         }
         line += Color.ANSI_RESET;
@@ -382,6 +382,14 @@ public class GeneralInformationRepository {
     public synchronized void setHorseJockeyNumberOfIncrementsDid(int horseJockeyId, int iterations) throws UnknownHorseJockeyException {
         try {
             horseJockeys[horseJockeyId].setNumberOfIncrementsDid(iterations);
+        } catch (IndexOutOfBoundsException ioobe) {
+            throw new UnknownHorseJockeyException(horseJockeyId);
+        }
+    }
+
+    public synchronized int getHorseJockeyNumberOfIncrementsDid(int horseJockeyId) throws UnknownHorseJockeyException {
+        try {
+            return horseJockeys[horseJockeyId].getNumberOfIncrementsDone();
         } catch (IndexOutOfBoundsException ioobe) {
             throw new UnknownHorseJockeyException(horseJockeyId);
         }
