@@ -78,34 +78,34 @@ public class GeneralInformationRepository {
         }
 
         /* print the title */
-        String title = Color.ANSI_BLUE_BOLD + "AFTERNOON AT THE RACE TRACK - Description of the internal state of the problem" + Color.ANSI_RESET;
+        String title = Color.ANSI_BLUE_BOLD + "               AFTERNOON AT THE RACE TRACK - Description of the internal state of the problem" + Color.ANSI_RESET;
         if (!onlyLogOnFile) {
             GenericIO.writelnString(title);
         }
         file.writelnString(cleanString(title));
 
         /* print the column headers */
-        String header1 = Color.ANSI_GREEN + "MAN/BRK" + Color.ANSI_RESET + "            " + Color.ANSI_CYAN + "SPECTATOR/BETTER" + Color.ANSI_RESET + "               " + Color.ANSI_YELLOW + "HORSE/JOCKEY PAIR at Race RN" + Color.ANSI_RESET + "\n";
-        header1 += Color.ANSI_GREEN + "  Stat  " + Color.ANSI_RESET;
+        String header1 = Color.ANSI_GREEN + " MAN/BRK" + Color.ANSI_RESET + "            " + Color.ANSI_CYAN + "SPECTATOR/BETTER" + Color.ANSI_RESET + "                                 " + Color.ANSI_YELLOW + "HORSE/JOCKEY PAIR at Race RN" + Color.ANSI_RESET + "\n";
+        header1 += Color.ANSI_GREEN + "   Stat  " + Color.ANSI_RESET;
         for (int i = 0; i != numberOfSpectators; i++) {
             header1 += Color.ANSI_CYAN;
-            header1 += "St" + i + "  Am" + i + " ";
+            header1 += "St" + i + "   Am" + i + " ";
             header1 += Color.ANSI_RESET;
         }
-        header1 += "RN ";
+        header1 += "   RN   ";
         for (int i = 0; i != numberOfHorses; i++) {
             header1 += Color.ANSI_YELLOW;
-            header1 += "St" + i + "  Len" + i + " ";
+            header1 += "St" + i + "  Len" + i + "       ";
             header1 += Color.ANSI_RESET;
         }
-        String header2 = Color.ANSI_BLUE_BOLD + "                                        Race RN Status\n" + Color.ANSI_RESET;
+        String header2 = Color.ANSI_BLUE_BOLD + "                                               Race RN Status\n" + Color.ANSI_RESET;
         header2 += " RN Dist  ";
         for (int i = 0; i != numberOfSpectators; i++) {
             header2 += Color.ANSI_PURPLE;
             header2 += "BS" + i + "  BA" + i + " ";
             header2 += Color.ANSI_RESET;
         }
-        header2 += "  ";
+        header2 += "     ";
         for (int i = 0; i != numberOfHorses; i++) {
             header2 += Color.ANSI_RED;
             header2 += "Od" + i + " N" + i + " Ps" + i + "  SD" + i + " ";
@@ -169,14 +169,14 @@ public class GeneralInformationRepository {
             line += " ";
         }
         line += Color.ANSI_RESET;
-        line += String.format("%2d", raceNumber);                               /* RN */
+        line += String.format("   %2d", raceNumber);                            /* RN */
         line += "  ";
         line += Color.ANSI_YELLOW;
         for (HorseJockey horseJockey : horseJockeys) {
             line += String.format("%5s", horseJockey.getStatus());              /* St# */
             line += " ";
             line += String.format("%4d", horseJockey.getAbility());             /* Len# */
-            line += " ";
+            line += "      ";
         }
         line += Color.ANSI_RESET;
         if (!onlyLogOnFile) {
@@ -203,7 +203,7 @@ public class GeneralInformationRepository {
         }
         line += Color.ANSI_RESET;
         line += Color.ANSI_RED;
-        line += "   ";
+        line += "      ";
         for (HorseJockey horseJockey : horseJockeys) {
             line += String.format("%3d", horseJockey.getProbabilityToWin());          /* Od# */
             line += " ";
