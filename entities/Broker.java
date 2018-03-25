@@ -53,18 +53,23 @@ public class Broker extends Thread {
      */
     @Override
     public void run() {
-        for (int raceNumber = 0; raceNumber < totalOfRaces; raceNumber++) {     // for each race on the set of races for today:
-            stable.summonHorsesToPaddock(raceNumber);                           //   call every horse of the race raceNumber on Stable to Paddock;
-            controlCentre.summonHorsesToPaddock();                              //   having all the horses being called, announce the next race;
-            bettingCentre.acceptTheBets();                                      //   go to the Betting Centre and accept the Spectators' bets;
-            racingTrack.startTheRace();                                         //   go then to the Racing Track and make the signal to start the race;
-            controlCentre.startTheRace();                                       //   prepare the Control Centre to the current race which has started;
-            controlCentre.reportResults();                                      //   as the race is finished, report its results;
-            if (bettingCentre.areThereAnyWinners()) {                           //   if there are any bet winners at the Betting Centre:
-                bettingCentre.honourTheBets();                                  //     then i should honour the bets and retrieve its money;
-            }                                                                   //
-        }                                                                       //
-        controlCentre.entertainTheGuests();                                     // as the races are over, then i should go entertain the guests.
+        try {
+            for (int raceNumber = 0; raceNumber < totalOfRaces; raceNumber++) {     // for each race on the set of races for today:
+                stable.summonHorsesToPaddock(raceNumber);                           //   call every horse of the race raceNumber on Stable to Paddock;
+                controlCentre.summonHorsesToPaddock();                              //   having all the horses being called, announce the next race;
+                bettingCentre.acceptTheBets();                                      //   go to the Betting Centre and accept the Spectators' bets;
+                racingTrack.startTheRace();                                         //   go then to the Racing Track and make the signal to start the race;
+                controlCentre.startTheRace();                                       //   prepare the Control Centre to the current race which has started;
+                controlCentre.reportResults();                                      //   as the race is finished, report its results;
+                if (bettingCentre.areThereAnyWinners()) {                           //   if there are any bet winners at the Betting Centre:
+                    bettingCentre.honourTheBets();                                  //     then i should honour the bets and retrieve its money;
+                }                                                                   //
+            }                                                                       //
+            controlCentre.entertainTheGuests();                                     // as the races are over, then i should go entertain the guests.
+        } catch (InterruptedException ie) {
+            ie.printStackTrace();
+            System.exit(4);
+        }
     }
 
     /**

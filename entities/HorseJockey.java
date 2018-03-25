@@ -60,17 +60,22 @@ public class HorseJockey extends Thread {
      */
     @Override
     public void run() {
-        stable.proceedToStable(getRaceNumber());                            // I receive a call to go to the Paddock and I'll go if I'm from this race;
-        controlCentre.proceedToPaddock();                                   // I should retrieve a signal to the Control Centre as I'm moved to the Paddock;
-        paddock.proceedToPaddock(raceNumber);                               // Then I should change my own state to At the Paddock;
-        paddock.proceedToStartLine();                                       // If every other Jockeys are at the Paddock and the Spectators saw us, then
-        racingTrack.proceedToStartLine();                                   //   we must proceed to the start line and change my state to At the Start Line;
-        while (!racingTrack.hasFinishLineBeenCrossed(identification)) {     // While the finish line is not crossed by me:
-            bettingCentre.setHorseJockeyWinner(racingTrack.getWinner());    //   I should verify if I'm about to win;
-            racingTrack.makeAMove(identification);                          //   I should make a move on the track;
-        }                                                                   //
-        controlCentre.makeAMove();                                          // As I crossed the line I must advance one step further to get off the line;
-        stable.proceedToStable();                                           // Then I should go to the Stable and rest till the next round, if that applies.
+        try {
+            stable.proceedToStable(getRaceNumber());                            // I receive a call to go to the Paddock and I'll go if I'm from this race;
+            controlCentre.proceedToPaddock();                                   // I should retrieve a signal to the Control Centre as I'm moved to the Paddock;
+            paddock.proceedToPaddock(raceNumber);                               // Then I should change my own state to At the Paddock;
+            paddock.proceedToStartLine();                                       // If every other Jockeys are at the Paddock and the Spectators saw us, then
+            racingTrack.proceedToStartLine();                                   //   we must proceed to the start line and change my state to At the Start Line;
+            while (!racingTrack.hasFinishLineBeenCrossed(identification)) {     // While the finish line is not crossed by me:
+                bettingCentre.setHorseJockeyWinner(racingTrack.getWinner());    //   I should verify if I'm about to win;
+                racingTrack.makeAMove(identification);                          //   I should make a move on the track;
+            }                                                                   //
+            controlCentre.makeAMove();                                          // As I crossed the line I must advance one step further to get off the line;
+            stable.proceedToStable();                                           // Then I should go to the Stable and rest till the next round, if that applies.
+        } catch (InterruptedException ie) {
+            ie.printStackTrace();
+            System.exit(2);
+        }
     }
 
     /**

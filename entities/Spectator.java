@@ -48,23 +48,28 @@ public class Spectator extends Thread {
      */
     @Override
     public void run() {
-        while (controlCentre.waitForTheNextRace()) {                            // While a next race is about to happen:
-            boolean isLastSpectator = paddock.goCheckHorses();                  //   the Paddock calls me to go check the horses and I retrieve if I'm the last to go;
-            if (isLastSpectator) {                                              //   if I'm the last Spectator to come:
-                controlCentre.goCheckHorses();                                  //     then the Control Centre must know, in order to advance something else;
-            }                                                                   //
-            paddock.goCheckHorses(isLastSpectator);                             //   I then must change my state to Appraising the Horses;
-            money -= bettingCentre.placeABet(identification, bet(), horse());   //   Having changed my state, then I must place my bet on the horse on my choice;
-            controlCentre.goWatchTheRace();                                     //   With the bet already placed, then I should go watch the race;
-            if (bettingCentre.haveIWon(identification)) {                       //   If the I already know that I've won the race, then:
-                money += bettingCentre.goCollectTheGains();                     //     I should collect my gains at the Betting Centre;
-            }                                                                   //
-            raceNumber++;                                                       //   Then the number of races must increase;
-            if (raceNumber == numberOfRaces) {                                  //   And if this is my last race:
-                break;                                                          //     then I should stop;
-            }                                                                   //
-        }                                                                       //
-        controlCentre.relaxABit();                                              // And relax a bit.
+        try {
+            while (controlCentre.waitForTheNextRace()) {                            // While a next race is about to happen:
+                boolean isLastSpectator = paddock.goCheckHorses();                  //   the Paddock calls me to go check the horses and I retrieve if I'm the last to go;
+                if (isLastSpectator) {                                              //   if I'm the last Spectator to come:
+                    controlCentre.goCheckHorses();                                  //     then the Control Centre must know, in order to advance something else;
+                }                                                                   //
+                paddock.goCheckHorses(isLastSpectator);                             //   I then must change my state to Appraising the Horses;
+                money -= bettingCentre.placeABet(identification, bet(), horse());   //   Having changed my state, then I must place my bet on the horse on my choice;
+                controlCentre.goWatchTheRace();                                     //   With the bet already placed, then I should go watch the race;
+                if (bettingCentre.haveIWon(identification)) {                       //   If the I already know that I've won the race, then:
+                    money += bettingCentre.goCollectTheGains();                     //     I should collect my gains at the Betting Centre;
+                }                                                                   //
+                raceNumber++;                                                       //   Then the number of races must increase;
+                if (raceNumber == numberOfRaces) {                                  //   And if this is my last race:
+                    break;                                                          //     then I should stop;
+                }                                                                   //
+            }                                                                       //
+            controlCentre.relaxABit();                                              // And relax a bit.
+        } catch (InterruptedException ie) {
+            ie.printStackTrace();
+            System.exit(3);
+        }
     }
 
     /**
