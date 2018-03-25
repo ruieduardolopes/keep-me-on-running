@@ -16,15 +16,24 @@ import hippodrome.*;
  * @version 1.0
  */
 public class HorseJockey extends Thread {
+
     /**
-     * Creates a pair Horse/Jockey with a given {@code identification} and an {@code ability} to run.
+     * Creates a pair Horse/Jockey.
+     * <br>
+     * This constructor creates a pair Horse/Jockey giving the reference of the {@link BettingCentre}, {@link ControlCentre},
+     * {@link RacingTrack}, the {@link Paddock} and {@link Stable} where is about to work on. More, the pair Horse/Jockey is also
+     * created having in mind a General Repository of Information ({@link GeneralInformationRepository}) - where all the actions
+     * must be reported and logged - and a given maximum ability {@code ability} and identification {@code identification}.
      *
      * @param identification number which identifies this pair Horse/Jockey.
-     * @param ability number with characterizes the Horse ability to run.
-     * @param controlCentre the {@link ControlCentre} instance where this pair Horse/Jockey ({@link HorseJockey}) will perform its actions.
-     * @param paddock the {@link Paddock} instance where this pair Horse/Jockey ({@link HorseJockey}) will perform its actions.
-     * @param racingTrack the {@link RacingTrack} instance where this pair Horse/Jockey ({@link HorseJockey}) will perform its actions.
-     * @param stable the {@link Stable} instance where this pair Horse/Jockey ({@link HorseJockey}) will perform its actions.
+     * @param ability number with characterizes the Horse maximum ability to run.
+     * @param bettingCentre An instance of a {@link BettingCentre} where this pair Horse/Jockey will work on.
+     * @param controlCentre An instance of a {@link ControlCentre} where this pair Horse/Jockey will work on.
+     * @param paddock An instance of a {@link Paddock} where this pair Horse/Jockey will work on.
+     * @param racingTrack An instance of a {@link RacingTrack} where this pair Horse/Jockey will work on.
+     * @param stable An instance of a {@link Stable} where this Broker pair Horse/Jockey work on.
+     * @param repository An instance of a {@link GeneralInformationRepository} in order to report all the actions and
+     *                   log each and every moment.
      */
     public HorseJockey(int identification, int ability, BettingCentre bettingCentre, ControlCentre controlCentre, Paddock paddock, RacingTrack racingTrack, Stable stable, GeneralInformationRepository repository) {
         this.identification = identification;
@@ -46,37 +55,28 @@ public class HorseJockey extends Thread {
      *
      * In a technical perspective this is reasoned by a thread definition function which
      * resumes all the specifications of a {@code HorseJockey} pair, since its displacement from the
-     * {@link hippodrome.Paddock}, to the {@link hippodrome.Stable}, passing by the {@link hippodrome.RacingTrack}.
+     * {@link hippodrome.Paddock}, to the {@link hippodrome.Stable}, passing by the {@link hippodrome.RacingTrack}
+     * and the {@link ControlCentre}.
      */
     @Override
     public void run() {
-        stable.proceedToStable(getRaceNumber());                                   // Stable's call for this pair Horse/Jockey;
-        controlCentre.proceedToPaddock();                           // alarm the Horses on Stable to go to the Paddock;
-        paddock.proceedToPaddock(raceNumber);                       // verify if this Horse is the last on his go;
-        paddock.proceedToStartLine();                               //
-        racingTrack.proceedToStartLine();                           // Racing track's call for horses on the start line;
-        while (!racingTrack.hasFinishLineBeenCrossed(identification)) {       // while this horse has not crossed the finish line
-            bettingCentre.setHorseJockeyWinner(racingTrack.getWinner());
-            racingTrack.makeAMove(identification);                //    it should make a move forward, to reach it;
-        }                                                           //
-        controlCentre.makeAMove();
-        stable.proceedToStable();                                   // finished the run, the pair must return to Stable.
-    }
-
-    /**
-     * Returns the pair Horse/Jockey state representation given by the {@link HorseJockeyState}
-     * enumeration.
-     *
-     * @return the current spectator {@link HorseJockeyState}.
-     * @see HorseJockeyState
-     */
-    public synchronized HorseJockeyState getHorseJockeyState() {
-        return state;
+        stable.proceedToStable(getRaceNumber());                            // I receive a call to go to the Paddock and I'll go if I'm from this race;
+        controlCentre.proceedToPaddock();                                   // I should retrieve a signal to the Control Centre as I'm moved to the Paddock;
+        paddock.proceedToPaddock(raceNumber);                               // Then I should change my own state to At the Paddock;
+        paddock.proceedToStartLine();                                       // If every other Jockeys are at the Paddock and the Spectators saw us, then
+        racingTrack.proceedToStartLine();                                   //   we must proceed to the start line and change my state to At the Start Line;
+        while (!racingTrack.hasFinishLineBeenCrossed(identification)) {     // While the finish line is not crossed by me:
+            bettingCentre.setHorseJockeyWinner(racingTrack.getWinner());    //   I should verify if I'm about to win;
+            racingTrack.makeAMove(identification);                          //   I should make a move on the track;
+        }                                                                   //
+        controlCentre.makeAMove();                                          // As I crossed the line I must advance one step further to get off the line;
+        stable.proceedToStable();                                           // Then I should go to the Stable and rest till the next round, if that applies.
     }
 
     /**
      * Sets the HorseJockey's state, from the possible available {@link HorseJockeyState}
-     * enumeration.
+     * enumeration. Here all the actions are reported to the General Repository of
+     * Information and a new snapshot is created.
      *
      * @param state Enumeration value represented by {@link HorseJockeyState}
      */
@@ -96,7 +96,7 @@ public class HorseJockey extends Thread {
     }
 
     /**
-     * Returns the pair Horse/Jockey ability to move forward on its track of the Racing Track.
+     * Returns the pair Horse/Jockey maximum ability to move forward on its track of the Racing Track.
      *
      * @return an integer representation of the ability.
      */
@@ -121,14 +121,6 @@ public class HorseJockey extends Thread {
      */
     public synchronized void setRaceNumber(int raceNumber) {
         this.raceNumber = raceNumber;
-    }
-
-    public synchronized void setRacingTrack(RacingTrack racingTrack) {
-        this.racingTrack = racingTrack;
-    }
-
-    public HorseJockeyState getThisState() {
-        return state;
     }
 
     /**
@@ -174,7 +166,13 @@ public class HorseJockey extends Thread {
      */
     private Stable stable;
 
-    private GeneralInformationRepository repository;
-
+    /**
+     * The {@link BettingCentre} instance where this pair Horse/Jockey ({@link HorseJockey}) will perform its actions.
+     */
     private BettingCentre bettingCentre;
+
+    /**
+     * The {@link GeneralInformationRepository} instance where all this pair Horse/Jockey's actions will be reported.
+     */
+    private GeneralInformationRepository repository;
 }
