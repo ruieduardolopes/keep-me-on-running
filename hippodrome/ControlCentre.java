@@ -239,7 +239,7 @@ public class ControlCentre {
     private boolean brokerDidNotReportResults = true;
 
     /**
-     * The {@link GeneralInformationRepository} instance where all this pair Horse/Jockey's actions will be reported.
+     * The {@link GeneralInformationRepository} instance where all this region's actions will be reported.
      */
     private GeneralInformationRepository repository; // TODO -- verify its use here.
 }
