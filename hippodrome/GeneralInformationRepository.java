@@ -18,7 +18,7 @@ import java.time.Instant;
  * @author Hugo Fragata
  * @author Rui Lopes
  * @since 0.1
- * @version 0.1
+ * @version 1.0
  */
 public class GeneralInformationRepository {
     /**
@@ -474,9 +474,20 @@ public class GeneralInformationRepository {
      */
     private TextFile file = new TextFile();
 
+    /**
+     * Number of pairs Horse/Jockey to attend the events.
+     */
     private int numberOfHorses;
 
+    /**
+     * Number of Spectators to attend the events.
+     */
     private int numberOfSpectators;
 
+    /**
+     * Flag to control if user wants to have colored information about the system's status on the {@code stdout} and
+     * simple one on file (behavior activated if {@code false}); otherwise, with {@code true}, only on file, without
+     * colors.
+     */
     private boolean onlyLogOnFile;
 }
