@@ -33,6 +33,11 @@ public class Paddock {
      * {@code false}.
      */
     public synchronized void proceedToPaddock(int raceNumber) {
+        HorseJockey horse = ((HorseJockey)Thread.currentThread());
+        if (horse.getRaceNumber() == raceNumber) {
+            horse.setHorseJockeyState(HorseJockeyState.AT_THE_PADDOCK);
+        }
+        lastHorseDidNotProceedToStartLine = true;
         currentNumberOfHorses++;
         while (lastSpectatorHasNotArrivedOnPaddock) {
             try {
@@ -47,10 +52,6 @@ public class Paddock {
             }
         }
         notifyAll();
-        HorseJockey horse = ((HorseJockey)Thread.currentThread());
-        if (horse.getRaceNumber() == raceNumber) {
-            horse.setHorseJockeyState(HorseJockeyState.AT_THE_PADDOCK);
-        }
         // wait fot goCheckHorses() from Spectators on Paddock
         // switch HJ state to ATP
         // done
@@ -80,6 +81,7 @@ public class Paddock {
                 System.exit(14);
             }
         }
+        lastSpectatorHasNotArrivedOnPaddock = true;
         // wait till ATP from Horses launches its last PTSL()
         // change S state to ATH
         // done
