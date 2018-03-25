@@ -16,9 +16,8 @@ public class ControlCentre {
     /**
      * Creates a Control Centre.
      * <br>
-     * This constructor creates a Control Centre giving a number of Spectators, a number of pairs Horse/Jockeys and a
-     * number of races for it to control. Plus, an instance of the repository is also given in order to report status
-     * changes on the course of its actions.
+     * This constructor creates a Control Centre giving a number of pairs Horse/Jockeys. Plus, an instance of the
+     * repository is also given in order to report status changes on the course of its actions.
      *
      * @param repository An instance of a {@link GeneralInformationRepository} in order to report all the actions and
      *                   log each and every moment.
