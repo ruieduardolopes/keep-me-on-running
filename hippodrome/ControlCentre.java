@@ -10,34 +10,30 @@ import hippodrome.actions.Race;
  * @author Hugo Fragata
  * @author Rui Lopes
  * @since 0.1
- * @version 0.1
+ * @version 1.0
  */
 public class ControlCentre {
-    public ControlCentre(GeneralInformationRepository repository, int numberOfSpectators, int numberOfHorses, int numberOfRaces) {
-        this.numberOfSpectators = numberOfSpectators;
+    /**
+     * Creates a Control Centre.
+     * <br>
+     * This constructor creates a Control Centre giving a number of Spectators, a number of pairs Horse/Jockeys and a
+     * number of races for it to control. Plus, an instance of the repository is also given in order to report status
+     * changes on the course of its actions.
+     *
+     * @param repository An instance of a {@link GeneralInformationRepository} in order to report all the actions and
+     *                   log each and every moment.
+     * @param numberOfHorses the number of pairs Horse/Jockeys which will compete against one another.
+     */
+    public ControlCentre(GeneralInformationRepository repository, int numberOfHorses) {
         this.numberOfHorses = numberOfHorses;
-        this.numberOfRaces = numberOfRaces;
         this.repository = repository;
     }
 
     /**
-     * Signal given by the {@link entities.Broker} to summon all the horses from the {@link Stable} to the
-     * {@link Paddock}. Such horses, representation of pairs Horse/Jockey's, must be identified by a race
-     * number identification, such as the {@link entities.Broker}'s call should only be relative to some of the
-     * pairs - the ones which will run side-by-side on the same {@link Race}, on the same {@link RacingTrack}.
-     *
-     * @param raceNumber number identification of the next {@link Race}.
+     * Changes the state of the {@link Broker} to Supervising the Race ({@code STR}) and waits till the last
+     * {@link ControlCentre#makeAMove()} is performed by a pair Horse/Jockey.
      */
-    public synchronized void summonHorsesToPaddock(int raceNumber) {
-        // SYNC - signal the horses on Stable to go to Paddock.
-    }
-
-    /**
-     * Signal given by the {@link entities.Broker} to start a {@link Race} identified by {@code raceNumber}.
-     *
-     * @param raceNumber number identification of the next {@link Race} to be started as of this instant.
-     */
-    public synchronized void startTheRace(int raceNumber) {
+    public synchronized void startTheRace() {
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.SUPERVISING_THE_RACE);
         while (thereIsStillHorsesToFinishRace) {
             try {
@@ -51,9 +47,6 @@ public class ControlCentre {
                 System.exit(10);
             }
         }
-        // wait for last makeAMove() of HJ
-        // change B state to STR
-        // done
     }
 
     /**
@@ -62,19 +55,15 @@ public class ControlCentre {
      */
     public synchronized void entertainTheGuests() {
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.PLAYING_HOST_AT_THE_BAR);
-        // non-blocking
-        // done
     }
 
     /**
-     * Wait for the next signal of the {@link entities.Broker} in order to prepare a new {@link Race}, identified
-     * by the number {@code raceNumber}.
+     * Changes the {@link Spectator}'s state to Waiting for a Race to Start ({@code WFRTS}) and waits till the last
+     * {@link ControlCentre#proceedToPaddock()} of the pair Horse/Jockey.
      *
-     * @param raceNumber number identification of the next {@link Race} to begin.
-     *
-     * @return {@code true} if the next race is still not prepared to begin; otherwise {@code false}.
+     * @return if the last pair Horse/Jockey has arrived on Paddock.
      */
-    public synchronized boolean waitForTheNextRace(int raceNumber) {
+    public synchronized boolean waitForTheNextRace() {
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.WAITING_FOR_A_RACE_TO_START);
         while (lastHorseJockeyHasNotArrivedOnPaddock) {
             try {
@@ -88,18 +77,17 @@ public class ControlCentre {
                 System.exit(15);
             }
         }
-        // wait till Horses free us with PTP() — the last horse
-        // when wait is ignored, then return true
-        // done
         return true;
     }
 
     /**
-     * Signal set out to all the {@link Spectator}s in order to watch the {@link Race} number {@code raceNumber}.
-     *
-     * @param raceNumber number identification of the {@link Race} which is about to start.
+     * Changes the state of the {@link Spectator} to Watching a Race ({@code WAR}) and waits till the
+     * {@link ControlCentre#reportResults()} of the Broker.
+     * <br>
+     * This method also resets the control variable for the last race results report, the number of horses which have
+     * finished the race and the control variable for the {@link ControlCentre#startTheRace()}.
      */
-    public synchronized void goWatchTheRace(int raceNumber) {
+    public synchronized void goWatchTheRace() {
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.WATCHING_A_RACE);
         brokerDidNotReportResults = true;
         finishedHorses = 0;
@@ -116,9 +104,6 @@ public class ControlCentre {
                 System.exit(11);
             }
         }
-        // waits for report results of the broker
-        // changes state to WAR of S
-        // done
     }
 
     /**
@@ -126,22 +111,24 @@ public class ControlCentre {
      */
     public synchronized void relaxABit() {
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.CELEBRATING);
-        // done
     }
 
     /**
-     * Publishing of the results by the {@link entities.Broker} performing its job.
+     * Signal that the race is over, having the publishing of the results by the {@link entities.Broker} performing its job.
+     * <br>
+     * Note that this method changes the value of the condition variable to the {@link ControlCentre#goWatchTheRace()}
+     * wait condition, notifying its changes.
      */
     public synchronized void reportResults() {
         brokerDidNotReportResults = false;
         notifyAll();
-        // notify S to unleash WAR
-        // done
     }
 
     /**
-     * Signal given by the {@link entities.Broker} to summon all the horses from the {@link Stable} to the
-     * {@link Paddock}.
+     * Changes the state of the Broker to Announcing Next Race ({@code ANR}) and waits till the last
+     * {@link ControlCentre#goCheckHorses()} from the last Spectator to arrive on Paddock.
+     * <br>
+     * Note that this method also resets its proper condition variable after unlocking itself.
      */
     public synchronized void summonHorsesToPaddock() {
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.ANNOUNCING_NEXT_RACE);
@@ -158,13 +145,13 @@ public class ControlCentre {
             }
         }
         lastSpectatorHasNotArrivedOnPaddock = true;
-        // wait for final goCheckHorses of CC
-        // change B state to ANR
-        // done
     }
 
     /**
-     * Signal given by the last pair Horse/Jockey which exits the {@link Stable} in direction to the {@link Paddock}.
+     * Signal given by the last pair Horse/Jockey that arrives on Paddock, notifying the {@link ControlCentre#waitForTheNextRace()}
+     * of the {@link Spectator}s.
+     * <br>
+     * Note that this method also resets the condition variable of itself after the notification.
      */
     public synchronized void proceedToPaddock() {
         numberOfHorseJockeysOnPaddock++;
@@ -173,56 +160,87 @@ public class ControlCentre {
             notifyAll();
             numberOfHorseJockeysOnPaddock = 0;
         }
-        // notify (as the last HJ) Spectators at WFARTS state
-        // i.e. if I'm the last HJ, then notify
-        // done
     }
 
     /**
-     * Signal given by the last {@link Spectator} which arrives at the {@link Paddock} to watch the horses, before placing
-     * a bet, to alert the {@link Broker}.
+     * Signal given by the last Spectator which arrives at the {@link Paddock} to appraise the horses, notifying the
+     * {@link ControlCentre#summonHorsesToPaddock()} of the {@link Broker}.
+     * <br>
+     * Note that this method also resets the condition variable used on the {@link ControlCentre#waitForTheNextRace()}.
      */
     public synchronized void goCheckHorses() {
         lastSpectatorHasNotArrivedOnPaddock = false;
         lastHorseJockeyHasNotArrivedOnPaddock = true;
         notifyAll();
-        // notify broker on ANR that the last spectator is done
-        // done
     }
 
+    /**
+     * Signal given the last horse has crossed the finish line, notifying the {@link ControlCentre#startTheRace()} in order
+     * to relief the {@link Broker} from the state Supervising the Race ({@code STR}), as the race is over.
+     */
     public synchronized void makeAMove() {
         finishedHorses++;
         if (finishedHorses == numberOfHorses) {
             thereIsStillHorsesToFinishRace = false;
             notifyAll();
         }
-        // done
     }
 
-    private int numberOfSpectators;
-
-    private int numberOfSpectatorsOnPaddock = 0;
-
-    private int numberOfHorseJockeysOnPaddock = 0;
-
+    /**
+     * The number of pairs Horse/Jockey that will be running and controlled on this region.
+     */
     private int numberOfHorses;
 
-    private int finishedHorses = 0;
-
-    private int winnerHorseJockey;
-
-    private GeneralInformationRepository repository;
+    /**
+     * The number of pairs Horse/Jockey which have arrived on Paddock.
+     * <br>
+     * This is a condition variable of {@link ControlCentre#proceedToPaddock()} and it is reset on the
+     * {@link ControlCentre#proceedToPaddock()} method itself.
+     */
+    private int numberOfHorseJockeysOnPaddock = 0;
 
     /**
-     * Condition variable to control wait for last {@link ControlCentre#goCheckHorses()}.
+     * The number of pairs Horse/Jockey which have crossed the finish line.
+     * <br>
+     * This is a condition variable of {@link ControlCentre#makeAMove()} and it is reset on the
+     * {@link ControlCentre#goWatchTheRace()} method.
+     */
+    private int finishedHorses = 0;
+
+    /**
+     * Condition variable for the last Spectator which has not arrived on the Paddock yet.
+     * <br>
+     * This is a condition variable of {@link ControlCentre#goCheckHorses()} and it is reset on the
+     * {@link ControlCentre#summonHorsesToPaddock()} method.
      */
     private boolean lastSpectatorHasNotArrivedOnPaddock = true;
 
+    /**
+     * Condition variable for the last pair Horse/Jockey which has not arrived on the Paddock yet.
+     * <br>
+     * This is a condition variable of the {@link ControlCentre#waitForTheNextRace()} and it is reset on the
+     * {@link ControlCentre#goCheckHorses()} method.
+     */
     private boolean lastHorseJockeyHasNotArrivedOnPaddock = true;
 
+    /**
+     * Condition variable for the last pair Horse/Jockey to finish the race.
+     *
+     * This is a condition variable of the {@link ControlCentre#startTheRace()} and it is reset on the
+     * {@link ControlCentre#goWatchTheRace()} method.
+     */
     private boolean thereIsStillHorsesToFinishRace = true;
 
+    /**
+     * Condition variable for the Broker to report the results of the race.
+     *
+     * This is a condition variable of the {@link ControlCentre#goWatchTheRace()} and it is reset on the
+     * {@link ControlCentre#goWatchTheRace()} method itself.
+     */
     private boolean brokerDidNotReportResults = true;
 
-    private int numberOfRaces;
+    /**
+     * The {@link GeneralInformationRepository} instance where all this pair Horse/Jockey's actions will be reported.
+     */
+    private GeneralInformationRepository repository; // TODO -- verify its use here.
 }

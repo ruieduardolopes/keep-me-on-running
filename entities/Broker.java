@@ -58,7 +58,7 @@ public class Broker extends Thread {
             controlCentre.summonHorsesToPaddock();                              //   having all the horses being called, announce the next race;
             bettingCentre.acceptTheBets();                                      //   go to the Betting Centre and accept the Spectators' bets;
             racingTrack.startTheRace();                                         //   go then to the Racing Track and make the signal to start the race;
-            controlCentre.startTheRace(raceNumber);                             //   prepare the Control Centre to the current race which has started;
+            controlCentre.startTheRace();                                       //   prepare the Control Centre to the current race which has started;
             controlCentre.reportResults();                                      //   as the race is finished, report its results;
             if (bettingCentre.areThereAnyWinners()) {                           //   if there are any bet winners at the Betting Centre:
                 bettingCentre.honourTheBets();                                  //     then i should honour the bets and retrieve its money;
