@@ -12,13 +12,16 @@ import entities.HorseJockeyState;
  * @version 1.0
  */
 public class Stable {
-    public Stable() {
-
-    }
-
     /**
      * Signal given by the {@link entities.Broker} in order to allow the pair Horse/Jockey to move
      * to this place (the {@link Stable}).
+     */
+
+    /**
+     * Changes the state of the pair Horse/Jockey to At the Stable ({@code ATS}) and waits till the current race is,
+     * in fact, the current race of the event which is about to start.
+     *
+     * @param raceNumber the race number which is about to start.
      */
     public synchronized void proceedToStable(int raceNumber) {
         while (currentRaceNumber != raceNumber) {
@@ -37,7 +40,9 @@ public class Stable {
     }
 
     /**
-     * Changes the state of current {@link HorseJockey} to move to the {@link Stable}.
+     * Changes the state of the pair Horse/Jockey to At the Stable ({@code ATS}).
+     * <br>
+     * This method is useful to finish the lifecycle of the pairs Horse/Jockey.
      */
     public synchronized void proceedToStable() {
         ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_STABLE);
