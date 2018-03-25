@@ -25,7 +25,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  * @author Hugo Fragata
  * @author Rui Lopes
  * @since 0.1
- * @version 0.2
+ * @version 1.0
  */
 public class BettingCentre {
     public BettingCentre(int numberOfHorses, int numberOfSpectators, GeneralInformationRepository repository) {
@@ -37,7 +37,6 @@ public class BettingCentre {
         this.bettingQueue = new LinkedBlockingQueue<>();
         this.repository = repository;
         this.winners = new int[numberOfSpectators];
-        this.numberOfBetters = 0;
     }
 
     /**
@@ -124,11 +123,9 @@ public class BettingCentre {
     /**
      * Let a {@code spectator} collect all his (or hers) gains after being placed a bet and a race had ended.
      *
-     * @param spectator the {@link Spectator} which had collected some money after his (or hers) bet.
-     *
-     * @return the amount of money collected by the {@code spectator}.
+     * @return the amount of money collected by the {@code spectator}, as an integer.
      */
-    public synchronized int goCollectTheGains(int spectator) {
+    public synchronized int goCollectTheGains() {
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.COLLECTING_THE_GAINS);
         winnersArrived++;
         if (winnersArrived == winners.length) {
@@ -150,9 +147,14 @@ public class BettingCentre {
         return amountPerWinner;
     }
 
+    /**
+     * Sets the local variable of {@code winner} as the horse identifier of the winning horse.
+     *
+     * @param winner winner horse identification.
+     */
     public synchronized void setHorseJockeyWinner(int winner) {
         if (winner != -1) {
-            this.winner = winner;   // HJ winner
+            this.winner = winner;
         }
     }
 
@@ -171,8 +173,6 @@ public class BettingCentre {
             }
         }
         return false;
-        // check if I won
-        // done
     }
 
     /**
@@ -198,12 +198,12 @@ public class BettingCentre {
             amountPerWinner = 0;
         }
         return winners.length != 0;
-        // done
     }
 
     /**
+     * Returns number of horses that the {@link BettingCentre} has knowledge of.
      *
-     * @return
+     * @return number of horses, as an integer.
      */
     public synchronized int getNumberOfHorses() {
         return numberOfHorses;
@@ -256,23 +256,29 @@ public class BettingCentre {
      */
     private GeneralInformationRepository repository;
 
-    private int numberOfBetters;
-
-    private boolean lastSpectatorHasNotBetted = true;
-
-    private boolean brokerIsNotAcceptingBets = true;
-
-    private boolean brokerStillHasToPayToSpectators = true;
-
-    private boolean brokerStillHasToHonorTheBets = true;
-
+    /**
+     * Internal attribute of {@code winner} as the horse identifier of the winning horse.
+     */
     private int winner;
 
+    /**
+     * Internal attribute that specifies if the brokers as accepted one bet.
+     */
     private boolean brokerHaveNotAcceptedTheBet = true;
 
+    /**
+     * Internal attribute that specifies if all winning {@link Spectator} must not receive their money.
+     */
     private boolean winnersMustNotReceiveTheirMoney = true;
 
+    /**
+     * Internal attribute that specifies if all winning {@link Spectator}
+     * have arrived on {@link BettingCentre}.
+     */
     private boolean allWinnersAreNotOnBettingCentre = true;
 
+    /**
+     * Internal attribute that specifies the number of winning {@link Spectator}
+     */
     private int winnersArrived = 0;
 }
