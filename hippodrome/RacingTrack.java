@@ -139,6 +139,11 @@ public class RacingTrack {
         return winner;
     }
 
+    /**
+     * Marks the final position of the pair Horse/Jockey identified with {@code horse}.
+     *
+     * @param horse the identification of the pair Horse/Jockey which has finished its race.
+     */
     private synchronized void markFinalPosition(int horse) {
         numberOfFinishedHorses++;
         repository.setHorseJockeyFinalStandPosition(horse, numberOfFinishedHorses);

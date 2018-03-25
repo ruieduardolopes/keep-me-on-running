@@ -19,13 +19,10 @@ public class ControlCentre {
      * This constructor creates a Control Centre giving a number of pairs Horse/Jockeys. Plus, an instance of the
      * repository is also given in order to report status changes on the course of its actions.
      *
-     * @param repository An instance of a {@link GeneralInformationRepository} in order to report all the actions and
-     *                   log each and every moment.
      * @param numberOfHorses the number of pairs Horse/Jockeys which will compete against one another.
      */
-    public ControlCentre(GeneralInformationRepository repository, int numberOfHorses) {
+    public ControlCentre(int numberOfHorses) {
         this.numberOfHorses = numberOfHorses;
-        this.repository = repository;
     }
 
     /**
@@ -230,8 +227,4 @@ public class ControlCentre {
      */
     private boolean brokerDidNotReportResults = true;
 
-    /**
-     * The {@link GeneralInformationRepository} instance where all this region's actions will be reported.
-     */
-    private GeneralInformationRepository repository; // TODO -- verify its use here.
 }

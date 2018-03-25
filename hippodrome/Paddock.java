@@ -25,13 +25,10 @@ public class Paddock {
      *
      * @param numberOfSpectators The number of Spectators which will be attending the event.
      * @param numberOfHorses The number of pairs Horse/Jockey which will be competing.
-     * @param repository An instance of a {@link GeneralInformationRepository} in order to report all the actions and
-     *                   log each and every moment.
      */
-    public Paddock(int numberOfSpectators, int numberOfHorses, GeneralInformationRepository repository) {
+    public Paddock(int numberOfSpectators, int numberOfHorses) {
         this.numberOfSpectators = numberOfSpectators;
         this.numberOfHorses = numberOfHorses;
-        this.repository = repository;
     }
 
     /**
@@ -154,9 +151,4 @@ public class Paddock {
      * {@link Paddock#goCheckHorses(boolean)} method.
      */
     private boolean lastSpectatorHasNotArrivedOnPaddock = true;
-
-    /**
-     * The {@link GeneralInformationRepository} instance where all this region's actions will be reported.
-     */
-    private GeneralInformationRepository repository; // TODO - is it needed?
 }

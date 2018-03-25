@@ -46,7 +46,6 @@ public class BettingCentre {
         this.numberOfSpectators = numberOfSpectators;
         this.bets = new Bet[numberOfSpectators];
         this.moneyOnSafe = 0;
-        this.amountPerWinner = 0;
         this.bettingQueue = new LinkedBlockingQueue<>();
         this.repository = repository;
         this.winners = new int[numberOfSpectators];
@@ -215,11 +214,6 @@ public class BettingCentre {
         for (int i = 0; i != winners.length; i++) {
             winners[i] = winningList.get(i);
         }
-        if (winners.length != 0) {
-            amountPerWinner = moneyOnSafe / winners.length;
-        } else {
-            amountPerWinner = 0;
-        }
         return winners.length != 0;
     }
 
@@ -309,12 +303,6 @@ public class BettingCentre {
      * perform the bets from the {@code Spectator}'s.
      */
     private int moneyOnSafe;
-
-    /**
-     * Internal attribute of the Betting Centre which must contain the amount of money which should be given per winner,
-     * on a bet.
-     */
-    private int amountPerWinner;
 
     /**
      * Array with the pairs Horse/Jockey odds.
