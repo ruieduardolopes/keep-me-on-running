@@ -6,6 +6,6 @@
  * @author Rui Lopes
  * @see hippodrome
  * @since 0.1
- * @version 0.1
+ * @version 1.0
  */
 package hippodrome.actions;
