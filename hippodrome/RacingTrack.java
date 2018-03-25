@@ -15,19 +15,28 @@ import java.util.concurrent.LinkedBlockingQueue;
  * @author Hugo Fragata
  * @author Rui Lopes
  * @since 0.1
- * @version 0.1
+ * @version 1.0
  */
 public class RacingTrack {
+    /**
+     * Creates a Racing Track.
+     * <br>
+     * This constructor creates a Racing Track giving a race. Plus, an instance of the
+     * repository is also given in order to report status changes on the course of its actions.
+     *
+     * @param race A race to be executed over this Racing Track.
+     * @param repository An instance of a {@link GeneralInformationRepository} in order to report all the actions and
+     *                   log each and every moment.
+     */
     public RacingTrack(Race race, GeneralInformationRepository repository) {
         this.race = race;
         this.repository = repository;
-        this.numberOfHorses = race.getNumberOfTracks();
-        this.currentHorsesPositions = new int[this.numberOfHorses];
+        this.currentHorsesPositions = new int[race.getNumberOfTracks()];
     }
 
     /**
-     * Signal given by the {@link entities.Broker} in order to call all the paradded pairs Horse/Jockey
-     * on the {@link Paddock} to the Racing Track's start line.
+     * Changes the state of the pair Horse/Jockey to At the Start Line ({@code ATSL}) and waits till the last
+     * {@link RacingTrack#startTheRace()} is performed by the Broker.
      */
     public synchronized void proceedToStartLine() {
         ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_START_LINE);
@@ -44,13 +53,13 @@ public class RacingTrack {
                 System.exit(9);
             }
         }
-        // wait for Broker to start the race with STR()
-        // change the HJ's state to ATSL
-        // done
     }
 
     /**
      * Let a pair Horse/Jockey {@code horse} make a move on the track, accordingly to its abilities to move.
+     * <br>
+     * This methods waits till the {@link RacingTrack#makeAMove(int)} of the last pair Horse/Jockey. Plus, it also
+     * notifies when the first pair Horse/Jockey has crossed the finish line.
      *
      * @param horseId the identification of the pair Horse/Jockey which wants to make a move.
      */
@@ -82,17 +91,12 @@ public class RacingTrack {
             raceIsAboutToEnd = false;
             winner = ((HorseJockey)Thread.currentThread()).getIdentification();
         }
-        // wait while this thread ID is different than the currentIndex;
-        // if this horse crossed the line, change the state to ATFL
-        // increment our position on array currentPosition and increment the index on modulo.
-        // i.e. currentIndex += (currentIndex + 1) % currentHorsesPosition.length;
-        // notify the next horse
-        // on the last make a move do this:
-        // done
     }
 
     /**
      * Verification if the pair Horse/Jockey {@code horse} has crossed the finish line.
+     * <br>
+     * This method reset the condition variable of {@link RacingTrack#proceedToStartLine()}.
      *
      * @param horseJockeyId the pair Horse/Jockey which we want to verify if had crossed the finish line.
      *
@@ -100,27 +104,37 @@ public class RacingTrack {
      */
     public synchronized boolean hasFinishLineBeenCrossed(int horseJockeyId) {
         if (currentHorsesPositions[horseJockeyId] >= race.getDistance()) {
-            // TODO - fazer reset a variáveis da racing track
-            // variável para proceed to start line
             brokerDidNotOrderToStartTheRace = true;
             return true;
         }
         return false;
-        // if displacement of this horse is equal to race distance return true; otherwise false. check array
-        // done
     }
 
+    /**
+     * Signal that the race is about to start, by the {@link entities.Broker} performing its job.
+     * <br>
+     * Note that this method changes the value of the condition variable to the {@link RacingTrack#proceedToStartLine()}
+     * wait condition, notifying its changes.
+     */
     public synchronized void startTheRace() {
         brokerDidNotOrderToStartTheRace = false;
         notifyAll();
-        // notify first horse to unlock the starting line (ATSL state)
-        // done
     }
 
+    /**
+     * Gets the current Race happening on this Racing Track.
+     *
+     * @return the Race of this Racing Track.
+     */
     public synchronized Race getRace() {
         return race;
     }
 
+    /**
+     * Gets the current winner of a race on this Racing Track.
+     *
+     * @return the current winner as the identification of a pair Horse/Jockey; otherwise {@code -1} if the race is not over yet.
+     */
     public synchronized int getWinner() {
         return winner;
     }
@@ -129,34 +143,53 @@ public class RacingTrack {
      * A representation of a race with an identification, a distance and a number of tracks. This is made using the class
      * {@link Race}.
      */
-    private Race race = null;
+    private Race race;
 
     /**
-     *
+     * A {@link Queue} representing the movement order of the pairs Horse/Jockey on field. This have an implementation of the
+     * {@link LinkedBlockingQueue} of Java's Collections Library.
      */
-    private GeneralInformationRepository repository;
-
     private Queue<Integer> horsesToRun = new LinkedBlockingQueue<>();
 
+    /**
+     * An array with all the positions of the pairs Horse/Jockeys currently on action.
+     */
     private int[] currentHorsesPositions;
 
-    private int numberOfHorses;
-
-    private int finishedHorses = 0;
-
-    private int currentIndex;
-
-    private boolean hasFirstHorseCrossedTheFinishLine = false;
-
-    private int horsesWhichCrossedTheLine = 0;
-
+    /**
+     * The current winner of this race as the identification of the pair Horse/Jockey which has crossed the finish line first.
+     * <br>
+     * Note that this winner, if the race is not finished, has its value of {@code -1}.
+     */
     private int winner = -1;
 
+    /**
+     * Condition variable for the first pair Horse/Jockey to announce that has crossed the finish line.
+     * <br>
+     * This is a condition variable of {@link RacingTrack#makeAMove(int)} and it is reset on the
+     * {@link RacingTrack#makeAMove(int)} method itself.
+     */
+    private boolean hasFirstHorseCrossedTheFinishLine = false;
+
+    /**
+     * Condition variable for the Broker to order the race to start.
+     * <br>
+     * This is a condition variable of {@link RacingTrack#proceedToStartLine()} and it is reset on the
+     * {@link RacingTrack#hasFinishLineBeenCrossed(int)} method.
+     */
     private boolean brokerDidNotOrderToStartTheRace = true;
 
-    private boolean someCondition = true;
-
+    /**
+     * Condition variable for noticing when a race is about to end.
+     * <br>
+     * This is a condition variable of {@link RacingTrack#makeAMove(int)}.
+     */
     private boolean raceIsAboutToEnd = true;
+
+    /**
+     * The {@link GeneralInformationRepository} instance where all this pair Horse/Jockey's actions will be reported.
+     */
+    private GeneralInformationRepository repository;
 }
 
 
