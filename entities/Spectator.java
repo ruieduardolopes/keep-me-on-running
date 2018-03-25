@@ -35,7 +35,6 @@ public class Spectator extends Thread {
         repository.setSpectatorStatus(identification, state);
         this.money = money;
         repository.setSpectatorAmountOfMoney(this.identification, this.money);
-        tired = false;
         this.bettingCentre = bettingCentre;
         this.controlCentre = controlCentre;
         this.paddock = paddock;
@@ -69,17 +68,6 @@ public class Spectator extends Thread {
             }
         }
         controlCentre.relaxABit();                                                  // having all set, then I must relax;
-    }
-
-    /**
-     * Returns the Spectator state representation given by the {@link SpectatorState}
-     * enumeration.
-     *
-     * @return the current spectator {@link SpectatorState}.
-     * @see SpectatorState
-     */
-    public synchronized SpectatorState getSpectatorState() {
-        return state;
     }
 
     /**
@@ -118,6 +106,11 @@ public class Spectator extends Thread {
         return (int)(money * portion[random.nextInt(portion.length)]);
     }
 
+    /**
+     * Returns a random horse for this Spectator to bet.
+     *
+     * @return a random horse identifier, as an integer.
+     */
     private int horse() {
         return (new Random()).nextInt(bettingCentre.getNumberOfHorses());
     }
@@ -139,22 +132,7 @@ public class Spectator extends Thread {
     private int money;
 
     /**
-     * Level of fatigue of this {@link Spectator}.
-     */
-    private boolean tired;
-
-    /**
-     * Amount of money prepared to be launched over a bet. TODO - probably is to remove...
-     */
-    private int bet;
-
-    /**
-     * Identification of the horse on which a bet will be made. TODO - probably is to remove...
-     */
-    private int horse;
-
-    /**
-     * The identification of the race which the Spectators want to bet and watch. TODO - probably is to remove...
+     * The identification of the race which the Spectators want to bet and watch.
      */
     private int raceNumber;
 
