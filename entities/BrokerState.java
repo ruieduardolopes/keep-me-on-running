@@ -7,7 +7,7 @@ package entities;
  * @author Rui Lopes
  * @see Broker#run()
  * @since 0.1
- * @version 0.1
+ * @version 1.0
  */
 public enum BrokerState {
     /**
@@ -30,7 +30,7 @@ public enum BrokerState {
     WAITING_FOR_BETS,
     /**
      * This is a <strong>blocking state</strong>. Here, the broker is waken up by the operation
-     * {@link hippodrome.RacingTrack#makeAMove(HorseJockey,boolean)} of the last pair Horse/Jockey ({@link HorseJockey})
+     * {@link hippodrome.RacingTrack#makeAMove(int)} of the last pair Horse/Jockey ({@link HorseJockey})
      * crossing the finishing line.
      */
     SUPERVISING_THE_RACE,
