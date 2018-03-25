@@ -9,13 +9,13 @@ import entities.HorseJockeyState;
  * @author Hugo Fragata
  * @author Rui Lopes
  * @since 0.1
- * @version 0.1
+ * @version 1.0
  */
 public class Stable {
-    public Stable(GeneralInformationRepository repository) {
-        this.repository = repository;
+    public Stable() {
+
     }
-int a;
+
     /**
      * Signal given by the {@link entities.Broker} in order to allow the pair Horse/Jockey to move
      * to this place (the {@link Stable}).
@@ -34,11 +34,11 @@ int a;
             }
         }
         ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_STABLE);
-        // wait for SHTP of the Broker
-        // switch HJ state to ATS
-        // done
     }
 
+    /**
+     * Changes the state of current {@link HorseJockey} to move to the {@link Stable}.
+     */
     public synchronized void proceedToStable() {
         ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_STABLE);
     }
@@ -53,26 +53,11 @@ int a;
     public synchronized void summonHorsesToPaddock(int raceNumber) {
         currentRaceNumber = raceNumber;
         notifyAll();
-        // notify : wake ATS of horses
-        // done
     }
 
     /**
-     * Allows the pairs Horse/Jockey to move from the {@link Stable} to the {@link Paddock}.
+     * Current race number identifier, as an integer.
      */
-    public synchronized void proceedToPaddock() {
-
-    }
-
-    /**
-     * Internal Structure for saving horses on {@code Stable}. Each index is a pair Horse/Jockey and each index content
-     * have {@code true} if horse is on {@code Stable}; otherwise {@code false}.
-     */
-    private boolean[] horses;
-
-    private GeneralInformationRepository repository;
-
     private int currentRaceNumber;
 
-    private boolean raceFinished;
 }

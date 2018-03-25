@@ -14,7 +14,7 @@ import hippodrome.actions.Race;
  * @author Hugo Fragata
  * @author Rui Lopes
  * @since 0.1
- * @version 0.1
+ * @version 1.0
  */
 public class Paddock {
     public Paddock(int numberOfSpectators, int numberOfHorses, GeneralInformationRepository repository) {
@@ -52,9 +52,6 @@ public class Paddock {
             }
         }
         notifyAll();
-        // wait fot goCheckHorses() from Spectators on Paddock
-        // switch HJ state to ATP
-        // done
     }
 
     /**
@@ -82,9 +79,6 @@ public class Paddock {
             }
         }
         lastSpectatorHasNotArrivedOnPaddock = true;
-        // wait till ATP from Horses launches its last PTSL()
-        // change S state to ATH
-        // done
     }
 
     public synchronized void proceedToStartLine() {
@@ -95,8 +89,6 @@ public class Paddock {
             currentNumberOfHorses = 0;
             notifyAll();
         }
-        // if I'm the last HJ, then wake up Spectators at ATH
-        // done
     }
 
     /**
@@ -110,34 +102,41 @@ public class Paddock {
     public synchronized boolean goCheckHorses() {
         currentNumberOfSpectators++;
         return currentNumberOfSpectators == numberOfSpectators;
-        // wake up horses at the paddock to free ATP state of HJ
-        // return if this is the last spectator
-        // done
     }
 
-    /**
-     * Internal Structure for saving horses on {@code Paddock}. Each index is a pair Horse/Jockey and each index content
-     * have {@code true} if horse is on {@code Paddock}; otherwise {@code false}.
-     */
-    private boolean[] horses;
 
     /**
-     * Internal Structure for saving spectators on {@code Paddock}. Each index is a Spectators and each index content
-     * have {@code true} if spectator is on {@code Paddock}; otherwise {@code false}.
+     * Instance of the global repository of information given by the {@code Simulation}.
      */
-    private boolean[] spectators;
-
     private GeneralInformationRepository repository;
 
+    /**
+     * Current number of {@link HorseJockey} present in the {@link Paddock}.
+     */
     private int currentNumberOfHorses;
 
+    /**
+     * Current number of {@link Spectator}s present in the {@link Paddock}.
+     */
     private int currentNumberOfSpectators;
 
+    /**
+     * Total number of {@link HorseJockey} present in the {@link Race}.
+     */
     private int numberOfHorses;
 
+    /**
+     * Total number of {@link Spectator} present in the {@link Race}.
+     */
     private int numberOfSpectators;
 
+    /**
+     * Indicates whether all the {@link HorseJockey}s have proceeded to the {@link RacingTrack}.
+     */
     private boolean lastHorseDidNotProceedToStartLine = true;
 
+    /**
+     * Indicates whether all the {@link Spectator}s have proceeded to the {@link Paddock}.
+     */
     private boolean lastSpectatorHasNotArrivedOnPaddock = true;
 }

@@ -24,7 +24,7 @@ public class Simulator {
         BettingCentre bettingCentre = new BettingCentre(numberOfHorses, numberOfSpectators, repository);
         ControlCentre controlCentre = new ControlCentre(repository, numberOfHorses);
         Paddock paddock = new Paddock(numberOfSpectators, numberOfHorses, repository);
-        Stable stable = new Stable(repository);
+        Stable stable = new Stable();
         Race race = new Race(numberOfHorses, 0, Race.generateDistance());
         RacingTrack racingTrack = new RacingTrack(race, repository);
 
