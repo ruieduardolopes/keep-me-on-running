@@ -20,8 +20,8 @@ int a;
      * Signal given by the {@link entities.Broker} in order to allow the pair Horse/Jockey to move
      * to this place (the {@link Stable}).
      */
-    public synchronized void proceedToStable() {
-        while (currentRaceNumber != ((HorseJockey)(Thread.currentThread())).getRaceNumber()) {
+    public synchronized void proceedToStable(int raceNumber) {
+        while (currentRaceNumber != raceNumber) {
             try {
                 wait();
             } catch (InterruptedException ie) {
@@ -37,6 +37,10 @@ int a;
         // wait for SHTP of the Broker
         // switch HJ state to ATS
         // done
+    }
+
+    public synchronized void proceedToStable() {
+        ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_STABLE);
     }
 
     /**
@@ -69,4 +73,6 @@ int a;
     private GeneralInformationRepository repository;
 
     private int currentRaceNumber;
+
+    private boolean raceFinished;
 }

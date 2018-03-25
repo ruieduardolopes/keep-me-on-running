@@ -50,7 +50,7 @@ public class HorseJockey extends Thread {
      */
     @Override
     public void run() {
-        stable.proceedToStable();                                   // Stable's call for this pair Horse/Jockey;
+        stable.proceedToStable(getRaceNumber());                                   // Stable's call for this pair Horse/Jockey;
         controlCentre.proceedToPaddock();                           // alarm the Horses on Stable to go to the Paddock;
         paddock.proceedToPaddock(raceNumber);                       // verify if this Horse is the last on his go;
         paddock.proceedToStartLine();                               //
