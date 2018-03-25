@@ -204,7 +204,7 @@ public class GeneralInformationRepository {
         line += Color.ANSI_RED;
         line += "   ";
         for (HorseJockey horseJockey : horseJockeys) {
-            line += String.format("%3d", 100);//(int)horseJockey.getProbabilityToWin()*100);/* Od# */
+            line += String.format("%3d", (int)horseJockey.getProbabilityToWin()*100);/* Od# */
             line += " ";
             line += String.format("%2d", horseJockey.getNumberOfIncrementsDone());    /* N# */
             line += " ";

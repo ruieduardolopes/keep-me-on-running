@@ -56,9 +56,11 @@ public class Spectator extends Thread {
                 }                                                                   //
                 paddock.goCheckHorses(isLastSpectator);                             //   I then must change my state to Appraising the Horses;
                 money -= bettingCentre.placeABet(identification, bet(), horse());   //   Having changed my state, then I must place my bet on the horse on my choice;
+                repository.setSpectatorAmountOfMoney(identification, money);        //
                 controlCentre.goWatchTheRace();                                     //   With the bet already placed, then I should go watch the race;
                 if (bettingCentre.haveIWon(identification)) {                       //   If the I already know that I've won the race, then:
                     money += bettingCentre.goCollectTheGains();                     //     I should collect my gains at the Betting Centre;
+                    repository.setSpectatorAmountOfMoney(identification, money);    //
                 }                                                                   //
                 raceNumber++;                                                       //   Then the number of races must increase;
                 if (raceNumber == numberOfRaces) {                                  //   And if this is my last race:
