@@ -18,17 +18,6 @@ import hippodrome.actions.Race;
  */
 public class Paddock {
     /**
-     * Creates a Racing Track.
-     * <br>
-     * This constructor creates a Racing Track giving a race. Plus, an instance of the
-     * repository is also given in order to report status changes on the course of its actions.
-     *
-     * @param race A race to be executed over this Racing Track.
-     * @param repository An instance of a {@link GeneralInformationRepository} in order to report all the actions and
-     *                   log each and every moment.
-     */
-
-    /**
      * Creates a Paddock.
      * <br>
      * This constructor creates a Paddock giving a number of pairs Horse/Jockey and a number of Spectators. Plus,
@@ -52,8 +41,10 @@ public class Paddock {
      * This method also resets the condition variable of the {@link Paddock#goCheckHorses(boolean)} method.
      *
      * @param raceNumber number identification of the race which is about to begin.
+     *
+     * @throws InterruptedException if the wait() is interrupted.
      */
-    public synchronized void proceedToPaddock(int raceNumber) {
+    public synchronized void proceedToPaddock(int raceNumber) throws InterruptedException {
         HorseJockey horse = ((HorseJockey)Thread.currentThread());
         if (horse.getRaceNumber() == raceNumber) {
             horse.setHorseJockeyState(HorseJockeyState.AT_THE_PADDOCK);
@@ -65,22 +56,11 @@ public class Paddock {
                 wait();
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
-                System.err.println("An error occurred while terminating the threads.");
-                System.err.println("The last program status was such as follows:");
-                ie.printStackTrace();
-                System.err.println("This program will now quit.");
-                System.exit(6);
+                throw new InterruptedException("The proceedToPaddock() has been interrupted on its wait().");
             }
         }
         notifyAll();
     }
-
-    /**
-     * Signal that the last {@link entities.Spectator} has reached the {@link Paddock}.
-     *
-     * @param isTheLastSpectator {@code boolean} variable which identifies when the last {@link entities.Spectator}
-     *                           has reached the premises.
-     */
 
     /**
      * Changes the Spectator's state to Appraising the Horses ({@code ATH}) and waits till the last
@@ -89,8 +69,10 @@ public class Paddock {
      *
      * @param isTheLastSpectator identification if the last {@link entities.Spectator}
      *                           has reached the premises - if {@code true}; otherwise {@code false}.
+     *
+     * @throws InterruptedException if the wait() is interrupted.
      */
-    public synchronized void goCheckHorses(boolean isTheLastSpectator) {
+    public synchronized void goCheckHorses(boolean isTheLastSpectator) throws InterruptedException {
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.APPRAISING_THE_HORSES);
         if (isTheLastSpectator) {
             lastSpectatorHasNotArrivedOnPaddock = false;
@@ -101,11 +83,7 @@ public class Paddock {
                 wait();
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
-                System.err.println("An error occurred while terminating the threads.");
-                System.err.println("The last program status was such as follows:");
-                ie.printStackTrace();
-                System.err.println("This program will now quit.");
-                System.exit(14);
+                throw new InterruptedException("The goCheckHorses() has been interrupted on its wait().");
             }
         }
         lastSpectatorHasNotArrivedOnPaddock = true;
@@ -159,13 +137,6 @@ public class Paddock {
      * Total number of {@link Spectator} attending the events.
      */
     private int numberOfSpectators;
-
-
-    /**
-     * Condition variable for noticing when a race is about to end.
-     * <br>
-     * This is a condition variable of {@link RacingTrack#makeAMove(int)}.
-     */
 
     /**
      * Condition variable for noticing when the last pair Horse/Jockey have (or have not) proceeded to the

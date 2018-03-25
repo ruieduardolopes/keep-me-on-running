@@ -56,19 +56,17 @@ public class BettingCentre {
      * {@link BettingCentre#placeABet(int, int, int)} is done by a Spectator.
      * <br>
      * This method also notifies the Spectators when the bets are accepted.
+     *
+     * @throws InterruptedException if the wait() is interrupted.
      */
-    public synchronized void acceptTheBets() {
+    public synchronized void acceptTheBets() throws InterruptedException {
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.WAITING_FOR_BETS);
         while (bettingQueue.size() !=  numberOfSpectators) {
             try {
                 wait();
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
-                System.err.println("An error occurred while terminating the threads.");
-                System.err.println("The last program status was such as follows:");
-                ie.printStackTrace();
-                System.err.println("This program will now quit.");
-                System.exit(7);
+                throw new InterruptedException("The acceptTheBets() has been interrupted on its wait().");
             }
         }
         brokerHaveNotAcceptedTheBet = false;
@@ -81,19 +79,17 @@ public class BettingCentre {
      * {@link BettingCentre#goCollectTheGains()} is done by a Spectator.
      * <br>
      * This method also notifies the Spectators when the Broker is about to give their money.
+     *
+     * @throws InterruptedException if the wait() is interrupted.
      */
-    public synchronized void honourTheBets() {
+    public synchronized void honourTheBets() throws InterruptedException {
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.SETTLING_ACCOUNTS);
         while (allWinnersAreNotOnBettingCentre) {
             try {
                 wait();
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
-                System.err.println("An error occurred while terminating the threads.");
-                System.err.println("The last program status was such as follows:");
-                ie.printStackTrace();
-                System.err.println("This program will now quit.");
-                System.exit(12);
+                throw new InterruptedException("The honourTheBets() has been interrupted on its wait().");
             }
         }
         winnersMustNotReceiveTheirMoney = false;
@@ -113,9 +109,11 @@ public class BettingCentre {
      * @param bet an amount of money represented as an integer, which the {@code spectator} wants to bet.
      * @param horse the identification of the pair Horse/Jockey in which the {@code spectator} wants to bet.
      *
+     * @throws InterruptedException if the wait() is interrupted.
+     *
      * @return the amount of money which was accepted by the {@link Broker} to place the bet.
      */
-    public synchronized int placeABet(int spectator, int bet, int horse) {
+    public synchronized int placeABet(int spectator, int bet, int horse) throws InterruptedException {
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.PLACING_A_BET);
         bettingQueue.add(spectator);
         try {
@@ -132,11 +130,7 @@ public class BettingCentre {
                 wait();
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
-                System.err.println("An error occurred while terminating the threads.");
-                System.err.println("The last program status was such as follows:");
-                ie.printStackTrace();
-                System.err.println("This program will now quit.");
-                System.exit(8);
+                throw new InterruptedException("The placeABet() has been interrupted on its wait().");
             }
         }
         return bet;
@@ -149,9 +143,11 @@ public class BettingCentre {
      * After the Broker alerted that its honouring the bets, each Spectator must then execute this method in order
      * to collect its gains.
      *
+     * @throws InterruptedException if the wait() is interrupted.
+     *
      * @return the amount of money collected by the {@code spectator}, as an integer.
      */
-    public synchronized int goCollectTheGains() {
+    public synchronized int goCollectTheGains() throws InterruptedException {
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.COLLECTING_THE_GAINS);
         winnersArrived++;
         if (winnersArrived == winners.length) {
@@ -163,11 +159,7 @@ public class BettingCentre {
                 wait();
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
-                System.err.println("An error occurred while terminating the threads.");
-                System.err.println("The last program status was such as follows:");
-                ie.printStackTrace();
-                System.err.println("This program will now quit.");
-                System.exit(13);
+                throw new InterruptedException("The goCollectTheGains() has been interrupted on its wait().");
             }
         }
         return amountPerWinner;

@@ -22,18 +22,16 @@ public class Stable {
      * in fact, the current race of the event which is about to start.
      *
      * @param raceNumber the race number which is about to start.
+     *
+     * @throws InterruptedException if the wait() is interrupted.
      */
-    public synchronized void proceedToStable(int raceNumber) {
+    public synchronized void proceedToStable(int raceNumber) throws InterruptedException {
         while (currentRaceNumber != raceNumber) {
             try {
                 wait();
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
-                System.err.println("An error occurred while terminating the threads.");
-                System.err.println("The last program status was such as follows:");
-                ie.printStackTrace();
-                System.err.println("This program will now quit.");
-                System.exit(5);
+                throw new InterruptedException("The proceedToStable() has been interrupted on its wait().");
             }
         }
         ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_STABLE);

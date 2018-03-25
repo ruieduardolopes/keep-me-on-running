@@ -37,8 +37,10 @@ public class RacingTrack {
     /**
      * Changes the state of the pair Horse/Jockey to At the Start Line ({@code ATSL}) and waits till the last
      * {@link RacingTrack#startTheRace()} is performed by the Broker.
+     *
+     * @throws InterruptedException if the wait() is interrupted.
      */
-    public synchronized void proceedToStartLine() {
+    public synchronized void proceedToStartLine() throws InterruptedException {
         ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_START_LINE);
         horsesToRun.add(((HorseJockey)Thread.currentThread()).getIdentification());
         while (brokerDidNotOrderToStartTheRace) {
@@ -46,11 +48,7 @@ public class RacingTrack {
                 wait();
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
-                System.err.println("An error occurred while terminating the threads.");
-                System.err.println("The last program status was such as follows:");
-                ie.printStackTrace();
-                System.err.println("This program will now quit.");
-                System.exit(9);
+                throw new InterruptedException("The proceedToStartLine() has been interrupted on its wait().");
             }
         }
     }
@@ -62,18 +60,16 @@ public class RacingTrack {
      * notifies when the first pair Horse/Jockey has crossed the finish line.
      *
      * @param horseId the identification of the pair Horse/Jockey which wants to make a move.
+     *
+     * @throws InterruptedException if the wait() is interrupted.
      */
-    public synchronized void makeAMove(int horseId) {
+    public synchronized void makeAMove(int horseId) throws InterruptedException {
         while (horsesToRun.peek() != horseId) {
             try {
                 wait();
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
-                System.err.println("An error occurred while terminating the threads.");
-                System.err.println("The last program status was such as follows:");
-                ie.printStackTrace();
-                System.err.println("This program will now quit.");
-                System.exit(16);
+                throw new InterruptedException("The makeAMove() has been interrupted on its wait().");
             }
         }
         ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.RUNNING);

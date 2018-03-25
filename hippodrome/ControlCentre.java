@@ -31,19 +31,17 @@ public class ControlCentre {
     /**
      * Changes the state of the {@link Broker} to Supervising the Race ({@code STR}) and waits till the last
      * {@link ControlCentre#makeAMove()} is performed by a pair Horse/Jockey.
+     *
+     * @throws InterruptedException if the wait() is interrupted.
      */
-    public synchronized void startTheRace() {
+    public synchronized void startTheRace() throws InterruptedException {
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.SUPERVISING_THE_RACE);
         while (thereIsStillHorsesToFinishRace) {
             try {
                 wait();
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
-                System.err.println("An error occurred while terminating the threads.");
-                System.err.println("The last program status was such as follows:");
-                ie.printStackTrace();
-                System.err.println("This program will now quit.");
-                System.exit(10);
+                throw new InterruptedException("The startTheRace() has been interrupted on its wait().");
             }
         }
     }
@@ -60,20 +58,18 @@ public class ControlCentre {
      * Changes the {@link Spectator}'s state to Waiting for a Race to Start ({@code WFRTS}) and waits till the last
      * {@link ControlCentre#proceedToPaddock()} of the pair Horse/Jockey.
      *
+     * @throws InterruptedException if the wait() is interrupted.
+     *
      * @return if the last pair Horse/Jockey has arrived on Paddock.
      */
-    public synchronized boolean waitForTheNextRace() {
+    public synchronized boolean waitForTheNextRace() throws InterruptedException {
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.WAITING_FOR_A_RACE_TO_START);
         while (lastHorseJockeyHasNotArrivedOnPaddock) {
             try {
                 wait();
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
-                System.err.println("An error occurred while terminating the threads.");
-                System.err.println("The last program status was such as follows:");
-                ie.printStackTrace();
-                System.err.println("This program will now quit.");
-                System.exit(15);
+                throw new InterruptedException("The waitForTheNextRace() has been interrupted on its wait().");
             }
         }
         return true;
@@ -85,8 +81,10 @@ public class ControlCentre {
      * <br>
      * This method also resets the control variable for the last race results report, the number of horses which have
      * finished the race and the control variable for the {@link ControlCentre#startTheRace()}.
+     *
+     * @throws InterruptedException if the wait() is interrupted.
      */
-    public synchronized void goWatchTheRace() {
+    public synchronized void goWatchTheRace() throws InterruptedException {
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.WATCHING_A_RACE);
         brokerDidNotReportResults = true;
         finishedHorses = 0;
@@ -96,11 +94,7 @@ public class ControlCentre {
                 wait();
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
-                System.err.println("An error occurred while terminating the threads.");
-                System.err.println("The last program status was such as follows:");
-                ie.printStackTrace();
-                System.err.println("This program will now quit.");
-                System.exit(11);
+                throw new InterruptedException("The goWatchTheRace() has been interrupted on its wait().");
             }
         }
     }
@@ -128,19 +122,17 @@ public class ControlCentre {
      * {@link ControlCentre#goCheckHorses()} from the last Spectator to arrive on Paddock.
      * <br>
      * Note that this method also resets its proper condition variable after unlocking itself.
+     *
+     * @throws InterruptedException if the wait() is interrupted.
      */
-    public synchronized void summonHorsesToPaddock() {
+    public synchronized void summonHorsesToPaddock() throws InterruptedException {
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.ANNOUNCING_NEXT_RACE);
         while (lastSpectatorHasNotArrivedOnPaddock) {
             try {
                 wait();
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
-                System.err.println("An error occurred while terminating the threads.");
-                System.err.println("The last program status was such as follows:");
-                ie.printStackTrace();
-                System.err.println("This program will now quit.");
-                System.exit(4);
+                throw new InterruptedException("The summonHorsesToPaddock() has been interrupted on its wait().");
             }
         }
         lastSpectatorHasNotArrivedOnPaddock = true;
