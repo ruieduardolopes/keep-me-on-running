@@ -13,7 +13,7 @@ import hippodrome.*;
  * @see Spectator
  * @see HorseJockey
  * @since 0.1
- * @version 0.1
+ * @version 1.0
  */
 public class Broker extends Thread {
     /**
@@ -23,6 +23,23 @@ public class Broker extends Thread {
      * @param controlCentre the {@link ControlCentre} instance where this {@link Broker} will perform its actions.
      * @param stable the {@link Stable} instance where this {@link Broker} will perform its actions.
      * @param repository the {@link GeneralInformationRepository} instance to snapshot each action performed.
+     */
+
+    /**
+     * Creates a Broker.
+     * <br>
+     * This constructor creates a Broker giving the reference of the {@link BettingCentre}, {@link ControlCentre},
+     * {@link RacingTrack} and {@link Stable} where is about to work on. More, the Broker is also created having in mind
+     * a General Repository of Information ({@link GeneralInformationRepository}) - where all the actions must be reported
+     * and logged - and a given number of races ({@code numberOfRaces}).
+     *
+     * @param numberOfRaces The number of races in which this Broker will work on.
+     * @param bettingCentre An instance of a {@link BettingCentre} where this Broker will work on.
+     * @param controlCentre An instance of a {@link ControlCentre} where this Broker will work on.
+     * @param racingTrack An instance of a {@link RacingTrack} where this Broker will work on.
+     * @param stable An instance of a {@link Stable} where this Broker will work on.
+     * @param repository An instance of a {@link GeneralInformationRepository} in order to report all the actions and
+     *                   log each and every moment.
      */
     public Broker(int numberOfRaces, BettingCentre bettingCentre, ControlCentre controlCentre, RacingTrack racingTrack, Stable stable, GeneralInformationRepository repository) {
         this.bettingCentre = bettingCentre;
@@ -39,38 +56,29 @@ public class Broker extends Thread {
      *
      * In a technical perspective this is reasoned by a thread definition function which
      * resumes all the specifications of a {@code Broker}, since its displacement from the
-     * {@link hippodrome.BettingCentre}, to the {@link hippodrome.ControlCentre}.
+     * {@link hippodrome.BettingCentre}, to the {@link hippodrome.ControlCentre},
+     * passing by the {@link hippodrome.Stable} and the {@link hippodrome.RacingTrack}.
      */
     @Override
     public void run() {
-        for (int raceNumber = 0; raceNumber < totalOfRaces; raceNumber++) { // for each race planned on the agenda
-            stable.summonHorsesToPaddock(raceNumber);                       //    a call must be done to Stable, asking Horses to go to Paddock
-            controlCentre.summonHorsesToPaddock();                          //    after which the Broker can proceed;
-            bettingCentre.acceptTheBets();                                  // the Broker must accept all the bets on the Betting Center;
-            racingTrack.startTheRace();
-            controlCentre.startTheRace(raceNumber);                         // then alerting everybody that the race starts (on the Control Centre);
-            controlCentre.reportResults();
-            if (bettingCentre.areThereAnyWinners()) {
-                bettingCentre.honourTheBets();
-            }
-        }                                                                   //
-        controlCentre.entertainTheGuests();                                 // Having the races concluded, the Broker should entertain the guests.
-    }
-
-    /**
-     * Returns the Broker state representation given by the {@link BrokerState}
-     * enumeration.
-     *
-     * @return the current broker {@link BrokerState}.
-     * @see BrokerState
-     */
-    public synchronized BrokerState getBrokerState() {
-        return state;
+        for (int raceNumber = 0; raceNumber < totalOfRaces; raceNumber++) {     // for each race on the set of races for today:
+            stable.summonHorsesToPaddock(raceNumber);                           //   call every horse of the race raceNumber on Stable to Paddock;
+            controlCentre.summonHorsesToPaddock();                              //   having all the horses being called, announce the next race;
+            bettingCentre.acceptTheBets();                                      //   go to the Betting Centre and accept the Spectators' bets;
+            racingTrack.startTheRace();                                         //   go then to the Racing Track and make the signal to start the race;
+            controlCentre.startTheRace(raceNumber);                             //   prepare the Control Centre to the current race which has started;
+            controlCentre.reportResults();                                      //   as the race is finished, report its results;
+            if (bettingCentre.areThereAnyWinners()) {                           //   if there are any bet winners at the Betting Centre:
+                bettingCentre.honourTheBets();                                  //     then i should honour the bets and retrieve its money;
+            }                                                                   //
+        }                                                                       //
+        controlCentre.entertainTheGuests();                                     // as the races are over, then i should go entertain the guests.
     }
 
     /**
      * Sets the Broker's state, from the possible available {@link BrokerState}
-     * enumeration.
+     * enumeration. Here all the actions are reported to the General Repository of
+     * Information and a new snapshot is created.
      *
      * @param state Enumeration value represented by {@link BrokerState}
      */
@@ -78,6 +86,15 @@ public class Broker extends Thread {
         this.state = state;
         repository.setBrokerStatus(state);
         repository.newSnapshot();
+    }
+
+    /**
+     * Sets the Broker's current Racing Track's instance {@link RacingTrack}.
+     *
+     * @param racingTrack the new instance of a {@link RacingTrack}.
+     */
+    public synchronized void setRacingTrack(RacingTrack racingTrack) {
+        this.racingTrack = racingTrack;
     }
 
     /**
@@ -101,10 +118,9 @@ public class Broker extends Thread {
      */
     private ControlCentre controlCentre;
 
-    public synchronized void setRacingTrack(RacingTrack racingTrack) {
-        this.racingTrack = racingTrack;
-    }
-
+    /**
+     * The {@link RacingTrack} instance where this {@link Broker} will perform its actions.
+     */
     private RacingTrack racingTrack;
 
     /**
@@ -112,5 +128,8 @@ public class Broker extends Thread {
      */
     private Stable stable;
 
+    /**
+     * The {@link GeneralInformationRepository} instance where all the {@link Broker}'s actions will be reported.
+     */
     private GeneralInformationRepository repository;
 }
