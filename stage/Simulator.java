@@ -122,7 +122,7 @@ public class Simulator {
     /**
      * Number of races happening at the same event.
      */
-    private static int numberOfRaces = 4;
+    private static int numberOfRaces = 5;
 
     /**
      * Number of spectators appearing on the hippodrome.
