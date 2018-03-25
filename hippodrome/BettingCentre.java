@@ -28,6 +28,18 @@ import java.util.concurrent.LinkedBlockingQueue;
  * @version 1.0
  */
 public class BettingCentre {
+
+    /**
+     * Creates a Betting Centre.
+     * <br>
+     * This constructor creates a Betting Centre giving a number of pairs Horse/Jockeys, a number of Spectators. Plus,
+     * an instance of the repository is also given in order to report status changes on the course of its actions.
+     *
+     * @param numberOfHorses the number of pairs Horse/Jockeys which will compete against one another.
+     * @param numberOfSpectators the number of Spectators which will attend the events.
+     * @param repository an instance of a {@link GeneralInformationRepository} in order to report all the actions and
+     *                   log each and every moment.
+     */
     public BettingCentre(int numberOfHorses, int numberOfSpectators, GeneralInformationRepository repository) {
         this.numberOfHorses = numberOfHorses;
         this.numberOfSpectators = numberOfSpectators;
@@ -40,7 +52,10 @@ public class BettingCentre {
     }
 
     /**
-     * Accept all the bets done by the {@link Spectator}s.
+     * Changes the state of the Broker to Waiting for Bets ({@code WFB}) and waits till the last
+     * {@link BettingCentre#placeABet(int, int, int)} is done by a Spectator.
+     * <br>
+     * This method also notifies the Spectators when the bets are accepted.
      */
     public synchronized void acceptTheBets() {
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.WAITING_FOR_BETS);
@@ -62,7 +77,10 @@ public class BettingCentre {
     }
 
     /**
-     * Give all the money to the respective betting parts - the {@link Spectator}s.
+     * Changes the state of the Broker to Settling Accounts ({@code SA}) and waits till the last
+     * {@link BettingCentre#goCollectTheGains()} is done by a Spectator.
+     * <br>
+     * This method also notifies the Spectators when the Broker is about to give their money.
      */
     public synchronized void honourTheBets() {
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.SETTLING_ACCOUNTS);
@@ -83,9 +101,13 @@ public class BettingCentre {
     }
 
     /**
-     * Let a {@link Spectator} place a {@code bet} onto the {@link BettingCentre}.
+     * Changes the Spectator's state to Placing a Bet ({@code PAB}) and lets a {@link Spectator} place a {@code bet}
+     * onto the {@link BettingCentre}.
+     * <br>
      * This {@code bet}, made by a specific {@code spectator} is done respecting a proper
      * {@code horse}, which represents a pair Horse/Jockey.
+     * <br>
+     * After all the Spectators have placed their bets, the Broker will then accept them.
      *
      * @param spectator an identification of a {@link Spectator} which represents a better.
      * @param bet an amount of money represented as an integer, which the {@code spectator} wants to bet.
@@ -121,7 +143,11 @@ public class BettingCentre {
     }
 
     /**
-     * Let a {@code spectator} collect all his (or hers) gains after being placed a bet and a race had ended.
+     * Changes the Spectator's state to Collecting the Gains ({@code CTG}) and lets a {@code spectator} collect all
+     * his (or hers) gains after being placed a bet and a race had ended.
+     * <br>
+     * After the Broker alerted that its honouring the bets, each Spectator must then execute this method in order
+     * to collect its gains.
      *
      * @return the amount of money collected by the {@code spectator}, as an integer.
      */
@@ -252,33 +278,41 @@ public class BettingCentre {
     private int amountPerWinner;
 
     /**
-     * Instance of the global repository of information given by the {@code Simulation}.
-     */
-    private GeneralInformationRepository repository;
-
-    /**
      * Internal attribute of {@code winner} as the horse identifier of the winning horse.
      */
     private int winner;
 
     /**
-     * Internal attribute that specifies if the brokers as accepted one bet.
+     * Condition variable for noticing when Broker have not accepted the bets yet.
+     * <br>
+     * This is a condition variable of the {@link BettingCentre#placeABet(int, int, int)} method.
      */
     private boolean brokerHaveNotAcceptedTheBet = true;
 
     /**
-     * Internal attribute that specifies if all winning {@link Spectator} must not receive their money.
+     * Condition variable for noticing when Spectators must receive their money or not, if they have won the bet.
+     * <br>
+     * This is a condition variable of the {@link BettingCentre#goCollectTheGains()} method.
      */
     private boolean winnersMustNotReceiveTheirMoney = true;
 
     /**
-     * Internal attribute that specifies if all winning {@link Spectator}
-     * have arrived on {@link BettingCentre}.
+     * Condition variable for noticing when Spectators (winner ones) are at the Betting Centre or not.
+     * <br>
+     * This is a condition variable of the {@link BettingCentre#honourTheBets()} method.
      */
     private boolean allWinnersAreNotOnBettingCentre = true;
 
     /**
-     * Internal attribute that specifies the number of winning {@link Spectator}
+     * Condition variable for noticing the number of winning Spectators who arrived at this Betting Centre.
+     * <br>
+     * This is a condition variable of the {@link BettingCentre#goCollectTheGains()} and it is reset on the
+     * {@link BettingCentre#areThereAnyWinners()} method.
      */
     private int winnersArrived = 0;
+
+    /**
+     * The {@link GeneralInformationRepository} instance where all this region's actions will be reported.
+     */
+    private GeneralInformationRepository repository;
 }
