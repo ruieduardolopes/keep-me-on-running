@@ -8,7 +8,7 @@ import entities.HorseJockeyState;
  * @author Hugo Fragata
  * @author Rui Lopes
  * @see Spectator
- * @version 0.1
+ * @version 1.0
  * @since 0.1
  */
 public class HorseJockey {
