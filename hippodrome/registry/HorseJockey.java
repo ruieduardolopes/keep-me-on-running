@@ -35,7 +35,7 @@ public class HorseJockey {
      *
      * @return the probability (from 0.0 to 1.0 - {@code double}) of this pair Horse/Jockey ({@link HorseJockey}) win.
      */
-    public double getProbabilityToWin() {
+    public int getProbabilityToWin() {
         return probabilityToWin;
     }
 
@@ -94,7 +94,7 @@ public class HorseJockey {
      *
      * @param probabilityToWin the new probability to win of this pair Horse/Jockey ({@link HorseJockey}).
      */
-    public void setProbabilityToWin(double probabilityToWin) {
+    public void setProbabilityToWin(int probabilityToWin) {
         this.probabilityToWin = probabilityToWin;
     }
 
@@ -138,7 +138,7 @@ public class HorseJockey {
     /**
      * Current probability to win of this pair Horse/Jockey.
      */
-    private double probabilityToWin;
+    private int probabilityToWin;
 
     /**
      * Current number of iterations (increments) did in order to reach the current position on track.

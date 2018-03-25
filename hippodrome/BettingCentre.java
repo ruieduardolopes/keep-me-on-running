@@ -2,6 +2,7 @@ package hippodrome;
 
 import entities.*;
 import hippodrome.actions.Bet;
+import hippodrome.registry.UnknownHorseJockeyException;
 import hippodrome.registry.UnknownSpectatorException;
 
 /**
@@ -49,6 +50,8 @@ public class BettingCentre {
         this.bettingQueue = new LinkedBlockingQueue<>();
         this.repository = repository;
         this.winners = new int[numberOfSpectators];
+        this.horsesOdds = new int[numberOfHorses];
+        this.horsesAbilities = new int[numberOfHorses];
     }
 
     /**
@@ -83,6 +86,7 @@ public class BettingCentre {
      * @throws InterruptedException if the wait() is interrupted.
      */
     public synchronized void honourTheBets() throws InterruptedException {
+        evaluateOdds();
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.SETTLING_ACCOUNTS);
         while (allWinnersAreNotOnBettingCentre) {
             try {
@@ -148,7 +152,8 @@ public class BettingCentre {
      * @return the amount of money collected by the {@code spectator}, as an integer.
      */
     public synchronized int goCollectTheGains() throws InterruptedException {
-        ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.COLLECTING_THE_GAINS);
+        Spectator spectator = ((Spectator)Thread.currentThread());
+        spectator.setSpectatorState(SpectatorState.COLLECTING_THE_GAINS);
         winnersArrived++;
         if (winnersArrived == winners.length) {
             allWinnersAreNotOnBettingCentre = false;
@@ -162,7 +167,7 @@ public class BettingCentre {
                 throw new InterruptedException("The goCollectTheGains() has been interrupted on its wait().");
             }
         }
-        return amountPerWinner;
+        return bets[spectator.getIdentification()].getAmount()*horsesOdds[bets[spectator.getIdentification()].getHorseJockeyId()];
     }
 
     /**
@@ -228,18 +233,60 @@ public class BettingCentre {
     }
 
     /**
+     * Sets the ability of a pair Horse/Jockey on a internal structure in order to evaluate its odds later.
+     *
+     * @param horse the identification of the pair Horse/Jockey.
+     * @param ability the ability of the pair Horse/Jockey identified with {@code horse}.
+     *
+     * @throws UnknownHorseJockeyException if the pair Horse/Jockey {@code horse} does not exists.
+     */
+    public synchronized void setAbility(int horse, int ability) throws UnknownHorseJockeyException {
+       try {
+           horsesAbilities[horse] = ability;
+       } catch (IndexOutOfBoundsException ioobe) {
+           ioobe.printStackTrace();
+           throw new UnknownHorseJockeyException(horse);
+       }
+    }
+
+    /**
+     * Evaluates the odds of all the pair Horse/Jockey.
+     */
+    private synchronized void evaluateOdds() {
+        for (int i = 0; i != horsesOdds.length; i++) {
+            horsesOdds[i] = sumOf(horsesAbilities) / horsesAbilities[i];
+            repository.setHorseJockeyProbabilityToWin(i, horsesOdds[i]);
+        }
+    }
+
+    /**
+     * Retrives the sum of all elements of an array {@code array}.
+     *
+     * @param array the array with the elements to sum.
+     *
+     * @return the value of the sum of all elements of the array {@code array}.
+     */
+    private synchronized int sumOf(int[] array) {
+        int sum = 0;
+        for (int i = 0; i != array.length; i++) {
+            sum += array[i];
+        }
+        return sum;
+    }
+
+    /**
      * The waiting queue to contact the {@link Broker} on its tasks. This could be used while waiting to a {@link Spectator}
      * place a bet, or while wainting to a {@link Spectator} go collect his (or hers) gains. This structure is granted by a
      * {@link LinkedBlockingQueue} Java class, which performs a blocking queue under the logic of a linked list.
      */
-    private Queue<Integer> bettingQueue = null;
+    private Queue<Integer> bettingQueue;
 
     /**
      * Internal structure of bets. This is an array of bets (issued by an entity called {@link Bet}). Here, each index
      * is related to a specific {@link Spectator} with its identification number. This is applicable since we consider
      * that the {@code Spectators} have sequential numbers.
      */
-    private Bet[] bets = null;
+    private Bet[] bets;
 
     /**
      * Array of {@code Spectator}'s identification numbers to whom the betting money should go. Its length represents the
@@ -268,6 +315,16 @@ public class BettingCentre {
      * on a bet.
      */
     private int amountPerWinner;
+
+    /**
+     * Array with the pairs Horse/Jockey odds.
+     */
+    private int[] horsesOdds;
+
+    /**
+     * Array with the pairs Horse/Jockey abilities
+     */
+    private int[] horsesAbilities;
 
     /**
      * Internal attribute of {@code winner} as the horse identifier of the winning horse.

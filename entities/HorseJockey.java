@@ -47,7 +47,6 @@ public class HorseJockey extends Thread {
         this.stable = stable;
         this.repository = repository;
         this.bettingCentre = bettingCentre;
-        repository.setHorseJockeyProbabilityToWin(identification, 0); // TODO - adjust the probability
     }
 
     /**
@@ -61,6 +60,7 @@ public class HorseJockey extends Thread {
     @Override
     public void run() {
         try {
+            bettingCentre.setAbility(identification, ability);                  // Set my ability on the Betting Centre;
             stable.proceedToStable(getRaceNumber());                            // I receive a call to go to the Paddock and I'll go if I'm from this race;
             controlCentre.proceedToPaddock();                                   // I should retrieve a signal to the Control Centre as I'm moved to the Paddock;
             paddock.proceedToPaddock(raceNumber);                               // Then I should change my own state to At the Paddock;

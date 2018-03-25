@@ -204,7 +204,7 @@ public class GeneralInformationRepository {
         line += Color.ANSI_RED;
         line += "   ";
         for (HorseJockey horseJockey : horseJockeys) {
-            line += String.format("%3d", (int)horseJockey.getProbabilityToWin()*100);/* Od# */
+            line += String.format("%3d", horseJockey.getProbabilityToWin());/* Od# */
             line += " ";
             line += String.format("%2d", horseJockey.getNumberOfIncrementsDone());    /* N# */
             line += " ";
@@ -361,7 +361,7 @@ public class GeneralInformationRepository {
      * @throws UnknownHorseJockeyException if a {@link HorseJockey} is non-existent and is indexed over our
      * {@code horseJockeys} array.
      */
-    public synchronized void setHorseJockeyProbabilityToWin(int horseJockeyId, double probability) throws UnknownHorseJockeyException {
+    public synchronized void setHorseJockeyProbabilityToWin(int horseJockeyId, int probability) throws UnknownHorseJockeyException {
         try {
             horseJockeys[horseJockeyId].setProbabilityToWin(probability);
         } catch (IndexOutOfBoundsException ioobe) {
