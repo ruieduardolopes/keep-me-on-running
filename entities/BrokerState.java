@@ -36,7 +36,7 @@ public enum BrokerState {
     SUPERVISING_THE_RACE,
     /**
      * This is a <strong>blocking state</strong> with transition. Here, the broker is waken up by the
-     * operation {@link hippodrome.BettingCentre#goCollectTheGains(int)} of each winning {@link Spectator}
+     * operation {@link hippodrome.BettingCentre#goCollectTheGains()} of each winning {@link Spectator}
      * and <strong>blocks again</strong> after honouring the bet.
      *
      * The transition only occurs when all spectators have been paid.

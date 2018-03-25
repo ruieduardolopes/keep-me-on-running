@@ -28,6 +28,7 @@ public class GeneralInformationRepository {
      *
      * @param numberOfHorses number of pairs Horse/Jockey to run on track.
      * @param numberOfSpectators number of Spectators to attend on track.
+     * @param onlyLogonFile flag for deactivate the debug on {@code stdout}.
      */
     public GeneralInformationRepository(int numberOfHorses, int numberOfSpectators, boolean onlyLogonFile) {
         this.onlyLogOnFile = onlyLogonFile;

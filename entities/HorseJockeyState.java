@@ -26,8 +26,8 @@ public enum HorseJockeyState {
     AT_THE_PADDOCK,
     /**
      * This is a <strong>blocking state</strong>. Here, the pair Horse/Jockey is waken up by the
-     * operation {@link ControlCentre#startTheRace(int)} of the {@link Broker} (the first) or by the
-     * operation {@link hippodrome.RacingTrack#makeAMove(HorseJockey,boolean)} of another pair Horse/Jockey.
+     * operation {@link ControlCentre#startTheRace()} of the {@link Broker} (the first) or by the
+     * operation {@link hippodrome.RacingTrack#makeAMove(int)} of another pair Horse/Jockey.
      */
     AT_THE_START_LINE,
     /**
