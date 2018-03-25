@@ -30,7 +30,7 @@ public class Spectator extends Thread {
      * @param controlCentre the {@link ControlCentre} instance where this {@link Spectator} will perform its actions.
      * @param paddock the {@link Paddock} instance where this {@link Spectator} will perform its actions.
      */
-    public Spectator(int identification, int money, BettingCentre bettingCentre, ControlCentre controlCentre, Paddock paddock, GeneralInformationRepository repository) {
+    public Spectator(int identification, int money, int numberOfRaces, BettingCentre bettingCentre, ControlCentre controlCentre, Paddock paddock, GeneralInformationRepository repository) {
         this.identification = identification;
         repository.setSpectatorStatus(identification, state);
         this.money = money;
@@ -40,6 +40,7 @@ public class Spectator extends Thread {
         this.controlCentre = controlCentre;
         this.paddock = paddock;
         this.repository = repository;
+        this.numberOfRaces = numberOfRaces;
     }
 
     /**
@@ -63,6 +64,9 @@ public class Spectator extends Thread {
                 money += bettingCentre.goCollectTheGains(identification);               //          then I must go to the Betting Centre and collect my gains;
             }
             raceNumber++;
+            if (raceNumber == numberOfRaces) {
+                break;
+            }
         }
         controlCentre.relaxABit();                                                  // having all set, then I must relax;
     }
@@ -170,4 +174,6 @@ public class Spectator extends Thread {
     private Paddock paddock;
 
     private GeneralInformationRepository repository;
+
+    private int numberOfRaces;
 }

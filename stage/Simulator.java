@@ -38,7 +38,7 @@ public class Simulator {
 
         /* initialize broker thread */
         for (int i = 0; i != numberOfSpectators; i++) {
-            spectators[i] = new Spectator(i, generateMoney(), bettingCentre, controlCentre, paddock, repository);
+            spectators[i] = new Spectator(i, generateMoney(), numberOfRaces, bettingCentre, controlCentre, paddock, repository);
             spectators[i].start();
             repository.newSnapshot();
         }
