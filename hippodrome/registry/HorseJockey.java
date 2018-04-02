@@ -33,7 +33,7 @@ public class HorseJockey {
     /**
      * Get the current probability to win of this pair Horse/Jockey ({@link HorseJockey}).
      *
-     * @return the probability (from 0.0 to 1.0 - {@code double}) of this pair Horse/Jockey ({@link HorseJockey}) win.
+     * @return the probability of this pair Horse/Jockey ({@link HorseJockey}) win.
      */
     public int getProbabilityToWin() {
         return probabilityToWin;
@@ -128,31 +128,31 @@ public class HorseJockey {
     /**
      * Current status of this pair Horse/Jockey ({@link HorseJockey}).
      */
-    private String status = "";
+    private String status = "---";
 
     /**
      * Current ability of this pair Horse/Jockey ({@link HorseJockey}).
      */
-    private int ability;
+    private int ability = 0;
 
     /**
      * Current probability to win of this pair Horse/Jockey.
      */
-    private int probabilityToWin;
+    private int probabilityToWin = 0;
 
     /**
      * Current number of iterations (increments) did in order to reach the current position on track.
      */
-    private int numberOfIncrementsDid;
+    private int numberOfIncrementsDid = 0;
 
     /**
      * Current position on track of this pair Horse/Jockey.
      */
-    private int positionOnTrack;
+    private int positionOnTrack = 0;
 
     /**
      * Current race position, applicable when the race is over. When the race is still happening,
      * then its value should be 0 (zero).
      */
-    private int finalStandPosition;
+    private int finalStandPosition = 0;
 }

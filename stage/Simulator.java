@@ -40,7 +40,6 @@ public class Simulator {
         for (int i = 0; i != numberOfSpectators; i++) {
             spectators[i] = new Spectator(i, generateMoney(), numberOfRaces, bettingCentre, controlCentre, paddock, repository);
             spectators[i].start();
-            repository.newSnapshot();
         }
 
         /* initialize races */
@@ -55,11 +54,9 @@ public class Simulator {
             for (int j = 0; j != numberOfHorses; j++) {
                 horseJockeys[j] = new HorseJockey(j, generateAbility(), bettingCentre, controlCentre, paddock, racingTrack, stable, repository);
                 horseJockeys[j].start();
-                repository.newSnapshot();
             }
             if (i == 0) {
                 broker.start();
-                repository.newSnapshot();
             }
             try {
                 for (int j = 0; j != numberOfHorses; j++) {
@@ -73,6 +70,7 @@ public class Simulator {
                 System.err.println("This program will now quit.");
                 System.exit(2);
             }
+            repository.raceIsOver();
         }
         try {
             broker.join();

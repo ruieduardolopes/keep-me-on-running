@@ -47,6 +47,7 @@ public class HorseJockey extends Thread {
         this.stable = stable;
         this.repository = repository;
         this.bettingCentre = bettingCentre;
+        repository.newSnapshot();
     }
 
     /**
@@ -67,7 +68,6 @@ public class HorseJockey extends Thread {
             paddock.proceedToStartLine();                                       // If every other Jockeys are at the Paddock and the Spectators saw us, then
             racingTrack.proceedToStartLine();                                   //   we must proceed to the start line and change my state to At the Start Line;
             while (!racingTrack.hasFinishLineBeenCrossed(identification)) {     // While the finish line is not crossed by me:
-                bettingCentre.setHorseJockeyWinner(racingTrack.getWinner());    //   I should verify if I'm about to win;
                 racingTrack.makeAMove(identification);                          //   I should make a move on the track;
             }                                                                   //
             controlCentre.makeAMove();                                          // As I crossed the line I must advance one step further to get off the line;

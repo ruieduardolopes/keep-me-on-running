@@ -28,7 +28,7 @@ public class Race {
      * @return the distance of a race, from 500 to 1500
      */
     public static int generateDistance() {
-        return (int)(Math.random()*1000) + 500;
+        return (int)(Math.random() * (100 - 50)) + 50; // TODO - constant values
     }
 
     /**

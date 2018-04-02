@@ -62,6 +62,8 @@ public class BettingCentre {
      * @throws InterruptedException if the wait() is interrupted.
      */
     public synchronized void acceptTheBets() throws InterruptedException {
+        evaluateOdds();
+        allWinnersAreNotOnBettingCentre = true;
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.WAITING_FOR_BETS);
         while (bettingQueue.size() !=  numberOfSpectators) {
             try {
@@ -85,7 +87,6 @@ public class BettingCentre {
      * @throws InterruptedException if the wait() is interrupted.
      */
     public synchronized void honourTheBets() throws InterruptedException {
-        evaluateOdds();
         ((Broker)Thread.currentThread()).setBrokerState(BrokerState.SETTLING_ACCOUNTS);
         while (allWinnersAreNotOnBettingCentre) {
             try {
@@ -170,17 +171,6 @@ public class BettingCentre {
     }
 
     /**
-     * Sets the local variable of {@code winner} as the horse identifier of the winning horse.
-     *
-     * @param winner winner horse identification.
-     */
-    public synchronized void setHorseJockeyWinner(int winner) {
-        if (winner != -1) {
-            this.winner = winner;
-        }
-    }
-
-    /**
      * Verification if a given Spectator identified with {@code spectatorId} has won his (or hers) bet.
      *
      * @param spectatorId identification of {@link Spectator} who has placed a bet earlier and wants to verify if it did
@@ -202,7 +192,7 @@ public class BettingCentre {
      *
      * @return {@code true} if anybody had won indeed; otherwise it will return {@code false}.
      */
-    public synchronized boolean areThereAnyWinners() {
+    public synchronized boolean areThereAnyWinners(int winner) {
         winnersArrived = 0;
         ArrayList<Integer> winningList = new ArrayList<>();
         for (int i = 0; i != bets.length; i++) {
@@ -315,11 +305,6 @@ public class BettingCentre {
     private int[] horsesAbilities;
 
     /**
-     * Internal attribute of {@code winner} as the horse identifier of the winning horse.
-     */
-    private int winner;
-
-    /**
      * Condition variable for noticing when Broker have not accepted the bets yet.
      * <br>
      * This is a condition variable of the {@link BettingCentre#placeABet(int, int, int)} method.
@@ -344,7 +329,7 @@ public class BettingCentre {
      * Condition variable for noticing the number of winning Spectators who arrived at this Betting Centre.
      * <br>
      * This is a condition variable of the {@link BettingCentre#goCollectTheGains()} and it is reset on the
-     * {@link BettingCentre#areThereAnyWinners()} method.
+     * {@link BettingCentre#areThereAnyWinners(int)} method.
      */
     private int winnersArrived = 0;
 

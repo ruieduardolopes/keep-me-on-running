@@ -35,8 +35,10 @@ public class GeneralInformationRepository {
         this.numberOfHorses = numberOfHorses;
         this.numberOfSpectators = numberOfSpectators;
         this.spectators = new Spectator[this.numberOfSpectators];
+        this.temporarySpectators = new Spectator[this.numberOfSpectators];
         for (int i = 0; i != spectators.length; i++) {
             spectators[i] = new Spectator();
+            temporarySpectators[i] = new Spectator();
         }
         this.horseJockeys = new HorseJockey[this.numberOfHorses];
         for (int i = 0; i != horseJockeys.length; i++) {
@@ -44,7 +46,7 @@ public class GeneralInformationRepository {
         }
         giveFileAName();
         try {
-            printHeaders();
+            printClassicHeaders();
         } catch (InaccessibleFileException ife) {
             System.err.println("The General Repository of Information could not be run...");
             System.err.println("The exception says: " + ife.getMessage());
@@ -123,6 +125,33 @@ public class GeneralInformationRepository {
     }
 
     /**
+     * Print the headers on a file as the teacher has asked.
+     *
+     * @throws InaccessibleFileException if the file does not grant any permission for the current user to be written on.
+     * The same behavior could occur if the directory where this file resides cannot be written by the current user.
+     */
+    private synchronized void printClassicHeaders() throws InaccessibleFileException {
+        boolean actionSucceeded = file.openForWriting(null, filename);
+        if (!actionSucceeded) {
+            throw new InaccessibleFileException("The requested file \"" + filename + "\" is currently unaccessible or this user does not have permissions to write on this directory.");
+        }
+        String title = "         AFTERNOON AT THE RACE TRACK - Description of the internal state of the problem";
+        if (!onlyLogOnFile) {
+            GenericIO.writelnString(title);
+        }
+        file.writelnString(cleanString(title));
+        String header1 = "MAN/BRK           SPECTATOR/BETTER              HORSE/JOCKEY PAIR at Race RN\n";
+        header1 += "  Stat  St0  Am0 St1  Am1 St2  Am2 St3  Am3 RN St0 Len0 St1 Len1 St2 Len2 St3 Len3\n";
+        header1 += "                                        Race RN Status\n";
+        header1 += " RN Dist BS0  BA0 BS1  BA1 BS2  BA2 BS3  BA3  Od0 N0 Ps0 SD0 Od1 N1 Ps1 Sd1 Od2 N2 Ps2 Sd2 Od3 N3 Ps3 St3\n";
+        if (!onlyLogOnFile) {
+            GenericIO.writelnString(header1);
+        }
+        file.writelnString(cleanString(header1));
+        file.close();
+    }
+
+    /**
      * Adds a new snapshot of the race to log it.
      */
     public synchronized void newSnapshot() {
@@ -130,8 +159,17 @@ public class GeneralInformationRepository {
         if (!actionSucceeded) {
             throw new InaccessibleFileException("The requested file \"" + filename + "\" is currently unaccessible or this user does not have permissions to write on this directory.");
         }
-        printEntitiesLine();
-        printRaceLine();
+        String line = "";
+        line += printClassicEntitiesLine();
+        line += "\n";
+        line += printClassicRaceLine();
+        if (!(line).equals(lastSnapshotLine)) {
+            if (!onlyLogOnFile) {
+                GenericIO.writelnString(line);
+            }
+            file.writelnString(cleanString(line));
+        }
+        lastSnapshotLine = line;
         file.close();
     }
 
@@ -155,7 +193,7 @@ public class GeneralInformationRepository {
     /**
      * Makes a snapshot of the entities at a given time.
      */
-    private synchronized void printEntitiesLine() {
+    private synchronized String printEntitiesLine() {
         String line = " ";
         line += Color.ANSI_GREEN;
         line += String.format("%6s", brokerStatus);                             /* Stat */
@@ -165,7 +203,11 @@ public class GeneralInformationRepository {
         for (Spectator spectator : spectators) {
             line += String.format("%5s", spectator.getStatus());                /* St# */
             line += " ";
-            line += String.format("%3d", spectator.getAmountOfMoney());         /* Am# */
+            if (spectator.getAmountOfMoney() == 0) {
+                line += "---";
+            } else {
+                line += String.format("%3d", spectator.getAmountOfMoney());         /* Am# */
+            }
             line += " ";
         }
         line += Color.ANSI_RESET;
@@ -175,50 +217,197 @@ public class GeneralInformationRepository {
         for (HorseJockey horseJockey : horseJockeys) {
             line += String.format("%5s", horseJockey.getStatus());              /* St# */
             line += " ";
-            line += String.format("%4d", horseJockey.getAbility());             /* Len# */
+            if (horseJockey.getAbility() == 0) {
+                line += "----";
+            } else {
+                line += String.format("%4d", horseJockey.getAbility());             /* Len# */
+            }
             line += "      ";
         }
         line += Color.ANSI_RESET;
-        if (!onlyLogOnFile) {
-            GenericIO.writelnString(line);
+        return line;
+    }
+
+    /**
+     * Makes a snapshot of the entities at a given time. This method prints the messages as the teacher asked.
+     */
+    private synchronized String printClassicEntitiesLine() {
+        String line = "  ";
+        switch (brokerStatus) {
+            case "OTE" : line += "OpTE"; break;
+            case "ANR" : line += "AnNR"; break;
+            case "WFB" : line += "WaFB"; break;
+            case "STR" : line += "SuTR"; break;
+            case "SA"  : line += "SetA"; break;
+            case "PHATB": line += "PHAB"; break;
+            default : line += "----"; break;
         }
-        file.writelnString(cleanString(line));
+        line += "  ";
+        for (Spectator spectator : spectators) {
+            switch (spectator.getStatus()) {
+                case "WFRTS" : line += "WRS"; break;
+                case "ATH"   : line += "ATH"; break;
+                case "PB"    : line += "PAB"; break;
+                case "WR"    : line += "WAR"; break;
+                case "CTG"   : line += "CTG"; break;
+                case "C"     : line += "CEL"; break;
+                default      : line += "---"; break;
+            }
+            line += " ";
+            if (spectator.getAmountOfMoney() == 0) {
+                line += "----";
+            } else {
+                line += String.format("%4d", spectator.getAmountOfMoney());         /* Am# */
+            }
+            line += " ";
+        }
+        line += " ";
+        line += String.format("%1d", raceNumber);                               /* RN */
+        line += " ";
+        for (HorseJockey horseJockey : horseJockeys) {
+            switch (horseJockey.getStatus()) {
+                case "ATS"  : line += "ATS"; break;
+                case "ATP"  : line += "ATP"; break;
+                case "ATSL" : line += "ASL"; break;
+                case "R"    : line += "RUN"; break;
+                case "ATFL" : line += "AFL"; break;
+                default     : line += "---"; break;
+            }
+            line += "  ";
+            if (horseJockey.getAbility() == 0) {
+                line += "--";
+            } else {
+                line += String.format("%2d", horseJockey.getAbility());             /* Len# */
+            }
+            line += "  ";
+        }
+        return line;
     }
 
     /**
      * Makes a snapshot of the race at a given time.
      */
-    private synchronized void printRaceLine() {
+    private synchronized String printRaceLine() {
         String line = " ";
         line += String.format("%2d", raceNumber);                                    /* RN */
         line += " ";
         line += String.format("%4d", currentRaceDistance);                           /* Dist */
         line += " ";
         line += Color.ANSI_PURPLE;
-        for (Spectator spectator : spectators) {
-            line += String.format("%4d", spectator.getBetSelection()+1);             /* BS# */
+        for (int i = 0; i != spectators.length; i++) {
+            if (spectators[i].getBetSelection() == -1) {
+                if (spectators[i].getStatus().matches("CTG|WR")) {
+                    line += String.format("%4d", temporarySpectators[i].getBetSelection() + 1);
+                } else {
+                    line += "----";
+                }
+            } else {
+                line += String.format("%4d", spectators[i].getBetSelection() + 1);             /* BS# */
+            }
             line += " ";
-            line += String.format("%3d", spectator.getBetAmount());                  /* BA# */
+            if (spectators[i].getBetAmount() == 0) {
+                if (spectators[i].getStatus().matches("CTG|WR")) {
+                    line += String.format("%4d", temporarySpectators[i].getBetAmount());
+                } else {
+                    line += "---";
+                }
+            } else {
+                line += String.format("%3d", spectators[i].getBetAmount());                  /* BA# */
+            }
             line += " ";
         }
         line += Color.ANSI_RESET;
         line += Color.ANSI_RED;
         line += "      ";
         for (HorseJockey horseJockey : horseJockeys) {
-            line += String.format("%3d", horseJockey.getProbabilityToWin());          /* Od# */
+            if (horseJockey.getProbabilityToWin() == 0) {
+                line += "---";
+            } else {
+                line += String.format("%3d", horseJockey.getProbabilityToWin());          /* Od# */
+            }
             line += " ";
-            line += String.format("%2d", horseJockey.getNumberOfIncrementsDone());    /* N# */
+            if (!horseJockey.getStatus().equals("R")) {
+                line += "--";
+            } else {
+                line += String.format("%2d", horseJockey.getNumberOfIncrementsDone());    /* N# */
+            }
             line += " ";
-            line += String.format("%3d", horseJockey.getPositionOnTrack());           /* Ps# */
+            if (!horseJockey.getStatus().equals("R")) {
+                line += "---";
+            } else {
+                line += String.format("%3d", horseJockey.getPositionOnTrack());           /* Ps# */
+            }
             line += " ";
-            line += String.format("%4d", horseJockey.getFinalStandPosition());        /* SD# */
+            if (!horseJockey.getStatus().matches("R|ATS|ATSL") || horseJockey.getFinalStandPosition() == 0) {
+                line += "----";
+            } else {
+                line += String.format("%4d", horseJockey.getFinalStandPosition());        /* SD# */
+            }
             line += " ";
         }
         line += Color.ANSI_RESET;
-        if (!onlyLogOnFile) {
-            GenericIO.writelnString(line);
+        return line;
+    }
+
+    /**
+     * Makes a snapshot of the race at a given time. This method prints the messages as the teacher asked.
+     */
+    private synchronized String printClassicRaceLine() {
+        String line = "  ";
+        line += String.format("%1d", raceNumber);                                    /* RN */
+        line += "  ";
+        line += String.format("%2d", currentRaceDistance);                           /* Dist */
+        line += "  ";
+        for (int i = 0; i != spectators.length; i++) {
+            line += " ";
+            if (spectators[i].getBetSelection() == -1) {
+                if (spectators[i].getStatus().matches("CTG|WR")) {
+                    line += String.format("%1d", temporarySpectators[i].getBetSelection() + 1);
+                } else {
+                    line += "-";
+                }
+            } else {
+                line += String.format("%1d", spectators[i].getBetSelection() + 1);             /* BS# */
+            }
+            line += "  ";
+            if (spectators[i].getBetAmount() == 0) {
+                if (spectators[i].getStatus().matches("CTG|WR")) {
+                    line += String.format("%4d", temporarySpectators[i].getBetAmount());
+                } else {
+                    line += "----";
+                }
+            } else {
+                line += String.format("%4d", spectators[i].getBetAmount());                  /* BA# */
+            }
+            line += " ";
         }
-        file.writelnString(cleanString(line));
+        for (HorseJockey horseJockey : horseJockeys) {
+            if (horseJockey.getProbabilityToWin() == 0) {
+                line += "----";
+            } else {
+                line += String.format("%4d", horseJockey.getProbabilityToWin());          /* Od# */
+            }
+            line += " ";
+            if (!horseJockey.getStatus().equals("R")) {
+                line += "--";
+            } else {
+                line += String.format("%2d", horseJockey.getNumberOfIncrementsDone());    /* N# */
+            }
+            line += "  ";
+            if (!horseJockey.getStatus().equals("R")) {
+                line += "--";
+            } else {
+                line += String.format("%2d", horseJockey.getPositionOnTrack());           /* Ps# */
+            }
+            line += "  ";
+            if (!horseJockey.getStatus().matches("R|ATS|ATSL") || horseJockey.getFinalStandPosition() == 0) {
+                line += "-";
+            } else {
+                line += String.format("%1d", horseJockey.getFinalStandPosition());        /* SD# */
+            }
+            line += " ";
+        }
+        return line;
     }
 
     /**
@@ -297,6 +486,7 @@ public class GeneralInformationRepository {
     public synchronized void setSpectatorBetSelection(int spectatorId, int selection) throws UnknownSpectatorException {
         try {
             spectators[spectatorId].setBetSelection(selection);
+            temporarySpectators[spectatorId].setBetSelection(selection);
         } catch (IndexOutOfBoundsException ioobe) {
             throw new UnknownSpectatorException(spectatorId);
         }
@@ -314,6 +504,7 @@ public class GeneralInformationRepository {
     public synchronized void setSpectatorBetAmount(int spectatorId, int bet) throws UnknownSpectatorException {
         try {
             spectators[spectatorId].setBetAmount(bet);
+            temporarySpectators[spectatorId].setBetAmount(bet);
         } catch (IndexOutOfBoundsException ioobe) {
             throw new UnknownSpectatorException(spectatorId);
         }
@@ -447,6 +638,20 @@ public class GeneralInformationRepository {
         return currentRaceDistance;
     }
 
+    public synchronized void raceIsOver() {
+        for (int i = 0; i != spectators.length; i++) {
+            spectators[i].setBetSelection(-1);
+            spectators[i].setBetAmount(0);
+        }
+        for (int i = 0; i != horseJockeys.length; i++) {
+            horseJockeys[i].setFinalStandPosition(0);
+            horseJockeys[i].setPositionOnTrack(0);
+            horseJockeys[i].setAbility(0);
+            horseJockeys[i].setNumberOfIncrementsDid(0);
+            horseJockeys[i].setProbabilityToWin(0);
+        }
+    }
+
     /**
      * Last taken snapshot of the {@link entities.Broker} entity.
      */
@@ -456,6 +661,11 @@ public class GeneralInformationRepository {
      * Last taken snapshot of the {@link entities.Spectator} entity.
      */
     private Spectator[] spectators;
+
+    /**
+     * Last temporary taken snapshot of the {@link entities.Spectator} entity.
+     */
+    private Spectator[] temporarySpectators;
 
     /**
      * Last taken snapshot of the pairs Horse/Jockey ({@link entities.HorseJockey}) entities.
@@ -476,6 +686,8 @@ public class GeneralInformationRepository {
      * Name of the file where the log is to be saved.
      */
     private String filename;
+
+    private String lastSnapshotLine = "";
 
     /**
      * File object {@code file} from the external class {@link TextFile} which

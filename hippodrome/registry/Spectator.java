@@ -98,16 +98,16 @@ public class Spectator {
     /**
      * Current amount of money of this {@link Spectator}.
      */
-    private int amountOfMoney;
+    private int amountOfMoney = 0;
 
 
     /**
      * Current {@link Spectator}'s bet selection of pair Horse/Jockey on run.
      */
-    private int betSelection;
+    private int betSelection = -1;
 
     /**
      * Current amount of money spent on the current bet.
      */
-    private int betAmount;
+    private int betAmount = 0;
 }

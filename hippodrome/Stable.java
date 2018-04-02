@@ -13,11 +13,6 @@ import entities.HorseJockeyState;
  */
 public class Stable {
     /**
-     * Signal given by the {@link entities.Broker} in order to allow the pair Horse/Jockey to move
-     * to this place (the {@link Stable}).
-     */
-
-    /**
      * Changes the state of the pair Horse/Jockey to At the Stable ({@code ATS}) and waits till the current race is,
      * in fact, the current race of the event which is about to start.
      *

@@ -40,6 +40,7 @@ public class Spectator extends Thread {
         this.paddock = paddock;
         this.repository = repository;
         this.numberOfRaces = numberOfRaces;
+        repository.newSnapshot();
     }
 
     /**

@@ -41,6 +41,7 @@ public class Broker extends Thread {
         this.repository = repository;
         this.totalOfRaces = numberOfRaces;
         repository.setBrokerStatus(state);
+        repository.newSnapshot();
     }
 
     /**
@@ -60,8 +61,8 @@ public class Broker extends Thread {
                 bettingCentre.acceptTheBets();                                      //   go to the Betting Centre and accept the Spectators' bets;
                 racingTrack.startTheRace();                                         //   go then to the Racing Track and make the signal to start the race;
                 controlCentre.startTheRace();                                       //   prepare the Control Centre to the current race which has started;
-                controlCentre.reportResults();                                      //   as the race is finished, report its results;
-                if (bettingCentre.areThereAnyWinners()) {                           //   if there are any bet winners at the Betting Centre:
+                int winner = controlCentre.reportResults();                         //   as the race is finished, report its results;
+                if (bettingCentre.areThereAnyWinners(winner)) {                     //   if there are any bet winners at the Betting Centre:
                     bettingCentre.honourTheBets();                                  //     then i should honour the bets and retrieve its money;
                 }                                                                   //
             }                                                                       //

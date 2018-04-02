@@ -85,6 +85,7 @@ public class ControlCentre {
         ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.WATCHING_A_RACE);
         brokerDidNotReportResults = true;
         finishedHorses = 0;
+        raceWinner = 0;
         thereIsStillHorsesToFinishRace = true;
         while (brokerDidNotReportResults) {
             try {
@@ -109,9 +110,10 @@ public class ControlCentre {
      * Note that this method changes the value of the condition variable to the {@link ControlCentre#goWatchTheRace()}
      * wait condition, notifying its changes.
      */
-    public synchronized void reportResults() {
+    public synchronized int reportResults() {
         brokerDidNotReportResults = false;
         notifyAll();
+        return raceWinner;
     }
 
     /**
@@ -168,6 +170,9 @@ public class ControlCentre {
      */
     public synchronized void makeAMove() {
         finishedHorses++;
+        if (finishedHorses == 1) {
+            raceWinner = ((HorseJockey)(Thread.currentThread())).getIdentification();
+        }
         if (finishedHorses == numberOfHorses) {
             thereIsStillHorsesToFinishRace = false;
             notifyAll();
@@ -226,5 +231,7 @@ public class ControlCentre {
      * {@link ControlCentre#goWatchTheRace()} method itself.
      */
     private boolean brokerDidNotReportResults = true;
+
+    private int raceWinner = 0;
 
 }
