@@ -4,6 +4,8 @@ import entities.*;
 import hippodrome.*;
 import hippodrome.actions.Race;
 
+import static stage.SimulatorConfiguration.*;
+
 /**
  * Creation of a Horse Race simulation placed on a Hippodrome.
  * This class has a {@link entities.Broker}, a set of {@link entities.Spectator}s
@@ -95,7 +97,7 @@ public class Simulator {
      * @return a money value between 1 and 999.
      */
     private static int generateMoney() {
-        return (int)(Math.random()*1000) + 1;
+        return (int)(Math.random() * (MONEY_MAX_BOUND - MONEY_MIN_BOUND)) + MONEY_MIN_BOUND;
     }
 
     /**
@@ -105,23 +107,23 @@ public class Simulator {
      * of the horse on track, while running.
      */
     private static int generateAbility() {
-        return (int)(Math.random()*10)+1;
+        return (int)(Math.random()*(ABILITY_MAX_BOUND - ABILITY_MIN_BOUND)) + ABILITY_MIN_BOUND;
     }
 
     /**
      * Number of horses competing with each other.
      */
-    private static int numberOfHorses = 4;
+    private static int numberOfHorses = NUMBER_OF_PAIRS_HORSE_JOCKEY;
 
     /**
      * Number of races happening at the same event.
      */
-    private static int numberOfRaces = 5;
+    private static int numberOfRaces = NUMBER_OF_RACES;
 
     /**
      * Number of spectators appearing on the hippodrome.
      */
-    private static int numberOfSpectators = 4;
+    private static int numberOfSpectators = NUMBER_OF_SPECTATORS;
 
     /**
      * The sets' Broker instance.

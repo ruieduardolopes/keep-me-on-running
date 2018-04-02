@@ -1,5 +1,8 @@
 package hippodrome.actions;
 
+import static hippodrome.actions.RaceConfiguration.TRACK_DISTANCE_MAX_BOUND;
+import static hippodrome.actions.RaceConfiguration.TRACK_DISTANCE_MIN_BOUND;
+
 /**
  * Representation of a race, which is done over a {@link hippodrome.RacingTrack}.
  *
@@ -28,7 +31,7 @@ public class Race {
      * @return the distance of a race, from 500 to 1500
      */
     public static int generateDistance() {
-        return (int)(Math.random() * (100 - 50)) + 50; // TODO - constant values
+        return (int)(Math.random() * (TRACK_DISTANCE_MAX_BOUND - TRACK_DISTANCE_MIN_BOUND)) + TRACK_DISTANCE_MIN_BOUND;
     }
 
     /**
