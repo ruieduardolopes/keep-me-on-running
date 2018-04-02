@@ -109,6 +109,8 @@ public class ControlCentre {
      * <br>
      * Note that this method changes the value of the condition variable to the {@link ControlCentre#goWatchTheRace()}
      * wait condition, notifying its changes.
+     *
+     * @return the winner of the current race.
      */
     public synchronized int reportResults() {
         brokerDidNotReportResults = false;
@@ -166,7 +168,8 @@ public class ControlCentre {
 
     /**
      * Signal given the last horse has crossed the finish line, notifying the {@link ControlCentre#startTheRace()} in order
-     * to relief the {@link Broker} from the state Supervising the Race ({@code STR}), as the race is over.
+     * to relief the {@link Broker} from the state Supervising the Race ({@code STR}), as the race is over. This method also
+     * helps identifying when a pair Horse/Jockey has won the race.
      */
     public synchronized void makeAMove() {
         finishedHorses++;
@@ -232,6 +235,9 @@ public class ControlCentre {
      */
     private boolean brokerDidNotReportResults = true;
 
+    /**
+     * Identification of the pair Horse/Jockey winner of the current race.
+     */
     private int raceWinner = 0;
 
 }

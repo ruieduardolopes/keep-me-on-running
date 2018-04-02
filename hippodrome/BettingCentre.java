@@ -190,6 +190,8 @@ public class BettingCentre {
     /**
      * Verification of bet's winners.
      *
+     * @param winner the identification of the pair Horse/Jockey which have won the race.
+     *
      * @return {@code true} if anybody had won indeed; otherwise it will return {@code false}.
      */
     public synchronized boolean areThereAnyWinners(int winner) {
@@ -321,7 +323,8 @@ public class BettingCentre {
     /**
      * Condition variable for noticing when Spectators (winner ones) are at the Betting Centre or not.
      * <br>
-     * This is a condition variable of the {@link BettingCentre#honourTheBets()} method.
+     * This is a condition variable of the {@link BettingCentre#honourTheBets()} method and it is reset on the
+     * {@link BettingCentre#acceptTheBets()} method.
      */
     private boolean allWinnersAreNotOnBettingCentre = true;
 

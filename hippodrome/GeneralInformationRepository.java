@@ -192,6 +192,8 @@ public class GeneralInformationRepository {
 
     /**
      * Makes a snapshot of the entities at a given time.
+     *
+     * @return an entities line of the logger.
      */
     private synchronized String printEntitiesLine() {
         String line = " ";
@@ -230,6 +232,8 @@ public class GeneralInformationRepository {
 
     /**
      * Makes a snapshot of the entities at a given time. This method prints the messages as the teacher asked.
+     *
+     * @return an entities line of the logger, specified as the teacher asked for.
      */
     private synchronized String printClassicEntitiesLine() {
         String line = "  ";
@@ -286,6 +290,8 @@ public class GeneralInformationRepository {
 
     /**
      * Makes a snapshot of the race at a given time.
+     *
+     * @return a race line of the logger.
      */
     private synchronized String printRaceLine() {
         String line = " ";
@@ -351,6 +357,8 @@ public class GeneralInformationRepository {
 
     /**
      * Makes a snapshot of the race at a given time. This method prints the messages as the teacher asked.
+     *
+     * @return a race line of the logger, specified as the teacher asked for.
      */
     private synchronized String printClassicRaceLine() {
         String line = "  ";
@@ -638,6 +646,9 @@ public class GeneralInformationRepository {
         return currentRaceDistance;
     }
 
+    /**
+     * Resets all the statuses of the entities related to a race. This method should be invoked when a race is over.
+     */
     public synchronized void raceIsOver() {
         for (int i = 0; i != spectators.length; i++) {
             spectators[i].setBetSelection(-1);
@@ -687,6 +698,9 @@ public class GeneralInformationRepository {
      */
     private String filename;
 
+    /**
+     * Last reported status (snapshot) of the logger.
+     */
     private String lastSnapshotLine = "";
 
     /**
