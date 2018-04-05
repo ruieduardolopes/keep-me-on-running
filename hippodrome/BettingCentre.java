@@ -238,7 +238,7 @@ public class BettingCentre {
     /**
      * Evaluates the odds of all the pair Horse/Jockey.
      */
-    private synchronized void evaluateOdds() {
+    private void evaluateOdds() {
         for (int i = 0; i != horsesOdds.length; i++) {
             horsesOdds[i] = sumOf(horsesAbilities) / horsesAbilities[i];
             repository.setHorseJockeyProbabilityToWin(i, horsesOdds[i]);
@@ -252,7 +252,7 @@ public class BettingCentre {
      *
      * @return the value of the sum of all elements of the array {@code array}.
      */
-    private synchronized int sumOf(int[] array) {
+    private int sumOf(int[] array) {
         int sum = 0;
         for (int i = 0; i != array.length; i++) {
             sum += array[i];

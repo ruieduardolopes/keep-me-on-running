@@ -4,7 +4,6 @@ import entities.HorseJockey;
 import entities.HorseJockeyState;
 import entities.Spectator;
 import entities.SpectatorState;
-import hippodrome.actions.Race;
 
 /**
  * Place where the horses are paradded before the {@link entities.Spectator}s. As the
@@ -43,9 +42,9 @@ public class Paddock {
      */
     public synchronized void proceedToPaddock(int raceNumber) throws InterruptedException {
         HorseJockey horse = ((HorseJockey)Thread.currentThread());
-        if (horse.getRaceNumber() == raceNumber) {
-            horse.setHorseJockeyState(HorseJockeyState.AT_THE_PADDOCK);
-        }
+        //if (horse.getRaceNumber() == raceNumber) {
+        //    horse.setHorseJockeyState(HorseJockeyState.AT_THE_PADDOCK); // TODO : change this call to something on the repository...
+        //}
         lastHorseDidNotProceedToStartLine = true;
         currentNumberOfHorses++;
         while (lastSpectatorHasNotArrivedOnPaddock) {
@@ -118,12 +117,12 @@ public class Paddock {
     /**
      * Current number of {@link HorseJockey} present in the {@link Paddock}.
      */
-    private int currentNumberOfHorses;
+    private int currentNumberOfHorses = 0;
 
     /**
      * Current number of {@link Spectator}s present in the {@link Paddock}.
      */
-    private int currentNumberOfSpectators;
+    private int currentNumberOfSpectators = 0;
 
     /**
      * Total number of {@link HorseJockey} competing.

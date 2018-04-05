@@ -179,7 +179,7 @@ public class GeneralInformationRepository {
      * @param colorfulString the ASCII'd {@code String}.
      * @return a cleaned {@code String}.
      */
-    private synchronized String cleanString(String colorfulString) {
+    private String cleanString(String colorfulString) {
         return colorfulString.replace(Color.ANSI_RESET, "").replace(Color.ANSI_BLACK, "").
                               replace(Color.ANSI_RED, "").replace(Color.ANSI_GREEN, "").
                               replace(Color.ANSI_YELLOW, "").replace(Color.ANSI_BLUE, "").
@@ -195,7 +195,7 @@ public class GeneralInformationRepository {
      *
      * @return an entities line of the logger.
      */
-    private synchronized String printEntitiesLine() {
+    private String printEntitiesLine() {
         String line = " ";
         line += Color.ANSI_GREEN;
         line += String.format("%6s", brokerStatus);                             /* Stat */
@@ -235,7 +235,7 @@ public class GeneralInformationRepository {
      *
      * @return an entities line of the logger, specified as the teacher asked for.
      */
-    private synchronized String printClassicEntitiesLine() {
+    private String printClassicEntitiesLine() {
         String line = "  ";
         switch (brokerStatus) {
             case "OTE" : line += "OpTE"; break;
@@ -293,7 +293,7 @@ public class GeneralInformationRepository {
      *
      * @return a race line of the logger.
      */
-    private synchronized String printRaceLine() {
+    private String printRaceLine() {
         String line = " ";
         line += String.format("%2d", raceNumber);                                    /* RN */
         line += " ";
@@ -315,10 +315,10 @@ public class GeneralInformationRepository {
                 if (spectators[i].getStatus().matches("CTG|WR")) {
                     line += String.format("%4d", temporarySpectators[i].getBetAmount());
                 } else {
-                    line += "---";
+                    line += "----";
                 }
             } else {
-                line += String.format("%3d", spectators[i].getBetAmount());                  /* BA# */
+                line += String.format("%4d", spectators[i].getBetAmount());                  /* BA# */
             }
             line += " ";
         }
@@ -360,7 +360,7 @@ public class GeneralInformationRepository {
      *
      * @return a race line of the logger, specified as the teacher asked for.
      */
-    private synchronized String printClassicRaceLine() {
+    private String printClassicRaceLine() {
         String line = "  ";
         line += String.format("%1d", raceNumber);                                    /* RN */
         line += "  ";

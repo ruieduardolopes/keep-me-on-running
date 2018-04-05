@@ -21,6 +21,7 @@ public class Stable {
      * @throws InterruptedException if the wait() is interrupted.
      */
     public synchronized void proceedToStable(int raceNumber) throws InterruptedException {
+        ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_STABLE);
         while (currentRaceNumber != raceNumber) {
             try {
                 wait();
@@ -29,7 +30,6 @@ public class Stable {
                 throw new InterruptedException("The proceedToStable() has been interrupted on its wait().");
             }
         }
-        ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_STABLE);
     }
 
     /**
@@ -56,6 +56,6 @@ public class Stable {
     /**
      * Current race number identifier, as an integer.
      */
-    private int currentRaceNumber;
+    private int currentRaceNumber = -1;
 
 }
