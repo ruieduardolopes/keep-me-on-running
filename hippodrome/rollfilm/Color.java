@@ -1,4 +1,4 @@
-package hippodrome.registry;
+package hippodrome.rollfilm;
 
 /**
  * This class serves as basis to concatenate colors on java Strings.

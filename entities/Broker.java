@@ -41,7 +41,6 @@ public class Broker extends Thread {
         this.repository = repository;
         this.totalOfRaces = numberOfRaces;
         repository.setBrokerStatus(state);
-        repository.newSnapshot();
     }
 
     /**
@@ -82,8 +81,7 @@ public class Broker extends Thread {
      */
     public synchronized void setBrokerState(BrokerState state) {
         this.state = state;
-        repository.setBrokerStatus(state);      // TODO : make these two operations atomic!
-        repository.newSnapshot();
+        repository.setBrokerStatus(state);
     }
 
     /**

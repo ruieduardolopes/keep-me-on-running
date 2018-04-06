@@ -44,6 +44,8 @@ public class Simulator {
             spectators[i].start();
         }
 
+        repository.setWereWaitingTheHorses(true);
+
         /* initialize races */
         for (int i = 0; i < numberOfRaces; i++) {
             if (i >= 1) {
@@ -88,7 +90,7 @@ public class Simulator {
             System.err.println("This program will now quit.");
             System.exit(3);
         }
-        repository.newSnapshot();
+        repository.newSnapshot(true);
     }
 
     /**

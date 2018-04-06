@@ -3,7 +3,7 @@ package hippodrome;
 import entities.BrokerState;
 import entities.HorseJockeyState;
 import entities.SpectatorState;
-import hippodrome.registry.*;
+import hippodrome.rollfilm.*;
 import genclass.GenericIO;
 import genclass.TextFile;
 
@@ -151,18 +151,27 @@ public class GeneralInformationRepository {
         file.close();
     }
 
+    public synchronized void newSnapshot(boolean nullable) {
+        newSnapshot();
+    }
+
     /**
      * Adds a new snapshot of the race to log it.
      */
-    public synchronized void newSnapshot() {
+    private void newSnapshot() {
+        for (int i = 0; i != horseJockeys.length; i++) {
+            if (horseJockeys[i].getAbility() == 0 && wereWaitingTheHorses) {
+                return;
+            }
+        }
         boolean actionSucceeded = file.openForAppending(null, filename);
         if (!actionSucceeded) {
             throw new InaccessibleFileException("The requested file \"" + filename + "\" is currently unaccessible or this user does not have permissions to write on this directory.");
         }
         String line = "";
-        line += printClassicEntitiesLine();
+        line += printEntitiesLine();
         line += "\n";
-        line += printClassicRaceLine();
+        line += printRaceLine();
         if (!(line).equals(lastSnapshotLine)) {
             if (!onlyLogOnFile) {
                 GenericIO.writelnString(line);
@@ -295,9 +304,17 @@ public class GeneralInformationRepository {
      */
     private String printRaceLine() {
         String line = " ";
-        line += String.format("%2d", raceNumber);                                    /* RN */
+        if (brokerStatus.equals("OTE")) {
+            line += "--";
+        } else {
+            line += String.format("%2d", raceNumber);                                    /* RN */
+        }
         line += " ";
-        line += String.format("%4d", currentRaceDistance);                           /* Dist */
+        if (brokerStatus.equals("OTE")) {
+            line += "----";
+        } else {
+            line += String.format("%4d", currentRaceDistance);                           /* Dist */
+        }
         line += " ";
         line += Color.ANSI_PURPLE;
         for (int i = 0; i != spectators.length; i++) {
@@ -332,13 +349,13 @@ public class GeneralInformationRepository {
                 line += String.format("%3d", horseJockey.getProbabilityToWin());          /* Od# */
             }
             line += " ";
-            if (!horseJockey.getStatus().equals("R")) {
+            if (!(horseJockey.getStatus().matches("R|ATSL|ATFL") || horseJockey.getFinalStandPosition() != 0)) {
                 line += "--";
             } else {
                 line += String.format("%2d", horseJockey.getNumberOfIncrementsDone());    /* N# */
             }
             line += " ";
-            if (!horseJockey.getStatus().equals("R")) {
+            if (!(horseJockey.getStatus().matches("R|ATSL|ATFL") || horseJockey.getFinalStandPosition() != 0)) {
                 line += "---";
             } else {
                 line += String.format("%3d", horseJockey.getPositionOnTrack());           /* Ps# */
@@ -362,9 +379,17 @@ public class GeneralInformationRepository {
      */
     private String printClassicRaceLine() {
         String line = "  ";
-        line += String.format("%1d", raceNumber);                                    /* RN */
-        line += "  ";
-        line += String.format("%2d", currentRaceDistance);                           /* Dist */
+        if (brokerStatus.equals("OTE")) {
+            line += "-";
+        } else {
+            line += String.format("%1d", raceNumber);                                    /* RN */
+        }
+        line += " ";
+        if (brokerStatus.equals("OTE")) {
+            line += "--";
+        } else {
+            line += String.format("%2d", currentRaceDistance);                           /* Dist */
+        }
         line += "  ";
         for (int i = 0; i != spectators.length; i++) {
             line += " ";
@@ -396,13 +421,13 @@ public class GeneralInformationRepository {
                 line += String.format("%4d", horseJockey.getProbabilityToWin());          /* Od# */
             }
             line += " ";
-            if (!horseJockey.getStatus().equals("R")) {
+            if (!(horseJockey.getStatus().matches("R|ATSL|ATFL") || horseJockey.getFinalStandPosition() != 0)) {
                 line += "--";
             } else {
                 line += String.format("%2d", horseJockey.getNumberOfIncrementsDone());    /* N# */
             }
             line += "  ";
-            if (!horseJockey.getStatus().equals("R")) {
+            if (!(horseJockey.getStatus().matches("R|ATSL|ATFL") || horseJockey.getFinalStandPosition() != 0)) {
                 line += "--";
             } else {
                 line += String.format("%2d", horseJockey.getPositionOnTrack());           /* Ps# */
@@ -446,6 +471,7 @@ public class GeneralInformationRepository {
         for (String word : status.name().split("_")) {
             brokerStatus += word.charAt(0);
         }
+        newSnapshot();
     }
 
     /**
@@ -463,6 +489,7 @@ public class GeneralInformationRepository {
         } catch (IndexOutOfBoundsException ioobe) {
             throw new UnknownSpectatorException(spectatorId);
         }
+        newSnapshot();
     }
 
     /**
@@ -533,6 +560,7 @@ public class GeneralInformationRepository {
         } catch (IndexOutOfBoundsException ioobe) {
             throw new UnknownHorseJockeyException(horseJockeyId);
         }
+        newSnapshot();
     }
 
     /**
@@ -626,6 +654,10 @@ public class GeneralInformationRepository {
         } catch (IndexOutOfBoundsException ioobe) {
             throw new UnknownHorseJockeyException(horseJockeyId);
         }
+    }
+
+    public synchronized void setWereWaitingTheHorses(boolean value) {
+        wereWaitingTheHorses = value;
     }
 
     /**
@@ -725,4 +757,6 @@ public class GeneralInformationRepository {
      * colors.
      */
     private boolean onlyLogOnFile;
+
+    private boolean wereWaitingTheHorses = false;
 }

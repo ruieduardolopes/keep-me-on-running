@@ -2,8 +2,8 @@ package hippodrome;
 
 import entities.*;
 import hippodrome.actions.Bet;
-import hippodrome.registry.UnknownHorseJockeyException;
-import hippodrome.registry.UnknownSpectatorException;
+import hippodrome.rollfilm.UnknownHorseJockeyException;
+import hippodrome.rollfilm.UnknownSpectatorException;
 
 /**
  * This class needs a Queue implementation in order to accomplish the creation of such a
@@ -14,7 +14,6 @@ import hippodrome.registry.UnknownSpectatorException;
  * Further documentation on this matter could be accessed here: {@link Queue}.
  */
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 

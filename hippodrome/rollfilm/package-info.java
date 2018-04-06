@@ -8,6 +8,6 @@
  * @since 0.1
  * @version 1.0
  */
-package hippodrome.registry;
+package hippodrome.rollfilm;
 
 // TODO - change this package name

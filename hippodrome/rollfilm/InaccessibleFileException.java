@@ -1,4 +1,4 @@
-package hippodrome.registry;
+package hippodrome.rollfilm;
 
 /**
  * This exception exists to be thrown when a file cannot be accessed with

@@ -47,7 +47,6 @@ public class HorseJockey extends Thread {
         this.stable = stable;
         this.repository = repository;
         this.bettingCentre = bettingCentre;
-        repository.newSnapshot();
     }
 
     /**
@@ -88,7 +87,6 @@ public class HorseJockey extends Thread {
     public synchronized void setHorseJockeyState(HorseJockeyState state) {
         this.state = state;
         repository.setHorseJockeyStatus(identification, state);
-        repository.newSnapshot();
     }
 
     /**
