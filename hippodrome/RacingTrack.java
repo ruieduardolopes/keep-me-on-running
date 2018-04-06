@@ -41,7 +41,6 @@ public class RacingTrack {
      * @throws InterruptedException if the wait() is interrupted.
      */
     public synchronized void proceedToStartLine() throws InterruptedException {
-        ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_START_LINE);
         horsesToRun.add(((HorseJockey)Thread.currentThread()).getIdentification());
         numberOfFinishedHorses = 0;
         repository.setHorseJockeyFinalStandPosition(((HorseJockey)Thread.currentThread()).getIdentification(), 0);

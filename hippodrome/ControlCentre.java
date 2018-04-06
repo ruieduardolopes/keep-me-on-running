@@ -150,7 +150,6 @@ public class ControlCentre {
     public synchronized void proceedToPaddock() {
         numberOfHorseJockeysOnPaddock++;
         ((HorseJockey)(Thread.currentThread())).setHorseJockeyState(HorseJockeyState.AT_THE_PADDOCK);
-        System.out.println("NUMBER : " + numberOfHorseJockeysOnPaddock);
         if (numberOfHorseJockeysOnPaddock == NUMBER_OF_PAIRS_HORSE_JOCKEY) {
             lastHorseJockeyHasNotArrivedOnPaddock = false;
             notifyAll();

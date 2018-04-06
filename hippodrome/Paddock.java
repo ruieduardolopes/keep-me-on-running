@@ -93,6 +93,7 @@ public class Paddock {
      */
     public synchronized void proceedToStartLine() {
         currentNumberOfSpectators = 0;
+        ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_START_LINE);
         currentNumberOfHorses++;
         if (currentNumberOfHorses == numberOfHorses*2) {
             lastHorseDidNotProceedToStartLine = false;
