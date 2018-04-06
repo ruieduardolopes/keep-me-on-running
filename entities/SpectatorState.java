@@ -10,7 +10,7 @@ import hippodrome.RacingTrack;
  * @author Rui Lopes
  * @see Spectator#run()
  * @since 0.1
- * @version 1.0
+ * @version 1.1
  */
 public enum SpectatorState {
     /**

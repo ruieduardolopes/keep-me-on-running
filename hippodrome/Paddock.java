@@ -13,7 +13,7 @@ import entities.SpectatorState;
  * @author Hugo Fragata
  * @author Rui Lopes
  * @since 0.1
- * @version 1.0
+ * @version 1.1
  */
 public class Paddock {
     /**
@@ -41,10 +41,6 @@ public class Paddock {
      * @throws InterruptedException if the wait() is interrupted.
      */
     public synchronized void proceedToPaddock(int raceNumber) throws InterruptedException {
-        HorseJockey horse = ((HorseJockey)Thread.currentThread());
-        //if (horse.getRaceNumber() == raceNumber) {
-        //    horse.setHorseJockeyState(HorseJockeyState.AT_THE_PADDOCK); // TODO : change this call to something on the repository...
-        //}
         lastHorseDidNotProceedToStartLine = true;
         currentNumberOfHorses++;
         while (lastSpectatorHasNotArrivedOnPaddock) {

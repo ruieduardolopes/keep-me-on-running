@@ -12,7 +12,7 @@ import static stage.SimulatorConfiguration.NUMBER_OF_PAIRS_HORSE_JOCKEY;
  * @author Hugo Fragata
  * @author Rui Lopes
  * @since 0.1
- * @version 1.0
+ * @version 1.1
  */
 public class ControlCentre {
     /**

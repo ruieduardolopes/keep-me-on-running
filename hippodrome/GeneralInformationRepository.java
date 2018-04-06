@@ -18,7 +18,7 @@ import java.time.Instant;
  * @author Hugo Fragata
  * @author Rui Lopes
  * @since 0.1
- * @version 1.0
+ * @version 1.1
  */
 public class GeneralInformationRepository {
     /**
@@ -176,9 +176,9 @@ public class GeneralInformationRepository {
             throw new InaccessibleFileException("The requested file \"" + filename + "\" is currently unaccessible or this user does not have permissions to write on this directory.");
         }
         String line = "";
-        line += printEntitiesLine();
+        line += printClassicEntitiesLine();
         line += "\n";
-        line += printRaceLine();
+        line += printClassicRaceLine();
         if (!(line).equals(lastSnapshotLine)) {
             if (!onlyLogOnFile) {
                 GenericIO.writelnString(line);

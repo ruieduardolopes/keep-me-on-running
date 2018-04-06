@@ -5,6 +5,11 @@ package stage;
  * behaviors of the {@link Simulator} which happens to execute a simulation of a
  * series of horse races with a set of pairs Horse/Jockey, a set of Spectators and
  * a Broker.
+ *
+ * @author Hugo Fragata
+ * @author Rui Lopes
+ * @since 1.0.1b
+ * @version 1.1
  */
 public class SimulatorConfiguration {
 

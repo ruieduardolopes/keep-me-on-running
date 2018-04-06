@@ -15,7 +15,7 @@ import java.util.Random;
  * @see Broker
  * @see HorseJockey
  * @since 0.1
- * @version 1.0
+ * @version 1.1
  */
 public class Spectator extends Thread {
     /**
