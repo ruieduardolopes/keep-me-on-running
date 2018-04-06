@@ -1,4 +1,4 @@
-package hippodrome.registry;
+package hippodrome.rollfilm;
 
 /**
  * This exception exists to be thrown when an invalid pair Horse/Jockey
@@ -6,7 +6,7 @@ package hippodrome.registry;
  *
  * @author Hugo Fragata
  * @author Rui Lopes
- * @version 1.0
+ * @version 1.1
  * @since 0.1
  */
 public class UnknownHorseJockeyException extends RuntimeException {

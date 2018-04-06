@@ -15,7 +15,7 @@ import java.util.Random;
  * @see Broker
  * @see HorseJockey
  * @since 0.1
- * @version 1.0
+ * @version 1.1
  */
 public class Spectator extends Thread {
     /**
@@ -40,7 +40,6 @@ public class Spectator extends Thread {
         this.paddock = paddock;
         this.repository = repository;
         this.numberOfRaces = numberOfRaces;
-        repository.newSnapshot();
     }
 
     /**
@@ -87,7 +86,6 @@ public class Spectator extends Thread {
     public synchronized void setSpectatorState(SpectatorState state) {
         this.state = state;
         repository.setSpectatorStatus(this.identification, state);
-        repository.newSnapshot();
     }
 
     /**

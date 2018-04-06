@@ -1,4 +1,4 @@
-package hippodrome.registry;
+package hippodrome.rollfilm;
 
 import entities.SpectatorState;
 
@@ -8,7 +8,7 @@ import entities.SpectatorState;
  * @author Hugo Fragata
  * @author Rui Lopes
  * @see HorseJockey
- * @version 1.0
+ * @version 1.1
  * @since 0.1
  */
 public class Spectator {

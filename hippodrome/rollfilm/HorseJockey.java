@@ -1,4 +1,4 @@
-package hippodrome.registry;
+package hippodrome.rollfilm;
 
 import entities.HorseJockeyState;
 
@@ -8,7 +8,7 @@ import entities.HorseJockeyState;
  * @author Hugo Fragata
  * @author Rui Lopes
  * @see Spectator
- * @version 1.0
+ * @version 1.1
  * @since 0.1
  */
 public class HorseJockey {

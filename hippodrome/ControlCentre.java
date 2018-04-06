@@ -3,6 +3,8 @@ package hippodrome;
 import entities.*;
 import hippodrome.actions.Race;
 
+import static stage.SimulatorConfiguration.NUMBER_OF_PAIRS_HORSE_JOCKEY;
+
 /**
  * Place where the {@link Spectator}s go to enjoy the race (at a Watching Stand) and the {@link entities.Broker}
  * controls the races and publishes its results.
@@ -10,7 +12,7 @@ import hippodrome.actions.Race;
  * @author Hugo Fragata
  * @author Rui Lopes
  * @since 0.1
- * @version 1.0
+ * @version 1.1
  */
 public class ControlCentre {
     /**
@@ -147,7 +149,8 @@ public class ControlCentre {
      */
     public synchronized void proceedToPaddock() {
         numberOfHorseJockeysOnPaddock++;
-        if (numberOfHorseJockeysOnPaddock == numberOfHorses) {
+        ((HorseJockey)(Thread.currentThread())).setHorseJockeyState(HorseJockeyState.AT_THE_PADDOCK);
+        if (numberOfHorseJockeysOnPaddock == NUMBER_OF_PAIRS_HORSE_JOCKEY) {
             lastHorseJockeyHasNotArrivedOnPaddock = false;
             notifyAll();
             numberOfHorseJockeysOnPaddock = 0;

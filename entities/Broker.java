@@ -13,7 +13,7 @@ import hippodrome.*;
  * @see Spectator
  * @see HorseJockey
  * @since 0.1
- * @version 1.0
+ * @version 1.1
  */
 public class Broker extends Thread {
 
@@ -41,7 +41,6 @@ public class Broker extends Thread {
         this.repository = repository;
         this.totalOfRaces = numberOfRaces;
         repository.setBrokerStatus(state);
-        repository.newSnapshot();
     }
 
     /**
@@ -83,7 +82,6 @@ public class Broker extends Thread {
     public synchronized void setBrokerState(BrokerState state) {
         this.state = state;
         repository.setBrokerStatus(state);
-        repository.newSnapshot();
     }
 
     /**

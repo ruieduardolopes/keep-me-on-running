@@ -3,7 +3,7 @@ package hippodrome;
 import entities.BrokerState;
 import entities.HorseJockeyState;
 import entities.SpectatorState;
-import hippodrome.registry.*;
+import hippodrome.rollfilm.*;
 import genclass.GenericIO;
 import genclass.TextFile;
 
@@ -18,7 +18,7 @@ import java.time.Instant;
  * @author Hugo Fragata
  * @author Rui Lopes
  * @since 0.1
- * @version 1.0
+ * @version 1.1
  */
 public class GeneralInformationRepository {
     /**
@@ -153,8 +153,24 @@ public class GeneralInformationRepository {
 
     /**
      * Adds a new snapshot of the race to log it.
+     *
+     * @param nullable a distinguishable item of the private method {@code newSnapshot}.
      */
-    public synchronized void newSnapshot() {
+    public synchronized void newSnapshot(boolean nullable) {
+        newSnapshot();
+    }
+
+    /**
+     * Adds a new snapshot of the race to log it.
+     */
+    private void newSnapshot() {
+        if (brokerStatus.equals("OTE")) {
+            for (int i = 0; i != horseJockeys.length; i++) {
+                if (horseJockeys[i].getAbility() == 0 && wereWaitingTheHorses) {
+                    return;
+                }
+            }
+        }
         boolean actionSucceeded = file.openForAppending(null, filename);
         if (!actionSucceeded) {
             throw new InaccessibleFileException("The requested file \"" + filename + "\" is currently unaccessible or this user does not have permissions to write on this directory.");
@@ -179,7 +195,7 @@ public class GeneralInformationRepository {
      * @param colorfulString the ASCII'd {@code String}.
      * @return a cleaned {@code String}.
      */
-    private synchronized String cleanString(String colorfulString) {
+    private String cleanString(String colorfulString) {
         return colorfulString.replace(Color.ANSI_RESET, "").replace(Color.ANSI_BLACK, "").
                               replace(Color.ANSI_RED, "").replace(Color.ANSI_GREEN, "").
                               replace(Color.ANSI_YELLOW, "").replace(Color.ANSI_BLUE, "").
@@ -195,7 +211,7 @@ public class GeneralInformationRepository {
      *
      * @return an entities line of the logger.
      */
-    private synchronized String printEntitiesLine() {
+    private String printEntitiesLine() {
         String line = " ";
         line += Color.ANSI_GREEN;
         line += String.format("%6s", brokerStatus);                             /* Stat */
@@ -235,7 +251,7 @@ public class GeneralInformationRepository {
      *
      * @return an entities line of the logger, specified as the teacher asked for.
      */
-    private synchronized String printClassicEntitiesLine() {
+    private String printClassicEntitiesLine() {
         String line = "  ";
         switch (brokerStatus) {
             case "OTE" : line += "OpTE"; break;
@@ -293,11 +309,19 @@ public class GeneralInformationRepository {
      *
      * @return a race line of the logger.
      */
-    private synchronized String printRaceLine() {
+    private String printRaceLine() {
         String line = " ";
-        line += String.format("%2d", raceNumber);                                    /* RN */
+        if (brokerStatus.equals("OTE")) {
+            line += "--";
+        } else {
+            line += String.format("%2d", raceNumber);                                    /* RN */
+        }
         line += " ";
-        line += String.format("%4d", currentRaceDistance);                           /* Dist */
+        if (brokerStatus.equals("OTE")) {
+            line += "----";
+        } else {
+            line += String.format("%4d", currentRaceDistance);                           /* Dist */
+        }
         line += " ";
         line += Color.ANSI_PURPLE;
         for (int i = 0; i != spectators.length; i++) {
@@ -315,10 +339,10 @@ public class GeneralInformationRepository {
                 if (spectators[i].getStatus().matches("CTG|WR")) {
                     line += String.format("%4d", temporarySpectators[i].getBetAmount());
                 } else {
-                    line += "---";
+                    line += "----";
                 }
             } else {
-                line += String.format("%3d", spectators[i].getBetAmount());                  /* BA# */
+                line += String.format("%4d", spectators[i].getBetAmount());                  /* BA# */
             }
             line += " ";
         }
@@ -332,13 +356,13 @@ public class GeneralInformationRepository {
                 line += String.format("%3d", horseJockey.getProbabilityToWin());          /* Od# */
             }
             line += " ";
-            if (!horseJockey.getStatus().equals("R")) {
+            if (!(horseJockey.getStatus().matches("R|ATSL|ATFL") || horseJockey.getFinalStandPosition() != 0)) {
                 line += "--";
             } else {
                 line += String.format("%2d", horseJockey.getNumberOfIncrementsDone());    /* N# */
             }
             line += " ";
-            if (!horseJockey.getStatus().equals("R")) {
+            if (!(horseJockey.getStatus().matches("R|ATSL|ATFL") || horseJockey.getFinalStandPosition() != 0)) {
                 line += "---";
             } else {
                 line += String.format("%3d", horseJockey.getPositionOnTrack());           /* Ps# */
@@ -360,11 +384,19 @@ public class GeneralInformationRepository {
      *
      * @return a race line of the logger, specified as the teacher asked for.
      */
-    private synchronized String printClassicRaceLine() {
+    private String printClassicRaceLine() {
         String line = "  ";
-        line += String.format("%1d", raceNumber);                                    /* RN */
-        line += "  ";
-        line += String.format("%2d", currentRaceDistance);                           /* Dist */
+        if (brokerStatus.equals("OTE")) {
+            line += "-";
+        } else {
+            line += String.format("%1d", raceNumber);                                    /* RN */
+        }
+        line += " ";
+        if (brokerStatus.equals("OTE")) {
+            line += "--";
+        } else {
+            line += String.format("%2d", currentRaceDistance);                           /* Dist */
+        }
         line += "  ";
         for (int i = 0; i != spectators.length; i++) {
             line += " ";
@@ -396,13 +428,13 @@ public class GeneralInformationRepository {
                 line += String.format("%4d", horseJockey.getProbabilityToWin());          /* Od# */
             }
             line += " ";
-            if (!horseJockey.getStatus().equals("R")) {
+            if (!(horseJockey.getStatus().matches("R|ATSL|ATFL") || horseJockey.getFinalStandPosition() != 0)) {
                 line += "--";
             } else {
                 line += String.format("%2d", horseJockey.getNumberOfIncrementsDone());    /* N# */
             }
             line += "  ";
-            if (!horseJockey.getStatus().equals("R")) {
+            if (!(horseJockey.getStatus().matches("R|ATSL|ATFL") || horseJockey.getFinalStandPosition() != 0)) {
                 line += "--";
             } else {
                 line += String.format("%2d", horseJockey.getPositionOnTrack());           /* Ps# */
@@ -437,7 +469,8 @@ public class GeneralInformationRepository {
     }
 
     /**
-     * Sets a new status for the {@link entities.Broker}, given by a {@link BrokerState}.
+     * Sets a new status for the {@link entities.Broker}, given by a {@link BrokerState}. This method also engraves a new
+     * snapshot.
      *
      * @param status the current state represented by a {@link BrokerState} enumeration value.
      */
@@ -446,10 +479,12 @@ public class GeneralInformationRepository {
         for (String word : status.name().split("_")) {
             brokerStatus += word.charAt(0);
         }
+        newSnapshot();
     }
 
     /**
-     * Sets a new status for the {@code spectatorId} {@link Spectator}, given by a {@link SpectatorState}.
+     * Sets a new status for the {@code spectatorId} {@link Spectator}, given by a {@link SpectatorState}. This method also engraves a new
+     * snapshot.
      *
      * @param spectatorId the identification of the {@link Spectator}.
      * @param status the current state represented by a {@link SpectatorState} enumeration value.
@@ -463,6 +498,7 @@ public class GeneralInformationRepository {
         } catch (IndexOutOfBoundsException ioobe) {
             throw new UnknownSpectatorException(spectatorId);
         }
+        newSnapshot();
     }
 
     /**
@@ -519,7 +555,8 @@ public class GeneralInformationRepository {
     }
 
     /**
-     * Sets a new status for the {@code horseJockeyId} {@link HorseJockey}, given by a {@link HorseJockeyState}.
+     * Sets a new status for the {@code horseJockeyId} {@link HorseJockey}, given by a {@link HorseJockeyState}. This method also engraves a new
+     * snapshot.
      *
      * @param horseJockeyId the identification of the pair {@link HorseJockey}.
      * @param status the current state represented by a {@link HorseJockeyState} enumeration value.
@@ -533,6 +570,7 @@ public class GeneralInformationRepository {
         } catch (IndexOutOfBoundsException ioobe) {
             throw new UnknownHorseJockeyException(horseJockeyId);
         }
+        newSnapshot();
     }
 
     /**
@@ -586,6 +624,16 @@ public class GeneralInformationRepository {
         }
     }
 
+    /**
+     * Gets the number of increments (iterations) for a pair Horse/Jockey identified with {@code horseJockeyId}.
+     *
+     * @param horseJockeyId the identification of the pair Horse/Jockey.
+     *
+     * @return the number of increments (iterations) for a pair Horse/Jockey.
+     *
+     * @throws UnknownHorseJockeyException if a {@link HorseJockey} is non-existent and is indexed over our
+     * {@code horseJockeys} array.
+     */
     public synchronized int getHorseJockeyNumberOfIncrementsDid(int horseJockeyId) throws UnknownHorseJockeyException {
         try {
             return horseJockeys[horseJockeyId].getNumberOfIncrementsDone();
@@ -626,6 +674,15 @@ public class GeneralInformationRepository {
         } catch (IndexOutOfBoundsException ioobe) {
             throw new UnknownHorseJockeyException(horseJockeyId);
         }
+    }
+
+    /**
+     * Sets value to internal variable to inform that all the Spectators and Broker are already created and ready on start.
+     *
+     * @param value {@code true} if the simulation is now waiting for the pairs Horse/Jockey to be created; otherwise {@code false}.
+     */
+    public synchronized void setWereWaitingTheHorses(boolean value) {
+        wereWaitingTheHorses = value;
     }
 
     /**
@@ -725,4 +782,9 @@ public class GeneralInformationRepository {
      * colors.
      */
     private boolean onlyLogOnFile;
+
+    /**
+     * Internal variable to inform that both the Spectators and the Broker are already created.
+     */
+    private boolean wereWaitingTheHorses = false;
 }

@@ -10,6 +10,11 @@ import static stage.SimulatorConfiguration.*;
  * Creation of a Horse Race simulation placed on a Hippodrome.
  * This class has a {@link entities.Broker}, a set of {@link entities.Spectator}s
  * and a set of pairs Horse/Jockey ({@link entities.HorseJockey}s).
+ *
+ * @author Hugo Fragata
+ * @author Rui Lopes
+ * @since 0.1
+ * @version 1.1
  */
 public class Simulator {
     /**
@@ -43,6 +48,8 @@ public class Simulator {
             spectators[i] = new Spectator(i, generateMoney(), numberOfRaces, bettingCentre, controlCentre, paddock, repository);
             spectators[i].start();
         }
+
+        repository.setWereWaitingTheHorses(true);
 
         /* initialize races */
         for (int i = 0; i < numberOfRaces; i++) {
@@ -88,7 +95,7 @@ public class Simulator {
             System.err.println("This program will now quit.");
             System.exit(3);
         }
-        repository.newSnapshot();
+        repository.newSnapshot(true);
     }
 
     /**

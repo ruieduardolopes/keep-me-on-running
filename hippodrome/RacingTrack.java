@@ -15,7 +15,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  * @author Hugo Fragata
  * @author Rui Lopes
  * @since 0.1
- * @version 1.0
+ * @version 1.1
  */
 public class RacingTrack {
     /**
@@ -41,7 +41,6 @@ public class RacingTrack {
      * @throws InterruptedException if the wait() is interrupted.
      */
     public synchronized void proceedToStartLine() throws InterruptedException {
-        ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_START_LINE);
         horsesToRun.add(((HorseJockey)Thread.currentThread()).getIdentification());
         numberOfFinishedHorses = 0;
         repository.setHorseJockeyFinalStandPosition(((HorseJockey)Thread.currentThread()).getIdentification(), 0);
@@ -144,7 +143,7 @@ public class RacingTrack {
      *
      * @param horse the identification of the pair Horse/Jockey which has finished its race.
      */
-    private synchronized void markFinalPosition(int horse) {
+    private void markFinalPosition(int horse) {
         numberOfFinishedHorses++;
         repository.setHorseJockeyFinalStandPosition(horse, numberOfFinishedHorses);
     }

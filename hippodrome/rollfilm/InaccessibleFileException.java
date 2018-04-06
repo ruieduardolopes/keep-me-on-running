@@ -1,4 +1,4 @@
-package hippodrome.registry;
+package hippodrome.rollfilm;
 
 /**
  * This exception exists to be thrown when a file cannot be accessed with
@@ -7,7 +7,7 @@ package hippodrome.registry;
  *
  * @author Hugo Fragata
  * @author Rui Lopes
- * @version 1.0
+ * @version 1.1
  * @since 0.1
  */
 public class InaccessibleFileException extends RuntimeException {

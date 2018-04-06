@@ -13,6 +13,6 @@
  * @see hippodrome
  * @see stage
  * @since 0.1
- * @version 1.0
+ * @version 1.1
  */
 package entities;
