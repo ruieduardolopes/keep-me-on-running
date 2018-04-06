@@ -151,6 +151,11 @@ public class GeneralInformationRepository {
         file.close();
     }
 
+    /**
+     * Adds a new snapshot of the race to log it.
+     *
+     * @param nullable a distinguishable item of the private method {@code newSnapshot}.
+     */
     public synchronized void newSnapshot(boolean nullable) {
         newSnapshot();
     }
@@ -159,9 +164,11 @@ public class GeneralInformationRepository {
      * Adds a new snapshot of the race to log it.
      */
     private void newSnapshot() {
-        for (int i = 0; i != horseJockeys.length; i++) {
-            if (horseJockeys[i].getAbility() == 0 && wereWaitingTheHorses) {
-                return;
+        if (brokerStatus.equals("OTE")) {
+            for (int i = 0; i != horseJockeys.length; i++) {
+                if (horseJockeys[i].getAbility() == 0 && wereWaitingTheHorses) {
+                    return;
+                }
             }
         }
         boolean actionSucceeded = file.openForAppending(null, filename);
@@ -462,7 +469,8 @@ public class GeneralInformationRepository {
     }
 
     /**
-     * Sets a new status for the {@link entities.Broker}, given by a {@link BrokerState}.
+     * Sets a new status for the {@link entities.Broker}, given by a {@link BrokerState}. This method also engraves a new
+     * snapshot.
      *
      * @param status the current state represented by a {@link BrokerState} enumeration value.
      */
@@ -475,7 +483,8 @@ public class GeneralInformationRepository {
     }
 
     /**
-     * Sets a new status for the {@code spectatorId} {@link Spectator}, given by a {@link SpectatorState}.
+     * Sets a new status for the {@code spectatorId} {@link Spectator}, given by a {@link SpectatorState}. This method also engraves a new
+     * snapshot.
      *
      * @param spectatorId the identification of the {@link Spectator}.
      * @param status the current state represented by a {@link SpectatorState} enumeration value.
@@ -546,7 +555,8 @@ public class GeneralInformationRepository {
     }
 
     /**
-     * Sets a new status for the {@code horseJockeyId} {@link HorseJockey}, given by a {@link HorseJockeyState}.
+     * Sets a new status for the {@code horseJockeyId} {@link HorseJockey}, given by a {@link HorseJockeyState}. This method also engraves a new
+     * snapshot.
      *
      * @param horseJockeyId the identification of the pair {@link HorseJockey}.
      * @param status the current state represented by a {@link HorseJockeyState} enumeration value.
@@ -614,6 +624,16 @@ public class GeneralInformationRepository {
         }
     }
 
+    /**
+     * Gets the number of increments (iterations) for a pair Horse/Jockey identified with {@code horseJockeyId}.
+     *
+     * @param horseJockeyId the identification of the pair Horse/Jockey.
+     *
+     * @return the number of increments (iterations) for a pair Horse/Jockey.
+     *
+     * @throws UnknownHorseJockeyException if a {@link HorseJockey} is non-existent and is indexed over our
+     * {@code horseJockeys} array.
+     */
     public synchronized int getHorseJockeyNumberOfIncrementsDid(int horseJockeyId) throws UnknownHorseJockeyException {
         try {
             return horseJockeys[horseJockeyId].getNumberOfIncrementsDone();
@@ -656,6 +676,11 @@ public class GeneralInformationRepository {
         }
     }
 
+    /**
+     * Sets value to internal variable to inform that all the Spectators and Broker are already created and ready on start.
+     *
+     * @param value {@code true} if the simulation is now waiting for the pairs Horse/Jockey to be created; otherwise {@code false}.
+     */
     public synchronized void setWereWaitingTheHorses(boolean value) {
         wereWaitingTheHorses = value;
     }
@@ -758,5 +783,8 @@ public class GeneralInformationRepository {
      */
     private boolean onlyLogOnFile;
 
+    /**
+     * Internal variable to inform that both the Spectators and the Broker are already created.
+     */
     private boolean wereWaitingTheHorses = false;
 }
