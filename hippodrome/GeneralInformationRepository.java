@@ -20,7 +20,7 @@ import java.time.Instant;
  * @since 0.1
  * @version 1.1
  */
-public class GeneralInformationRepository {
+public class GeneralInformationRepository implements GeneralInformationRepositoryInterface {
     /**
      * Creates a General Repository of Information which saves a
      * snapshot of all instants of time throughout a horse run

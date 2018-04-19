@@ -27,7 +27,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  * @since 0.1
  * @version 1.1
  */
-public class BettingCentre {
+public class BettingCentre implements BettingCentreInterface {
 
     /**
      * Creates a Betting Centre.

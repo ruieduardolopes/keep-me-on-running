@@ -15,7 +15,7 @@ import entities.SpectatorState;
  * @since 0.1
  * @version 1.1
  */
-public class Paddock {
+public class Paddock implements PaddockInterface {
     /**
      * Creates a Paddock.
      * <br>

@@ -11,7 +11,7 @@ import entities.HorseJockeyState;
  * @since 0.1
  * @version 1.1
  */
-public class Stable {
+public class Stable implements StableInterface {
     /**
      * Changes the state of the pair Horse/Jockey to At the Stable ({@code ATS}) and waits till the current race is,
      * in fact, the current race of the event which is about to start.

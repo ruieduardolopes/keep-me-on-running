@@ -14,7 +14,7 @@ import static stage.SimulatorConfiguration.NUMBER_OF_PAIRS_HORSE_JOCKEY;
  * @since 0.1
  * @version 1.1
  */
-public class ControlCentre {
+public class ControlCentre implements ControlCentreInterface {
     /**
      * Creates a Control Centre.
      * <br>

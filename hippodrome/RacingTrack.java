@@ -17,7 +17,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  * @since 0.1
  * @version 1.1
  */
-public class RacingTrack {
+public class RacingTrack implements RacingTrackInterface {
     /**
      * Creates a Racing Track.
      * <br>
