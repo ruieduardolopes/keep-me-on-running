@@ -1,4 +1,4 @@
-package clientSide;
+package lib.communication;
 
 import genclass.GenericIO;
 import java.io.*;
