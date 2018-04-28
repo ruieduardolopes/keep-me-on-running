@@ -7,6 +7,14 @@ import entities.SpectatorState;
 public class Message {
     public Message(MessageType type) {
         this.type = type;
+        switch (type) {
+            case BETTING_CENTRE_ACCEPT_THE_BETS:
+                break;
+            case BETTING_CENTRE_HONOUR_THE_BETS:
+                break;
+            case BETTING_CENTRE_GO_COLLECT_THE_GAINS:
+                break;
+        }
     }
 
     public Message(MessageType type, boolean value) {
@@ -16,6 +24,21 @@ public class Message {
                 this.value = value;
                 break;
             case PADDOCK_GO_CHECK_HORSES_WITH_LAST_SPECTATOR:
+                this.value = value;
+                break;
+            case REPLY_BETTING_CENTRE_ARE_THERE_ANY_WINNERS:
+                this.value = value;
+                break;
+            case REPLY_BETTING_CENTRE_HAVE_I_WON:
+                this.value = value;
+                break;
+            case REPLY_CONTROL_CENTRE_WAIT_FOR_NEXT_RACE:
+                this.value = value;
+                break;
+            case REPLY_PADDOCK_GO_CHECK_HORSES:
+                this.value = value;
+                break;
+            case REPLY_RACING_TRACK_HAS_FINISH_LINE_BEEN_CROSSED:
                 this.value = value;
                 break;
             default:
@@ -56,6 +79,30 @@ public class Message {
                 break;
             case STABLE_SUMMON_HORSES_TO_PADDOCK:
                 raceNumber = value;
+                break;
+            case REPLY_BETTING_CENTRE_GET_NUMBER_OF_HORSES:
+                horses = value;
+                break;
+            case REPLY_BETTING_CENTRE_GO_COLLECT_THE_GAINS:
+                gains = value;
+                break;
+            case REPLY_BETTING_CENTRE_PLACE_A_BET:
+                bet = value;
+                break;
+            case REPLY_CONTROL_CENTRE_REPORT_RESULTS:
+                results = value;
+                break;
+            case REPLY_GENERAL_INFORMATION_REPOSITORY_GET_CURRENT_RACE_DISTANCE:
+                raceDistance = value;
+                break;
+            case REPLY_GENERAL_INFORMATION_REPOSITORY_GET_HORSE_JOCKEY_NUMBER_OF_INCREMENTS_DID:
+                increments = value;
+                break;
+            case REPLY_GENERAL_INFORMATION_REPOSITORY_GET_RACE_NUMBER:
+                raceNumber = value;
+                break;
+            case REPLY_RACING_TRACK_GET_WINNER:
+                winner = value;
                 break;
             default:
                 // TODO : Handle this case
@@ -139,6 +186,11 @@ public class Message {
         this.spectatorState = state;
     }
 
+    public Message(MessageType type, byte[] serializedObject) {
+        this.type = type;
+        this.serializedObject = serializedObject;
+    }
+
     public MessageType getType() {
         return type;
     }
@@ -211,6 +263,30 @@ public class Message {
         return value;
     }
 
+    public int getGains() {
+        return gains;
+    }
+
+    public int getHorses() {
+        return horses;
+    }
+
+    public int getResults() {
+        return results;
+    }
+
+    public int getIncrements() {
+        return increments;
+    }
+
+    public boolean isValue() {
+        return value;
+    }
+
+    public byte[] getSerializedObject() {
+        return serializedObject;
+    }
+
     private MessageType type;
     private BrokerState brokerState;
     private HorseJockeyState horseJockeyState;
@@ -218,6 +294,10 @@ public class Message {
     private int identification;
     private int spectatorID;
     private int bet;
+    private int gains;
+    private int horses;
+    private int results;
+    private int increments;
     private int horseID;
     private int winner;
     private int ability;
@@ -229,4 +309,5 @@ public class Message {
     private int horseIteration;
     private int horsePosition;
     private boolean value;
+    private byte[] serializedObject;
 }
