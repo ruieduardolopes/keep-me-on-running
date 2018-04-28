@@ -12,6 +12,13 @@ import entities.HorseJockeyState;
  * @version 1.1
  */
 public class Stable implements StableInterface {
+    public static Stable getInstance() {
+        if (instance == null) {
+            instance = new Stable();
+        }
+        return instance;
+    }
+
     /**
      * Changes the state of the pair Horse/Jockey to At the Stable ({@code ATS}) and waits till the current race is,
      * in fact, the current race of the event which is about to start.
@@ -58,4 +65,5 @@ public class Stable implements StableInterface {
      */
     private int currentRaceNumber = -1;
 
+    private static Stable instance;
 }

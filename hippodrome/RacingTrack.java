@@ -7,6 +7,10 @@ import entities.HorseJockey;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import static hippodrome.configurations.RacingTrack.NUMBER_OF_TRACKS;
+import static hippodrome.configurations.RacingTrack.RACE_DISTANCE;
+import static hippodrome.configurations.RacingTrack.RACE_IDENTIFICATION;
+
 /**
  * Place where the races take place. Here each race is represented by an element
  * of the class {@link Race}, described by a given number of tracks, an identification
@@ -28,10 +32,17 @@ public class RacingTrack implements RacingTrackInterface {
      * @param repository An instance of a {@link GeneralInformationRepository} in order to report all the actions and
      *                   log each and every moment.
      */
-    public RacingTrack(Race race, GeneralInformationRepository repository) {
+    private RacingTrack(Race race, GeneralInformationRepository repository) {
         this.race = race;
         this.repository = repository;
         this.currentHorsesPositions = new int[race.getNumberOfTracks()];
+    }
+
+    public static RacingTrack getInstance() {
+        if (instance == null) {
+            instance = new RacingTrack(new Race(NUMBER_OF_TRACKS, RACE_IDENTIFICATION, RACE_DISTANCE), null);
+        }
+        return instance;
     }
 
     /**
@@ -204,6 +215,8 @@ public class RacingTrack implements RacingTrackInterface {
      * The {@link GeneralInformationRepository} instance where all this region's actions will be reported.
      */
     private GeneralInformationRepository repository;
+
+    private static RacingTrack instance;
 }
 
 
