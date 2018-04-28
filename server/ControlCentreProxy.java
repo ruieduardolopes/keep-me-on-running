@@ -13,7 +13,7 @@ public class ControlCentreProxy implements Server {
     public Message processAndAnswerRequest(Message message) throws Exception {
         Message reply = null;
         switch (message.getType()) {
-            case CONTROL_CENTRE_ENTERTAIN_THE_RACE:
+            case CONTROL_CENTRE_ENTERTAIN_THE_GUESTS:
                 controlCentre.entertainTheGuests();
                 reply = new Message(MessageType.OK);
                 break;
@@ -51,7 +51,7 @@ public class ControlCentreProxy implements Server {
                 break;
             case CONTROL_CENTRE_WAIT_FOR_THE_NEXT_RACE:
                 boolean thereIsANextRace = controlCentre.waitForTheNextRace();
-                reply = new Message(MessageType.REPLY_CONTROL_CENTRE_WAT_FOR_NEXT_RACE, thereIsANextRace);
+                reply = new Message(MessageType.REPLY_CONTROL_CENTRE_WAIT_FOR_NEXT_RACE, thereIsANextRace);
                 break;
             default:
                 // TODO : handle this case

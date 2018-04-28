@@ -19,11 +19,11 @@ public class GeneralInformationRepositoryProxy implements Server {
                 break;
             case GENERAL_INFORMATION_REPOSITORY_GET_HORSE_JOCKEY_NUMBER_OF_INCREMENTS_DID:
                 int numberOfIncrements = repository.getHorseJockeyNumberOfIncrementsDid(message.getHorseID());
-                reply = new Message(MessageType.REPLY_GENERAL_INFORMATION_REPOSITORY_GET_HORSE_JOCKEY_NUMBER_OF_INCREMENTS_DID);
+                reply = new Message(MessageType.REPLY_GENERAL_INFORMATION_REPOSITORY_GET_HORSE_JOCKEY_NUMBER_OF_INCREMENTS_DID, numberOfIncrements);
                 break;
             case GENERAL_INFORMATION_REPOSITORY_GET_RACE_NUMBER:
                 int raceNumber = repository.getRaceNumber();
-                reply = new Message(MessageType.REPLY_GENERAL_INFORMATION_REPOSITORY_GET_RACE_NUMBER);
+                reply = new Message(MessageType.REPLY_GENERAL_INFORMATION_REPOSITORY_GET_RACE_NUMBER, raceNumber);
                 break;
             case GENERAL_INFORMATION_REPOSITORY_NEW_SNAPSHOT:
                 repository.newSnapshot(false);
