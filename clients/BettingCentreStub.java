@@ -6,6 +6,8 @@ import hippodrome.BettingCentreInterface;
 import hippodrome.rollfilm.UnknownHorseJockeyException;
 import lib.communication.ClientCom;
 
+import static clients.configurations.BettingCentre.*;
+
 public class BettingCentreStub implements BettingCentreInterface {
     @Override
     public void acceptTheBets() throws InterruptedException {
@@ -21,7 +23,14 @@ public class BettingCentreStub implements BettingCentreInterface {
 
     @Override
     public void honourTheBets() throws InterruptedException {
-
+        ClientCom connection = createConnectionWithServer();
+        Message messageToSend = new Message(MessageType.BETTING_CENTRE_HONOUR_THE_BETS);
+        connection.writeObject(messageToSend);
+        Message messageReceived = (Message) connection.readObject();
+        if (messageReceived.getType() != MessageType.OK) {
+            // TODO : Handle this error
+        }
+        connection.close();
     }
 
     @Override
@@ -30,39 +39,67 @@ public class BettingCentreStub implements BettingCentreInterface {
         Message messageToSend = new Message(MessageType.BETTING_CENTRE_PLACE_A_BET, spectator, bet, horse);
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
+        connection.close();
         return messageReceived.getBet();
     }
 
     @Override
     public int goCollectTheGains() throws InterruptedException {
-        return 0;
+        ClientCom connection = createConnectionWithServer();
+        Message messageToSend = new Message(MessageType.BETTING_CENTRE_GO_COLLECT_THE_GAINS);
+        connection.writeObject(messageToSend);
+        Message messageReceived = (Message) connection.readObject();
+        connection.close();
+        return messageReceived.getGains();
     }
 
     @Override
     public boolean haveIWon(int spectatorId) {
-        return false;
+        ClientCom connection = createConnectionWithServer();
+        Message messageToSend = new Message(MessageType.BETTING_CENTRE_HAVE_I_WON);
+        connection.writeObject(messageToSend);
+        Message messageReceived = (Message) connection.readObject();
+        connection.close();
+        return messageReceived.getValue();
     }
 
     @Override
     public boolean areThereAnyWinners(int winner) {
-        return false;
+        ClientCom connection = createConnectionWithServer();
+        Message messageToSend = new Message(MessageType.BETTING_CENTRE_ARE_THERE_ANY_WINNERS);
+        connection.writeObject(messageToSend);
+        Message messageReceived = (Message) connection.readObject();
+        connection.close();
+        return messageReceived.getValue();
     }
 
     @Override
     public int getNumberOfHorses() {
-        return 0;
+        ClientCom connection = createConnectionWithServer();
+        Message messageToSend = new Message(MessageType.BETTING_CENTRE_GET_NUMBER_OF_HORSES);
+        connection.writeObject(messageToSend);
+        Message messageReceived = (Message) connection.readObject();
+        connection.close();
+        return messageReceived.getHorses();
     }
 
     @Override
     public void setAbility(int horse, int ability) throws UnknownHorseJockeyException {
-
+        ClientCom connection = createConnectionWithServer();
+        Message messageToSend = new Message(MessageType.BETTING_CENTRE_SET_ABILITY, horse, ability);
+        connection.writeObject(messageToSend);
+        Message messageReceived = (Message) connection.readObject();
+        if (messageReceived.getType() != MessageType.OK) {
+            // TODO : Handle this error
+        }
+        connection.close();
     }
 
     private ClientCom createConnectionWithServer() {
-        ClientCom connection = new ClientCom(config.host, config.repoServerPort);
+        ClientCom connection = new ClientCom(HOST, PORT);
         while (!connection.open()) {
             try {
-                Thread.sleep(config.timeSleep);
+                Thread.sleep(TIME_TO_SLEEP);
             } catch (InterruptedException ie) {
                 // TODO : Handle this exception
             }
