@@ -5,6 +5,9 @@ import entities.HorseJockeyState;
 import entities.Spectator;
 import entities.SpectatorState;
 
+import static hippodrome.configurations.Paddock.NUMBER_OF_HORSES;
+import static hippodrome.configurations.Paddock.NUMBER_OF_SPECTATORS;
+
 /**
  * Place where the horses are paradded before the {@link entities.Spectator}s. As the
  * pairs Horse/Jockey comes here, it means that each and everyone of them is getting prepared
@@ -25,9 +28,17 @@ public class Paddock implements PaddockInterface {
      * @param numberOfSpectators The number of Spectators which will be attending the event.
      * @param numberOfHorses The number of pairs Horse/Jockey which will be competing.
      */
-    public Paddock(int numberOfSpectators, int numberOfHorses) {
+    private Paddock(int numberOfSpectators, int numberOfHorses) {
         this.numberOfSpectators = numberOfSpectators;
         this.numberOfHorses = numberOfHorses;
+    }
+
+    /** TODO : documentation */
+    public static Paddock getInstance() {
+        if (instance == null) {
+            instance = new Paddock(NUMBER_OF_SPECTATORS, NUMBER_OF_HORSES);
+        }
+        return instance;
     }
 
     /**
@@ -147,4 +158,7 @@ public class Paddock implements PaddockInterface {
      * {@link Paddock#goCheckHorses(boolean)} method.
      */
     private boolean lastSpectatorHasNotArrivedOnPaddock = true;
+
+    /** TODO : documentation */
+    private static Paddock instance;
 }

@@ -3,6 +3,7 @@ package hippodrome;
 import entities.*;
 import hippodrome.actions.Race;
 
+import static hippodrome.configurations.ControlCentre.NUMBER_OF_HORSES;
 import static stage.SimulatorConfiguration.NUMBER_OF_PAIRS_HORSE_JOCKEY;
 
 /**
@@ -23,8 +24,16 @@ public class ControlCentre implements ControlCentreInterface {
      *
      * @param numberOfHorses the number of pairs Horse/Jockeys which will compete against one another.
      */
-    public ControlCentre(int numberOfHorses) {
+    private ControlCentre(int numberOfHorses) {
         this.numberOfHorses = numberOfHorses;
+    }
+
+    /** TODO : Documentation */
+    public static ControlCentre getInstance() {
+        if (instance == null) {
+            new ControlCentre(NUMBER_OF_HORSES);
+        }
+        return instance;
     }
 
     /**
@@ -243,4 +252,6 @@ public class ControlCentre implements ControlCentreInterface {
      */
     private int raceWinner = 0;
 
+    /** TODO : documentation */
+    private static ControlCentre instance;
 }

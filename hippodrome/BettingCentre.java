@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import static hippodrome.configurations.BettingCentre.NUMBER_OF_HORSES;
+import static hippodrome.configurations.BettingCentre.NUMBER_OF_SPECTATORS;
+
 /**
  * Place where the {@link Spectator}s place their bets on the winning horse. As they come here
  * to place their bets, they also come here to collect his (or hers) further gains, if such a
@@ -40,7 +43,7 @@ public class BettingCentre implements BettingCentreInterface {
      * @param repository an instance of a {@link GeneralInformationRepository} in order to report all the actions and
      *                   log each and every moment.
      */
-    public BettingCentre(int numberOfHorses, int numberOfSpectators, GeneralInformationRepository repository) {
+    private BettingCentre(int numberOfHorses, int numberOfSpectators, GeneralInformationRepository repository) {
         this.numberOfHorses = numberOfHorses;
         this.numberOfSpectators = numberOfSpectators;
         this.bets = new Bet[numberOfSpectators];
@@ -50,6 +53,14 @@ public class BettingCentre implements BettingCentreInterface {
         this.winners = new int[numberOfSpectators];
         this.horsesOdds = new int[numberOfHorses];
         this.horsesAbilities = new int[numberOfHorses];
+    }
+
+    /** TODO : Documentation */
+    public static BettingCentre getInstance() {
+        if (instance == null) {
+            new BettingCentre(NUMBER_OF_HORSES, NUMBER_OF_SPECTATORS, null); // TODO : how can we solve the repository issue?
+        }
+        return instance;
     }
 
     /**
@@ -339,4 +350,7 @@ public class BettingCentre implements BettingCentreInterface {
      * The {@link GeneralInformationRepository} instance where all this region's actions will be reported.
      */
     private GeneralInformationRepository repository;
+
+    /** TODO : Documentation */
+    private static BettingCentre instance;
 }

@@ -6,6 +6,7 @@ import entities.SpectatorState;
 import hippodrome.rollfilm.*;
 import genclass.GenericIO;
 import genclass.TextFile;
+import static hippodrome.configurations.GeneralInformationRepository.*;
 
 import java.time.Instant;
 
@@ -30,7 +31,7 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
      * @param numberOfSpectators number of Spectators to attend on track.
      * @param onlyLogonFile flag for deactivate the debug on {@code stdout}.
      */
-    public GeneralInformationRepository(int numberOfHorses, int numberOfSpectators, boolean onlyLogonFile) {
+    private GeneralInformationRepository(int numberOfHorses, int numberOfSpectators, boolean onlyLogonFile) {
         this.onlyLogOnFile = onlyLogonFile;
         this.numberOfHorses = numberOfHorses;
         this.numberOfSpectators = numberOfSpectators;
@@ -55,6 +56,14 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
             System.err.println("Quitting...");
             System.exit(1);
         }
+    }
+
+    /** TODO : documentation */
+    public static GeneralInformationRepository getInstance() {
+        if (instance == null) {
+            instance = new GeneralInformationRepository(NUMBER_OF_HORSES, NUMBER_OF_SPECTATORS, ONLY_LOG_ON_FILE);
+        }
+        return instance;
     }
 
     /**
@@ -787,4 +796,7 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
      * Internal variable to inform that both the Spectators and the Broker are already created.
      */
     private boolean wereWaitingTheHorses = false;
+
+    /** TODO : documentation */
+    private static GeneralInformationRepository instance;
 }
