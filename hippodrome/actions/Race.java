@@ -1,5 +1,7 @@
 package hippodrome.actions;
 
+import java.io.Serializable;
+
 import static hippodrome.actions.RaceConfiguration.TRACK_DISTANCE_MAX_BOUND;
 import static hippodrome.actions.RaceConfiguration.TRACK_DISTANCE_MIN_BOUND;
 
@@ -11,7 +13,7 @@ import static hippodrome.actions.RaceConfiguration.TRACK_DISTANCE_MIN_BOUND;
  * @since 0.1
  * @version 1.1
  */
-public class Race {
+public class Race implements Serializable {
     /**
      * Constructs a race with {@code numberOfTracks} number of tracks and identification {@code identification}.
      *
