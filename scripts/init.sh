@@ -2,5 +2,5 @@
 
 WORK_PATH=$(dirname "$(pwd)")
 
-source simulation-controls.sh
-source server-and-client-controls.sh
+source $WORK_PATH/scripts/simulation-controls.sh
+source $WORK_PATH/scripts/server-and-client-controls.sh
