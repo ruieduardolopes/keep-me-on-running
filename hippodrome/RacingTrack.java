@@ -42,7 +42,7 @@ public class RacingTrack implements RacingTrackInterface {
 
     public static RacingTrack getInstance() {
         if (instance == null) {
-            instance = new RacingTrack(new Race(NUMBER_OF_TRACKS, id++, generateDistance())); // TODO : fill with new race identification and distance
+            instance = new RacingTrack(new Race(NUMBER_OF_TRACKS, identification++, generateDistance())); // TODO : fill with new race identification and distance
 
         }
         return instance;
@@ -162,12 +162,13 @@ public class RacingTrack implements RacingTrackInterface {
         repository.setHorseJockeyFinalStandPosition(horse, numberOfFinishedHorses);
     }
 
-    //TODO: docs here
+    /** TODO : documentation */
     private static int generateDistance() {
         return (int)(Math.random() * (TRACK_DISTANCE_MAX_BOUND - TRACK_DISTANCE_MIN_BOUND)) + TRACK_DISTANCE_MIN_BOUND;
     }
 
-    private static int id = 0;
+    /** TODO : documentation */
+    private static int identification = 0;
 
     /**
      * A representation of a race with an identification, a distance and a number of tracks. This is made using the class
@@ -226,6 +227,7 @@ public class RacingTrack implements RacingTrackInterface {
      */
     private GeneralInformationRepositoryStub repository;
 
+    /** TODO : documentation */
     private static RacingTrack instance;
 }
 
