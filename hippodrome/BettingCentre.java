@@ -57,7 +57,7 @@ public class BettingCentre implements BettingCentreInterface {
     /** TODO : Documentation */
     public static BettingCentre getInstance() {
         if (instance == null) {
-            new BettingCentre(NUMBER_OF_PAIRS_HORSE_JOCKEY, NUMBER_OF_SPECTATORS); // TODO : how can we solve the repository issue?
+            new BettingCentre(NUMBER_OF_PAIRS_HORSE_JOCKEY, NUMBER_OF_SPECTATORS);
         }
         return instance;
     }

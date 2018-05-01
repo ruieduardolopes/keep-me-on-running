@@ -19,7 +19,7 @@ public class RacingTrackProxy implements Server {
         ByteArrayOutputStream objectByteArray = new ByteArrayOutputStream();
         ObjectOutputStream serializedObject = null;
         switch (message.getType()) {
-            case RACING_TRACK_GET_RACE: // TODO : verify the serialization of a Racep
+            case RACING_TRACK_GET_RACE: // TODO : verify the serialization of a Race
                 Race race = racingTrack.getRace();
                 serializedObject = new ObjectOutputStream(objectByteArray);
                 serializedObject.writeObject(race);

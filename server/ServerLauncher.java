@@ -46,8 +46,8 @@ public class ServerLauncher {
             serverConnectionInstance = serverConnectionRequest.accept();
             Logger.printNotification("Preparing to attend to request");
             serviceProviderAgent = new ServiceProviderAgent(serverConnectionInstance, server);
-            serviceProviderAgent.start();
             Logger.printInformation("An agent was already made available to attend the situation");
+            serviceProviderAgent.start();
         }
     }
 

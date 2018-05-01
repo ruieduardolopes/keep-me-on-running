@@ -24,7 +24,6 @@ public class ClientLauncher {
                 }
                 break;
             case "spectators" :
-                // TODO : make a set of spectators (just like in the Simulator)
                 port = SPECTATOR_PORT;
                 Spectator[] spectators = new Spectator[NUMBER_OF_SPECTATORS];
                 for (int i = 0; i != spectators.length; i++) {
