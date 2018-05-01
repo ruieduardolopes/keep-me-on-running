@@ -1,6 +1,6 @@
 package server;
 
-import configurations.ServerConfiguration;
+import configurations.ServerConfigurations;
 import lib.communication.ServerCom;
 import lib.logging.Logger;
 
@@ -12,27 +12,27 @@ public class ServerLauncher {
         switch (args[0]) {
             case "betting-centre" :
                 server = new BettingCentreProxy();
-                port = ServerConfiguration.BETTING_CENTRE_PORT;
+                port = ServerConfigurations.BETTING_CENTRE_PORT;
                 break;
             case "control-centre" :
                 server = new ControlCentreProxy();
-                port = ServerConfiguration.CONTROL_CENTRE_PORT;
+                port = ServerConfigurations.CONTROL_CENTRE_PORT;
                 break;
             case "general-repo" :
                 server = new GeneralInformationRepositoryProxy();
-                port = ServerConfiguration.GENERAL_INFORMATION_REPOSITORY_PORT;
+                port = ServerConfigurations.GENERAL_INFORMATION_REPOSITORY_PORT;
                 break;
             case "paddock" :
                 server = new PaddockProxy();
-                port = ServerConfiguration.PADDOCK_PORT;
+                port = ServerConfigurations.PADDOCK_PORT;
                 break;
             case "racing-track" :
                 server = new RacingTrackProxy();
-                port = ServerConfiguration.RACING_TRACK_PORT;
+                port = ServerConfigurations.RACING_TRACK_PORT;
                 break;
             case "stable" :
                 server = new StableProxy();
-                port = ServerConfiguration.STABLE_PORT;
+                port = ServerConfigurations.STABLE_PORT;
                 break;
             default :
                 // TODO : handle this case

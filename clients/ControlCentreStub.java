@@ -5,9 +5,9 @@ import communications.MessageType;
 import hippodrome.ControlCentreInterface;
 import lib.communication.ClientCom;
 
-import static configurations.ServerConfiguration.CONTROL_CENTRE_HOST;
-import static configurations.ServerConfiguration.CONTROL_CENTRE_PORT;
-import static configurations.ServerConfiguration.CONTROL_CENTRE_TIME_TO_SLEEP;
+import static configurations.ServerConfigurations.CONTROL_CENTRE_HOST;
+import static configurations.ServerConfigurations.CONTROL_CENTRE_PORT;
+import static configurations.ServerConfigurations.CONTROL_CENTRE_TIME_TO_SLEEP;
 
 public class ControlCentreStub implements ControlCentreInterface {
     @Override

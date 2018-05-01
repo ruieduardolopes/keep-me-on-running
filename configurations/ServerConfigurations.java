@@ -1,6 +1,6 @@
 package configurations;
 
-public class ServerConfiguration {
+public class ServerConfigurations {
     public static final int BETTING_CENTRE_PORT = 22410;
     public static final String BETTING_CENTRE_HOST = "localhost";
     public static final int BETTING_CENTRE_TIME_TO_SLEEP = 1;

@@ -5,9 +5,9 @@ import communications.MessageType;
 import hippodrome.PaddockInterface;
 import lib.communication.ClientCom;
 
-import static configurations.ServerConfiguration.PADDOCK_HOST;
-import static configurations.ServerConfiguration.PADDOCK_PORT;
-import static configurations.ServerConfiguration.PADDOCK_TIME_TO_SLEEP;
+import static configurations.ServerConfigurations.PADDOCK_HOST;
+import static configurations.ServerConfigurations.PADDOCK_PORT;
+import static configurations.ServerConfigurations.PADDOCK_TIME_TO_SLEEP;
 
 public class PaddockStub implements PaddockInterface {
     @Override

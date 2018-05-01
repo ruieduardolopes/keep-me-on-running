@@ -6,9 +6,9 @@ import hippodrome.BettingCentreInterface;
 import hippodrome.rollfilm.UnknownHorseJockeyException;
 import lib.communication.ClientCom;
 
-import static configurations.ServerConfiguration.BETTING_CENTRE_HOST;
-import static configurations.ServerConfiguration.BETTING_CENTRE_PORT;
-import static configurations.ServerConfiguration.BETTING_CENTRE_TIME_TO_SLEEP;
+import static configurations.ServerConfigurations.BETTING_CENTRE_HOST;
+import static configurations.ServerConfigurations.BETTING_CENTRE_PORT;
+import static configurations.ServerConfigurations.BETTING_CENTRE_TIME_TO_SLEEP;
 
 public class BettingCentreStub implements BettingCentreInterface {
     @Override

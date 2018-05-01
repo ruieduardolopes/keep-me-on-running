@@ -10,9 +10,9 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
-import static configurations.ServerConfiguration.RACING_TRACK_HOST;
-import static configurations.ServerConfiguration.RACING_TRACK_PORT;
-import static configurations.ServerConfiguration.RACING_TRACK_TIME_TO_SLEEP;
+import static configurations.ServerConfigurations.RACING_TRACK_HOST;
+import static configurations.ServerConfigurations.RACING_TRACK_PORT;
+import static configurations.ServerConfigurations.RACING_TRACK_TIME_TO_SLEEP;
 
 public class RacingTrackStub implements RacingTrackInterface {
     @Override

@@ -10,9 +10,9 @@ import hippodrome.rollfilm.UnknownHorseJockeyException;
 import hippodrome.rollfilm.UnknownSpectatorException;
 import lib.communication.ClientCom;
 
-import static configurations.ServerConfiguration.GENERAL_INFORMATION_REPOSITORY_HOST;
-import static configurations.ServerConfiguration.GENERAL_INFORMATION_REPOSITORY_PORT;
-import static configurations.ServerConfiguration.GENERAL_INFORMATION_REPOSITORY_TIME_TO_SLEEP;
+import static configurations.ServerConfigurations.GENERAL_INFORMATION_REPOSITORY_HOST;
+import static configurations.ServerConfigurations.GENERAL_INFORMATION_REPOSITORY_PORT;
+import static configurations.ServerConfigurations.GENERAL_INFORMATION_REPOSITORY_TIME_TO_SLEEP;
 
 public class GeneralInformationRepositoryStub implements GeneralInformationRepositoryInterface {
     @Override

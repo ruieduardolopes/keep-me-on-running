@@ -5,9 +5,9 @@ import communications.MessageType;
 import hippodrome.StableInterface;
 import lib.communication.ClientCom;
 
-import static configurations.ServerConfiguration.STABLE_HOST;
-import static configurations.ServerConfiguration.STABLE_PORT;
-import static configurations.ServerConfiguration.STABLE_TIME_TO_SLEEP;
+import static configurations.ServerConfigurations.STABLE_HOST;
+import static configurations.ServerConfigurations.STABLE_PORT;
+import static configurations.ServerConfigurations.STABLE_TIME_TO_SLEEP;
 
 public class StableStub implements StableInterface {
     @Override
