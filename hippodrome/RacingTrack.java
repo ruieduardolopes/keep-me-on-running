@@ -35,11 +35,15 @@ public class RacingTrack implements RacingTrackInterface {
         this.race = race;
         this.repository = new GeneralInformationRepositoryStub();
         this.currentHorsesPositions = new int[race.getNumberOfTracks()];
+
+        repository.setRaceDistance(race.getDistance());
+        repository.setRaceNumber(race.getIdentification());
     }
 
     public static RacingTrack getInstance() {
         if (instance == null) {
             instance = new RacingTrack(new Race(NUMBER_OF_TRACKS, id++, generateDistance())); // TODO : fill with new race identification and distance
+
         }
         return instance;
     }
