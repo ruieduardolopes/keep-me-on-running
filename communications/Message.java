@@ -4,7 +4,9 @@ import entities.BrokerState;
 import entities.HorseJockeyState;
 import entities.SpectatorState;
 
-public class Message {
+import java.io.Serializable;
+
+public class Message implements Serializable {
     public Message(MessageType type) {
         this.type = type;
         switch (type) {
