@@ -42,6 +42,8 @@ public class HorseJockey extends Thread {
         this.stable = new StableStub();
         this.repository = new GeneralInformationRepositoryStub();
         this.bettingCentre = new BettingCentreStub();
+
+        repository.setWereWaitingTheHorses(true);
     }
 
     /**
