@@ -21,6 +21,7 @@ import static configurations.SimulationConfigurations.*;
  * @version 1.1
  */
 public class RacingTrack implements RacingTrackInterface {
+
     /**
      * Creates a Racing Track.
      * <br>
@@ -38,7 +39,7 @@ public class RacingTrack implements RacingTrackInterface {
 
     public static RacingTrack getInstance() {
         if (instance == null) {
-            instance = new RacingTrack(new Race(NUMBER_OF_TRACKS, 0 , 0)); // TODO : fill with new race identification and distance
+            instance = new RacingTrack(new Race(NUMBER_OF_TRACKS, id++, generateDistance())); // TODO : fill with new race identification and distance
         }
         return instance;
     }
@@ -156,6 +157,13 @@ public class RacingTrack implements RacingTrackInterface {
         numberOfFinishedHorses++;
         repository.setHorseJockeyFinalStandPosition(horse, numberOfFinishedHorses);
     }
+
+    //TODO: docs here
+    private static int generateDistance() {
+        return (int)(Math.random() * (TRACK_DISTANCE_MAX_BOUND - TRACK_DISTANCE_MIN_BOUND)) + TRACK_DISTANCE_MIN_BOUND;
+    }
+
+    private static int id = 0;
 
     /**
      * A representation of a race with an identification, a distance and a number of tracks. This is made using the class

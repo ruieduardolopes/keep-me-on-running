@@ -39,4 +39,13 @@ public class SimulationConfigurations {
     public static final int ABILITY_MIN_BOUND = 1;
 
     public static final boolean ONLY_LOG_ON_FILE = true;
+
+    /**
+     * Maximum distance of a race track.
+     */
+    public static final int TRACK_DISTANCE_MAX_BOUND = 100;
+    /**
+     * Minimum distance of a race track.
+     */
+    public static final int TRACK_DISTANCE_MIN_BOUND = 50;
 }
