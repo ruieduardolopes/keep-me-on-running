@@ -83,9 +83,10 @@ chraces () {
 
     if [ "$optionT" -eq 1 ]; then
         sed -ie "s/NUMBER_OF_TRACKS.*/NUMBER_OF_TRACKS = $2;/g" $WORK_PATH/configurations/SimulationConfigurations.java
+        sed -ie "s/NUMBER_OF_RACES.*/NUMBER_OF_RACES = $2;/g" $WORK_PATH/configurations/SimulationConfigurations.java
+    else
+        sed -ie "s/NUMBER_OF_RACES.*/NUMBER_OF_RACES = $1;/g" $WORK_PATH/configurations/SimulationConfigurations.java
     fi
-
-    sed -ie "s/NUMBER_OF_RACES.*/NUMBER_OF_RACES = $1;/g" $WORK_PATH/configurations/SimulationConfigurations.java
 
     # Verification of the result
     if [[ "$?" -ne 0 ]]; then
