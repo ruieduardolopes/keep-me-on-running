@@ -18,8 +18,7 @@ import java.util.ArrayList;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import static hippodrome.configurations.BettingCentre.NUMBER_OF_HORSES;
-import static hippodrome.configurations.BettingCentre.NUMBER_OF_SPECTATORS;
+import static configurations.SimulationConfigurations.*;
 
 /**
  * Place where the {@link Spectator}s place their bets on the winning horse. As they come here
@@ -58,7 +57,7 @@ public class BettingCentre implements BettingCentreInterface {
     /** TODO : Documentation */
     public static BettingCentre getInstance() {
         if (instance == null) {
-            new BettingCentre(NUMBER_OF_HORSES, NUMBER_OF_SPECTATORS); // TODO : how can we solve the repository issue?
+            new BettingCentre(NUMBER_OF_PAIRS_HORSE_JOCKEY, NUMBER_OF_SPECTATORS); // TODO : how can we solve the repository issue?
         }
         return instance;
     }

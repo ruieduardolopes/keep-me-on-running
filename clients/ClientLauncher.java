@@ -1,10 +1,11 @@
 package clients;
 
-import clients.configurations.ClientConfiguration;
-import clients.configurations.Entities;
 import entities.Broker;
 import entities.HorseJockey;
 import entities.Spectator;
+
+import static configurations.ClientConfigurations.*;
+import static configurations.SimulationConfigurations.*;
 
 public class ClientLauncher {
     public static void main(String[] args) {
@@ -13,8 +14,8 @@ public class ClientLauncher {
         }
         switch (args[0]) {
             case "broker" :
-                port = ClientConfiguration.BROKER_PORT;
-                Broker broker = new Broker(Entities.NUMBER_OF_RACES);
+                port = BROKER_PORT;
+                Broker broker = new Broker(NUMBER_OF_RACES);
                 broker.start();
                 try {
                     broker.join();
@@ -24,10 +25,10 @@ public class ClientLauncher {
                 break;
             case "spectators" :
                 // TODO : make a set of spectators (just like in the Simulator)
-                port = ClientConfiguration.SPECTATOR_PORT;
-                Spectator[] spectators = new Spectator[Entities.NUMBER_OF_SPECTATORS];
+                port = SPECTATOR_PORT;
+                Spectator[] spectators = new Spectator[NUMBER_OF_SPECTATORS];
                 for (int i = 0; i != spectators.length; i++) {
-                    spectators[i] = new Spectator(i, generateMoney(), Entities.NUMBER_OF_RACES);
+                    spectators[i] = new Spectator(i, generateMoney(), NUMBER_OF_RACES);
                     spectators[i].start();
                 }
                 try {
@@ -39,9 +40,9 @@ public class ClientLauncher {
                 }
                 break;
             case "horses" :
-                port = ClientConfiguration.HORSE_JOCKEY_PORT;
-                for (int race = 0; race != Entities.NUMBER_OF_RACES; race++) {
-                    HorseJockey[] horseJockeys = new HorseJockey[Entities.NUMBER_OF_PAIRS_HORSE_JOCKEY];
+                port = HORSE_JOCKEY_PORT;
+                for (int race = 0; race != NUMBER_OF_RACES; race++) {
+                    HorseJockey[] horseJockeys = new HorseJockey[NUMBER_OF_PAIRS_HORSE_JOCKEY];
                     for (int i = 0; i != horseJockeys.length; i++) {
                         horseJockeys[i] = new HorseJockey(i, generateAbility());
                         horseJockeys[i].start();
@@ -67,7 +68,7 @@ public class ClientLauncher {
      * @return a money value between 1 and 999.
      */
     private static int generateMoney() {
-        return (int)(Math.random() * (Entities.MONEY_MAX_BOUND - Entities.MONEY_MIN_BOUND)) + Entities.MONEY_MIN_BOUND;
+        return (int)(Math.random() * (MONEY_MAX_BOUND - MONEY_MIN_BOUND)) + MONEY_MIN_BOUND;
     }
 
     /**
@@ -77,7 +78,7 @@ public class ClientLauncher {
      * of the horse on track, while running.
      */
     private static int generateAbility() {
-        return (int)(Math.random()*(Entities.ABILITY_MAX_BOUND - Entities.ABILITY_MIN_BOUND)) + Entities.ABILITY_MIN_BOUND;
+        return (int)(Math.random()*(ABILITY_MAX_BOUND - ABILITY_MIN_BOUND)) + ABILITY_MIN_BOUND;
     }
 
     private static int port;

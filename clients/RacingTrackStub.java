@@ -10,7 +10,9 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
-import static clients.configurations.RacingTrack.*;
+import static configurations.ServerConfiguration.RACING_TRACK_HOST;
+import static configurations.ServerConfiguration.RACING_TRACK_PORT;
+import static configurations.ServerConfiguration.RACING_TRACK_TIME_TO_SLEEP;
 
 public class RacingTrackStub implements RacingTrackInterface {
     @Override
@@ -98,10 +100,10 @@ public class RacingTrackStub implements RacingTrackInterface {
     }
 
     private ClientCom createConnectionWithServer() {
-        ClientCom connection = new ClientCom(HOST, PORT);
+        ClientCom connection = new ClientCom(RACING_TRACK_HOST, RACING_TRACK_PORT);
         while (!connection.open()) {
             try {
-                Thread.sleep(TIME_TO_SLEEP);
+                Thread.sleep(RACING_TRACK_TIME_TO_SLEEP);
             } catch (InterruptedException ie) {
                 // TODO : Handle this exception
             }

@@ -8,9 +8,7 @@ import entities.HorseJockey;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import static hippodrome.configurations.RacingTrack.NUMBER_OF_TRACKS;
-import static hippodrome.configurations.RacingTrack.RACE_DISTANCE;
-import static hippodrome.configurations.RacingTrack.RACE_IDENTIFICATION;
+import static configurations.SimulationConfigurations.*;
 
 /**
  * Place where the races take place. Here each race is represented by an element
@@ -40,7 +38,7 @@ public class RacingTrack implements RacingTrackInterface {
 
     public static RacingTrack getInstance() {
         if (instance == null) {
-            instance = new RacingTrack(new Race(NUMBER_OF_TRACKS, RACE_IDENTIFICATION, RACE_DISTANCE));
+            instance = new RacingTrack(new Race(NUMBER_OF_TRACKS, 0 , 0)); // TODO : fill with new race identification and distance
         }
         return instance;
     }

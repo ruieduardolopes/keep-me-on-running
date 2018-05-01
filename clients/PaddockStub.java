@@ -5,7 +5,9 @@ import communications.MessageType;
 import hippodrome.PaddockInterface;
 import lib.communication.ClientCom;
 
-import static clients.configurations.Paddock.*;
+import static configurations.ServerConfiguration.PADDOCK_HOST;
+import static configurations.ServerConfiguration.PADDOCK_PORT;
+import static configurations.ServerConfiguration.PADDOCK_TIME_TO_SLEEP;
 
 public class PaddockStub implements PaddockInterface {
     @Override
@@ -55,10 +57,10 @@ public class PaddockStub implements PaddockInterface {
     }
 
     private ClientCom createConnectionWithServer() {
-        ClientCom connection = new ClientCom(HOST, PORT);
+        ClientCom connection = new ClientCom(PADDOCK_HOST, PADDOCK_PORT);
         while (!connection.open()) {
             try {
-                Thread.sleep(TIME_TO_SLEEP);
+                Thread.sleep(PADDOCK_TIME_TO_SLEEP);
             } catch (InterruptedException ie) {
                 // TODO : Handle this exception
             }

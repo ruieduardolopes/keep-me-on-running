@@ -8,9 +8,10 @@ import genclass.GenericIO;
 import genclass.TextFile;
 import lib.logging.Color;
 
-import static hippodrome.configurations.GeneralInformationRepository.*;
 
 import java.time.Instant;
+
+import static configurations.SimulationConfigurations.*;
 
 /**
  * Class which represents an archive of all hippodrome's actions
@@ -63,7 +64,7 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
     /** TODO : documentation */
     public static GeneralInformationRepository getInstance() {
         if (instance == null) {
-            instance = new GeneralInformationRepository(NUMBER_OF_HORSES, NUMBER_OF_SPECTATORS, ONLY_LOG_ON_FILE);
+            instance = new GeneralInformationRepository(NUMBER_OF_PAIRS_HORSE_JOCKEY, NUMBER_OF_SPECTATORS, ONLY_LOG_ON_FILE);
         }
         return instance;
     }

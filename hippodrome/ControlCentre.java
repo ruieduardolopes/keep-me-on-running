@@ -1,9 +1,8 @@
 package hippodrome;
 
 import entities.*;
-import hippodrome.actions.Race;
 
-import static hippodrome.configurations.ControlCentre.NUMBER_OF_HORSES;
+import static configurations.SimulationConfigurations.*;
 
 /**
  * Place where the {@link Spectator}s go to enjoy the race (at a Watching Stand) and the {@link entities.Broker}
@@ -30,7 +29,7 @@ public class ControlCentre implements ControlCentreInterface {
     /** TODO : Documentation */
     public static ControlCentre getInstance() {
         if (instance == null) {
-            new ControlCentre(NUMBER_OF_HORSES);
+            new ControlCentre(NUMBER_OF_PAIRS_HORSE_JOCKEY);
         }
         return instance;
     }
@@ -158,7 +157,7 @@ public class ControlCentre implements ControlCentreInterface {
     public synchronized void proceedToPaddock() {
         numberOfHorseJockeysOnPaddock++;
         ((HorseJockey)(Thread.currentThread())).setHorseJockeyState(HorseJockeyState.AT_THE_PADDOCK);
-        if (numberOfHorseJockeysOnPaddock == NUMBER_OF_HORSES) {
+        if (numberOfHorseJockeysOnPaddock == NUMBER_OF_PAIRS_HORSE_JOCKEY) {
             lastHorseJockeyHasNotArrivedOnPaddock = false;
             notifyAll();
             numberOfHorseJockeysOnPaddock = 0;

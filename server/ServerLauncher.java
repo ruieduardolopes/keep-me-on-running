@@ -1,5 +1,6 @@
 package server;
 
+import configurations.ServerConfiguration;
 import lib.communication.ServerCom;
 import lib.logging.Logger;
 

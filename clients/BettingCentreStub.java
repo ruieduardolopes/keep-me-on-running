@@ -6,7 +6,9 @@ import hippodrome.BettingCentreInterface;
 import hippodrome.rollfilm.UnknownHorseJockeyException;
 import lib.communication.ClientCom;
 
-import static clients.configurations.BettingCentre.*;
+import static configurations.ServerConfiguration.BETTING_CENTRE_HOST;
+import static configurations.ServerConfiguration.BETTING_CENTRE_PORT;
+import static configurations.ServerConfiguration.BETTING_CENTRE_TIME_TO_SLEEP;
 
 public class BettingCentreStub implements BettingCentreInterface {
     @Override
@@ -96,10 +98,10 @@ public class BettingCentreStub implements BettingCentreInterface {
     }
 
     private ClientCom createConnectionWithServer() {
-        ClientCom connection = new ClientCom(HOST, PORT);
+        ClientCom connection = new ClientCom(BETTING_CENTRE_HOST, BETTING_CENTRE_PORT);
         while (!connection.open()) {
             try {
-                Thread.sleep(TIME_TO_SLEEP);
+                Thread.sleep(BETTING_CENTRE_TIME_TO_SLEEP);
             } catch (InterruptedException ie) {
                 // TODO : Handle this exception
             }

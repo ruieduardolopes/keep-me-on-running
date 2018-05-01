@@ -5,7 +5,9 @@ import communications.MessageType;
 import hippodrome.ControlCentreInterface;
 import lib.communication.ClientCom;
 
-import static clients.configurations.ControlCentre.*;
+import static configurations.ServerConfiguration.CONTROL_CENTRE_HOST;
+import static configurations.ServerConfiguration.CONTROL_CENTRE_PORT;
+import static configurations.ServerConfiguration.CONTROL_CENTRE_TIME_TO_SLEEP;
 
 public class ControlCentreStub implements ControlCentreInterface {
     @Override
@@ -125,10 +127,10 @@ public class ControlCentreStub implements ControlCentreInterface {
     }
 
     private ClientCom createConnectionWithServer() {
-        ClientCom connection = new ClientCom(HOST, PORT);
+        ClientCom connection = new ClientCom(CONTROL_CENTRE_HOST, CONTROL_CENTRE_PORT);
         while (!connection.open()) {
             try {
-                Thread.sleep(TIME_TO_SLEEP);
+                Thread.sleep(CONTROL_CENTRE_TIME_TO_SLEEP);
             } catch (InterruptedException ie) {
                 // TODO : Handle this exception
             }

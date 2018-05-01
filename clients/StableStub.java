@@ -5,7 +5,9 @@ import communications.MessageType;
 import hippodrome.StableInterface;
 import lib.communication.ClientCom;
 
-import static clients.configurations.Stable.*;
+import static configurations.ServerConfiguration.STABLE_HOST;
+import static configurations.ServerConfiguration.STABLE_PORT;
+import static configurations.ServerConfiguration.STABLE_TIME_TO_SLEEP;
 
 public class StableStub implements StableInterface {
     @Override
@@ -45,10 +47,10 @@ public class StableStub implements StableInterface {
     }
 
     private ClientCom createConnectionWithServer() {
-        ClientCom connection = new ClientCom(HOST, PORT);
+        ClientCom connection = new ClientCom(STABLE_HOST, STABLE_PORT);
         while (!connection.open()) {
             try {
-                Thread.sleep(TIME_TO_SLEEP);
+                Thread.sleep(STABLE_TIME_TO_SLEEP);
             } catch (InterruptedException ie) {
                 // TODO : Handle this exception
             }

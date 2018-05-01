@@ -5,8 +5,7 @@ import entities.HorseJockeyState;
 import entities.Spectator;
 import entities.SpectatorState;
 
-import static hippodrome.configurations.Paddock.NUMBER_OF_HORSES;
-import static hippodrome.configurations.Paddock.NUMBER_OF_SPECTATORS;
+import static configurations.SimulationConfigurations.*;
 
 /**
  * Place where the horses are paradded before the {@link entities.Spectator}s. As the
@@ -36,7 +35,7 @@ public class Paddock implements PaddockInterface {
     /** TODO : documentation */
     public static Paddock getInstance() {
         if (instance == null) {
-            instance = new Paddock(NUMBER_OF_SPECTATORS, NUMBER_OF_HORSES);
+            instance = new Paddock(NUMBER_OF_SPECTATORS, NUMBER_OF_PAIRS_HORSE_JOCKEY);
         }
         return instance;
     }

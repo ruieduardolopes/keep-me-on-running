@@ -10,7 +10,9 @@ import hippodrome.rollfilm.UnknownHorseJockeyException;
 import hippodrome.rollfilm.UnknownSpectatorException;
 import lib.communication.ClientCom;
 
-import static clients.configurations.GeneralInformationRepository.*;
+import static configurations.ServerConfiguration.GENERAL_INFORMATION_REPOSITORY_HOST;
+import static configurations.ServerConfiguration.GENERAL_INFORMATION_REPOSITORY_PORT;
+import static configurations.ServerConfiguration.GENERAL_INFORMATION_REPOSITORY_TIME_TO_SLEEP;
 
 public class GeneralInformationRepositoryStub implements GeneralInformationRepositoryInterface {
     @Override
@@ -236,10 +238,10 @@ public class GeneralInformationRepositoryStub implements GeneralInformationRepos
     }
 
     private ClientCom createConnectionWithServer() {
-        ClientCom connection = new ClientCom(HOST, PORT);
+        ClientCom connection = new ClientCom(GENERAL_INFORMATION_REPOSITORY_HOST, GENERAL_INFORMATION_REPOSITORY_PORT);
         while (!connection.open()) {
             try {
-                Thread.sleep(TIME_TO_SLEEP);
+                Thread.sleep(GENERAL_INFORMATION_REPOSITORY_TIME_TO_SLEEP);
             } catch (InterruptedException ie) {
                 // TODO : Handle this exception
             }

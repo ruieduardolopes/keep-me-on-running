@@ -1,6 +1,6 @@
-package clients.configurations;
+package configurations;
 
-public class Entities {
+public class SimulationConfigurations {
     /**
      * Number of Pairs Horse/Jockey to compete on the simulation.
      */
@@ -15,6 +15,8 @@ public class Entities {
      * Number of races of a simulated event.
      */
     public static final int NUMBER_OF_RACES = 5;
+
+    public static final int NUMBER_OF_TRACKS = 4;
 
     /**
      * Maximum amount of money a Spectator could have.
@@ -35,4 +37,6 @@ public class Entities {
      * Minimum ability of the pairs Horse/Jockey.
      */
     public static final int ABILITY_MIN_BOUND = 1;
+
+    public static final boolean ONLY_LOG_ON_FILE = true;
 }
