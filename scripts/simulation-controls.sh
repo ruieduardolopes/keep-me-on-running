@@ -16,7 +16,7 @@ chhorses () {
         return 1
     fi
 
-    sed -ie 's/NUMBER_OF_PAIRS_HORSE_JOCKEY.*/NUMBER_OF_PAIRS_HORSE_JOCKEY = $1;/g' $WORK_PATH/configurations/SimulationConfigurations.java
+    sed -ie 's/NUMBER_OF_PAIRS_HORSE_JOCKEY.*/NUMBER_OF_PAIRS_HORSE_JOCKEY = "$1";/g' $WORK_PATH/configurations/SimulationConfigurations.java
 
     # Verification of the result
     if [[ "$?" -ne 0 ]]; then
@@ -46,7 +46,7 @@ chspec () {
         return 1
     fi
 
-    sed -ie 's/NUMBER_OF_SPECTATORS.*/NUMBER_OF_SPECTATORS = $1;/g' $WORK_PATH/configurations/SimulationConfigurations.java
+    sed -ie 's/NUMBER_OF_SPECTATORS.*/NUMBER_OF_SPECTATORS = "$1";/g' $WORK_PATH/configurations/SimulationConfigurations.java
 
     # Verification of the result
     if [[ "$?" -ne 0 ]]; then
@@ -82,10 +82,10 @@ chraces () {
     fi
 
     if [ "$optionT" -eq 1 ]; then
-        sed -ie 's/NUMBER_OF_TRACKS.*/NUMBER_OF_TRACKS = $1;/g' $WORK_PATH/configurations/SimulationConfigurations.java
+        sed -ie 's/NUMBER_OF_TRACKS.*/NUMBER_OF_TRACKS = "$1";/g' $WORK_PATH/configurations/SimulationConfigurations.java
     fi
 
-    sed -ie 's/NUMBER_OF_RACES.*/NUMBER_OF_RACES = $1;/g' $WORK_PATH/configurations/SimulationConfigurations.java
+    sed -ie 's/NUMBER_OF_RACES.*/NUMBER_OF_RACES = "$1";/g' $WORK_PATH/configurations/SimulationConfigurations.java
 
     # Verification of the result
     if [[ "$?" -ne 0 ]]; then
@@ -118,8 +118,8 @@ chability () {
         return 1
     fi
 
-    sed -ie 's/ABILITY_MIN_BOUND.*/ABILITY_MIN_BOUND = $1;/g' $WORK_PATH/configurations/SimulationConfigurations.java
-    sed -ie 's/ABILITY_MAX_BOUND.*/ABILITY_MAX_BOUND = $1;/g' $WORK_PATH/configurations/SimulationConfigurations.java
+    sed -ie 's/ABILITY_MIN_BOUND.*/ABILITY_MIN_BOUND = "$1";/g' $WORK_PATH/configurations/SimulationConfigurations.java
+    sed -ie 's/ABILITY_MAX_BOUND.*/ABILITY_MAX_BOUND = "$1";/g' $WORK_PATH/configurations/SimulationConfigurations.java
 
     # Verification of the result
     if [[ "$?" -ne 0 ]]; then
@@ -150,8 +150,8 @@ chmoney () {
         return 1
     fi
 
-    sed -ie 's/MONEY_MIN_BOUND.*/MONEY_MIN_BOUND = $1;/g' $WORK_PATH/configurations/SimulationConfigurations.java
-    sed -ie 's/MONEY_MAX_BOUND.*/MONEY_MAX_BOUND = $1;/g' $WORK_PATH/configurations/SimulationConfigurations.java
+    sed -ie 's/MONEY_MIN_BOUND.*/MONEY_MIN_BOUND = "$1";/g' $WORK_PATH/configurations/SimulationConfigurations.java
+    sed -ie 's/MONEY_MAX_BOUND.*/MONEY_MAX_BOUND = "$1";/g' $WORK_PATH/configurations/SimulationConfigurations.java
 
     # Verification of the result
     if [[ "$?" -ne 0 ]]; then
@@ -182,8 +182,8 @@ chdistance () {
         return 1
     fi
 
-    sed -ie 's/TRACK_DISTANCE_MIN_BOUND.*/TRACK_DISTANCE_MIN_BOUND = $1;/g' $WORK_PATH/configurations/SimulationConfigurations.java
-    sed -ie 's/TRACK_DISTANCE_MAX_BOUND.*/TRACK_DISTANCE_MAX_BOUND = $1;/g' $WORK_PATH/configurations/SimulationConfigurations.java
+    sed -ie 's/TRACK_DISTANCE_MIN_BOUND.*/TRACK_DISTANCE_MIN_BOUND = "$1";/g' $WORK_PATH/configurations/SimulationConfigurations.java
+    sed -ie 's/TRACK_DISTANCE_MAX_BOUND.*/TRACK_DISTANCE_MAX_BOUND = "$1";/g' $WORK_PATH/configurations/SimulationConfigurations.java
 
     # Verification of the result
     if [[ "$?" -ne 0 ]]; then
