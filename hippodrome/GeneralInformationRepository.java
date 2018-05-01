@@ -6,6 +6,8 @@ import entities.SpectatorState;
 import hippodrome.rollfilm.*;
 import genclass.GenericIO;
 import genclass.TextFile;
+import lib.logging.Color;
+
 import static hippodrome.configurations.GeneralInformationRepository.*;
 
 import java.time.Instant;
@@ -686,7 +688,7 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
     }
 
     /**
-     * Sets value to internal variable to inform that all the Spectators and Broker are already created and ready on start.
+     * Sets value to internal variable to inform that all the Spectators and Entities are already created and ready on start.
      *
      * @param value {@code true} if the simulation is now waiting for the pairs Horse/Jockey to be created; otherwise {@code false}.
      */
@@ -793,7 +795,7 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
     private boolean onlyLogOnFile;
 
     /**
-     * Internal variable to inform that both the Spectators and the Broker are already created.
+     * Internal variable to inform that both the Spectators and the Entities are already created.
      */
     private boolean wereWaitingTheHorses = false;
 

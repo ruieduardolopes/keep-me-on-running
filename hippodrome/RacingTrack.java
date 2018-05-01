@@ -1,5 +1,6 @@
 package hippodrome;
 
+import clients.GeneralInformationRepositoryStub;
 import entities.HorseJockeyState;
 import hippodrome.actions.Race;
 import entities.HorseJockey;
@@ -29,25 +30,24 @@ public class RacingTrack implements RacingTrackInterface {
      * repository is also given in order to report status changes on the course of its actions.
      *
      * @param race A race to be executed over this Racing Track.
-     * @param repository An instance of a {@link GeneralInformationRepository} in order to report all the actions and
-     *                   log each and every moment.
+     *
      */
-    private RacingTrack(Race race, GeneralInformationRepository repository) {
+    private RacingTrack(Race race) {
         this.race = race;
-        this.repository = repository;
+        this.repository = new GeneralInformationRepositoryStub();
         this.currentHorsesPositions = new int[race.getNumberOfTracks()];
     }
 
     public static RacingTrack getInstance() {
         if (instance == null) {
-            instance = new RacingTrack(new Race(NUMBER_OF_TRACKS, RACE_IDENTIFICATION, RACE_DISTANCE), null);
+            instance = new RacingTrack(new Race(NUMBER_OF_TRACKS, RACE_IDENTIFICATION, RACE_DISTANCE));
         }
         return instance;
     }
 
     /**
      * Changes the state of the pair Horse/Jockey to At the Start Line ({@code ATSL}) and waits till the last
-     * {@link RacingTrack#startTheRace()} is performed by the Broker.
+     * {@link RacingTrack#startTheRace()} is performed by the Entities.
      *
      * @throws InterruptedException if the wait() is interrupted.
      */
@@ -197,7 +197,7 @@ public class RacingTrack implements RacingTrackInterface {
     private boolean hasFirstHorseCrossedTheFinishLine = false;
 
     /**
-     * Condition variable for the Broker to order the race to start.
+     * Condition variable for the Entities to order the race to start.
      * <br>
      * This is a condition variable of {@link RacingTrack#proceedToStartLine()} and it is reset on the
      * {@link RacingTrack#hasFinishLineBeenCrossed(int)} method.
@@ -214,7 +214,7 @@ public class RacingTrack implements RacingTrackInterface {
     /**
      * The {@link GeneralInformationRepository} instance where all this region's actions will be reported.
      */
-    private GeneralInformationRepository repository;
+    private GeneralInformationRepositoryStub repository;
 
     private static RacingTrack instance;
 }

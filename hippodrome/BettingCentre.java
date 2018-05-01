@@ -1,5 +1,6 @@
 package hippodrome;
 
+import clients.GeneralInformationRepositoryStub;
 import entities.*;
 import hippodrome.actions.Bet;
 import hippodrome.rollfilm.UnknownHorseJockeyException;
@@ -40,16 +41,15 @@ public class BettingCentre implements BettingCentreInterface {
      *
      * @param numberOfHorses the number of pairs Horse/Jockeys which will compete against one another.
      * @param numberOfSpectators the number of Spectators which will attend the events.
-     * @param repository an instance of a {@link GeneralInformationRepository} in order to report all the actions and
-     *                   log each and every moment.
+     *
      */
-    private BettingCentre(int numberOfHorses, int numberOfSpectators, GeneralInformationRepository repository) {
+    private BettingCentre(int numberOfHorses, int numberOfSpectators) {
         this.numberOfHorses = numberOfHorses;
         this.numberOfSpectators = numberOfSpectators;
         this.bets = new Bet[numberOfSpectators];
         this.moneyOnSafe = 0;
         this.bettingQueue = new LinkedBlockingQueue<>();
-        this.repository = repository;
+        this.repository = new GeneralInformationRepositoryStub();
         this.winners = new int[numberOfSpectators];
         this.horsesOdds = new int[numberOfHorses];
         this.horsesAbilities = new int[numberOfHorses];
@@ -58,13 +58,13 @@ public class BettingCentre implements BettingCentreInterface {
     /** TODO : Documentation */
     public static BettingCentre getInstance() {
         if (instance == null) {
-            new BettingCentre(NUMBER_OF_HORSES, NUMBER_OF_SPECTATORS, null); // TODO : how can we solve the repository issue?
+            new BettingCentre(NUMBER_OF_HORSES, NUMBER_OF_SPECTATORS); // TODO : how can we solve the repository issue?
         }
         return instance;
     }
 
     /**
-     * Changes the state of the Broker to Waiting for Bets ({@code WFB}) and waits till the last
+     * Changes the state of the Entities to Waiting for Bets ({@code WFB}) and waits till the last
      * {@link BettingCentre#placeABet(int, int, int)} is done by a Spectator.
      * <br>
      * This method also notifies the Spectators when the bets are accepted.
@@ -89,10 +89,10 @@ public class BettingCentre implements BettingCentreInterface {
     }
 
     /**
-     * Changes the state of the Broker to Settling Accounts ({@code SA}) and waits till the last
+     * Changes the state of the Entities to Settling Accounts ({@code SA}) and waits till the last
      * {@link BettingCentre#goCollectTheGains()} is done by a Spectator.
      * <br>
-     * This method also notifies the Spectators when the Broker is about to give their money.
+     * This method also notifies the Spectators when the Entities is about to give their money.
      *
      * @throws InterruptedException if the wait() is interrupted.
      */
@@ -117,7 +117,7 @@ public class BettingCentre implements BettingCentreInterface {
      * This {@code bet}, made by a specific {@code spectator} is done respecting a proper
      * {@code horse}, which represents a pair Horse/Jockey.
      * <br>
-     * After all the Spectators have placed their bets, the Broker will then accept them.
+     * After all the Spectators have placed their bets, the Entities will then accept them.
      *
      * @param spectator an identification of a {@link Spectator} which represents a better.
      * @param bet an amount of money represented as an integer, which the {@code spectator} wants to bet.
@@ -154,7 +154,7 @@ public class BettingCentre implements BettingCentreInterface {
      * Changes the Spectator's state to Collecting the Gains ({@code CTG}) and lets a {@code spectator} collect all
      * his (or hers) gains after being placed a bet and a race had ended.
      * <br>
-     * After the Broker alerted that its honouring the bets, each Spectator must then execute this method in order
+     * After the Entities alerted that its honouring the bets, each Spectator must then execute this method in order
      * to collect its gains.
      *
      * @throws InterruptedException if the wait() is interrupted.
@@ -317,7 +317,7 @@ public class BettingCentre implements BettingCentreInterface {
     private int[] horsesAbilities;
 
     /**
-     * Condition variable for noticing when Broker have not accepted the bets yet.
+     * Condition variable for noticing when Entities have not accepted the bets yet.
      * <br>
      * This is a condition variable of the {@link BettingCentre#placeABet(int, int, int)} method.
      */
@@ -349,7 +349,7 @@ public class BettingCentre implements BettingCentreInterface {
     /**
      * The {@link GeneralInformationRepository} instance where all this region's actions will be reported.
      */
-    private GeneralInformationRepository repository;
+    private GeneralInformationRepositoryStub repository;
 
     /** TODO : Documentation */
     private static BettingCentre instance;

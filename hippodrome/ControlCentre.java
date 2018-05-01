@@ -4,7 +4,6 @@ import entities.*;
 import hippodrome.actions.Race;
 
 import static hippodrome.configurations.ControlCentre.NUMBER_OF_HORSES;
-import static stage.SimulatorConfiguration.NUMBER_OF_PAIRS_HORSE_JOCKEY;
 
 /**
  * Place where the {@link Spectator}s go to enjoy the race (at a Watching Stand) and the {@link entities.Broker}
@@ -85,7 +84,7 @@ public class ControlCentre implements ControlCentreInterface {
 
     /**
      * Changes the state of the {@link Spectator} to Watching a Race ({@code WAR}) and waits till the
-     * {@link ControlCentre#reportResults()} of the Broker.
+     * {@link ControlCentre#reportResults()} of the Entities.
      * <br>
      * This method also resets the control variable for the last race results report, the number of horses which have
      * finished the race and the control variable for the {@link ControlCentre#startTheRace()}.
@@ -130,7 +129,7 @@ public class ControlCentre implements ControlCentreInterface {
     }
 
     /**
-     * Changes the state of the Broker to Announcing Next Race ({@code ANR}) and waits till the last
+     * Changes the state of the Entities to Announcing Next Race ({@code ANR}) and waits till the last
      * {@link ControlCentre#goCheckHorses()} from the last Spectator to arrive on Paddock.
      * <br>
      * Note that this method also resets its proper condition variable after unlocking itself.
@@ -159,7 +158,7 @@ public class ControlCentre implements ControlCentreInterface {
     public synchronized void proceedToPaddock() {
         numberOfHorseJockeysOnPaddock++;
         ((HorseJockey)(Thread.currentThread())).setHorseJockeyState(HorseJockeyState.AT_THE_PADDOCK);
-        if (numberOfHorseJockeysOnPaddock == NUMBER_OF_PAIRS_HORSE_JOCKEY) {
+        if (numberOfHorseJockeysOnPaddock == NUMBER_OF_HORSES) {
             lastHorseJockeyHasNotArrivedOnPaddock = false;
             notifyAll();
             numberOfHorseJockeysOnPaddock = 0;
@@ -240,7 +239,7 @@ public class ControlCentre implements ControlCentreInterface {
     private boolean thereIsStillHorsesToFinishRace = true;
 
     /**
-     * Condition variable for the Broker to report the results of the race.
+     * Condition variable for the Entities to report the results of the race.
      * <br>
      * This is a condition variable of the {@link ControlCentre#goWatchTheRace()} and it is reset on the
      * {@link ControlCentre#goWatchTheRace()} method itself.
