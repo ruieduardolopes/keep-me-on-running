@@ -16,6 +16,9 @@ public class SimulationConfigurations {
      */
     public static final int NUMBER_OF_RACES = 5;
 
+    /**
+     * Number of tracks on the racing track.
+     */
     public static final int NUMBER_OF_TRACKS = 4;
 
     /**
@@ -38,12 +41,18 @@ public class SimulationConfigurations {
      */
     public static final int ABILITY_MIN_BOUND = 1;
 
+    /**
+     * Flag to control if user wants to have colored information about the system's status on the {@code stdout} and
+     * simple one on file (behavior activated if {@code false}); otherwise, with {@code true}, only on file, without
+     * colors.
+     */
     public static final boolean ONLY_LOG_ON_FILE = true;
 
     /**
      * Maximum distance of a race track.
      */
     public static final int TRACK_DISTANCE_MAX_BOUND = 100;
+
     /**
      * Minimum distance of a race track.
      */
