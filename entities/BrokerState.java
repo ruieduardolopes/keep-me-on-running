@@ -1,7 +1,7 @@
 package entities;
 
 /**
- * Enumeration of all Broker's states, given on its lifecycle.
+ * Enumeration of all Entities's states, given on its lifecycle.
  *
  * @author Hugo Fragata
  * @author Rui Lopes
@@ -11,11 +11,11 @@ package entities;
  */
 public enum BrokerState {
     /**
-     * Initial Broker's state. This is a state of transition.
+     * Initial Entities's state. This is a state of transition.
      */
     OPENING_THE_EVENT,
     /**
-     * This is a <strong>blocking state</strong>. Here, the Broker is waken up by the operation
+     * This is a <strong>blocking state</strong>. Here, the Entities is waken up by the operation
      * {@link hippodrome.Paddock#goCheckHorses()} of the last {@link Spectator} to reach the
      * {@link hippodrome.Paddock}.
      */
@@ -43,7 +43,7 @@ public enum BrokerState {
      */
     SETTLING_ACCOUNTS,
     /**
-     * This is the final Broker's state. This is a state of transition.
+     * This is the final Entities's state. This is a state of transition.
      */
     PLAYING_HOST_AT_THE_BAR
 }

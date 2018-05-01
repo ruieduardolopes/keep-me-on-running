@@ -1,5 +1,9 @@
 package entities;
 
+import clients.BettingCentreStub;
+import clients.ControlCentreStub;
+import clients.GeneralInformationRepositoryStub;
+import clients.PaddockStub;
 import hippodrome.*;
 
 import java.util.Random;
@@ -24,21 +28,17 @@ public class Spectator extends Thread {
      * @param identification number which identifies this {@code Spectator}.
      * @param money amount of money given to this {@code Spectator}.
      * @param numberOfRaces number of races which will happen in this event.
-     * @param bettingCentre the {@link BettingCentre} instance where this {@link Spectator} will perform its actions.
-     * @param controlCentre the {@link ControlCentre} instance where this {@link Spectator} will perform its actions.
-     * @param paddock the {@link Paddock} instance where this {@link Spectator} will perform its actions.
-     * @param repository An instance of a {@link GeneralInformationRepository} in order to report all the actions and
-     *                   log each and every moment.
+     *
      */
-    public Spectator(int identification, int money, int numberOfRaces, BettingCentre bettingCentre, ControlCentre controlCentre, Paddock paddock, GeneralInformationRepository repository) {
+    public Spectator(int identification, int money, int numberOfRaces) {
         this.identification = identification;
         repository.setSpectatorStatus(identification, state);
         this.money = money;
         repository.setSpectatorAmountOfMoney(this.identification, this.money);
-        this.bettingCentre = bettingCentre;
-        this.controlCentre = controlCentre;
-        this.paddock = paddock;
-        this.repository = repository;
+        this.bettingCentre = new BettingCentreStub();
+        this.controlCentre = new ControlCentreStub();
+        this.paddock = new PaddockStub();
+        this.repository = new GeneralInformationRepositoryStub();
         this.numberOfRaces = numberOfRaces;
     }
 
@@ -150,20 +150,20 @@ public class Spectator extends Thread {
     /**
      * The {@link BettingCentre} instance where this {@link Spectator} will perform its actions.
      */
-    private BettingCentre bettingCentre;
+    private BettingCentreStub bettingCentre;
 
     /**
      * The {@link ControlCentre} instance where this {@link Spectator} will perform its actions.
      */
-    private ControlCentre controlCentre;
+    private ControlCentreStub controlCentre;
 
     /**
      * The {@link Paddock} instance where this {@link Spectator} will perform its actions.
      */
-    private Paddock paddock;
+    private PaddockStub paddock;
 
     /**
      * The {@link GeneralInformationRepository} instance where all this Spectator's actions will be reported.
      */
-    private GeneralInformationRepository repository;
+    private GeneralInformationRepositoryStub repository;
 }

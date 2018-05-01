@@ -1,9 +1,10 @@
 package entities;
 
+import clients.*;
 import hippodrome.*;
 
 /**
- * Implementation of a Broker, an essential character on a horse race action. This
+ * Implementation of a Entities, an essential character on a horse race action. This
  * entity, belonging to the {@link entities} package, has the responsibility of
  * controlling the races and of honouring and accepting the spectator's bets (for
  * more information about the {@code spectator}, please, consult {@link Spectator}).
@@ -18,36 +19,31 @@ import hippodrome.*;
 public class Broker extends Thread {
 
     /**
-     * Creates a Broker.
+     * Creates a Entities.
      * <br>
-     * This constructor creates a Broker giving the reference of the {@link BettingCentre}, {@link ControlCentre},
-     * {@link RacingTrack} and {@link Stable} where is about to work on. More, the Broker is also created having in mind
+     * This constructor creates a Entities giving the reference of the {@link BettingCentre}, {@link ControlCentre},
+     * {@link RacingTrack} and {@link Stable} where is about to work on. More, the Entities is also created having in mind
      * a General Repository of Information ({@link GeneralInformationRepository}) - where all the actions must be reported
      * and logged - and a given number of races ({@code numberOfRaces}).
      *
-     * @param numberOfRaces The number of races in which this Broker will work on.
-     * @param bettingCentre An instance of a {@link BettingCentre} where this Broker will work on.
-     * @param controlCentre An instance of a {@link ControlCentre} where this Broker will work on.
-     * @param racingTrack An instance of a {@link RacingTrack} where this Broker will work on.
-     * @param stable An instance of a {@link Stable} where this Broker will work on.
-     * @param repository An instance of a {@link GeneralInformationRepository} in order to report all the actions and
-     *                   log each and every moment.
+     * @param numberOfRaces The number of races in which this Entities will work on.
+     *
      */
-    public Broker(int numberOfRaces, BettingCentre bettingCentre, ControlCentre controlCentre, RacingTrack racingTrack, Stable stable, GeneralInformationRepository repository) {
-        this.bettingCentre = bettingCentre;
-        this.controlCentre = controlCentre;
-        this.racingTrack = racingTrack;
-        this.stable = stable;
-        this.repository = repository;
+    public Broker(int numberOfRaces) {
+        this.bettingCentre = new BettingCentreStub();
+        this.controlCentre = new ControlCentreStub();
+        this.racingTrack = new RacingTrackStub();
+        this.stable = new StableStub();
+        this.repository = new GeneralInformationRepositoryStub();
         this.totalOfRaces = numberOfRaces;
         repository.setBrokerStatus(state);
     }
 
     /**
-     * Definition of the Broker's lifecycle.
+     * Definition of the Entities's lifecycle.
      *
      * In a technical perspective this is reasoned by a thread definition function which
-     * resumes all the specifications of a {@code Broker}, since its displacement from the
+     * resumes all the specifications of a {@code Entities}, since its displacement from the
      * {@link hippodrome.BettingCentre}, to the {@link hippodrome.ControlCentre},
      * passing by the {@link hippodrome.Stable} and the {@link hippodrome.RacingTrack}.
      */
@@ -73,7 +69,7 @@ public class Broker extends Thread {
     }
 
     /**
-     * Sets the Broker's state, from the possible available {@link BrokerState}
+     * Sets the Entities's state, from the possible available {@link BrokerState}
      * enumeration. Here all the actions are reported to the General Repository of
      * Information and a new snapshot is created.
      *
@@ -85,47 +81,47 @@ public class Broker extends Thread {
     }
 
     /**
-     * Sets the Broker's current Racing Track's instance {@link RacingTrack}.
+     * Sets the Entities's current Racing Track's instance {@link RacingTrack}.
      *
      * @param racingTrack the new instance of a {@link RacingTrack}.
      */
-    public synchronized void setRacingTrack(RacingTrack racingTrack) {
+    public synchronized void setRacingTrack(RacingTrackStub racingTrack) {
         this.racingTrack = racingTrack;
     }
 
     /**
-     * A representation of the Broker's state given by the {@link BrokerState}
+     * A representation of the Entities's state given by the {@link BrokerState}
      * enumeration.
      */
     private BrokerState state = BrokerState.OPENING_THE_EVENT;
 
     /**
-     * Broker's knowledge of how many races are about to be performed today.
+     * Entities's knowledge of how many races are about to be performed today.
      */
     private int totalOfRaces;
 
     /**
      * The {@link BettingCentre} instance where this {@link Broker} will perform its actions.
      */
-    private BettingCentre bettingCentre;
+    private BettingCentreStub bettingCentre;
 
     /**
      * The {@link ControlCentre} instance where this {@link Broker} will perform its actions.
      */
-    private ControlCentre controlCentre;
+    private ControlCentreStub controlCentre;
 
     /**
      * The {@link RacingTrack} instance where this {@link Broker} will perform its actions.
      */
-    private RacingTrack racingTrack;
+    private RacingTrackStub racingTrack;
 
     /**
      * The {@link Stable} instance where this {@link Broker} will perform its actions.
      */
-    private Stable stable;
+    private StableStub stable;
 
     /**
      * The {@link GeneralInformationRepository} instance where all the {@link Broker}'s actions will be reported.
      */
-    private GeneralInformationRepository repository;
+    private GeneralInformationRepositoryStub repository;
 }

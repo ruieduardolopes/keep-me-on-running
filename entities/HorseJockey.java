@@ -1,5 +1,6 @@
 package entities;
 
+import clients.*;
 import hippodrome.*;
 
 /**
@@ -27,26 +28,20 @@ public class HorseJockey extends Thread {
      *
      * @param identification number which identifies this pair Horse/Jockey.
      * @param ability number with characterizes the Horse maximum ability to run.
-     * @param bettingCentre An instance of a {@link BettingCentre} where this pair Horse/Jockey will work on.
-     * @param controlCentre An instance of a {@link ControlCentre} where this pair Horse/Jockey will work on.
-     * @param paddock An instance of a {@link Paddock} where this pair Horse/Jockey will work on.
-     * @param racingTrack An instance of a {@link RacingTrack} where this pair Horse/Jockey will work on.
-     * @param stable An instance of a {@link Stable} where this Broker pair Horse/Jockey work on.
-     * @param repository An instance of a {@link GeneralInformationRepository} in order to report all the actions and
-     *                   log each and every moment.
+     *
      */
-    public HorseJockey(int identification, int ability, BettingCentre bettingCentre, ControlCentre controlCentre, Paddock paddock, RacingTrack racingTrack, Stable stable, GeneralInformationRepository repository) {
+    public HorseJockey(int identification, int ability) {
         this.identification = identification;
         repository.setHorseJockeyStatus(identification, state);
         this.ability = ability;
         repository.setHorseJockeyAbility(this.identification, this.ability);
-        this.controlCentre = controlCentre;
-        this.paddock = paddock;
-        this.racingTrack = racingTrack;
+        this.controlCentre = new ControlCentreStub();
+        this.paddock = new PaddockStub();
+        this.racingTrack = new RacingTrackStub();
         this.raceNumber = this.racingTrack.getRace().getIdentification();
-        this.stable = stable;
-        this.repository = repository;
-        this.bettingCentre = bettingCentre;
+        this.stable = new StableStub();
+        this.repository = new GeneralInformationRepositoryStub();
+        this.bettingCentre = new BettingCentreStub();
     }
 
     /**
@@ -152,30 +147,30 @@ public class HorseJockey extends Thread {
     /**
      * The {@link ControlCentre} instance where this pair Horse/Jockey ({@link HorseJockey}) will perform its actions.
      */
-    private ControlCentre controlCentre;
+    private ControlCentreStub controlCentre;
 
     /**
      * The {@link Paddock} instance where this pair Horse/Jockey ({@link HorseJockey}) will perform its actions.
      */
-    private Paddock paddock;
+    private PaddockStub paddock;
 
     /**
      * The {@link RacingTrack} instance where this pair Horse/Jockey ({@link HorseJockey}) will perform its actions.
      */
-    private RacingTrack racingTrack;
+    private RacingTrackStub racingTrack;
 
     /**
      * The {@link Stable} instance where this pair Horse/Jockey ({@link HorseJockey}) will perform its actions.
      */
-    private Stable stable;
+    private StableStub stable;
 
     /**
      * The {@link BettingCentre} instance where this pair Horse/Jockey ({@link HorseJockey}) will perform its actions.
      */
-    private BettingCentre bettingCentre;
+    private BettingCentreStub bettingCentre;
 
     /**
      * The {@link GeneralInformationRepository} instance where all this pair Horse/Jockey's actions will be reported.
      */
-    private GeneralInformationRepository repository;
+    private GeneralInformationRepositoryStub repository;
 }
