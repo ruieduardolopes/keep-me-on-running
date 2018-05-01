@@ -1,6 +1,7 @@
 package server;
 
 import lib.communication.ServerCom;
+import lib.logging.Logger;
 
 public class ServerLauncher {
     public static void main(String[] args) {
@@ -10,38 +11,42 @@ public class ServerLauncher {
         switch (args[0]) {
             case "betting-centre" :
                 server = new BettingCentreProxy();
-                port = 0; // TODO : identify the port
+                port = ServerConfiguration.BETTING_CENTRE_PORT;
                 break;
             case "control-centre" :
                 server = new ControlCentreProxy();
-                port = 0; // TODO : identify the port
+                port = ServerConfiguration.CONTROL_CENTRE_PORT;
                 break;
             case "general-repo" :
                 server = new GeneralInformationRepositoryProxy();
-                port = 0; // TODO : identify the port
+                port = ServerConfiguration.GENERAL_INFORMATION_REPOSITORY_PORT;
                 break;
             case "paddock" :
                 server = new PaddockProxy();
-                port = 0; // TODO : identify the port
+                port = ServerConfiguration.PADDOCK_PORT;
                 break;
             case "racing-track" :
                 server = new RacingTrackProxy();
-                port = 0; // TODO : identify the port
+                port = ServerConfiguration.RACING_TRACK_PORT;
                 break;
             case "stable" :
                 server = new StableProxy();
-                port = 0; // TODO : identify the port
+                port = ServerConfiguration.STABLE_PORT;
                 break;
             default :
                 // TODO : handle this case
                 break;
         }
+        Logger.printNotification("Preparing to run %s server on port %d", args[0], port);
         serverConnectionRequest = new ServerCom(port);
         serverConnectionRequest.start();
+        Logger.printInformation("Server already running and waiting for new messages");
         while (true) {
             serverConnectionInstance = serverConnectionRequest.accept();
+            Logger.printNotification("Preparing to attend to request");
             serviceProviderAgent = new ServiceProviderAgent(serverConnectionInstance, server);
             serviceProviderAgent.start();
+            Logger.printInformation("An agent was already made available to attend the situation");
         }
     }
 
