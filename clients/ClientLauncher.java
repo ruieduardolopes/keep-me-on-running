@@ -14,7 +14,6 @@ public class ClientLauncher {
         }
         switch (args[0]) {
             case "broker" :
-                port = BROKER_PORT;
                 Broker broker = new Broker(NUMBER_OF_RACES);
                 broker.start();
                 try {
@@ -24,7 +23,6 @@ public class ClientLauncher {
                 }
                 break;
             case "spectators" :
-                port = SPECTATOR_PORT;
                 Spectator[] spectators = new Spectator[NUMBER_OF_SPECTATORS];
                 for (int i = 0; i != spectators.length; i++) {
                     spectators[i] = new Spectator(i, generateMoney(), NUMBER_OF_RACES);
@@ -39,7 +37,6 @@ public class ClientLauncher {
                 }
                 break;
             case "horses" :
-                port = HORSE_JOCKEY_PORT;
                 for (int race = 0; race != NUMBER_OF_RACES; race++) {
                     HorseJockey[] horseJockeys = new HorseJockey[NUMBER_OF_PAIRS_HORSE_JOCKEY];
                     for (int i = 0; i != horseJockeys.length; i++) {
@@ -79,6 +76,4 @@ public class ClientLauncher {
     private static int generateAbility() {
         return (int)(Math.random()*(ABILITY_MAX_BOUND - ABILITY_MIN_BOUND)) + ABILITY_MIN_BOUND;
     }
-
-    private static int port;
 }

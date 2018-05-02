@@ -31,10 +31,11 @@ public class HorseJockey extends Thread {
      *
      */
     public HorseJockey(int identification, int ability) {
+        this.repository = new GeneralInformationRepositoryStub();
         this.identification = identification;
-        repository.setHorseJockeyStatus(identification, state);
+        this.repository.setHorseJockeyStatus(identification, state);
         this.ability = ability;
-        repository.setHorseJockeyAbility(this.identification, this.ability);
+        this.repository.setHorseJockeyAbility(this.identification, this.ability);
         this.controlCentre = new ControlCentreStub();
         this.paddock = new PaddockStub();
         this.racingTrack = new RacingTrackStub();

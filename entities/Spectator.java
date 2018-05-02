@@ -31,10 +31,11 @@ public class Spectator extends Thread {
      *
      */
     public Spectator(int identification, int money, int numberOfRaces) {
+        this.repository = new GeneralInformationRepositoryStub();
         this.identification = identification;
-        repository.setSpectatorStatus(identification, state);
+        this.repository.setSpectatorStatus(identification, state);
         this.money = money;
-        repository.setSpectatorAmountOfMoney(this.identification, this.money);
+        this.repository.setSpectatorAmountOfMoney(this.identification, this.money);
         this.bettingCentre = new BettingCentreStub();
         this.controlCentre = new ControlCentreStub();
         this.paddock = new PaddockStub();
