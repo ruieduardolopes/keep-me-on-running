@@ -53,6 +53,7 @@ updcode () {
         cd -
         return 2
     fi
+    source /home/sd0402/.bashrc
     cd -
     return 0
 }
