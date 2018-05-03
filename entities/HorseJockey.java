@@ -41,7 +41,6 @@ public class HorseJockey extends Thread {
         this.racingTrack = new RacingTrackStub();
         this.raceNumber = this.racingTrack.getRace().getIdentification();
         this.stable = new StableStub();
-        this.repository = new GeneralInformationRepositoryStub();
         this.bettingCentre = new BettingCentreStub();
 
         repository.setWereWaitingTheHorses(true);

@@ -5,6 +5,7 @@ import entities.*;
 import hippodrome.actions.Bet;
 import hippodrome.rollfilm.UnknownHorseJockeyException;
 import hippodrome.rollfilm.UnknownSpectatorException;
+import server.ServiceProviderAgent;
 
 /**
  * This class needs a Queue implementation in order to accomplish the creation of such a
@@ -57,7 +58,7 @@ public class BettingCentre implements BettingCentreInterface {
     /** TODO : Documentation */
     public static BettingCentre getInstance() {
         if (instance == null) {
-            new BettingCentre(NUMBER_OF_PAIRS_HORSE_JOCKEY, NUMBER_OF_SPECTATORS);
+            instance = new BettingCentre(NUMBER_OF_PAIRS_HORSE_JOCKEY, NUMBER_OF_SPECTATORS);
         }
         return instance;
     }
@@ -73,7 +74,7 @@ public class BettingCentre implements BettingCentreInterface {
     public synchronized void acceptTheBets() throws InterruptedException {
         evaluateOdds();
         allWinnersAreNotOnBettingCentre = true;
-        ((Broker)Thread.currentThread()).setBrokerState(BrokerState.WAITING_FOR_BETS);
+        ((ServiceProviderAgent)Thread.currentThread()).setBrokerState(BrokerState.WAITING_FOR_BETS);
         while (bettingQueue.size() !=  numberOfSpectators) {
             try {
                 wait();
@@ -96,7 +97,7 @@ public class BettingCentre implements BettingCentreInterface {
      * @throws InterruptedException if the wait() is interrupted.
      */
     public synchronized void honourTheBets() throws InterruptedException {
-        ((Broker)Thread.currentThread()).setBrokerState(BrokerState.SETTLING_ACCOUNTS);
+        ((ServiceProviderAgent)Thread.currentThread()).setBrokerState(BrokerState.SETTLING_ACCOUNTS);
         while (allWinnersAreNotOnBettingCentre) {
             try {
                 wait();
@@ -127,7 +128,7 @@ public class BettingCentre implements BettingCentreInterface {
      * @return the amount of money which was accepted by the {@link Broker} to place the bet.
      */
     public synchronized int placeABet(int spectator, int bet, int horse) throws InterruptedException {
-        ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.PLACING_A_BET);
+        ((ServiceProviderAgent)Thread.currentThread()).setSpectatorState(SpectatorState.PLACING_A_BET);
         bettingQueue.add(spectator);
         try {
             bets[spectator] = new Bet(horse, bet);
@@ -161,8 +162,8 @@ public class BettingCentre implements BettingCentreInterface {
      * @return the amount of money collected by the {@code spectator}, as an integer.
      */
     public synchronized int goCollectTheGains() throws InterruptedException {
-        Spectator spectator = ((Spectator)Thread.currentThread());
-        spectator.setSpectatorState(SpectatorState.COLLECTING_THE_GAINS);
+        ServiceProviderAgent agent = ((ServiceProviderAgent)Thread.currentThread());
+        agent.setSpectatorState(SpectatorState.COLLECTING_THE_GAINS);
         winnersArrived++;
         if (winnersArrived == winners.length) {
             allWinnersAreNotOnBettingCentre = false;
@@ -176,7 +177,7 @@ public class BettingCentre implements BettingCentreInterface {
                 throw new InterruptedException("The goCollectTheGains() has been interrupted on its wait().");
             }
         }
-        return bets[spectator.getIdentification()].getAmount()*horsesOdds[bets[spectator.getIdentification()].getHorseJockeyId()];
+        return bets[agent.getSpectatorIdentification()].getAmount()*horsesOdds[bets[agent.getSpectatorIdentification()].getHorseJockeyId()];
     }
 
     /**

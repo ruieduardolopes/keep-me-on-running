@@ -47,7 +47,7 @@ public class ControlCentreProxy implements Server {
                 break;
             case CONTROL_CENTRE_SUMMON_HORSES_TO_PADDOCK:
                 controlCentre.summonHorsesToPaddock();
-                reply = new Message(MessageType.OK);
+                reply = new Message(MessageType.REPLY_CONTROL_CENTRE_SUMMON_HORSES_TO_PADDOCK);
                 break;
             case CONTROL_CENTRE_WAIT_FOR_THE_NEXT_RACE:
                 boolean thereIsANextRace = controlCentre.waitForTheNextRace();

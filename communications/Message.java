@@ -289,6 +289,98 @@ public class Message implements Serializable {
         return serializedObject;
     }
 
+    public void setType(MessageType type) {
+        this.type = type;
+    }
+
+    public void setBrokerState(BrokerState brokerState) {
+        this.brokerState = brokerState;
+    }
+
+    public void setHorseJockeyState(HorseJockeyState horseJockeyState) {
+        this.horseJockeyState = horseJockeyState;
+    }
+
+    public void setSpectatorState(SpectatorState spectatorState) {
+        this.spectatorState = spectatorState;
+    }
+
+    public void setIdentification(int identification) {
+        this.identification = identification;
+    }
+
+    public void setSpectatorID(int spectatorID) {
+        this.spectatorID = spectatorID;
+    }
+
+    public void setBet(int bet) {
+        this.bet = bet;
+    }
+
+    public void setGains(int gains) {
+        this.gains = gains;
+    }
+
+    public void setHorses(int horses) {
+        this.horses = horses;
+    }
+
+    public void setResults(int results) {
+        this.results = results;
+    }
+
+    public void setIncrements(int increments) {
+        this.increments = increments;
+    }
+
+    public void setHorseID(int horseID) {
+        this.horseID = horseID;
+    }
+
+    public void setWinner(int winner) {
+        this.winner = winner;
+    }
+
+    public void setAbility(int ability) {
+        this.ability = ability;
+    }
+
+    public void setRaceNumber(int raceNumber) {
+        this.raceNumber = raceNumber;
+    }
+
+    public void setRaceDistance(int raceDistance) {
+        this.raceDistance = raceDistance;
+    }
+
+    public void setSpectatorAmountOfMoney(int spectatorAmountOfMoney) {
+        this.spectatorAmountOfMoney = spectatorAmountOfMoney;
+    }
+
+    public void setSpectatorBetSelection(int spectatorBetSelection) {
+        this.spectatorBetSelection = spectatorBetSelection;
+    }
+
+    public void setHorseProbability(int horseProbability) {
+        this.horseProbability = horseProbability;
+    }
+
+    public void setHorseIteration(int horseIteration) {
+        this.horseIteration = horseIteration;
+    }
+
+    public void setHorsePosition(int horsePosition) {
+        this.horsePosition = horsePosition;
+    }
+
+    public void setValue(boolean value) {
+        this.value = value;
+    }
+
+    public void setSerializedObject(byte[] serializedObject) {
+        this.serializedObject = serializedObject;
+    }
+
     private MessageType type;
     private BrokerState brokerState;
     private HorseJockeyState horseJockeyState;

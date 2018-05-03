@@ -1,6 +1,7 @@
 package hippodrome;
 
 import entities.*;
+import server.ServiceProviderAgent;
 
 import static configurations.SimulationConfigurations.*;
 
@@ -29,7 +30,7 @@ public class ControlCentre implements ControlCentreInterface {
     /** TODO : Documentation */
     public static ControlCentre getInstance() {
         if (instance == null) {
-            new ControlCentre(NUMBER_OF_PAIRS_HORSE_JOCKEY);
+            instance = new ControlCentre(NUMBER_OF_PAIRS_HORSE_JOCKEY);
         }
         return instance;
     }
@@ -41,7 +42,7 @@ public class ControlCentre implements ControlCentreInterface {
      * @throws InterruptedException if the wait() is interrupted.
      */
     public synchronized void startTheRace() throws InterruptedException {
-        ((Broker)Thread.currentThread()).setBrokerState(BrokerState.SUPERVISING_THE_RACE);
+        ((ServiceProviderAgent)Thread.currentThread()).setBrokerState(BrokerState.SUPERVISING_THE_RACE);
         while (thereIsStillHorsesToFinishRace) {
             try {
                 wait();
@@ -57,7 +58,7 @@ public class ControlCentre implements ControlCentreInterface {
      * can be considered as terminated.
      */
     public synchronized void entertainTheGuests() {
-        ((Broker)Thread.currentThread()).setBrokerState(BrokerState.PLAYING_HOST_AT_THE_BAR);
+        ((ServiceProviderAgent)Thread.currentThread()).setBrokerState(BrokerState.PLAYING_HOST_AT_THE_BAR);
     }
 
     /**
@@ -69,7 +70,7 @@ public class ControlCentre implements ControlCentreInterface {
      * @return if the last pair Horse/Jockey has arrived on Paddock.
      */
     public synchronized boolean waitForTheNextRace() throws InterruptedException {
-        ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.WAITING_FOR_A_RACE_TO_START);
+        ((ServiceProviderAgent)Thread.currentThread()).setSpectatorState(SpectatorState.WAITING_FOR_A_RACE_TO_START);
         while (lastHorseJockeyHasNotArrivedOnPaddock) {
             try {
                 wait();
@@ -91,7 +92,7 @@ public class ControlCentre implements ControlCentreInterface {
      * @throws InterruptedException if the wait() is interrupted.
      */
     public synchronized void goWatchTheRace() throws InterruptedException {
-        ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.WATCHING_A_RACE);
+        ((ServiceProviderAgent)Thread.currentThread()).setSpectatorState(SpectatorState.WATCHING_A_RACE);
         brokerDidNotReportResults = true;
         finishedHorses = 0;
         raceWinner = 0;
@@ -110,7 +111,7 @@ public class ControlCentre implements ControlCentreInterface {
      * Relax a bit from the games, as this is could be the final transition of a {@link Spectator} lifecycle.
      */
     public synchronized void relaxABit() {
-        ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.CELEBRATING);
+        ((ServiceProviderAgent)Thread.currentThread()).setSpectatorState(SpectatorState.CELEBRATING);
     }
 
     /**
@@ -136,7 +137,7 @@ public class ControlCentre implements ControlCentreInterface {
      * @throws InterruptedException if the wait() is interrupted.
      */
     public synchronized void summonHorsesToPaddock() throws InterruptedException {
-        ((Broker)Thread.currentThread()).setBrokerState(BrokerState.ANNOUNCING_NEXT_RACE);
+        ((ServiceProviderAgent)Thread.currentThread()).setBrokerState(BrokerState.ANNOUNCING_NEXT_RACE);
         while (lastSpectatorHasNotArrivedOnPaddock) {
             try {
                 wait();
@@ -156,7 +157,7 @@ public class ControlCentre implements ControlCentreInterface {
      */
     public synchronized void proceedToPaddock() {
         numberOfHorseJockeysOnPaddock++;
-        ((HorseJockey)(Thread.currentThread())).setHorseJockeyState(HorseJockeyState.AT_THE_PADDOCK);
+        ((ServiceProviderAgent)(Thread.currentThread())).setHorseJockeyState(HorseJockeyState.AT_THE_PADDOCK);
         if (numberOfHorseJockeysOnPaddock == NUMBER_OF_PAIRS_HORSE_JOCKEY) {
             lastHorseJockeyHasNotArrivedOnPaddock = false;
             notifyAll();
@@ -184,7 +185,7 @@ public class ControlCentre implements ControlCentreInterface {
     public synchronized void makeAMove() {
         finishedHorses++;
         if (finishedHorses == 1) {
-            raceWinner = ((HorseJockey)(Thread.currentThread())).getIdentification();
+            raceWinner = ((ServiceProviderAgent)(Thread.currentThread())).getHorseJockeyIdentification();
         }
         if (finishedHorses == numberOfHorses) {
             thereIsStillHorsesToFinishRace = false;

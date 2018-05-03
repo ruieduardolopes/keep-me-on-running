@@ -7,6 +7,7 @@ import hippodrome.rollfilm.*;
 import genclass.GenericIO;
 import genclass.TextFile;
 import lib.logging.Color;
+import lib.logging.Logger;
 
 
 import java.time.Instant;
@@ -175,7 +176,8 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
     /**
      * Adds a new snapshot of the race to log it.
      */
-    private void newSnapshot() {
+    private synchronized void newSnapshot() {
+        System.out.print("111111");
         if (brokerStatus.equals("OTE")) {
             for (int i = 0; i != horseJockeys.length; i++) {
                 if (horseJockeys[i].getAbility() == 0 && wereWaitingTheHorses) {
@@ -577,8 +579,11 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
      * {@code horseJockeys} array.
      */
     public synchronized void setHorseJockeyStatus(int horseJockeyId, HorseJockeyState status) throws UnknownHorseJockeyException {
+        System.out.print("000,5555");
+        Logger.printError(horseJockeyId + "");
         try {
             horseJockeys[horseJockeyId].setStatus(status);
+            System.out.print("000,6666");
         } catch (IndexOutOfBoundsException ioobe) {
             throw new UnknownHorseJockeyException(horseJockeyId);
         }

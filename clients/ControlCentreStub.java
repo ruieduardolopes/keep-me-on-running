@@ -2,6 +2,9 @@ package clients;
 
 import communications.Message;
 import communications.MessageType;
+import entities.Broker;
+import entities.HorseJockey;
+import entities.Spectator;
 import hippodrome.ControlCentreInterface;
 import lib.communication.ClientCom;
 
@@ -16,9 +19,10 @@ public class ControlCentreStub implements ControlCentreInterface {
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_START_THE_RACE);
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
-        if (messageReceived.getType() != MessageType.OK) {
+        if (messageReceived.getType() != MessageType.REPLY_CONTROL_CENTRE_START_THE_RACE) {
             // TODO : Handle this error
         }
+        ((Broker)Thread.currentThread()).setBrokerState(messageReceived.getBrokerState());
         connection.close();
     }
 
@@ -28,9 +32,10 @@ public class ControlCentreStub implements ControlCentreInterface {
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_ENTERTAIN_THE_GUESTS);
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
-        if (messageReceived.getType() != MessageType.OK) {
+        if (messageReceived.getType() != MessageType.REPLY_CONTROL_CENTRE_ENTERTAIN_THE_GUESTS) {
             // TODO : Handle this error
         }
+        ((Broker)Thread.currentThread()).setBrokerState(messageReceived.getBrokerState());
         connection.close();
     }
 
@@ -40,6 +45,10 @@ public class ControlCentreStub implements ControlCentreInterface {
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_WAIT_FOR_THE_NEXT_RACE);
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
+        if (messageReceived.getType() != MessageType.REPLY_CONTROL_CENTRE_WAIT_FOR_NEXT_RACE) {
+            // TODO : Handle this error
+        }
+        ((Spectator)Thread.currentThread()).setSpectatorState(messageReceived.getSpectatorState());
         connection.close();
         return messageReceived.getValue();
     }
@@ -50,9 +59,10 @@ public class ControlCentreStub implements ControlCentreInterface {
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_GO_WATCH_THE_RACE);
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
-        if (messageReceived.getType() != MessageType.OK) {
+        if (messageReceived.getType() != MessageType.REPLY_CONTROL_CENTRE_GO_WATCH_THE_RACE) {
             // TODO : Handle this error
         }
+        ((Spectator)Thread.currentThread()).setSpectatorState(messageReceived.getSpectatorState());
         connection.close();
     }
 
@@ -62,9 +72,10 @@ public class ControlCentreStub implements ControlCentreInterface {
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_RELAX_A_BIT);
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
-        if (messageReceived.getType() != MessageType.OK) {
+        if (messageReceived.getType() != MessageType.REPLY_CONTROL_CENTRE_RELAX_A_BIT) {
             // TODO : Handle this error
         }
+        ((Spectator)Thread.currentThread()).setSpectatorState(messageReceived.getSpectatorState());
         connection.close();
     }
 
@@ -84,9 +95,10 @@ public class ControlCentreStub implements ControlCentreInterface {
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_SUMMON_HORSES_TO_PADDOCK);
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
-        if (messageReceived.getType() != MessageType.OK) {
+        if (messageReceived.getType() != MessageType.REPLY_CONTROL_CENTRE_SUMMON_HORSES_TO_PADDOCK) {
             // TODO : Handle this error
         }
+        ((Broker)Thread.currentThread()).setBrokerState(messageReceived.getBrokerState());
         connection.close();
     }
 
@@ -96,9 +108,10 @@ public class ControlCentreStub implements ControlCentreInterface {
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_PROCEED_TO_PADDOCK);
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
-        if (messageReceived.getType() != MessageType.OK) {
+        if (messageReceived.getType() != MessageType.REPLY_CONTROL_CENTRE_PROCEED_TO_PADDOCK) {
             // TODO : Handle this error
         }
+        ((HorseJockey)Thread.currentThread()).setHorseJockeyState(messageReceived.getHorseJockeyState());
         connection.close();
     }
 

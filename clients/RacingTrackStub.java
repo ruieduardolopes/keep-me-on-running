@@ -2,6 +2,7 @@ package clients;
 
 import communications.Message;
 import communications.MessageType;
+import entities.HorseJockey;
 import hippodrome.RacingTrackInterface;
 import hippodrome.actions.Race;
 import lib.communication.ClientCom;
@@ -33,9 +34,10 @@ public class RacingTrackStub implements RacingTrackInterface {
         Message messageToSend = new Message(MessageType.RACING_TRACK_MAKE_A_MOVE, horseId);
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
-        if (messageReceived.getType() != MessageType.OK) {
+        if (messageReceived.getType() != MessageType.REPLY_RACING_TRACK_MAKE_A_MOVE) {
             // TODO : Handle this error
         }
+        ((HorseJockey)Thread.currentThread()).setHorseJockeyState(messageReceived.getHorseJockeyState());
         connection.close();
     }
 
@@ -62,7 +64,7 @@ public class RacingTrackStub implements RacingTrackInterface {
     }
 
     @Override
-    public Race getRace() {
+    public Race getRace() { // TODO : Review this
         Race race = null;
         ByteArrayInputStream objectByteArray = null;
         ObjectInputStream deseriablizedObject = null;

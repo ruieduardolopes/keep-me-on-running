@@ -4,6 +4,7 @@ import entities.HorseJockey;
 import entities.HorseJockeyState;
 import entities.Spectator;
 import entities.SpectatorState;
+import server.ServiceProviderAgent;
 
 import static configurations.SimulationConfigurations.*;
 
@@ -75,7 +76,7 @@ public class Paddock implements PaddockInterface {
      * @throws InterruptedException if the wait() is interrupted.
      */
     public synchronized void goCheckHorses(boolean isTheLastSpectator) throws InterruptedException {
-        ((Spectator)Thread.currentThread()).setSpectatorState(SpectatorState.APPRAISING_THE_HORSES);
+        ((ServiceProviderAgent)Thread.currentThread()).setSpectatorState(SpectatorState.APPRAISING_THE_HORSES);
         if (isTheLastSpectator) {
             lastSpectatorHasNotArrivedOnPaddock = false;
             notifyAll();
@@ -99,7 +100,7 @@ public class Paddock implements PaddockInterface {
      */
     public synchronized void proceedToStartLine() {
         currentNumberOfSpectators = 0;
-        ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_START_LINE);
+        ((ServiceProviderAgent)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_START_LINE);
         currentNumberOfHorses++;
         if (currentNumberOfHorses == numberOfHorses*2) {
             lastHorseDidNotProceedToStartLine = false;

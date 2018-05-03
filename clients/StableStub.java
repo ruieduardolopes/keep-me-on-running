@@ -2,6 +2,7 @@ package clients;
 
 import communications.Message;
 import communications.MessageType;
+import entities.HorseJockey;
 import hippodrome.StableInterface;
 import lib.communication.ClientCom;
 
@@ -16,10 +17,11 @@ public class StableStub implements StableInterface {
         Message messageToSend = new Message(MessageType.STABLE_PROCEED_TO_STABLE_WITH_RACE_ID, raceNumber);
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
-        if (messageReceived.getType() != MessageType.OK) {
+        if (messageReceived.getType() != MessageType.REPLY_STABLE_PROCEED_TO_STABLE_WITH_RACE_ID) {
             // TODO : Handle this error
         }
         connection.close();
+        ((HorseJockey)Thread.currentThread()).setHorseJockeyState(messageReceived.getHorseJockeyState());
     }
 
     @Override
@@ -28,9 +30,10 @@ public class StableStub implements StableInterface {
         Message messageToSend = new Message(MessageType.STABLE_PROCEED_TO_STABLE);
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
-        if (messageReceived.getType() != MessageType.OK) {
+        if (messageReceived.getType() != MessageType.REPLY_STABLE_PROCEED_TO_STABLE) {
             // TODO : Handle this error
         }
+        ((HorseJockey)Thread.currentThread()).setHorseJockeyState(messageReceived.getHorseJockeyState());
         connection.close();
     }
 

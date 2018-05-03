@@ -2,6 +2,8 @@ package clients;
 
 import communications.Message;
 import communications.MessageType;
+import entities.Broker;
+import entities.Spectator;
 import hippodrome.BettingCentreInterface;
 import hippodrome.rollfilm.UnknownHorseJockeyException;
 import lib.communication.ClientCom;
@@ -17,9 +19,10 @@ public class BettingCentreStub implements BettingCentreInterface {
         Message messageToSend = new Message(MessageType.BETTING_CENTRE_ACCEPT_THE_BETS);
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
-        if (messageReceived.getType() != MessageType.OK) {
+        if (messageReceived.getType() != MessageType.REPLY_BETTING_CENTRE_ACCEPT_THE_BETS) {
             // TODO : Handle this error
         }
+        ((Broker)Thread.currentThread()).setBrokerState(messageReceived.getBrokerState());
         connection.close();
     }
 
@@ -29,9 +32,10 @@ public class BettingCentreStub implements BettingCentreInterface {
         Message messageToSend = new Message(MessageType.BETTING_CENTRE_HONOUR_THE_BETS);
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
-        if (messageReceived.getType() != MessageType.OK) {
+        if (messageReceived.getType() != MessageType.REPLY_BETTING_CENTRE_HONOUR_THE_BETS) {
             // TODO : Handle this error
         }
+        ((Broker)Thread.currentThread()).setBrokerState(messageReceived.getBrokerState());
         connection.close();
     }
 
@@ -41,6 +45,10 @@ public class BettingCentreStub implements BettingCentreInterface {
         Message messageToSend = new Message(MessageType.BETTING_CENTRE_PLACE_A_BET, spectator, bet, horse);
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
+        if (messageReceived.getType() != MessageType.REPLY_BETTING_CENTRE_PLACE_A_BET) {
+            // TODO : Handle this error
+        }
+        ((Spectator)Thread.currentThread()).setSpectatorState(messageReceived.getSpectatorState());
         connection.close();
         return messageReceived.getBet();
     }
@@ -51,6 +59,10 @@ public class BettingCentreStub implements BettingCentreInterface {
         Message messageToSend = new Message(MessageType.BETTING_CENTRE_GO_COLLECT_THE_GAINS);
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
+        if (messageReceived.getType() != MessageType.REPLY_BETTING_CENTRE_GO_COLLECT_THE_GAINS) {
+            // TODO : Handle this error
+        }
+        ((Spectator)Thread.currentThread()).setSpectatorState(messageReceived.getSpectatorState());
         connection.close();
         return messageReceived.getGains();
     }

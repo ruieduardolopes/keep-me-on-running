@@ -2,6 +2,7 @@ package hippodrome;
 
 import entities.HorseJockey;
 import entities.HorseJockeyState;
+import server.ServiceProviderAgent;
 
 /**
  * Place where the horses rest waiting their turn to enter the competition.
@@ -28,7 +29,7 @@ public class Stable implements StableInterface {
      * @throws InterruptedException if the wait() is interrupted.
      */
     public synchronized void proceedToStable(int raceNumber) throws InterruptedException {
-        ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_STABLE);
+        ((ServiceProviderAgent)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_STABLE);
         while (currentRaceNumber != raceNumber) {
             try {
                 wait();
@@ -45,7 +46,7 @@ public class Stable implements StableInterface {
      * This method is useful to finish the lifecycle of the pairs Horse/Jockey.
      */
     public synchronized void proceedToStable() {
-        ((HorseJockey)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_STABLE);
+        ((ServiceProviderAgent)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_STABLE);
     }
 
     /**

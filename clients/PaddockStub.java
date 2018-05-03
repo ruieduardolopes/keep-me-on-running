@@ -2,6 +2,8 @@ package clients;
 
 import communications.Message;
 import communications.MessageType;
+import entities.HorseJockey;
+import entities.Spectator;
 import hippodrome.PaddockInterface;
 import lib.communication.ClientCom;
 
@@ -28,9 +30,10 @@ public class PaddockStub implements PaddockInterface {
         Message messageToSend = new Message(MessageType.PADDOCK_GO_CHECK_HORSES_WITH_LAST_SPECTATOR, isTheLastSpectator);
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
-        if (messageReceived.getType() != MessageType.OK) {
+        if (messageReceived.getType() != MessageType.REPLY_PADDOCK_GO_CHECK_HORSES) {
             // TODO : Handle this error
         }
+        ((Spectator)Thread.currentThread()).setSpectatorState(messageReceived.getSpectatorState());
         connection.close();
     }
 
@@ -40,9 +43,10 @@ public class PaddockStub implements PaddockInterface {
         Message messageToSend = new Message(MessageType.PADDOCK_PROCEED_TO_START_LINE);
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
-        if (messageReceived.getType() != MessageType.OK) {
+        if (messageReceived.getType() != MessageType.REPLY_PADDOCK_PROCEED_TO_START_LINE) {
             // TODO : Handle this error
         }
+        ((HorseJockey)Thread.currentThread()).setHorseJockeyState(messageReceived.getHorseJockeyState());
         connection.close();
     }
 
