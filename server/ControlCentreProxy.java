@@ -15,7 +15,7 @@ public class ControlCentreProxy implements Server {
         switch (message.getType()) {
             case CONTROL_CENTRE_ENTERTAIN_THE_GUESTS:
                 controlCentre.entertainTheGuests();
-                reply = new Message(MessageType.OK);
+                reply = new Message(MessageType.REPLY_CONTROL_CENTRE_ENTERTAIN_THE_GUESTS);
                 break;
             case CONTROL_CENTRE_GO_CHECK_HORSES:
                 controlCentre.goCheckHorses();
@@ -23,7 +23,7 @@ public class ControlCentreProxy implements Server {
                 break;
             case CONTROL_CENTRE_GO_WATCH_THE_RACE:
                 controlCentre.goWatchTheRace();
-                reply = new Message(MessageType.OK);
+                reply = new Message(MessageType.REPLY_CONTROL_CENTRE_GO_WATCH_THE_RACE);
                 break;
             case CONTROL_CENTRE_MAKE_A_MOVE:
                 controlCentre.makeAMove();
@@ -31,11 +31,11 @@ public class ControlCentreProxy implements Server {
                 break;
             case CONTROL_CENTRE_PROCEED_TO_PADDOCK:
                 controlCentre.proceedToPaddock();
-                reply = new Message(MessageType.OK);
+                reply = new Message(MessageType.REPLY_CONTROL_CENTRE_PROCEED_TO_PADDOCK);
                 break;
             case CONTROL_CENTRE_RELAX_A_BIT:
                 controlCentre.relaxABit();
-                reply = new Message(MessageType.OK);
+                reply = new Message(MessageType.REPLY_CONTROL_CENTRE_RELAX_A_BIT);
                 break;
             case CONTROL_CENTRE_REPORT_RESULTS:
                 int result = controlCentre.reportResults();
@@ -43,7 +43,7 @@ public class ControlCentreProxy implements Server {
                 break;
             case CONTROL_CENTRE_START_THE_RACE:
                 controlCentre.startTheRace();
-                reply = new Message(MessageType.OK);
+                reply = new Message(MessageType.REPLY_CONTROL_CENTRE_START_THE_RACE);
                 break;
             case CONTROL_CENTRE_SUMMON_HORSES_TO_PADDOCK:
                 controlCentre.summonHorsesToPaddock();

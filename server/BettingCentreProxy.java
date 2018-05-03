@@ -15,7 +15,7 @@ public class BettingCentreProxy implements Server {
         switch (message.getType()) {
             case BETTING_CENTRE_ACCEPT_THE_BETS:
                 bettingCentre.acceptTheBets();
-                reply = new Message(MessageType.OK);
+                reply = new Message(MessageType.REPLY_BETTING_CENTRE_ACCEPT_THE_BETS);
                 break;
             case BETTING_CENTRE_ARE_THERE_ANY_WINNERS:
                 boolean result = bettingCentre.areThereAnyWinners(message.getWinner());
@@ -39,7 +39,7 @@ public class BettingCentreProxy implements Server {
                 break;
             case BETTING_CENTRE_HONOUR_THE_BETS:
                 bettingCentre.honourTheBets();
-                reply = new Message(MessageType.OK);
+                reply = new Message(MessageType.REPLY_BETTING_CENTRE_HONOUR_THE_BETS);
                 break;
             case BETTING_CENTRE_SET_ABILITY:
                 bettingCentre.setAbility(message.getHorseID(), message.getAbility());

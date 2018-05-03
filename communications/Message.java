@@ -3,6 +3,7 @@ package communications;
 import entities.BrokerState;
 import entities.HorseJockeyState;
 import entities.SpectatorState;
+import hippodrome.actions.Race;
 
 import java.io.Serializable;
 
@@ -37,7 +38,7 @@ public class Message implements Serializable {
             case REPLY_CONTROL_CENTRE_WAIT_FOR_NEXT_RACE:
                 this.value = value;
                 break;
-            case REPLY_PADDOCK_GO_CHECK_HORSES:
+            case REPLY_PADDOCK_GO_CHECK_HORSES_WITH_LAST_SPECTATOR:
                 this.value = value;
                 break;
             case REPLY_RACING_TRACK_HAS_FINISH_LINE_BEEN_CROSSED:
@@ -176,21 +177,21 @@ public class Message implements Serializable {
         brokerState = state;
     }
 
-    public Message(MessageType type, int identification, HorseJockeyState state) {
+    public Message(MessageType type, int horseID, HorseJockeyState state) {
         this.type = type;
-        this.identification = identification;
+        this.horseID = horseID;
         this.horseJockeyState = state;
     }
 
-    public Message(MessageType type, int identification, SpectatorState state) {
+    public Message(MessageType type, int spectatorID, SpectatorState state) {
         this.type = type;
-        this.identification = identification;
+        this.spectatorID = spectatorID;
         this.spectatorState = state;
     }
 
-    public Message(MessageType type, byte[] serializedObject) {
+    public Message(MessageType type, Race race) {
         this.type = type;
-        this.serializedObject = serializedObject;
+        this.race = race;
     }
 
     public MessageType getType() {
@@ -285,8 +286,8 @@ public class Message implements Serializable {
         return value;
     }
 
-    public byte[] getSerializedObject() {
-        return serializedObject;
+    public Race getRace() {
+        return race;
     }
 
     public void setType(MessageType type) {
@@ -377,8 +378,8 @@ public class Message implements Serializable {
         this.value = value;
     }
 
-    public void setSerializedObject(byte[] serializedObject) {
-        this.serializedObject = serializedObject;
+    public void setRace(Race race) {
+        this.race = race;
     }
 
     private MessageType type;
@@ -403,5 +404,5 @@ public class Message implements Serializable {
     private int horseIteration;
     private int horsePosition;
     private boolean value;
-    private byte[] serializedObject;
+    private Race race;
 }

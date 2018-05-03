@@ -19,12 +19,9 @@ public class RacingTrackProxy implements Server {
         ByteArrayOutputStream objectByteArray = new ByteArrayOutputStream();
         ObjectOutputStream serializedObject = null;
         switch (message.getType()) {
-            case RACING_TRACK_GET_RACE: // TODO : verify the serialization of a Race
+            case RACING_TRACK_GET_RACE:
                 Race race = racingTrack.getRace();
-                serializedObject = new ObjectOutputStream(objectByteArray);
-                serializedObject.writeObject(race);
-                serializedObject.flush();
-                reply = new Message(MessageType.REPLY_RACING_TRACK_GET_RACE, objectByteArray.toByteArray());
+                reply = new Message(MessageType.REPLY_RACING_TRACK_GET_RACE, race);
                 break;
             case RACING_TRACK_GET_WINNER:
                 int winner = racingTrack.getWinner();
@@ -36,7 +33,7 @@ public class RacingTrackProxy implements Server {
                 break;
             case RACING_TRACK_MAKE_A_MOVE:
                 racingTrack.makeAMove(message.getHorseID());
-                reply = new Message(MessageType.OK);
+                reply = new Message(MessageType.REPLY_RACING_TRACK_MAKE_A_MOVE);
                 break;
             case RACING_TRACK_PROCEED_TO_START_LINE:
                 racingTrack.proceedToStartLine();

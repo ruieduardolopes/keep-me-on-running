@@ -64,31 +64,13 @@ public class RacingTrackStub implements RacingTrackInterface {
     }
 
     @Override
-    public Race getRace() { // TODO : Review this
-        Race race = null;
-        ByteArrayInputStream objectByteArray = null;
-        ObjectInputStream deseriablizedObject = null;
+    public Race getRace() {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.RACING_TRACK_GET_RACE);
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
         connection.close();
-        objectByteArray = new ByteArrayInputStream(messageReceived.getSerializedObject());
-        try {
-            deseriablizedObject = new ObjectInputStream(objectByteArray);
-            race = (Race) deseriablizedObject.readObject();
-        } catch (Exception e) {
-            // TODO : handle this exception
-        } finally {
-            try {
-                if (objectByteArray != null) {
-                    objectByteArray.close();
-                }
-            } catch (IOException ioe) {
-                // TODO : handle this exception
-            }
-        }
-        return race;
+        return messageReceived.getRace();
     }
 
     @Override

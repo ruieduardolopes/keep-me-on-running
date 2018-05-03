@@ -508,6 +508,7 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
      */
     public synchronized void setSpectatorStatus(int spectatorId, SpectatorState status) throws UnknownSpectatorException {
         try {
+            Logger.printError("id is " + spectatorId);
             spectators[spectatorId].setStatus(status);
         } catch (IndexOutOfBoundsException ioobe) {
             throw new UnknownSpectatorException(spectatorId);
@@ -579,11 +580,8 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
      * {@code horseJockeys} array.
      */
     public synchronized void setHorseJockeyStatus(int horseJockeyId, HorseJockeyState status) throws UnknownHorseJockeyException {
-        System.out.print("000,5555");
-        Logger.printError(horseJockeyId + "");
         try {
             horseJockeys[horseJockeyId].setStatus(status);
-            System.out.print("000,6666");
         } catch (IndexOutOfBoundsException ioobe) {
             throw new UnknownHorseJockeyException(horseJockeyId);
         }

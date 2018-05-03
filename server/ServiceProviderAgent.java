@@ -101,6 +101,18 @@ public class ServiceProviderAgent extends Thread {
             case REPLY_CONTROL_CENTRE_GO_WATCH_THE_RACE:
                 reply.setSpectatorState(spectatorState);
                 break;
+            case REPLY_CONTROL_CENTRE_WAIT_FOR_NEXT_RACE:
+                reply.setSpectatorState(spectatorState);
+                break;
+            case REPLY_BETTING_CENTRE_PLACE_A_BET:
+                reply.setSpectatorState(spectatorState);
+                break;
+            case REPLY_BETTING_CENTRE_GO_COLLECT_THE_GAINS:
+                reply.setSpectatorState(spectatorState);
+                break;
+            case REPLY_PADDOCK_GO_CHECK_HORSES_WITH_LAST_SPECTATOR:
+                reply.setSpectatorState(spectatorState);
+                break;
             default:
                 // TODO : handle this case
                 break;

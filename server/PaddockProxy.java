@@ -15,11 +15,11 @@ public class PaddockProxy implements Server {
         switch (message.getType()) {
             case PADDOCK_GO_CHECK_HORSES:
                 boolean result = paddock.goCheckHorses();
-                reply = new Message(MessageType.REPLY_PADDOCK_GO_CHECK_HORSES, result);
+                reply = new Message(MessageType.REPLY_PADDOCK_GO_CHECK_HORSES_WITH_LAST_SPECTATOR, result);
                 break;
             case PADDOCK_GO_CHECK_HORSES_WITH_LAST_SPECTATOR:
                 paddock.goCheckHorses(message.getValue());
-                reply = new Message(MessageType.OK);
+                reply = new Message(MessageType.REPLY_PADDOCK_GO_CHECK_HORSES_WITH_LAST_SPECTATOR);
                 break;
             case PADDOCK_PROCEED_TO_PADDOCK:
                 paddock.proceedToPaddock(message.getRaceNumber());
@@ -27,7 +27,7 @@ public class PaddockProxy implements Server {
                 break;
             case PADDOCK_PROCEED_TO_START_LINE:
                 paddock.proceedToStartLine();
-                reply = new Message(MessageType.OK);
+                reply = new Message(MessageType.REPLY_PADDOCK_PROCEED_TO_START_LINE);
                 break;
             default:
                 // TODO : handle this case

@@ -15,11 +15,11 @@ public class StableProxy implements Server {
         switch (message.getType()) {
             case STABLE_PROCEED_TO_STABLE:
                 stable.proceedToStable();
-                reply = new Message(MessageType.OK);
+                reply = new Message(MessageType.REPLY_STABLE_PROCEED_TO_STABLE);
                 break;
             case STABLE_PROCEED_TO_STABLE_WITH_RACE_ID:
                 stable.proceedToStable(message.getRaceNumber());
-                reply = new Message(MessageType.OK);
+                reply = new Message(MessageType.REPLY_STABLE_PROCEED_TO_STABLE_WITH_RACE_ID);
                 break;
             case STABLE_SUMMON_HORSES_TO_PADDOCK:
                 stable.summonHorsesToPaddock(message.getRaceNumber());

@@ -30,7 +30,7 @@ public class PaddockStub implements PaddockInterface {
         Message messageToSend = new Message(MessageType.PADDOCK_GO_CHECK_HORSES_WITH_LAST_SPECTATOR, isTheLastSpectator);
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
-        if (messageReceived.getType() != MessageType.REPLY_PADDOCK_GO_CHECK_HORSES) {
+        if (messageReceived.getType() != MessageType.REPLY_PADDOCK_GO_CHECK_HORSES_WITH_LAST_SPECTATOR) {
             // TODO : Handle this error
         }
         ((Spectator)Thread.currentThread()).setSpectatorState(messageReceived.getSpectatorState());

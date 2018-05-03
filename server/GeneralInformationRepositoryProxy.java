@@ -58,9 +58,7 @@ public class GeneralInformationRepositoryProxy implements Server {
                 reply = new Message(MessageType.OK);
                 break;
             case GENERAL_INFORMATION_REPOSITORY_SET_HORSE_JOCKEY_STATUS:
-                System.out.print("00000");
                 repository.setHorseJockeyStatus(message.getHorseID(), message.getHorseJockeyState());
-                System.out.print("2222");
                 reply = new Message(MessageType.OK);
                 break;
             case GENERAL_INFORMATION_REPOSITORY_SET_RACE_DISTANCE:
