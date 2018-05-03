@@ -16,4 +16,8 @@ public class Logger {
     public static void printDebug(String message, Object ... args) {
         System.out.printf(Color.ANSI_PURPLE + "[DEBUG] " + Color.ANSI_RESET + message + "\n", args);
     }
+
+    public static void printWarning(String message, Object ... args) {
+        System.out.printf(Color.ANSI_YELLOW + "[WARNG] " + Color.ANSI_RESET + message + "\n", args);
+    }
 }
