@@ -177,7 +177,6 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
      * Adds a new snapshot of the race to log it.
      */
     private synchronized void newSnapshot() {
-        System.out.print("111111");
         if (brokerStatus.equals("OTE")) {
             for (int i = 0; i != horseJockeys.length; i++) {
                 if (horseJockeys[i].getAbility() == 0 && wereWaitingTheHorses) {
@@ -508,7 +507,6 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
      */
     public synchronized void setSpectatorStatus(int spectatorId, SpectatorState status) throws UnknownSpectatorException {
         try {
-            Logger.printError("id is " + spectatorId);
             spectators[spectatorId].setStatus(status);
         } catch (IndexOutOfBoundsException ioobe) {
             throw new UnknownSpectatorException(spectatorId);
@@ -581,6 +579,7 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
      */
     public synchronized void setHorseJockeyStatus(int horseJockeyId, HorseJockeyState status) throws UnknownHorseJockeyException {
         try {
+            Logger.printWarning("The pair %d Horse/Jockey status is %s.", horseJockeyId, status); // TODO : unnecessary comment
             horseJockeys[horseJockeyId].setStatus(status);
         } catch (IndexOutOfBoundsException ioobe) {
             throw new UnknownHorseJockeyException(horseJockeyId);

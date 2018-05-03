@@ -3,8 +3,8 @@ package clients;
 import entities.Broker;
 import entities.HorseJockey;
 import entities.Spectator;
+import lib.logging.Logger;
 
-import static configurations.ClientConfigurations.*;
 import static configurations.SimulationConfigurations.*;
 
 public class ClientLauncher {

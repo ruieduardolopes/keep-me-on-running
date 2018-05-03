@@ -63,6 +63,7 @@ public class Broker extends Thread {
                 }
 
                 repository.raceIsOver();                                            //
+                setRacingTrack();
             }                                                                       //
             controlCentre.entertainTheGuests();                                     // as the races are over, then i should go entertain the guests.
             repository.newSnapshot(true);
@@ -87,10 +88,9 @@ public class Broker extends Thread {
     /**
      * Sets the Entities's current Racing Track's instance {@link RacingTrack}.
      *
-     * @param racingTrack the new instance of a {@link RacingTrack}.
      */
-    public synchronized void setRacingTrack(RacingTrackStub racingTrack) {
-        this.racingTrack = racingTrack;
+    public synchronized void setRacingTrack() {
+        this.racingTrack = new RacingTrackStub();
     }
 
     /**
