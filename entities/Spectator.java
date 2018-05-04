@@ -39,7 +39,6 @@ public class Spectator extends Thread {
         this.bettingCentre = new BettingCentreStub();
         this.controlCentre = new ControlCentreStub();
         this.paddock = new PaddockStub();
-        this.repository = new GeneralInformationRepositoryStub();
         this.numberOfRaces = numberOfRaces;
     }
 

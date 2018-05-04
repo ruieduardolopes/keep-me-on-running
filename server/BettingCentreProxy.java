@@ -3,6 +3,7 @@ package server;
 import communications.Message;
 import communications.MessageType;
 import hippodrome.BettingCentre;
+import lib.logging.Logger;
 
 public class BettingCentreProxy implements Server {
     public BettingCentreProxy() {
@@ -42,6 +43,7 @@ public class BettingCentreProxy implements Server {
                 reply = new Message(MessageType.REPLY_BETTING_CENTRE_HONOUR_THE_BETS);
                 break;
             case BETTING_CENTRE_SET_ABILITY:
+                Logger.printInformation("Received a request %s to the horse %d with ability %d", message.getType(), message.getHorseID(), message.getAbility());
                 bettingCentre.setAbility(message.getHorseID(), message.getAbility());
                 reply = new Message(MessageType.OK);
                 break;

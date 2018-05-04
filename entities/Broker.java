@@ -49,7 +49,6 @@ public class Broker extends Thread {
      */
     @Override
     public void run() {
-        repository.setWereWaitingTheHorses(true);
         try {
             for (int raceNumber = 0; raceNumber < totalOfRaces; raceNumber++) {     // for each race on the set of races for today:
                 stable.summonHorsesToPaddock(raceNumber);                           //   call every horse of the race raceNumber on Stable to Paddock;
@@ -61,7 +60,6 @@ public class Broker extends Thread {
                 if (bettingCentre.areThereAnyWinners(winner)) {                     //   if there are any bet winners at the Betting Centre:
                     bettingCentre.honourTheBets();                                  //     then i should honour the bets and retrieve its money;
                 }
-
                 repository.raceIsOver();                                            //
                 setRacingTrack();
             }                                                                       //

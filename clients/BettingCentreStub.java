@@ -7,6 +7,7 @@ import entities.Spectator;
 import hippodrome.BettingCentreInterface;
 import hippodrome.rollfilm.UnknownHorseJockeyException;
 import lib.communication.ClientCom;
+import lib.logging.Logger;
 
 import static configurations.ServerConfigurations.BETTING_CENTRE_HOST;
 import static configurations.ServerConfigurations.BETTING_CENTRE_PORT;
@@ -17,8 +18,10 @@ public class BettingCentreStub implements BettingCentreInterface {
     public void acceptTheBets() throws InterruptedException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.BETTING_CENTRE_ACCEPT_THE_BETS);
+        Logger.printNotification("Sending %s message to server", messageToSend.getType());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
+        Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.REPLY_BETTING_CENTRE_ACCEPT_THE_BETS) {
             // TODO : Handle this error
         }
@@ -30,8 +33,10 @@ public class BettingCentreStub implements BettingCentreInterface {
     public void honourTheBets() throws InterruptedException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.BETTING_CENTRE_HONOUR_THE_BETS);
+        Logger.printNotification("Sending %s message to server", messageToSend.getType());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
+        Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.REPLY_BETTING_CENTRE_HONOUR_THE_BETS) {
             // TODO : Handle this error
         }
@@ -43,8 +48,10 @@ public class BettingCentreStub implements BettingCentreInterface {
     public int placeABet(int spectator, int bet, int horse) throws InterruptedException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.BETTING_CENTRE_PLACE_A_BET, spectator, bet, horse);
+        Logger.printNotification("Sending %s message to server with arguments (id:%d, bet:%d, horse:%d)", messageToSend.getType(), spectator, bet, horse);
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
+        Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.REPLY_BETTING_CENTRE_PLACE_A_BET) {
             // TODO : Handle this error
         }
@@ -57,8 +64,10 @@ public class BettingCentreStub implements BettingCentreInterface {
     public int goCollectTheGains() throws InterruptedException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.BETTING_CENTRE_GO_COLLECT_THE_GAINS);
+        Logger.printNotification("Sending %s message to server", messageToSend.getType());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
+        Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.REPLY_BETTING_CENTRE_GO_COLLECT_THE_GAINS) {
             // TODO : Handle this error
         }
@@ -71,8 +80,10 @@ public class BettingCentreStub implements BettingCentreInterface {
     public boolean haveIWon(int spectatorId) {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.BETTING_CENTRE_HAVE_I_WON);
+        Logger.printNotification("Sending %s message to server", messageToSend.getType());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
+        Logger.printInformation("Received a %s message", messageReceived.getType());
         connection.close();
         return messageReceived.getValue();
     }
@@ -81,8 +92,10 @@ public class BettingCentreStub implements BettingCentreInterface {
     public boolean areThereAnyWinners(int winner) {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.BETTING_CENTRE_ARE_THERE_ANY_WINNERS);
+        Logger.printNotification("Sending %s message to server", messageToSend.getType());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
+        Logger.printInformation("Received a %s message", messageReceived.getType());
         connection.close();
         return messageReceived.getValue();
     }
@@ -91,8 +104,10 @@ public class BettingCentreStub implements BettingCentreInterface {
     public int getNumberOfHorses() {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.BETTING_CENTRE_GET_NUMBER_OF_HORSES);
+        Logger.printNotification("Sending %s message to server", messageToSend.getType());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
+        Logger.printInformation("Received a %s message", messageReceived.getType());
         connection.close();
         return messageReceived.getHorses();
     }
@@ -101,8 +116,10 @@ public class BettingCentreStub implements BettingCentreInterface {
     public void setAbility(int horse, int ability) throws UnknownHorseJockeyException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.BETTING_CENTRE_SET_ABILITY, horse, ability);
+        Logger.printNotification("Sending %s message to server with arguments (horse:%d, ability:%d)", messageToSend.getType(), horse, ability);
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
+        Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.OK) {
             // TODO : Handle this error
         }
