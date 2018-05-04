@@ -75,6 +75,7 @@ public class BettingCentre implements BettingCentreInterface {
         evaluateOdds();
         allWinnersAreNotOnBettingCentre = true;
         ((ServiceProviderAgent)Thread.currentThread()).setBrokerState(BrokerState.WAITING_FOR_BETS);
+        repository.setBrokerStatus(BrokerState.WAITING_FOR_BETS);
         while (bettingQueue.size() !=  numberOfSpectators) {
             try {
                 wait();
@@ -98,6 +99,7 @@ public class BettingCentre implements BettingCentreInterface {
      */
     public synchronized void honourTheBets() throws InterruptedException {
         ((ServiceProviderAgent)Thread.currentThread()).setBrokerState(BrokerState.SETTLING_ACCOUNTS);
+        repository.setBrokerStatus(BrokerState.SETTLING_ACCOUNTS);
         while (allWinnersAreNotOnBettingCentre) {
             try {
                 wait();
@@ -129,6 +131,7 @@ public class BettingCentre implements BettingCentreInterface {
      */
     public synchronized int placeABet(int spectator, int bet, int horse) throws InterruptedException {
         ((ServiceProviderAgent)Thread.currentThread()).setSpectatorState(SpectatorState.PLACING_A_BET);
+        repository.setSpectatorStatus(spectator, SpectatorState.PLACING_A_BET);
         bettingQueue.add(spectator);
         try {
             bets[spectator] = new Bet(horse, bet);
@@ -164,6 +167,7 @@ public class BettingCentre implements BettingCentreInterface {
     public synchronized int goCollectTheGains() throws InterruptedException {
         ServiceProviderAgent agent = ((ServiceProviderAgent)Thread.currentThread());
         agent.setSpectatorState(SpectatorState.COLLECTING_THE_GAINS);
+        repository.setSpectatorStatus(agent.getSpectatorIdentification(), SpectatorState.COLLECTING_THE_GAINS);
         winnersArrived++;
         if (winnersArrived == winners.length) {
             allWinnersAreNotOnBettingCentre = false;

@@ -33,6 +33,7 @@ public class HorseJockey extends Thread {
     public HorseJockey(int identification, int ability) {
         this.repository = new GeneralInformationRepositoryStub();
         this.identification = identification;
+        this.repository.setWereWaitingTheHorses(true);
         this.repository.setHorseJockeyStatus(identification, state);
         this.ability = ability;
         this.repository.setHorseJockeyAbility(this.identification, this.ability);
@@ -42,7 +43,6 @@ public class HorseJockey extends Thread {
         this.raceNumber = this.racingTrack.getRace().getIdentification();
         this.stable = new StableStub();
         this.bettingCentre = new BettingCentreStub();
-        this.repository.setWereWaitingTheHorses(true);
     }
 
     /**
@@ -82,7 +82,7 @@ public class HorseJockey extends Thread {
      */
     public synchronized void setHorseJockeyState(HorseJockeyState state) {
         this.state = state;
-        repository.setHorseJockeyStatus(identification, state);
+        //repository.setHorseJockeyStatus(identification, state);
     }
 
     /**

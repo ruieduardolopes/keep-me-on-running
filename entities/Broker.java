@@ -1,7 +1,9 @@
 package entities;
 
 import clients.*;
+import configurations.SimulationConfigurations;
 import hippodrome.*;
+import hippodrome.actions.Race;
 
 /**
  * Implementation of a Entities, an essential character on a horse race action. This
@@ -36,7 +38,7 @@ public class Broker extends Thread {
         this.stable = new StableStub();
         this.repository = new GeneralInformationRepositoryStub();
         this.totalOfRaces = numberOfRaces;
-        repository.setBrokerStatus(state);
+        this.repository.setBrokerStatus(state);
     }
 
     /**
@@ -61,7 +63,7 @@ public class Broker extends Thread {
                     bettingCentre.honourTheBets();                                  //     then i should honour the bets and retrieve its money;
                 }
                 repository.raceIsOver();                                            //
-                setRacingTrack();
+                setRacingTrack(raceNumber+1);
             }                                                                       //
             controlCentre.entertainTheGuests();                                     // as the races are over, then i should go entertain the guests.
             repository.newSnapshot(true);
@@ -80,15 +82,15 @@ public class Broker extends Thread {
      */
     public synchronized void setBrokerState(BrokerState state) {
         this.state = state;
-        repository.setBrokerStatus(state);
+        //repository.setBrokerStatus(state);
     }
 
     /**
      * Sets the Entities's current Racing Track's instance {@link RacingTrack}.
      *
      */
-    public synchronized void setRacingTrack() {
-        this.racingTrack = new RacingTrackStub();
+    public synchronized void setRacingTrack(int identification) {
+        this.racingTrack.setRace(new Race(SimulationConfigurations.NUMBER_OF_TRACKS, identification, Race.generateDistance()));
     }
 
     /**

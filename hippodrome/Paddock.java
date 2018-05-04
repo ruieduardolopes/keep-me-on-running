@@ -1,5 +1,6 @@
 package hippodrome;
 
+import clients.GeneralInformationRepositoryStub;
 import entities.HorseJockey;
 import entities.HorseJockeyState;
 import entities.Spectator;
@@ -31,6 +32,7 @@ public class Paddock implements PaddockInterface {
     private Paddock(int numberOfSpectators, int numberOfHorses) {
         this.numberOfSpectators = numberOfSpectators;
         this.numberOfHorses = numberOfHorses;
+        this.repository = new GeneralInformationRepositoryStub();
     }
 
     /** TODO : documentation */
@@ -77,6 +79,8 @@ public class Paddock implements PaddockInterface {
      */
     public synchronized void goCheckHorses(boolean isTheLastSpectator) throws InterruptedException {
         ((ServiceProviderAgent)Thread.currentThread()).setSpectatorState(SpectatorState.APPRAISING_THE_HORSES);
+        repository.setSpectatorStatus(((ServiceProviderAgent)(Thread.currentThread())).getSpectatorIdentification(), SpectatorState.APPRAISING_THE_HORSES);
+
         if (isTheLastSpectator) {
             lastSpectatorHasNotArrivedOnPaddock = false;
             notifyAll();
@@ -101,6 +105,7 @@ public class Paddock implements PaddockInterface {
     public synchronized void proceedToStartLine() {
         currentNumberOfSpectators = 0;
         ((ServiceProviderAgent)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_START_LINE);
+        repository.setHorseJockeyStatus(((ServiceProviderAgent)(Thread.currentThread())).getHorseJockeyIdentification(), HorseJockeyState.AT_THE_START_LINE);
         currentNumberOfHorses++;
         if (currentNumberOfHorses == numberOfHorses*2) {
             lastHorseDidNotProceedToStartLine = false;
@@ -161,4 +166,6 @@ public class Paddock implements PaddockInterface {
 
     /** TODO : documentation */
     private static Paddock instance;
+
+    private GeneralInformationRepositoryStub repository;
 }

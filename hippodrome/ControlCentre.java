@@ -1,5 +1,7 @@
 package hippodrome;
 
+import clients.ControlCentreStub;
+import clients.GeneralInformationRepositoryStub;
 import entities.*;
 import server.ServiceProviderAgent;
 
@@ -25,6 +27,7 @@ public class ControlCentre implements ControlCentreInterface {
      */
     private ControlCentre(int numberOfHorses) {
         this.numberOfHorses = numberOfHorses;
+        this.repository = new GeneralInformationRepositoryStub();
     }
 
     /** TODO : Documentation */
@@ -43,6 +46,7 @@ public class ControlCentre implements ControlCentreInterface {
      */
     public synchronized void startTheRace() throws InterruptedException {
         ((ServiceProviderAgent)Thread.currentThread()).setBrokerState(BrokerState.SUPERVISING_THE_RACE);
+        repository.setBrokerStatus(BrokerState.SUPERVISING_THE_RACE);
         while (thereIsStillHorsesToFinishRace) {
             try {
                 wait();
@@ -59,6 +63,7 @@ public class ControlCentre implements ControlCentreInterface {
      */
     public synchronized void entertainTheGuests() {
         ((ServiceProviderAgent)Thread.currentThread()).setBrokerState(BrokerState.PLAYING_HOST_AT_THE_BAR);
+        repository.setBrokerStatus(BrokerState.PLAYING_HOST_AT_THE_BAR);
     }
 
     /**
@@ -71,6 +76,7 @@ public class ControlCentre implements ControlCentreInterface {
      */
     public synchronized boolean waitForTheNextRace() throws InterruptedException {
         ((ServiceProviderAgent)Thread.currentThread()).setSpectatorState(SpectatorState.WAITING_FOR_A_RACE_TO_START);
+        repository.setSpectatorStatus(((ServiceProviderAgent)Thread.currentThread()).getSpectatorIdentification(), SpectatorState.WAITING_FOR_A_RACE_TO_START);
         while (lastHorseJockeyHasNotArrivedOnPaddock) {
             try {
                 wait();
@@ -93,6 +99,7 @@ public class ControlCentre implements ControlCentreInterface {
      */
     public synchronized void goWatchTheRace() throws InterruptedException {
         ((ServiceProviderAgent)Thread.currentThread()).setSpectatorState(SpectatorState.WATCHING_A_RACE);
+        repository.setSpectatorStatus(((ServiceProviderAgent)Thread.currentThread()).getSpectatorIdentification(), SpectatorState.WATCHING_A_RACE);
         brokerDidNotReportResults = true;
         finishedHorses = 0;
         raceWinner = 0;
@@ -112,6 +119,7 @@ public class ControlCentre implements ControlCentreInterface {
      */
     public synchronized void relaxABit() {
         ((ServiceProviderAgent)Thread.currentThread()).setSpectatorState(SpectatorState.CELEBRATING);
+        repository.setSpectatorStatus(((ServiceProviderAgent)Thread.currentThread()).getSpectatorIdentification(), SpectatorState.CELEBRATING);
     }
 
     /**
@@ -138,6 +146,7 @@ public class ControlCentre implements ControlCentreInterface {
      */
     public synchronized void summonHorsesToPaddock() throws InterruptedException {
         ((ServiceProviderAgent)Thread.currentThread()).setBrokerState(BrokerState.ANNOUNCING_NEXT_RACE);
+        repository.setBrokerStatus(BrokerState.ANNOUNCING_NEXT_RACE);
         while (lastSpectatorHasNotArrivedOnPaddock) {
             try {
                 wait();
@@ -158,6 +167,7 @@ public class ControlCentre implements ControlCentreInterface {
     public synchronized void proceedToPaddock() {
         numberOfHorseJockeysOnPaddock++;
         ((ServiceProviderAgent)(Thread.currentThread())).setHorseJockeyState(HorseJockeyState.AT_THE_PADDOCK);
+        repository.setHorseJockeyStatus(((ServiceProviderAgent)(Thread.currentThread())).getHorseJockeyIdentification(), HorseJockeyState.AT_THE_PADDOCK);
         if (numberOfHorseJockeysOnPaddock == NUMBER_OF_PAIRS_HORSE_JOCKEY) {
             lastHorseJockeyHasNotArrivedOnPaddock = false;
             notifyAll();
@@ -250,6 +260,8 @@ public class ControlCentre implements ControlCentreInterface {
      * Identification of the pair Horse/Jockey winner of the current race.
      */
     private int raceWinner = 0;
+
+    private GeneralInformationRepositoryStub repository;
 
     /** TODO : documentation */
     private static ControlCentre instance;

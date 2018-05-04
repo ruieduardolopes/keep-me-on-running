@@ -43,6 +43,10 @@ public class RacingTrackProxy implements Server {
                 racingTrack.startTheRace();
                 reply = new Message(MessageType.OK);
                 break;
+            case RACING_TRACK_SET_RACE:
+                racingTrack.setRace(message.getRace());
+                reply = new Message(MessageType.OK);
+                break;
             default:
                 // TODO : handle this case
                 break;

@@ -13,5 +13,7 @@ public interface RacingTrackInterface {
 
     Race getRace();
 
+    void setRace(Race race);
+
     int getWinner();
 }

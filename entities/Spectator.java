@@ -85,7 +85,7 @@ public class Spectator extends Thread {
      */
     public synchronized void setSpectatorState(SpectatorState state) {
         this.state = state;
-        repository.setSpectatorStatus(this.identification, state);
+        //repository.setSpectatorStatus(this.identification, state);
     }
 
     /**

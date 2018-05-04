@@ -36,15 +36,13 @@ public class RacingTrack implements RacingTrackInterface {
         this.race = race;
         this.repository = new GeneralInformationRepositoryStub();
         this.currentHorsesPositions = new int[race.getNumberOfTracks()];
-
-        repository.setRaceDistance(race.getDistance());
-        repository.setRaceNumber(race.getIdentification());
+        this.repository.setRaceDistance(race.getDistance());
+        this.repository.setRaceNumber(race.getIdentification());
     }
 
     public static RacingTrack getInstance() {
         if (instance == null) {
-            instance = new RacingTrack(new Race(NUMBER_OF_TRACKS, identification++, generateDistance())); // TODO : fill with new race identification and distance
-
+            instance = new RacingTrack(new Race(NUMBER_OF_TRACKS, identification, generateDistance())); // TODO : fill with new race identification and distance
         }
         return instance;
     }
@@ -89,12 +87,14 @@ public class RacingTrack implements RacingTrackInterface {
             }
         }
         ((ServiceProviderAgent)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.RUNNING);
+        repository.setHorseJockeyStatus(((ServiceProviderAgent)(Thread.currentThread())).getHorseJockeyIdentification(), HorseJockeyState.RUNNING);
         int thisHorse = horsesToRun.remove();
         currentHorsesPositions[thisHorse] += (int)(Math.random()*((ServiceProviderAgent) Thread.currentThread()).getHorseJockeyAgility()) + 1;
         repository.setHorseJockeyPositionOnTrack(horseId, currentHorsesPositions[thisHorse]);
         repository.setHorseJockeyNumberOfIncrementsDid(horseId, repository.getHorseJockeyNumberOfIncrementsDid(horseId)+1);
         if (currentHorsesPositions[thisHorse] >= race.getDistance()) {
             ((ServiceProviderAgent)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_FINNISH_LINE);
+            repository.setHorseJockeyStatus(((ServiceProviderAgent)(Thread.currentThread())).getHorseJockeyIdentification(), HorseJockeyState.AT_THE_FINNISH_LINE);
             hasFirstHorseCrossedTheFinishLine = true;
         } else {
             horsesToRun.add(thisHorse);
@@ -166,6 +166,11 @@ public class RacingTrack implements RacingTrackInterface {
     /** TODO : documentation */
     private static int generateDistance() {
         return (int)(Math.random() * (TRACK_DISTANCE_MAX_BOUND - TRACK_DISTANCE_MIN_BOUND)) + TRACK_DISTANCE_MIN_BOUND;
+    }
+
+    /** TODO : documentation */
+    public void setRace(Race race) {
+        this.race = race;
     }
 
     /** TODO : documentation */

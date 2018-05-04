@@ -5,6 +5,7 @@ import communications.MessageType;
 import entities.HorseJockey;
 import hippodrome.StableInterface;
 import lib.communication.ClientCom;
+import lib.logging.Logger;
 
 import static configurations.ServerConfigurations.STABLE_HOST;
 import static configurations.ServerConfigurations.STABLE_PORT;
@@ -41,8 +42,10 @@ public class StableStub implements StableInterface {
     public void summonHorsesToPaddock(int raceNumber) {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.STABLE_SUMMON_HORSES_TO_PADDOCK, raceNumber);
+        Logger.printNotification("Sending %s message to server with argument (race:%d)", messageToSend.getType(), raceNumber);
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
+        Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.OK) {
             // TODO : Handle this error
         }

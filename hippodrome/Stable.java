@@ -1,5 +1,6 @@
 package hippodrome;
 
+import clients.GeneralInformationRepositoryStub;
 import entities.HorseJockey;
 import entities.HorseJockeyState;
 import server.ServiceProviderAgent;
@@ -13,6 +14,10 @@ import server.ServiceProviderAgent;
  * @version 1.1
  */
 public class Stable implements StableInterface {
+    public Stable() {
+        repository = new GeneralInformationRepositoryStub();
+    }
+
     public static Stable getInstance() {
         if (instance == null) {
             instance = new Stable();
@@ -30,6 +35,7 @@ public class Stable implements StableInterface {
      */
     public synchronized void proceedToStable(int raceNumber) throws InterruptedException {
         ((ServiceProviderAgent)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_STABLE);
+        repository.setHorseJockeyStatus(((ServiceProviderAgent)(Thread.currentThread())).getHorseJockeyIdentification(), HorseJockeyState.AT_THE_STABLE);
         while (currentRaceNumber != raceNumber) {
             try {
                 wait();
@@ -47,6 +53,7 @@ public class Stable implements StableInterface {
      */
     public synchronized void proceedToStable() {
         ((ServiceProviderAgent)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_STABLE);
+        repository.setHorseJockeyStatus(((ServiceProviderAgent)(Thread.currentThread())).getHorseJockeyIdentification(), HorseJockeyState.AT_THE_STABLE);
     }
 
     /**
@@ -67,4 +74,6 @@ public class Stable implements StableInterface {
     private int currentRaceNumber = -1;
 
     private static Stable instance;
+
+    private GeneralInformationRepositoryStub repository;
 }

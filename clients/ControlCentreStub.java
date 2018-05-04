@@ -7,6 +7,7 @@ import entities.HorseJockey;
 import entities.Spectator;
 import hippodrome.ControlCentreInterface;
 import lib.communication.ClientCom;
+import lib.logging.Logger;
 
 import static configurations.ServerConfigurations.CONTROL_CENTRE_HOST;
 import static configurations.ServerConfigurations.CONTROL_CENTRE_PORT;
@@ -17,8 +18,10 @@ public class ControlCentreStub implements ControlCentreInterface {
     public void startTheRace() throws InterruptedException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_START_THE_RACE);
+        Logger.printNotification("Sending %s message to server", messageToSend.getType());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
+        Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.REPLY_CONTROL_CENTRE_START_THE_RACE) {
             // TODO : Handle this error
         }
@@ -93,8 +96,10 @@ public class ControlCentreStub implements ControlCentreInterface {
     public void summonHorsesToPaddock() throws InterruptedException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_SUMMON_HORSES_TO_PADDOCK);
+        Logger.printNotification("Sending %s message to server", messageToSend.getType());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
+        Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.REPLY_CONTROL_CENTRE_SUMMON_HORSES_TO_PADDOCK) {
             // TODO : Handle this error
         }
@@ -106,8 +111,10 @@ public class ControlCentreStub implements ControlCentreInterface {
     public void proceedToPaddock() {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_PROCEED_TO_PADDOCK);
+        Logger.printNotification("Sending %s message to server", messageToSend.getType());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
+        Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.REPLY_CONTROL_CENTRE_PROCEED_TO_PADDOCK) {
             // TODO : Handle this error
         }
@@ -131,6 +138,7 @@ public class ControlCentreStub implements ControlCentreInterface {
     public void makeAMove() {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_MAKE_A_MOVE);
+        messageToSend.setHorseID(((HorseJockey)Thread.currentThread()).getIdentification());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
         if (messageReceived.getType() != MessageType.OK) {

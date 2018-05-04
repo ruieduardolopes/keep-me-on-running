@@ -64,6 +64,7 @@ public class BettingCentreStub implements BettingCentreInterface {
     public int goCollectTheGains() throws InterruptedException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.BETTING_CENTRE_GO_COLLECT_THE_GAINS);
+        messageToSend.setSpectatorID(((Spectator)Thread.currentThread()).getIdentification());
         Logger.printNotification("Sending %s message to server", messageToSend.getType());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
