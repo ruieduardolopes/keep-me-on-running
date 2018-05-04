@@ -16,6 +16,7 @@ public class StableStub implements StableInterface {
     public void proceedToStable(int raceNumber) throws InterruptedException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.STABLE_PROCEED_TO_STABLE_WITH_RACE_ID, raceNumber);
+        messageToSend.setHorseID(((HorseJockey)Thread.currentThread()).getIdentification());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
         if (messageReceived.getType() != MessageType.REPLY_STABLE_PROCEED_TO_STABLE_WITH_RACE_ID) {
@@ -29,6 +30,7 @@ public class StableStub implements StableInterface {
     public void proceedToStable() {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.STABLE_PROCEED_TO_STABLE);
+        messageToSend.setHorseID(((HorseJockey)Thread.currentThread()).getIdentification());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
         if (messageReceived.getType() != MessageType.REPLY_STABLE_PROCEED_TO_STABLE) {

@@ -28,6 +28,7 @@ public class PaddockStub implements PaddockInterface {
     public void goCheckHorses(boolean isTheLastSpectator) throws InterruptedException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.PADDOCK_GO_CHECK_HORSES_WITH_LAST_SPECTATOR, isTheLastSpectator);
+        messageToSend.setSpectatorID(((Spectator)Thread.currentThread()).getIdentification());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
         if (messageReceived.getType() != MessageType.REPLY_PADDOCK_GO_CHECK_HORSES_WITH_LAST_SPECTATOR) {
@@ -41,6 +42,7 @@ public class PaddockStub implements PaddockInterface {
     public void proceedToStartLine() {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.PADDOCK_PROCEED_TO_START_LINE);
+        messageToSend.setHorseID(((HorseJockey)Thread.currentThread()).getIdentification());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
         if (messageReceived.getType() != MessageType.REPLY_PADDOCK_PROCEED_TO_START_LINE) {

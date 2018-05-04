@@ -46,6 +46,7 @@ public class ControlCentreStub implements ControlCentreInterface {
     public boolean waitForTheNextRace() throws InterruptedException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_WAIT_FOR_THE_NEXT_RACE);
+        messageToSend.setSpectatorID(((Spectator)Thread.currentThread()).getIdentification());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
         if (messageReceived.getType() != MessageType.REPLY_CONTROL_CENTRE_WAIT_FOR_NEXT_RACE) {
@@ -60,6 +61,7 @@ public class ControlCentreStub implements ControlCentreInterface {
     public void goWatchTheRace() throws InterruptedException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_GO_WATCH_THE_RACE);
+        messageToSend.setSpectatorID(((Spectator)Thread.currentThread()).getIdentification());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
         if (messageReceived.getType() != MessageType.REPLY_CONTROL_CENTRE_GO_WATCH_THE_RACE) {
@@ -67,12 +69,15 @@ public class ControlCentreStub implements ControlCentreInterface {
         }
         ((Spectator)Thread.currentThread()).setSpectatorState(messageReceived.getSpectatorState());
         connection.close();
+
+    //
     }
 
     @Override
     public void relaxABit() {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_RELAX_A_BIT);
+        messageToSend.setSpectatorID(((Spectator)Thread.currentThread()).getIdentification());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
         if (messageReceived.getType() != MessageType.REPLY_CONTROL_CENTRE_RELAX_A_BIT) {
@@ -111,6 +116,7 @@ public class ControlCentreStub implements ControlCentreInterface {
     public void proceedToPaddock() {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_PROCEED_TO_PADDOCK);
+        messageToSend.setHorseID(((HorseJockey)Thread.currentThread()).getIdentification());
         Logger.printNotification("Sending %s message to server", messageToSend.getType());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();

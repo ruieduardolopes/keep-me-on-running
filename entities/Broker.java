@@ -53,17 +53,23 @@ public class Broker extends Thread {
     public void run() {
         try {
             for (int raceNumber = 0; raceNumber < totalOfRaces; raceNumber++) {     // for each race on the set of races for today:
+                System.out.println("oo");
                 stable.summonHorsesToPaddock(raceNumber);                           //   call every horse of the race raceNumber on Stable to Paddock;
                 controlCentre.summonHorsesToPaddock();                              //   having all the horses being called, announce the next race;
                 bettingCentre.acceptTheBets();                                      //   go to the Betting Centre and accept the Spectators' bets;
                 racingTrack.startTheRace();                                         //   go then to the Racing Track and make the signal to start the race;
                 controlCentre.startTheRace();                                       //   prepare the Control Centre to the current race which has started;
                 int winner = controlCentre.reportResults();                         //   as the race is finished, report its results;
+                System.out.println("z");
                 if (bettingCentre.areThereAnyWinners(winner)) {                     //   if there are any bet winners at the Betting Centre:
+                    System.out.println("x");
                     bettingCentre.honourTheBets();                                  //     then i should honour the bets and retrieve its money;
                 }
-                repository.raceIsOver();                                            //
+                System.out.println("a");
                 setRacingTrack(raceNumber+1);
+                System.out.println("b");
+                repository.raceIsOver();                                            //
+                System.out.println("c");
             }                                                                       //
             controlCentre.entertainTheGuests();                                     // as the races are over, then i should go entertain the guests.
             repository.newSnapshot(true);
