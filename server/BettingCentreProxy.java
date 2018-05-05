@@ -53,6 +53,9 @@ public class BettingCentreProxy implements Server {
                 bettingCentre.setAbility(message.getHorseID(), message.getAbility());
                 reply = new Message(MessageType.OK);
                 break;
+            case BETTING_CENTRE_SHUTDOWN:
+                reply = new Message(MessageType.OK);
+                break;
             default:
                 // TODO : handle this case
                 break;

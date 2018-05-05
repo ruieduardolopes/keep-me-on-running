@@ -1,8 +1,11 @@
 package server;
 
 import configurations.ServerConfigurations;
+import configurations.SimulationConfigurations;
 import lib.communication.ServerCom;
 import lib.logging.Logger;
+
+import java.net.SocketTimeoutException;
 
 public class ServerLauncher {
     public static void main(String[] args) {
@@ -42,15 +45,21 @@ public class ServerLauncher {
         serverConnectionRequest = new ServerCom(port);
         serverConnectionRequest.start();
         Logger.printInformation("Server already running and waiting for new messages");
-        while (true) {
-            serverConnectionInstance = serverConnectionRequest.accept();
-            Logger.printNotification("Preparing to attend to request");
-            serviceProviderAgent = new ServiceProviderAgent(serverConnectionInstance, server);
-            Logger.printInformation("An agent was already made available to attend the situation");
-            serviceProviderAgent.start();
+        while (!terminateExecution) {
+            try {
+                serverConnectionInstance = serverConnectionRequest.accept();
+                Logger.printNotification("Preparing to attend to request");
+                serviceProviderAgent = new ServiceProviderAgent(serverConnectionInstance, server);
+                Logger.printInformation("An agent was already made available to attend the situation");
+                serviceProviderAgent.start();
+            } catch (SocketTimeoutException ste) {
+                // TODO : handle this exception
+            }
+            terminateExecution = ServiceProviderAgent.getShutdownCounter(args[0]);
         }
     }
 
+    private static boolean terminateExecution = false;
     private static Server server = null;
     private static int port;
     private static ServerCom serverConnectionRequest;

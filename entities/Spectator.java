@@ -1,9 +1,6 @@
 package entities;
 
-import clients.BettingCentreStub;
-import clients.ControlCentreStub;
-import clients.GeneralInformationRepositoryStub;
-import clients.PaddockStub;
+import clients.*;
 import hippodrome.*;
 
 import java.util.Random;
@@ -71,6 +68,7 @@ public class Spectator extends Thread {
                 }                                                                   //
             }                                                                       //
             controlCentre.relaxABit();                                              // And relax a bit.
+            shutdown();
         } catch (InterruptedException ie) {
             ie.printStackTrace();
             System.exit(3);
@@ -119,6 +117,15 @@ public class Spectator extends Thread {
      */
     private int horse() {
         return (new Random()).nextInt(bettingCentre.getNumberOfHorses());
+    }
+
+    private void shutdown() {
+        bettingCentre.shutdown();
+        controlCentre.shutdown();
+        repository.shutdown();
+        paddock.shutdown();
+        new RacingTrackStub().shutdown();
+        new StableStub().shutdown();
     }
 
     /**

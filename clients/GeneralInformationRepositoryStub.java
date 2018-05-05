@@ -9,6 +9,7 @@ import hippodrome.GeneralInformationRepositoryInterface;
 import hippodrome.rollfilm.UnknownHorseJockeyException;
 import hippodrome.rollfilm.UnknownSpectatorException;
 import lib.communication.ClientCom;
+import lib.logging.Logger;
 
 import static configurations.ServerConfigurations.GENERAL_INFORMATION_REPOSITORY_HOST;
 import static configurations.ServerConfigurations.GENERAL_INFORMATION_REPOSITORY_PORT;
@@ -231,6 +232,19 @@ public class GeneralInformationRepositoryStub implements GeneralInformationRepos
         Message messageToSend = new Message(MessageType.GENERAL_INFORMATION_REPOSITORY_RACE_IS_OVER);
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
+        if (messageReceived.getType() != MessageType.OK) {
+            // TODO : Handle this error
+        }
+        connection.close();
+    }
+
+    public void shutdown() {
+        ClientCom connection = createConnectionWithServer();
+        Message messageToSend = new Message(MessageType.GENERAL_INFORMATION_REPOSITORY_SHUTDOWN);
+        Logger.printNotification("Sending %s message to server", messageToSend.getType());
+        connection.writeObject(messageToSend);
+        Message messageReceived = (Message) connection.readObject();
+        Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.OK) {
             // TODO : Handle this error
         }

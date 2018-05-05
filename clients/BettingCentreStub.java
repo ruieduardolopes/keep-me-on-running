@@ -127,6 +127,19 @@ public class BettingCentreStub implements BettingCentreInterface {
         connection.close();
     }
 
+    public void shutdown() {
+        ClientCom connection = createConnectionWithServer();
+        Message messageToSend = new Message(MessageType.BETTING_CENTRE_SHUTDOWN);
+        Logger.printNotification("Sending %s message to server", messageToSend.getType());
+        connection.writeObject(messageToSend);
+        Message messageReceived = (Message) connection.readObject();
+        Logger.printInformation("Received a %s message", messageReceived.getType());
+        if (messageReceived.getType() != MessageType.OK) {
+            // TODO : Handle this error
+        }
+        connection.close();
+    }
+
     private ClientCom createConnectionWithServer() {
         ClientCom connection = new ClientCom(BETTING_CENTRE_HOST, BETTING_CENTRE_PORT);
         while (!connection.open()) {

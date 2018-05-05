@@ -1,6 +1,7 @@
 package server;
 
 import communications.Message;
+import configurations.SimulationConfigurations;
 import entities.BrokerState;
 import entities.HorseJockeyState;
 import entities.SpectatorState;
@@ -67,6 +68,24 @@ public class ServiceProviderAgent extends Thread {
                 break;
             case CONTROL_CENTRE_GO_WATCH_THE_RACE:
                 spectatorIdentification = message.getSpectatorID();
+                break;
+            case BETTING_CENTRE_SHUTDOWN:
+                shutdownArray[0]++;
+                break;
+            case CONTROL_CENTRE_SHUTDOWN:
+                shutdownArray[1]++;
+                break;
+            case GENERAL_INFORMATION_REPOSITORY_SHUTDOWN:
+                shutdownArray[2]++;
+                break;
+            case PADDOCK_SHUTDOWN:
+                shutdownArray[3]++;
+                break;
+            case RACING_TRACK_SHUTDOWN:
+                shutdownArray[4]++;
+                break;
+            case STABLE_SHUTDOWN:
+                shutdownArray[5]++;
                 break;
         }
         Logger.printDebug("%s",message.getType());
@@ -135,6 +154,36 @@ public class ServiceProviderAgent extends Thread {
         Logger.printDebug("%s",reply.getType());
         connection.writeObject(reply);
         connection.close();
+    }
+
+    public static boolean getShutdownCounter(String region) {
+        int index = -1;
+        switch (region) {
+            case "betting-centre":
+                index = 0;
+                break;
+            case "control-centre":
+                index = 1;
+                break;
+            case "general-repo":
+                index = 2;
+                break;
+            case "paddock":
+                index = 3;
+                break;
+            case "racing-track":
+                index = 4;
+                break;
+            case "stable":
+                index = 5;
+                break;
+            default:
+                // TODO: handle this case
+        }
+        if (index == -1) {
+            return false;
+        }
+        return shutdownArray[index] == (1 + SimulationConfigurations.NUMBER_OF_SPECTATORS);
     }
 
     public int getSpectatorAmountOfMoney() {
@@ -211,4 +260,5 @@ public class ServiceProviderAgent extends Thread {
     private BrokerState brokerState;
     private ServerCom connection;
     private Server server;
+    private static int[] shutdownArray = new int[6];
 }

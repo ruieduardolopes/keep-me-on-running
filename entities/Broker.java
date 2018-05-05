@@ -67,6 +67,7 @@ public class Broker extends Thread {
             }                                                                       //
             controlCentre.entertainTheGuests();                                     // as the races are over, then i should go entertain the guests.
             repository.newSnapshot(true);
+            shutdown();
         } catch (InterruptedException ie) {
             ie.printStackTrace();
             System.exit(4);
@@ -91,6 +92,15 @@ public class Broker extends Thread {
      */
     public synchronized void setRace(int identification) {
         this.racingTrack.setRace(new Race(SimulationConfigurations.NUMBER_OF_TRACKS, identification, Race.generateDistance()));
+    }
+
+    private void shutdown() {
+        bettingCentre.shutdown();
+        controlCentre.shutdown();
+        repository.shutdown();
+        new PaddockStub().shutdown();
+        racingTrack.shutdown();
+        stable.shutdown();
     }
 
     /**
