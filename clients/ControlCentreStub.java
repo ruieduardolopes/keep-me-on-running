@@ -33,8 +33,10 @@ public class ControlCentreStub implements ControlCentreInterface {
     public void entertainTheGuests() {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_ENTERTAIN_THE_GUESTS);
+        Logger.printNotification("Sending %s message to server", messageToSend.getType());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
+        Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.REPLY_CONTROL_CENTRE_ENTERTAIN_THE_GUESTS) {
             // TODO : Handle this error
         }
@@ -46,9 +48,11 @@ public class ControlCentreStub implements ControlCentreInterface {
     public boolean waitForTheNextRace() throws InterruptedException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_WAIT_FOR_THE_NEXT_RACE);
+        Logger.printNotification("Sending %s message to server", messageToSend.getType());
         messageToSend.setSpectatorID(((Spectator)Thread.currentThread()).getIdentification());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
+        Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.REPLY_CONTROL_CENTRE_WAIT_FOR_NEXT_RACE) {
             // TODO : Handle this error
         }
@@ -61,9 +65,11 @@ public class ControlCentreStub implements ControlCentreInterface {
     public void goWatchTheRace() throws InterruptedException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_GO_WATCH_THE_RACE);
+        Logger.printNotification("Sending %s message to server", messageToSend.getType());
         messageToSend.setSpectatorID(((Spectator)Thread.currentThread()).getIdentification());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
+        Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.REPLY_CONTROL_CENTRE_GO_WATCH_THE_RACE) {
             // TODO : Handle this error
         }
@@ -77,9 +83,11 @@ public class ControlCentreStub implements ControlCentreInterface {
     public void relaxABit() {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_RELAX_A_BIT);
+        Logger.printNotification("Sending %s message to server", messageToSend.getType());
         messageToSend.setSpectatorID(((Spectator)Thread.currentThread()).getIdentification());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
+        Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.REPLY_CONTROL_CENTRE_RELAX_A_BIT) {
             // TODO : Handle this error
         }
@@ -91,8 +99,10 @@ public class ControlCentreStub implements ControlCentreInterface {
     public int reportResults() {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_REPORT_RESULTS);
+        Logger.printNotification("Sending %s message to server", messageToSend.getType());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
+        Logger.printInformation("Received a %s message", messageReceived.getType());
         connection.close();
         return messageReceived.getResults();
     }
@@ -132,8 +142,10 @@ public class ControlCentreStub implements ControlCentreInterface {
     public void goCheckHorses() {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_GO_CHECK_HORSES);
+        Logger.printNotification("Sending %s message to server", messageToSend.getType());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
+        Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.OK) {
             // TODO : Handle this error
         }
@@ -144,9 +156,11 @@ public class ControlCentreStub implements ControlCentreInterface {
     public void makeAMove() {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_MAKE_A_MOVE);
+        Logger.printNotification("Sending %s message to server", messageToSend.getType());
         messageToSend.setHorseID(((HorseJockey)Thread.currentThread()).getIdentification());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
+        Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.OK) {
             // TODO : Handle this error
         }

@@ -16,23 +16,27 @@ public class StableStub implements StableInterface {
     public void proceedToStable(int raceNumber) throws InterruptedException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.STABLE_PROCEED_TO_STABLE_WITH_RACE_ID, raceNumber);
+        Logger.printNotification("Sending %s message to server", messageToSend.getType());
         messageToSend.setHorseID(((HorseJockey)Thread.currentThread()).getIdentification());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
+        Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.REPLY_STABLE_PROCEED_TO_STABLE_WITH_RACE_ID) {
             // TODO : Handle this error
         }
-        connection.close();
         ((HorseJockey)Thread.currentThread()).setHorseJockeyState(messageReceived.getHorseJockeyState());
+        connection.close();
     }
 
     @Override
     public void proceedToStable() {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.STABLE_PROCEED_TO_STABLE);
+        Logger.printNotification("Sending %s message to server", messageToSend.getType());
         messageToSend.setHorseID(((HorseJockey)Thread.currentThread()).getIdentification());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
+        Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.REPLY_STABLE_PROCEED_TO_STABLE) {
             // TODO : Handle this error
         }

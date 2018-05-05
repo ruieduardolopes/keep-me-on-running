@@ -36,10 +36,12 @@ public class RacingTrackStub implements RacingTrackInterface {
     public void makeAMove(int horseId) throws InterruptedException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.RACING_TRACK_MAKE_A_MOVE, horseId);
+        Logger.printNotification("Sending %s message to server", messageToSend.getType());
         messageToSend.setHorseID(((HorseJockey)Thread.currentThread()).getIdentification());
         messageToSend.setAbility(((HorseJockey)Thread.currentThread()).getAbility());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
+        Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.REPLY_RACING_TRACK_MAKE_A_MOVE) {
             // TODO : Handle this error
         }
@@ -51,10 +53,10 @@ public class RacingTrackStub implements RacingTrackInterface {
     public boolean hasFinishLineBeenCrossed(int horseJockeyId) {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.RACING_TRACK_HAS_FINISH_LINE_BEEN_CROSSED, horseJockeyId);
-        if (horseJockeyId != 0) Logger.printNotification("Sending %s message to server", messageToSend.getType());
+        if (horseJockeyId != 0) Logger.printNotification("Sending %s message to server for Horse with identification %d", messageToSend.getType(), horseJockeyId);
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
-        if (horseJockeyId != 0) Logger.printInformation("Received a %s message", messageReceived.getType());
+        Logger.printInformation("Received a %s message for Horse with identification %d", messageReceived.getType(), horseJockeyId);
         connection.close();
         return messageReceived.getValue();
     }
@@ -77,8 +79,10 @@ public class RacingTrackStub implements RacingTrackInterface {
     public Race getRace() {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.RACING_TRACK_GET_RACE);
+        Logger.printNotification("Sending %s message to server", messageToSend.getType());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
+        Logger.printInformation("Received a %s message", messageReceived.getType());
         connection.close();
         return messageReceived.getRace();
     }
@@ -101,8 +105,10 @@ public class RacingTrackStub implements RacingTrackInterface {
     public int getWinner() {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.RACING_TRACK_GET_WINNER);
+        Logger.printNotification("Sending %s message to server", messageToSend.getType());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
+        Logger.printInformation("Received a %s message", messageReceived.getType());
         connection.close();
         return messageReceived.getWinner();
     }

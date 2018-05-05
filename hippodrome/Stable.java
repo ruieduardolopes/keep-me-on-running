@@ -36,6 +36,7 @@ public class Stable implements StableInterface {
     public synchronized void proceedToStable(int raceNumber) throws InterruptedException {
         ((ServiceProviderAgent)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_STABLE);
         repository.setHorseJockeyStatus(((ServiceProviderAgent)(Thread.currentThread())).getHorseJockeyIdentification(), HorseJockeyState.AT_THE_STABLE);
+        brokerDidNotSaidToAdvance = true;
         while (currentRaceNumber != raceNumber) {
             try {
                 wait();
@@ -51,9 +52,17 @@ public class Stable implements StableInterface {
      * <br>
      * This method is useful to finish the lifecycle of the pairs Horse/Jockey.
      */
-    public synchronized void proceedToStable() {
+    public synchronized void proceedToStable() throws InterruptedException {
         ((ServiceProviderAgent)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_STABLE);
         repository.setHorseJockeyStatus(((ServiceProviderAgent)(Thread.currentThread())).getHorseJockeyIdentification(), HorseJockeyState.AT_THE_STABLE);
+        while (brokerDidNotSaidToAdvance) {
+            try {
+                wait();
+            } catch (InterruptedException ie) {
+                ie.printStackTrace();
+                throw new InterruptedException("The proceedToStable() has been interrupted on its wait().");
+            }
+        }
     }
 
     /**
@@ -65,6 +74,7 @@ public class Stable implements StableInterface {
      */
     public synchronized void summonHorsesToPaddock(int raceNumber) {
         currentRaceNumber = raceNumber;
+        brokerDidNotSaidToAdvance = false;
         notifyAll();
     }
 
@@ -72,6 +82,8 @@ public class Stable implements StableInterface {
      * Current race number identifier, as an integer.
      */
     private int currentRaceNumber = -1;
+
+    private boolean brokerDidNotSaidToAdvance = true;
 
     private static Stable instance;
 
