@@ -69,7 +69,7 @@ public class ControlCentreStub implements ControlCentreInterface {
         messageToSend.setSpectatorID(((Spectator)Thread.currentThread()).getIdentification());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
-        Logger.printInformation("Received a %s message", messageReceived.getType());
+        Logger.printInformation("Received a %s message (spectator thread number %d)", messageReceived.getType(), ((Spectator)Thread.currentThread()).getIdentification());
         if (messageReceived.getType() != MessageType.REPLY_CONTROL_CENTRE_GO_WATCH_THE_RACE) {
             // TODO : Handle this error
         }
