@@ -35,7 +35,9 @@ public class StableStub implements StableInterface {
         Logger.printNotification("Sending %s message to server", messageToSend.getType());
         messageToSend.setHorseID(((HorseJockey)Thread.currentThread()).getIdentification());
         connection.writeObject(messageToSend);
+        Logger.printError("BEFORE");
         Message messageReceived = (Message) connection.readObject();
+        Logger.printError("AFTER");
         Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.REPLY_STABLE_PROCEED_TO_STABLE) {
             // TODO : Handle this error

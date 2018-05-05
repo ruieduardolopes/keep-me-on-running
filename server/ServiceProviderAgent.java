@@ -107,6 +107,7 @@ public class ServiceProviderAgent extends Thread {
                 reply.setHorseJockeyState(horseJockeyState);
                 break;
             case REPLY_STABLE_PROCEED_TO_STABLE:
+                Logger.printError("This is a reply on the SPA of the proceed to stable (simple)");
                 reply.setHorseJockeyState(horseJockeyState);
                 break;
             case REPLY_STABLE_PROCEED_TO_STABLE_WITH_RACE_ID:

@@ -1,6 +1,7 @@
 package hippodrome;
 
 import clients.GeneralInformationRepositoryStub;
+import configurations.SimulationConfigurations;
 import entities.HorseJockey;
 import entities.HorseJockeyState;
 import lib.logging.Logger;
@@ -57,6 +58,9 @@ public class Stable implements StableInterface {
     public synchronized void proceedToStable() throws InterruptedException {
         ((ServiceProviderAgent)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_STABLE);
         repository.setHorseJockeyStatus(((ServiceProviderAgent)(Thread.currentThread())).getHorseJockeyIdentification(), HorseJockeyState.AT_THE_STABLE);
+        if (thisIsAfterTheLastRun) {
+            return;
+        }
         while (brokerDidNotSaidToAdvance) {
             try {
                 wait();
@@ -64,6 +68,9 @@ public class Stable implements StableInterface {
                 ie.printStackTrace();
                 throw new InterruptedException("The proceedToStable() has been interrupted on its wait().");
             }
+        }
+        if (currentRaceNumber == SimulationConfigurations.NUMBER_OF_RACES-1) {
+            thisIsAfterTheLastRun = true;
         }
     }
 
@@ -84,6 +91,8 @@ public class Stable implements StableInterface {
      * Current race number identifier, as an integer.
      */
     private int currentRaceNumber = -1;
+
+    private boolean thisIsAfterTheLastRun = false;
 
     private boolean brokerDidNotSaidToAdvance = true;
 

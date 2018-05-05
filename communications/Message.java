@@ -10,14 +10,6 @@ import java.io.Serializable;
 public class Message implements Serializable {
     public Message(MessageType type) {
         this.type = type;
-        switch (type) {
-            case BETTING_CENTRE_ACCEPT_THE_BETS:
-                break;
-            case BETTING_CENTRE_HONOUR_THE_BETS:
-                break;
-            case BETTING_CENTRE_GO_COLLECT_THE_GAINS:
-                break;
-        }
     }
 
     public Message(MessageType type, boolean value) {
