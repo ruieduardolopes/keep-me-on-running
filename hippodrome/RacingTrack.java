@@ -54,6 +54,7 @@ public class RacingTrack implements RacingTrackInterface {
      * @throws InterruptedException if the wait() is interrupted.
      */
     public synchronized void proceedToStartLine() throws InterruptedException {
+        currentHorsesPositions = new int[race.getNumberOfTracks()]; // <--
         horsesToRun.add(((ServiceProviderAgent)Thread.currentThread()).getHorseJockeyIdentification());
         numberOfFinishedHorses = 0;
         repository.setHorseJockeyFinalStandPosition(((ServiceProviderAgent)Thread.currentThread()).getHorseJockeyIdentification(), 0);

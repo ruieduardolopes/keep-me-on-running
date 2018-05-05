@@ -55,6 +55,9 @@ public class ControlCentreProxy implements Server {
                 boolean thereIsANextRace = controlCentre.waitForTheNextRace();
                 reply = new Message(MessageType.REPLY_CONTROL_CENTRE_WAIT_FOR_NEXT_RACE, thereIsANextRace);
                 break;
+            case CONTROL_CENTRE_SHUTDOWN:
+                reply = new Message(MessageType.OK);
+                break;
             default:
                 // TODO : handle this case
                 break;

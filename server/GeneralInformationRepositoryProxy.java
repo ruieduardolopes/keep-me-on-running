@@ -89,6 +89,9 @@ public class GeneralInformationRepositoryProxy implements Server {
                 repository.setWereWaitingTheHorses(message.getValue());
                 reply = new Message(MessageType.OK);
                 break;
+            case GENERAL_INFORMATION_REPOSITORY_SHUTDOWN:
+                reply = new Message(MessageType.OK);
+                break;
             default:
                 // TODO : handle this case
                 System.out.print("AHEHF"+message.getType());

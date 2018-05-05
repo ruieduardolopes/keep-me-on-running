@@ -27,6 +27,9 @@ public class StableProxy implements Server {
                 stable.summonHorsesToPaddock(message.getRaceNumber());
                 reply = new Message(MessageType.OK);
                 break;
+            case STABLE_SHUTDOWN:
+                reply = new Message(MessageType.OK);
+                break;
             default:
                 // TODO : handle this case
                 break;

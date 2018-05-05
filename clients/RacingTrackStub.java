@@ -8,10 +8,6 @@ import hippodrome.actions.Race;
 import lib.communication.ClientCom;
 import lib.logging.Logger;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-
 import static configurations.ServerConfigurations.RACING_TRACK_HOST;
 import static configurations.ServerConfigurations.RACING_TRACK_PORT;
 import static configurations.ServerConfigurations.RACING_TRACK_TIME_TO_SLEEP;

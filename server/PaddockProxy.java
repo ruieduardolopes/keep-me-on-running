@@ -29,6 +29,9 @@ public class PaddockProxy implements Server {
                 paddock.proceedToStartLine();
                 reply = new Message(MessageType.REPLY_PADDOCK_PROCEED_TO_START_LINE);
                 break;
+            case PADDOCK_SHUTDOWN:
+                reply = new Message(MessageType.OK);
+                break;
             default:
                 // TODO : handle this case
                 break;

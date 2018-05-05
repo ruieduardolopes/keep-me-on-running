@@ -72,7 +72,7 @@ public class ClientCom
 
       try
       { commSocket = new Socket();
-        commSocket.connect (serverAddress);
+        commSocket.connect (serverAddress, 1000);
       }
       catch (UnknownHostException e)
       { GenericIO.writelnString (Thread.currentThread ().getName () +

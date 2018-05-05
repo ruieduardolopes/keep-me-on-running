@@ -47,6 +47,9 @@ public class RacingTrackProxy implements Server {
                 racingTrack.setRace(message.getRace());
                 reply = new Message(MessageType.OK);
                 break;
+            case RACING_TRACK_SHUTDOWN:
+                reply = new Message(MessageType.OK);
+                break;
             default:
                 // TODO : handle this case
                 break;
