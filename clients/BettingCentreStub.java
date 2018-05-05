@@ -80,7 +80,7 @@ public class BettingCentreStub implements BettingCentreInterface {
     @Override
     public boolean haveIWon(int spectatorId) {
         ClientCom connection = createConnectionWithServer();
-        Message messageToSend = new Message(MessageType.BETTING_CENTRE_HAVE_I_WON);
+        Message messageToSend = new Message(MessageType.BETTING_CENTRE_HAVE_I_WON, spectatorId);
         Logger.printNotification("Sending %s message to server (spectatorID:%d)", messageToSend.getType(), spectatorId);
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();

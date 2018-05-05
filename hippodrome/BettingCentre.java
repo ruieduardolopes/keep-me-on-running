@@ -17,6 +17,7 @@ import server.ServiceProviderAgent;
  * Further documentation on this matter could be accessed here: {@link Queue}.
  */
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -74,6 +75,7 @@ public class BettingCentre implements BettingCentreInterface {
      */
     public synchronized void acceptTheBets() throws InterruptedException {
         evaluateOdds();
+        brokerDoesNotAllowToProceedToHaveIWon = true;
         allWinnersAreNotOnBettingCentre = true;
         ((ServiceProviderAgent)Thread.currentThread()).setBrokerState(BrokerState.WAITING_FOR_BETS);
         repository.setBrokerStatus(BrokerState.WAITING_FOR_BETS);
@@ -193,7 +195,16 @@ public class BettingCentre implements BettingCentreInterface {
      *
      * @return {@code true} if {@code spectator} has won his (or hers) bet; otherwise, it will return {@code false}.
      */
-    public synchronized boolean haveIWon(int spectatorId) {
+    public synchronized boolean haveIWon(int spectatorId) throws InterruptedException {
+        while (brokerDoesNotAllowToProceedToHaveIWon) {
+            try {
+                wait();
+            } catch (InterruptedException ie) {
+                ie.printStackTrace();
+                throw new InterruptedException("The haveIWon() has been interrupted on its wait().");
+            }
+        }
+        Logger.printError("At Have I Won, we have these winners: %s", Arrays.toString(winners));
         for (int winner : winners) {
             if (winner == spectatorId) {
                 return true;
@@ -226,6 +237,8 @@ public class BettingCentre implements BettingCentreInterface {
         for (int i = 0; i != winners.length; i++) {
             winners[i] = winningList.get(i);
         }
+        brokerDoesNotAllowToProceedToHaveIWon = false;
+        notifyAll();
         return winners.length != 0;
     }
 
@@ -266,7 +279,7 @@ public class BettingCentre implements BettingCentreInterface {
     }
 
     /**
-     * Retrives the sum of all elements of an array {@code array}.
+     * Retrieves the sum of all elements of an array {@code array}.
      *
      * @param array the array with the elements to sum.
      *
@@ -347,6 +360,8 @@ public class BettingCentre implements BettingCentreInterface {
      * {@link BettingCentre#acceptTheBets()} method.
      */
     private boolean allWinnersAreNotOnBettingCentre = true;
+
+    private boolean brokerDoesNotAllowToProceedToHaveIWon = true;
 
     /**
      * Condition variable for noticing the number of winning Spectators who arrived at this Betting Centre.

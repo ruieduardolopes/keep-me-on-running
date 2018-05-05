@@ -26,10 +26,10 @@ public class ServiceProviderAgent extends Thread {
             case CONTROL_CENTRE_ENTERTAIN_THE_GUESTS:
                 break;
             case CONTROL_CENTRE_WAIT_FOR_THE_NEXT_RACE:
-                spectatorIdentification = message.getIdentification();
+                spectatorIdentification = message.getSpectatorID();
                 break;
             case CONTROL_CENTRE_RELAX_A_BIT:
-                spectatorIdentification = message.getIdentification();
+                spectatorIdentification = message.getSpectatorID();
                 break;
             case CONTROL_CENTRE_SUMMON_HORSES_TO_PADDOCK:
                 break;
@@ -51,10 +51,10 @@ public class ServiceProviderAgent extends Thread {
             case BETTING_CENTRE_PLACE_A_BET:
                 break;
             case BETTING_CENTRE_GO_COLLECT_THE_GAINS:
-                spectatorIdentification = message.getIdentification();
+                spectatorIdentification = message.getSpectatorID();
                 break;
             case PADDOCK_GO_CHECK_HORSES_WITH_LAST_SPECTATOR:
-                spectatorIdentification = message.getIdentification();
+                spectatorIdentification = message.getSpectatorID();
                 break;
             case PADDOCK_PROCEED_TO_START_LINE:
                 horseJockeyIdentification = message.getHorseID();
@@ -66,7 +66,7 @@ public class ServiceProviderAgent extends Thread {
                 horseJockeyIdentification = message.getHorseID();
                 break;
             case CONTROL_CENTRE_GO_WATCH_THE_RACE:
-                spectatorIdentification = message.getIdentification();
+                spectatorIdentification = message.getSpectatorID();
                 break;
         }
         Logger.printDebug("%s",message.getType());

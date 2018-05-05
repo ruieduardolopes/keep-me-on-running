@@ -52,7 +52,7 @@ public class Spectator extends Thread {
     @Override
     public void run() {
         try {
-            while (controlCentre.waitForTheNextRace()) {                            // While a next race is about to happen:
+            while (controlCentre.waitForTheNextRace()) {                            //x While a next race is about to happen:
                 boolean isLastSpectator = paddock.goCheckHorses();                  //   the Paddock calls me to go check the horses and I retrieve if I'm the last to go;
                 if (isLastSpectator) {                                              //   if I'm the last Spectator to come:
                     controlCentre.goCheckHorses();                                  //     then the Control Centre must know, in order to advance something else;

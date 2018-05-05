@@ -75,8 +75,6 @@ public class ControlCentreStub implements ControlCentreInterface {
         }
         ((Spectator)Thread.currentThread()).setSpectatorState(messageReceived.getSpectatorState());
         connection.close();
-
-    //
     }
 
     @Override

@@ -75,6 +75,7 @@ public class ControlCentre implements ControlCentreInterface {
      * @return if the last pair Horse/Jockey has arrived on Paddock.
      */
     public synchronized boolean waitForTheNextRace() throws InterruptedException {
+        brokerDidNotReportResults = true;
         ((ServiceProviderAgent)Thread.currentThread()).setSpectatorState(SpectatorState.WAITING_FOR_A_RACE_TO_START);
         repository.setSpectatorStatus(((ServiceProviderAgent)Thread.currentThread()).getSpectatorIdentification(), SpectatorState.WAITING_FOR_A_RACE_TO_START);
         while (lastHorseJockeyHasNotArrivedOnPaddock) {
@@ -100,7 +101,6 @@ public class ControlCentre implements ControlCentreInterface {
     public synchronized void goWatchTheRace() throws InterruptedException {
         ((ServiceProviderAgent)Thread.currentThread()).setSpectatorState(SpectatorState.WATCHING_A_RACE);
         repository.setSpectatorStatus(((ServiceProviderAgent)Thread.currentThread()).getSpectatorIdentification(), SpectatorState.WATCHING_A_RACE);
-        brokerDidNotReportResults = true;
         finishedHorses = 0;
         raceWinner = -1;
         thereIsStillHorsesToFinishRace = true;

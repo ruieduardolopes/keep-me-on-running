@@ -3,6 +3,7 @@ package server;
 import communications.Message;
 import communications.MessageType;
 import hippodrome.ControlCentre;
+import lib.logging.Logger;
 
 public class ControlCentreProxy implements Server {
     public ControlCentreProxy() {
@@ -39,6 +40,7 @@ public class ControlCentreProxy implements Server {
                 break;
             case CONTROL_CENTRE_REPORT_RESULTS:
                 int result = controlCentre.reportResults();
+                Logger.printError("Control Centre says the winner is %d", result);
                 reply = new Message(MessageType.REPLY_CONTROL_CENTRE_REPORT_RESULTS, result);
                 break;
             case CONTROL_CENTRE_START_THE_RACE:

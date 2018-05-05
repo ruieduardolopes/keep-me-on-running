@@ -12,7 +12,7 @@ public interface BettingCentreInterface {
 
     int goCollectTheGains() throws InterruptedException;
 
-    boolean haveIWon(int spectatorId);
+    boolean haveIWon(int spectatorId) throws InterruptedException;
 
     boolean areThereAnyWinners(int winner);
 

@@ -37,7 +37,9 @@ public class BettingCentreProxy implements Server {
                 break;
             case BETTING_CENTRE_HAVE_I_WON:
                 boolean haveIWon = bettingCentre.haveIWon(message.getSpectatorID());
+                Logger.printError("I'm in the Have I Won (BettingCentreProxy) with value %s", haveIWon);
                 reply = new Message(MessageType.REPLY_BETTING_CENTRE_HAVE_I_WON, haveIWon);
+                Logger.printError("I'm in the Have I Won (BettingCentreProxy) with value %s (Created message)", haveIWon);
                 break;
             case BETTING_CENTRE_HONOUR_THE_BETS:
                 Logger.printError("qqqqqqqqqqqq");
