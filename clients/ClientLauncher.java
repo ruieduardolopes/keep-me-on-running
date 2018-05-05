@@ -46,6 +46,7 @@ public class ClientLauncher {
                     try {
                         for (int i = 0; i != horseJockeys.length; i++) {
                             horseJockeys[i].join();
+                            Logger.printInformation("The pair Horse/Jockey number %d deceased.",i);
                         }
                     } catch (InterruptedException ie) {
                         // TODO : catch this exception

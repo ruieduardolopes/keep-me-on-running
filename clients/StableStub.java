@@ -16,7 +16,7 @@ public class StableStub implements StableInterface {
     public void proceedToStable(int raceNumber) throws InterruptedException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.STABLE_PROCEED_TO_STABLE_WITH_RACE_ID, raceNumber);
-        Logger.printNotification("Sending %s message to server", messageToSend.getType());
+        Logger.printNotification("Sending %s message to server with argument (raceNumber:%d)", messageToSend.getType(), raceNumber);
         messageToSend.setHorseID(((HorseJockey)Thread.currentThread()).getIdentification());
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();

@@ -80,6 +80,9 @@ public class Message implements Serializable {
             case STABLE_PROCEED_TO_STABLE:
                 raceNumber = value;
                 break;
+            case STABLE_PROCEED_TO_STABLE_WITH_RACE_ID:
+                raceNumber = value;
+                break;
             case STABLE_SUMMON_HORSES_TO_PADDOCK:
                 raceNumber = value;
                 break;

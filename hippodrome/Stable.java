@@ -3,6 +3,7 @@ package hippodrome;
 import clients.GeneralInformationRepositoryStub;
 import entities.HorseJockey;
 import entities.HorseJockeyState;
+import lib.logging.Logger;
 import server.ServiceProviderAgent;
 
 /**
@@ -34,6 +35,7 @@ public class Stable implements StableInterface {
      * @throws InterruptedException if the wait() is interrupted.
      */
     public synchronized void proceedToStable(int raceNumber) throws InterruptedException {
+        Logger.printError("On proceed to stable, the race number is %d", raceNumber);
         ((ServiceProviderAgent)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_STABLE);
         repository.setHorseJockeyStatus(((ServiceProviderAgent)(Thread.currentThread())).getHorseJockeyIdentification(), HorseJockeyState.AT_THE_STABLE);
         brokerDidNotSaidToAdvance = true;

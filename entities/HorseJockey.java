@@ -2,6 +2,7 @@ package entities;
 
 import clients.*;
 import hippodrome.*;
+import lib.logging.Logger;
 
 /**
  * Implementation of a pair Horse/Jockey, the main horse race character. This entity,
@@ -43,6 +44,7 @@ public class HorseJockey extends Thread {
         this.raceNumber = this.racingTrack.getRace().getIdentification();
         this.stable = new StableStub();
         this.bettingCentre = new BettingCentreStub();
+        Logger.printError("Creating a new Horse for the race number %d", this.raceNumber);
     }
 
     /**
@@ -57,7 +59,7 @@ public class HorseJockey extends Thread {
     public void run() {
         try {
             bettingCentre.setAbility(identification, ability);                  // Set my ability on the Betting Centre to evaluate odds;
-            stable.proceedToStable(raceNumber);                                 //x I receive a call to go to the Paddock and I'll go if I'm from this race;
+            stable.proceedToStable(raceNumber);                                 // I receive a call to go to the Paddock and I'll go if I'm from this race;
             controlCentre.proceedToPaddock();                                   // I should retrieve a signal to the Control Centre as I moved to the Paddock;
             paddock.proceedToPaddock(raceNumber);                               // Then I should change my own state to At the Paddock;
             paddock.proceedToStartLine();                                       // If every other Jockeys are at the Paddock and the Spectators saw us, then
