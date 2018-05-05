@@ -92,8 +92,8 @@ public class BettingCentreStub implements BettingCentreInterface {
     @Override
     public boolean areThereAnyWinners(int winner) {
         ClientCom connection = createConnectionWithServer();
-        Message messageToSend = new Message(MessageType.BETTING_CENTRE_ARE_THERE_ANY_WINNERS);
-        Logger.printNotification("Sending %s message to server", messageToSend.getType());
+        Message messageToSend = new Message(MessageType.BETTING_CENTRE_ARE_THERE_ANY_WINNERS, winner);
+        Logger.printNotification("Sending %s message to server with argument (winner:%d)", messageToSend.getType(), winner);
         connection.writeObject(messageToSend);
         Message messageReceived = (Message) connection.readObject();
         Logger.printInformation("Received a %s message", messageReceived.getType());

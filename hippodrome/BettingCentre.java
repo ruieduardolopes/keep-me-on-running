@@ -5,6 +5,7 @@ import entities.*;
 import hippodrome.actions.Bet;
 import hippodrome.rollfilm.UnknownHorseJockeyException;
 import hippodrome.rollfilm.UnknownSpectatorException;
+import lib.logging.Logger;
 import server.ServiceProviderAgent;
 
 /**
@@ -209,12 +210,17 @@ public class BettingCentre implements BettingCentreInterface {
      * @return {@code true} if anybody had won indeed; otherwise it will return {@code false}.
      */
     public synchronized boolean areThereAnyWinners(int winner) {
+        Logger.printError("We received %d as a winner!", winner);
         winnersArrived = 0;
         ArrayList<Integer> winningList = new ArrayList<>();
         for (int i = 0; i != bets.length; i++) {
             if (bets[i].getHorseJockeyId() == winner) {
                 winningList.add(i);
             }
+        }
+        Logger.printError("The winners are %s", winningList);
+        for (int i = 0; i != bets.length; i++) {
+            Logger.printError("Spectator %d voted for %d by %d.", i, bets[i].getHorseJockeyId(), bets[i].getAmount());
         }
         winners = new int[winningList.size()];
         for (int i = 0; i != winners.length; i++) {

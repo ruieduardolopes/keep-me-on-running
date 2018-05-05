@@ -102,7 +102,7 @@ public class ControlCentre implements ControlCentreInterface {
         repository.setSpectatorStatus(((ServiceProviderAgent)Thread.currentThread()).getSpectatorIdentification(), SpectatorState.WATCHING_A_RACE);
         brokerDidNotReportResults = true;
         finishedHorses = 0;
-        raceWinner = 0;
+        raceWinner = -1;
         thereIsStillHorsesToFinishRace = true;
         while (brokerDidNotReportResults) {
             try {
@@ -259,7 +259,7 @@ public class ControlCentre implements ControlCentreInterface {
     /**
      * Identification of the pair Horse/Jockey winner of the current race.
      */
-    private int raceWinner = 0;
+    private int raceWinner = -1;
 
     private GeneralInformationRepositoryStub repository;
 

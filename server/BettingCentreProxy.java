@@ -40,7 +40,9 @@ public class BettingCentreProxy implements Server {
                 reply = new Message(MessageType.REPLY_BETTING_CENTRE_HAVE_I_WON, haveIWon);
                 break;
             case BETTING_CENTRE_HONOUR_THE_BETS:
+                Logger.printError("qqqqqqqqqqqq");
                 bettingCentre.honourTheBets();
+                Logger.printError("uuuuuuuuuuuuuu");
                 reply = new Message(MessageType.REPLY_BETTING_CENTRE_HONOUR_THE_BETS);
                 Logger.printError("hhhhhhhhhhhhhhhhh");
                 break;
