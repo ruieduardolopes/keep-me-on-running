@@ -7,7 +7,20 @@ import lib.logging.Logger;
 
 import static configurations.SimulationConfigurations.*;
 
+/**
+ * Main function which must be used to run the various entities classified on {@link entities}.
+ *
+ * @author Hugo Fragata
+ * @author Rui Lopes
+ * @since 2.0
+ * @version 2.0
+ */
 public class ClientLauncher {
+    /**
+     * The main function for this execution.
+     *
+     * @param args the entity to run.
+     */
     public static void main(String[] args) {
         if (args.length != 1) {
             printUsage();
@@ -71,6 +84,9 @@ public class ClientLauncher {
         }
     }
 
+    /**
+     * Prints the help message for this method.
+     */
     private static void printUsage() {
         System.err.println("Invalid arguments.");
         System.err.println("Usage: java -classpath \"project-folder:genclass-jar-folder\" ClientLauncher <entity>");

@@ -6,7 +6,6 @@ import communications.UnexpectedReplyTypeException;
 import entities.Broker;
 import entities.Spectator;
 import hippodrome.BettingCentreInterface;
-import hippodrome.rollfilm.UnknownHorseJockeyException;
 import lib.communication.ClientCom;
 import lib.logging.Logger;
 
@@ -14,7 +13,25 @@ import static configurations.ServerConfigurations.BETTING_CENTRE_HOST;
 import static configurations.ServerConfigurations.BETTING_CENTRE_PORT;
 import static configurations.ServerConfigurations.BETTING_CENTRE_TIME_TO_SLEEP;
 
+/**
+ * Representation of a place where the {@link Spectator}s place their bets on the winning horse. As they come here
+ * to place their bets, they also come here to collect his (or hers) further gains, if such a
+ * scenario applies on a given race.
+ *
+ * @author Hugo Fragata
+ * @author Rui Lopes
+ * @since 2.0
+ * @version 2.0
+ */
 public class BettingCentreStub implements BettingCentreInterface {
+    /**
+     * Stub entity to represent the will of a {@link Broker} to Accept the Bets on
+     * the {@link hippodrome.BettingCentre}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public void acceptTheBets() throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -31,6 +48,14 @@ public class BettingCentreStub implements BettingCentreInterface {
         connection.close();
     }
 
+    /**
+     * Stub entity to represent the will of a {@link Broker} to Honour the Bets on
+     * the {@link hippodrome.BettingCentre}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public void honourTheBets() throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -47,6 +72,15 @@ public class BettingCentreStub implements BettingCentreInterface {
         connection.close();
     }
 
+    /**
+     * Stub entity to represent the will of a {@link Spectator} to Place a Bet on
+     * the {@link hippodrome.BettingCentre}.
+     *
+     * @return the amount of money bet.
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public int placeABet(int spectator, int bet, int horse) throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -64,6 +98,15 @@ public class BettingCentreStub implements BettingCentreInterface {
         return messageReceived.getBet();
     }
 
+    /**
+     * Stub entity to represent the will of a {@link Spectator} to Collect the Gains on
+     * the {@link hippodrome.BettingCentre}.
+     *
+     * @return the gains made with the bet, which the Spectator wants to collect.
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public int goCollectTheGains() throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -82,6 +125,13 @@ public class BettingCentreStub implements BettingCentreInterface {
         return messageReceived.getGains();
     }
 
+    /**
+     * Stub entity to represent the will of a {@link Spectator} to check if they've won a bet on
+     * the {@link hippodrome.BettingCentre}.
+     *
+     * @return {@code true} if the Spectator {@code spectatorId} has won; otherwise {@code false}.
+     * @throws InterruptedException if a connection could not be established with success.
+     */
     @Override
     public boolean haveIWon(int spectatorId) throws InterruptedException {
         ClientCom connection = createConnectionWithServer();
@@ -94,6 +144,13 @@ public class BettingCentreStub implements BettingCentreInterface {
         return messageReceived.getValue();
     }
 
+    /**
+     * Stub entity to represent the will of a {@link Broker} to check if anyone has won a bet on
+     * the {@link hippodrome.BettingCentre}.
+     *
+     * @return {@code true} if there is a bet winner; otherwise {@code false}.
+     * @throws InterruptedException if a connection could not be established with success.
+     */
     @Override
     public boolean areThereAnyWinners(int winner) throws InterruptedException {
         ClientCom connection = createConnectionWithServer();
@@ -106,6 +163,12 @@ public class BettingCentreStub implements BettingCentreInterface {
         return messageReceived.getValue();
     }
 
+    /**
+     * Stub entity to get the number of pairs Horse/Jockey, as registered in the {@link hippodrome.BettingCentre}.
+     *
+     * @return the number of pairs Horse/Jockey.
+     * @throws InterruptedException if a connection could not be established with success.
+     */
     @Override
     public int getNumberOfHorses() throws InterruptedException {
         ClientCom connection = createConnectionWithServer();
@@ -118,6 +181,13 @@ public class BettingCentreStub implements BettingCentreInterface {
         return messageReceived.getHorses();
     }
 
+    /**
+     * Stub entity to set the ability of a pair Horse/Jockey, to be registered in the {@link hippodrome.BettingCentre}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     *         unexpected reply message has been received.
+     */
     @Override
     public void setAbility(int horse, int ability) throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -133,6 +203,13 @@ public class BettingCentreStub implements BettingCentreInterface {
         connection.close();
     }
 
+    /**
+     * Stub entity to shutdown the premises of the {@link hippodrome.BettingCentre}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     *         unexpected reply message has been received.
+     */
     public void shutdown() throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.BETTING_CENTRE_SHUTDOWN);
@@ -147,6 +224,12 @@ public class BettingCentreStub implements BettingCentreInterface {
         connection.close();
     }
 
+    /**
+     * Creates a connection to the correspondent server (meaning the {@link hippodrome.BettingCentre}).
+     *
+     * @return the communication with the server, already defined over a {@link ClientCom} object.
+     * @throws InterruptedException if a connection could not be established with success.
+     */
     private ClientCom createConnectionWithServer() throws InterruptedException {
         ClientCom connection = new ClientCom(BETTING_CENTRE_HOST, BETTING_CENTRE_PORT);
         while (!connection.open()) {
