@@ -31,7 +31,7 @@ import static configurations.SimulationConfigurations.*;
  * @author Hugo Fragata
  * @author Rui Lopes
  * @since 0.1
- * @version 1.1
+ * @version 2.0
  */
 public class BettingCentre implements BettingCentreInterface {
 
@@ -57,7 +57,11 @@ public class BettingCentre implements BettingCentreInterface {
         this.horsesAbilities = new int[numberOfHorses];
     }
 
-    /** TODO : Documentation */
+    /**
+     * Get a singleton instance of a Betting Centre.
+     *
+     * @return an instance of the Betting Centre.
+     */
     public static BettingCentre getInstance() {
         if (instance == null) {
             instance = new BettingCentre(NUMBER_OF_PAIRS_HORSE_JOCKEY, NUMBER_OF_SPECTATORS);
@@ -365,6 +369,12 @@ public class BettingCentre implements BettingCentreInterface {
      */
     private boolean allWinnersAreNotOnBettingCentre = true;
 
+    /**
+     * Condition variable for noticing when Spectators must wait or not, to see if they've won.
+     * <br>
+     * This is a condition variable of the {@link BettingCentre#haveIWon(int)} method and it is reset on the
+     * {@link BettingCentre#acceptTheBets()} method.
+     */
     private boolean brokerDoesNotAllowToProceedToHaveIWon = true;
 
     /**
@@ -380,6 +390,8 @@ public class BettingCentre implements BettingCentreInterface {
      */
     private GeneralInformationRepositoryStub repository;
 
-    /** TODO : Documentation */
+    /**
+     * The created instance of this class
+     */
     private static BettingCentre instance;
 }

@@ -23,7 +23,7 @@ import static configurations.SimulationConfigurations.*;
  * @author Hugo Fragata
  * @author Rui Lopes
  * @since 0.1
- * @version 1.1
+ * @version 2.0
  */
 public class GeneralInformationRepository implements GeneralInformationRepositoryInterface {
     /**
@@ -62,7 +62,11 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
         }
     }
 
-    /** TODO : documentation */
+    /**
+     * Get a singleton instance of a General Repository of Information.
+     *
+     * @return an instance of the General Repository of Information.
+     */
     public static GeneralInformationRepository getInstance() {
         if (instance == null) {
             instance = new GeneralInformationRepository(NUMBER_OF_PAIRS_HORSE_JOCKEY, NUMBER_OF_SPECTATORS, ONLY_LOG_ON_FILE);
@@ -805,6 +809,8 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
      */
     private boolean wereWaitingTheHorses = false;
 
-    /** TODO : documentation */
+    /**
+     * The created instance of this class
+     */
     private static GeneralInformationRepository instance;
 }

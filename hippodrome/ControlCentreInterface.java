@@ -1,5 +1,16 @@
 package hippodrome;
 
+import entities.Spectator;
+
+/**
+ * Interface of the place where the {@link Spectator}s go to enjoy the race (at a Watching Stand) and the {@link entities.Broker}
+ * controls the races and publishes its results.
+ *
+ * @author Hugo Fragata
+ * @author Rui Lopes
+ * @since 2.0
+ * @version 2.0
+ */
 public interface ControlCentreInterface {
 
     void startTheRace() throws InterruptedException;

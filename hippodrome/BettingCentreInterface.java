@@ -1,7 +1,17 @@
 package hippodrome;
 
-import hippodrome.rollfilm.UnknownHorseJockeyException;
+import entities.Spectator;
 
+/**
+ * Interface of the place where the {@link Spectator}s place their bets on the winning horse. As they come here
+ * to place their bets, they also come here to collect his (or hers) further gains, if such a
+ * scenario applies on a given race.
+ *
+ * @author Hugo Fragata
+ * @author Rui Lopes
+ * @since 2.0
+ * @version 2.0
+ */
 public interface BettingCentreInterface {
 
     void acceptTheBets() throws InterruptedException;

@@ -17,7 +17,7 @@ import static configurations.SimulationConfigurations.*;
  * @author Hugo Fragata
  * @author Rui Lopes
  * @since 0.1
- * @version 1.1
+ * @version 2.0
  */
 public class Paddock implements PaddockInterface {
     /**
@@ -35,7 +35,11 @@ public class Paddock implements PaddockInterface {
         this.repository = new GeneralInformationRepositoryStub();
     }
 
-    /** TODO : documentation */
+    /**
+     * Get a singleton instance of a General Repository of Information.
+     *
+     * @return an instance of the General Repository of Information.
+     */
     public static Paddock getInstance() {
         if (instance == null) {
             instance = new Paddock(NUMBER_OF_SPECTATORS, NUMBER_OF_PAIRS_HORSE_JOCKEY);
@@ -168,8 +172,13 @@ public class Paddock implements PaddockInterface {
      */
     private boolean lastSpectatorHasNotArrivedOnPaddock = true;
 
-    /** TODO : documentation */
+    /**
+     * The created instance of this class
+     */
     private static Paddock instance;
 
+    /**
+     * An entity which represents the repository.
+     */
     private GeneralInformationRepositoryStub repository;
 }
