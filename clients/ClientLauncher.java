@@ -91,8 +91,8 @@ public class ClientLauncher {
         System.err.println("Invalid arguments.");
         System.err.println("Usage: java -classpath \"project-folder:genclass-jar-folder\" ClientLauncher <entity>");
         System.err.println("Entities:");
-        System.err.println("  - broker          (Broker)" +
-                "  - spectator       (Spectators)" +
+        System.err.println("  - broker          (Broker)\n" +
+                "  - spectator       (Spectators)\n" +
                 "  - horses          (Pairs Horse/Jockey)");
     }
 

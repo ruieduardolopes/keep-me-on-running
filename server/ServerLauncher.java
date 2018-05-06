@@ -87,12 +87,12 @@ public class ServerLauncher {
         System.err.println("Invalid arguments.");
         System.err.println("Usage: java -classpath \"project-folder:genclass-jar-folder\" ServerLauncher <hippodrome-region>");
         System.err.println("Hippodrome Regions:");
-        System.err.println("  - betting-centre      (Betting Centre)" +
-                "  - control-centre      (Control Centre)" +
-                "  - general-repo        (General Repository of Information)" +
-                "  - paddock             (Paddock)" +
-                "  - racing-track        (Racing Track)" +
-                "  - stable              (Stable)");
+        System.err.println("  - betting-centre      (Betting Centre)\n" +
+                "  - control-centre      (Control Centre)\n" +
+                "  - general-repo        (General Repository of Information)\n" +
+                "  - paddock             (Paddock)\n" +
+                "  - racing-track        (Racing Track)\n" +
+                "  - stable              (Stable)\n");
     }
 
 
