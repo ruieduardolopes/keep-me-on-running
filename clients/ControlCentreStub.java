@@ -14,7 +14,24 @@ import static configurations.ServerConfigurations.CONTROL_CENTRE_HOST;
 import static configurations.ServerConfigurations.CONTROL_CENTRE_PORT;
 import static configurations.ServerConfigurations.CONTROL_CENTRE_TIME_TO_SLEEP;
 
+/**
+ * Representation of a place where the {@link Broker} coordinates the race and where the {@link Spectator}s
+ * come to relax and be entertained.
+ *
+ * @author Hugo Fragata
+ * @author Rui Lopes
+ * @since 2.0
+ * @version 2.0
+ */
 public class ControlCentreStub implements ControlCentreInterface {
+    /**
+     * Stub entity to represent the will of a {@link Broker} to Start The Race on
+     * the {@link hippodrome.ControlCentre}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public void startTheRace() throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -31,6 +48,14 @@ public class ControlCentreStub implements ControlCentreInterface {
         connection.close();
     }
 
+    /**
+     * Stub entity to represent the will of a {@link Broker} to Entertain the Guests on
+     * the {@link hippodrome.ControlCentre}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public void entertainTheGuests() throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -47,6 +72,15 @@ public class ControlCentreStub implements ControlCentreInterface {
         connection.close();
     }
 
+    /**
+     * Stub entity to represent the will of a {@link Spectator} to Wait for the Next Race to start on
+     * the {@link hippodrome.ControlCentre}.
+     *
+     * @return a boolean representing whether if the next race has begun.
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public boolean waitForTheNextRace() throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -65,6 +99,14 @@ public class ControlCentreStub implements ControlCentreInterface {
         return messageReceived.getValue();
     }
 
+    /**
+     * Stub entity to represent the will of a {@link Spectator} to go Watch the Race on
+     * the {@link hippodrome.ControlCentre}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public void goWatchTheRace() throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -82,6 +124,14 @@ public class ControlCentreStub implements ControlCentreInterface {
         connection.close();
     }
 
+    /**
+     * Stub entity to represent the will of a {@link Spectator} to go Relax a Bit on
+     * the {@link hippodrome.ControlCentre}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public void relaxABit() throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -99,6 +149,15 @@ public class ControlCentreStub implements ControlCentreInterface {
         connection.close();
     }
 
+    /**
+     * Stub entity to represent the will of a {@link Broker} to Report the Results to the {@link Spectator}s on
+     * the {@link hippodrome.ControlCentre}.
+     *
+     * @return the int identification of the winner of the race.
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public int reportResults() throws InterruptedException {
         ClientCom connection = createConnectionWithServer();
@@ -111,6 +170,14 @@ public class ControlCentreStub implements ControlCentreInterface {
         return messageReceived.getResults();
     }
 
+    /**
+     * Stub entity to represent the will of a {@link Broker} to Summon the {@link HorseJockey}s to go to the
+     * {@link hippodrome.Paddock} from the {@link hippodrome.ControlCentre}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public void summonHorsesToPaddock() throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -127,6 +194,14 @@ public class ControlCentreStub implements ControlCentreInterface {
         connection.close();
     }
 
+    /**
+     * Stub entity to represent the will of the last {@link HorseJockey} to Proceed to the {@link hippodrome.Paddock}
+     * on the {@link hippodrome.ControlCentre}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public void proceedToPaddock() throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -144,6 +219,14 @@ public class ControlCentreStub implements ControlCentreInterface {
         connection.close();
     }
 
+    /**
+     * Stub entity to represent the will of the last {@link Spectator} to go Check the {@link HorseJockey}
+     * and inform so on the {@link hippodrome.ControlCentre}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public void goCheckHorses() throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -159,6 +242,14 @@ public class ControlCentreStub implements ControlCentreInterface {
         connection.close();
     }
 
+    /**
+     * Stub entity to represent the will of the last {@link HorseJockey} to Make a Move
+     * and inform so on the {@link hippodrome.ControlCentre}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public void makeAMove() throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -175,6 +266,13 @@ public class ControlCentreStub implements ControlCentreInterface {
         connection.close();
     }
 
+    /**
+     * Stub entity to shutdown the premises of the {@link hippodrome.ControlCentre}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     *         unexpected reply message has been received.
+     */
     public void shutdown() throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_SHUTDOWN);
@@ -189,6 +287,12 @@ public class ControlCentreStub implements ControlCentreInterface {
         connection.close();
     }
 
+    /**
+     * Creates a connection to the correspondent server (meaning the {@link hippodrome.ControlCentre}).
+     *
+     * @return the communication with the server, already defined over a {@link ClientCom} object.
+     * @throws InterruptedException if a connection could not be established with success.
+     */
     private ClientCom createConnectionWithServer() throws InterruptedException {
         ClientCom connection = new ClientCom(CONTROL_CENTRE_HOST, CONTROL_CENTRE_PORT);
         while (!connection.open()) {

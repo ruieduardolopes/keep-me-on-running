@@ -3,7 +3,9 @@ package clients;
 import communications.Message;
 import communications.MessageType;
 import communications.UnexpectedReplyTypeException;
+import entities.Broker;
 import entities.HorseJockey;
+import entities.Spectator;
 import hippodrome.StableInterface;
 import lib.communication.ClientCom;
 import lib.logging.Logger;
@@ -12,7 +14,24 @@ import static configurations.ServerConfigurations.STABLE_HOST;
 import static configurations.ServerConfigurations.STABLE_PORT;
 import static configurations.ServerConfigurations.STABLE_TIME_TO_SLEEP;
 
+/**
+ * Representation of a place where the {@link HorseJockey}s rest before and after each {@link hippodrome.actions.Race}.
+ *
+ * @author Hugo Fragata
+ * @author Rui Lopes
+ * @since 2.0
+ * @version 2.0
+ */
 public class StableStub implements StableInterface {
+
+    /**
+     * Stub entity to represent the will of a {@link HorseJockey} to Proceed to
+     * the {@link hippodrome.Stable}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public void proceedToStable(int raceNumber) throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -30,6 +49,14 @@ public class StableStub implements StableInterface {
         connection.close();
     }
 
+    /**
+     * Stub entity to represent the will of the last {@link HorseJockey} to Proceed to
+     * the {@link hippodrome.Stable}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public void proceedToStable() throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -47,6 +74,14 @@ public class StableStub implements StableInterface {
         connection.close();
     }
 
+    /**
+     * Stub entity to represent the will of the {@link Broker} to Proceed to the Paddock on
+     * the {@link hippodrome.Stable}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public void summonHorsesToPaddock(int raceNumber) throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -62,6 +97,13 @@ public class StableStub implements StableInterface {
         connection.close();
     }
 
+    /**
+     * Stub entity to shutdown the premises of the {@link hippodrome.Stable}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     *         unexpected reply message has been received.
+     */
     public void shutdown() throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.STABLE_SHUTDOWN);
@@ -76,6 +118,12 @@ public class StableStub implements StableInterface {
         connection.close();
     }
 
+    /**
+     * Creates a connection to the correspondent server (meaning the {@link hippodrome.Stable}).
+     *
+     * @return the communication with the server, already defined over a {@link ClientCom} object.
+     * @throws InterruptedException if a connection could not be established with success.
+     */
     private ClientCom createConnectionWithServer() throws InterruptedException {
         ClientCom connection = new ClientCom(STABLE_HOST, STABLE_PORT);
         while (!connection.open()) {

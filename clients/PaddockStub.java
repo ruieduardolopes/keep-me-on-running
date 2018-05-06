@@ -13,7 +13,23 @@ import static configurations.ServerConfigurations.PADDOCK_HOST;
 import static configurations.ServerConfigurations.PADDOCK_PORT;
 import static configurations.ServerConfigurations.PADDOCK_TIME_TO_SLEEP;
 
+/**
+ * Representation of a place where the {@link HorseJockey}s show themselves to the {@link Spectator}s.
+ *
+ * @author Hugo Fragata
+ * @author Rui Lopes
+ * @since 2.0
+ * @version 2.0
+ */
 public class PaddockStub implements PaddockInterface {
+
+    /**
+     * Stub entity to represent the will of a {@link HorseJockey} to Proceed to the {@link hippodrome.Paddock}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public void proceedToPaddock(int raceNumber) throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -29,6 +45,13 @@ public class PaddockStub implements PaddockInterface {
         connection.close();
     }
 
+    /**
+     * Stub entity to represent the will of the {@link Spectator}s to go Check The {@link HorseJockey}s on the {@link hippodrome.Paddock}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public void goCheckHorses(boolean isTheLastSpectator) throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -46,6 +69,14 @@ public class PaddockStub implements PaddockInterface {
         connection.close();
     }
 
+    /**
+     * Stub entity to represent the will of the {@link HorseJockey}s to
+     * Proceed to the Starting Line of the {@link hippodrome.RacingTrack}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public void proceedToStartLine() throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -63,6 +94,14 @@ public class PaddockStub implements PaddockInterface {
         connection.close();
     }
 
+    /**
+     * Stub entity to represent the will of the last {@link Spectator} to go Check The {@link HorseJockey}s on the {@link hippodrome.Paddock}.
+     *
+     * @return a boolean representing the this is the last {@link Spectator}.
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public boolean goCheckHorses() throws InterruptedException {
         ClientCom connection = createConnectionWithServer();
@@ -75,6 +114,13 @@ public class PaddockStub implements PaddockInterface {
         return messageReceived.getValue();
     }
 
+    /**
+     * Stub entity to shutdown the premises of the {@link hippodrome.Paddock}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     *         unexpected reply message has been received.
+     */
     public void shutdown() throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.PADDOCK_SHUTDOWN);
@@ -89,6 +135,12 @@ public class PaddockStub implements PaddockInterface {
         connection.close();
     }
 
+    /**
+     * Creates a connection to the correspondent server (meaning the {@link hippodrome.Paddock}).
+     *
+     * @return the communication with the server, already defined over a {@link ClientCom} object.
+     * @throws InterruptedException if a connection could not be established with success.
+     */
     private ClientCom createConnectionWithServer() throws InterruptedException {
         ClientCom connection = new ClientCom(PADDOCK_HOST, PADDOCK_PORT);
         while (!connection.open()) {
