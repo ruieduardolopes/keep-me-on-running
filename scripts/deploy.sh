@@ -37,6 +37,11 @@ execute_code () {
 }
 
 deployall () {
+    git checkout tests
+    git merge dev
+    git add *
+    git commit -m "Added the last version on tests"
+    git push origin tests
     preparehippodrome
     execute_code
 }
