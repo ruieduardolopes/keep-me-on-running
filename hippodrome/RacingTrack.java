@@ -30,7 +30,7 @@ public class RacingTrack implements RacingTrackInterface {
      * repository is also given in order to report status changes on the course of its actions.
      *
      * @param race A race to be executed over this Racing Track.
-     *
+     * @throws Exception if a illegal argument is sent.
      */
     private RacingTrack(Race race) throws Exception {
         try {
@@ -49,6 +49,7 @@ public class RacingTrack implements RacingTrackInterface {
      * Get a singleton instance of a General Repository of Information.
      *
      * @return an instance of the General Repository of Information.
+     * @throws Exception if a illegal argument is sent.
      */
     public static RacingTrack getInstance() throws Exception {
         try {
@@ -178,6 +179,7 @@ public class RacingTrack implements RacingTrackInterface {
      * Marks the final position of the pair Horse/Jockey identified with {@code horse}.
      *
      * @param horse the identification of the pair Horse/Jockey which has finished its race.
+     * @throws Exception if a illegal argument is sent.
      */
     private void markFinalPosition(int horse) throws Exception {
         numberOfFinishedHorses++;

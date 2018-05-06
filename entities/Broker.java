@@ -29,7 +29,7 @@ public class Broker extends Thread {
      * and logged - and a given number of races ({@code numberOfRaces}).
      *
      * @param numberOfRaces The number of races in which this Entities will work on.
-     *
+     * @throws InterruptedException if the communication channel is busy.
      */
     public Broker(int numberOfRaces) throws InterruptedException {
         try {
@@ -93,7 +93,8 @@ public class Broker extends Thread {
 
     /**
      * Sets the Entities's current Racing Track's instance {@link RacingTrack}.
-     *
+     * @param identification the identification of the race to set.
+     * @throws InterruptedException if the communication channel is busy.
      */
     public synchronized void setRace(int identification) throws InterruptedException {
         try {

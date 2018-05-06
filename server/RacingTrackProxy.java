@@ -19,6 +19,7 @@ import java.io.ObjectOutputStream;
 public class RacingTrackProxy implements Server {
     /**
      * Creates a Racing Track Proxy instance.
+     * @throws InterruptedException if a communication channel could not be established.
      */
     public RacingTrackProxy() throws InterruptedException {
         try {

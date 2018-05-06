@@ -29,7 +29,7 @@ public class HorseJockey extends Thread {
      *
      * @param identification number which identifies this pair Horse/Jockey.
      * @param ability number with characterizes the Horse maximum ability to run.
-     *
+     * @throws Exception if an illegal argument is given.
      */
     public HorseJockey(int identification, int ability) throws Exception {
         try {

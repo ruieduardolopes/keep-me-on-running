@@ -11,6 +11,7 @@ package communications;
 public class UnexpectedReplyTypeException extends RuntimeException {
     /**
      * A meaningful and default exception followed by a simple message.
+     * @param type the Message Type which has not been identified.
      */
     public UnexpectedReplyTypeException(MessageType type) {
         this(String.format("This type of reply message was unexpected: %s", type));

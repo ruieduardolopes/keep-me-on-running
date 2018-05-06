@@ -193,6 +193,7 @@ public class Message implements Serializable {
      * @param type the type of this message.
      * @param value1 the first {@code integer} value which must be saved with the message.
      * @param value2 the second {@code integer} value which must be saved with the message.
+     * @param value3 the third {@code integer} value which must be saved with the message.
      */
     public Message(MessageType type, int value1, int value2, int value3) {
         this.type = type;

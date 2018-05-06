@@ -9,27 +9,47 @@ package lib.logging;
  */
 public class Logger {
 
-    /** Prints a Green Information String */
+    /**
+     * Prints an Information String
+     * @param message the message to print.
+     * @param args the formatter.
+     */
     public static void printInformation(String message, Object ... args) {
         System.out.printf(Color.ANSI_GREEN + "[INFOR] " + Color.ANSI_RESET + message + "." + "\n", args);
     }
 
-    /** Prints a Cyan Notification String */
+    /**
+     * Prints a Notification String
+     * @param message the message to print.
+     * @param args the formatter.
+     */
     public static void printNotification(String message, Object ... args) {
         System.out.printf(Color.ANSI_CYAN + "[NOTIF] " + Color.ANSI_RESET + message + "..." + "\n", args);
     }
 
-    /** Prints a Red Error String */
+    /**
+     * Prints a Error String
+     * @param message the message to print.
+     * @param args the formatter.
+     */
     public static void printError(String message, Object ... args) {
         System.out.printf(Color.ANSI_RED + "[ERROR] " + Color.ANSI_RESET + message + "." + "\n", args);
     }
 
-    /** Prints a Purple Debug String */
+    /**
+     * Prints a Debug String
+     * @param message the message to print.
+     * @param args the formatter.
+     */
     public static void printDebug(String message, Object ... args) {
         System.out.printf(Color.ANSI_PURPLE + "[DEBUG] " + Color.ANSI_RESET + message + "\n", args);
     }
 
-    /** Prints a Yellow Warning String */
+    /**
+     * Prints a Warning String
+     * @param message the message to print.
+     * @param args the formatter.
+     */
     public static void printWarning(String message, Object ... args) {
         System.out.printf(Color.ANSI_YELLOW + "[WARNG] " + Color.ANSI_RESET + message + "\n", args);
     }

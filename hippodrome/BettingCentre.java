@@ -274,6 +274,7 @@ public class BettingCentre implements BettingCentreInterface {
 
     /**
      * Evaluates the odds of all the pair Horse/Jockey.
+     * @throws InterruptedException if the communication channel is busy.
      */
     private void evaluateOdds() throws InterruptedException {
         try {

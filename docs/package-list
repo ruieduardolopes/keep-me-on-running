@@ -1,5 +1,9 @@
+clients
+communications
+configurations
 entities
 hippodrome
 hippodrome.actions
 hippodrome.rollfilm
-stage
+lib.logging
+server

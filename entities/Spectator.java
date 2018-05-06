@@ -26,7 +26,7 @@ public class Spectator extends Thread {
      * @param identification number which identifies this {@code Spectator}.
      * @param money amount of money given to this {@code Spectator}.
      * @param numberOfRaces number of races which will happen in this event.
-     *
+     * @throws InterruptedException if the communication channel is busy.
      */
     public Spectator(int identification, int money, int numberOfRaces) throws InterruptedException {
         try {
@@ -123,6 +123,7 @@ public class Spectator extends Thread {
      * Returns a random horse for this Spectator to bet.
      *
      * @return a random horse identifier, as an integer.
+     * @throws InterruptedException if the communication channel is busy.
      */
     private int horse() throws InterruptedException {
         int value = -1;
