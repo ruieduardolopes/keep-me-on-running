@@ -3,6 +3,7 @@ package hippodrome;
 import clients.ControlCentreStub;
 import clients.GeneralInformationRepositoryStub;
 import entities.*;
+import lib.logging.Logger;
 import server.ServiceProviderAgent;
 
 import static configurations.SimulationConfigurations.*;
@@ -61,9 +62,14 @@ public class ControlCentre implements ControlCentreInterface {
      * Start entertaining the guests (representation of the {@link Spectator}s), as the {@link entities.Broker}'s actions
      * can be considered as terminated.
      */
-    public synchronized void entertainTheGuests() {
-        ((ServiceProviderAgent)Thread.currentThread()).setBrokerState(BrokerState.PLAYING_HOST_AT_THE_BAR);
-        repository.setBrokerStatus(BrokerState.PLAYING_HOST_AT_THE_BAR);
+    public synchronized void entertainTheGuests() throws InterruptedException {
+        try {
+            ((ServiceProviderAgent)Thread.currentThread()).setBrokerState(BrokerState.PLAYING_HOST_AT_THE_BAR);
+            repository.setBrokerStatus(BrokerState.PLAYING_HOST_AT_THE_BAR);
+        } catch (InterruptedException ie) {
+            ie.printStackTrace();
+            throw new InterruptedException();
+        }
     }
 
     /**
@@ -118,8 +124,12 @@ public class ControlCentre implements ControlCentreInterface {
      * Relax a bit from the games, as this is could be the final transition of a {@link Spectator} lifecycle.
      */
     public synchronized void relaxABit() {
-        ((ServiceProviderAgent)Thread.currentThread()).setSpectatorState(SpectatorState.CELEBRATING);
-        repository.setSpectatorStatus(((ServiceProviderAgent)Thread.currentThread()).getSpectatorIdentification(), SpectatorState.CELEBRATING);
+        try {
+            ((ServiceProviderAgent)Thread.currentThread()).setSpectatorState(SpectatorState.CELEBRATING);
+            repository.setSpectatorStatus(((ServiceProviderAgent)Thread.currentThread()).getSpectatorIdentification(), SpectatorState.CELEBRATING);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -164,14 +174,20 @@ public class ControlCentre implements ControlCentreInterface {
      * <br>
      * Note that this method also resets the condition variable of itself after the notification.
      */
-    public synchronized void proceedToPaddock() {
-        numberOfHorseJockeysOnPaddock++;
-        ((ServiceProviderAgent)(Thread.currentThread())).setHorseJockeyState(HorseJockeyState.AT_THE_PADDOCK);
-        repository.setHorseJockeyStatus(((ServiceProviderAgent)(Thread.currentThread())).getHorseJockeyIdentification(), HorseJockeyState.AT_THE_PADDOCK);
-        if (numberOfHorseJockeysOnPaddock == NUMBER_OF_PAIRS_HORSE_JOCKEY) {
-            lastHorseJockeyHasNotArrivedOnPaddock = false;
-            notifyAll();
-            numberOfHorseJockeysOnPaddock = 0;
+    public synchronized void proceedToPaddock() throws InterruptedException {
+        try {
+            ++numberOfHorseJockeysOnPaddock;
+            ((ServiceProviderAgent)(Thread.currentThread())).setHorseJockeyState(HorseJockeyState.AT_THE_PADDOCK);
+            repository.setHorseJockeyStatus(((ServiceProviderAgent)(Thread.currentThread())).getHorseJockeyIdentification(), HorseJockeyState.AT_THE_PADDOCK);
+
+            if (numberOfHorseJockeysOnPaddock == NUMBER_OF_PAIRS_HORSE_JOCKEY) {
+                lastHorseJockeyHasNotArrivedOnPaddock = false;
+                notifyAll();
+                numberOfHorseJockeysOnPaddock = 0;
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            throw new InterruptedException();
         }
     }
 

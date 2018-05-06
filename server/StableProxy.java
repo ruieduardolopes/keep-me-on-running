@@ -16,7 +16,7 @@ public class StableProxy implements Server {
         switch (message.getType()) {
             case STABLE_PROCEED_TO_STABLE:
                 stable.proceedToStable();
-                Logger.printError("Proceed to Stable done after processNRquest call...");
+
                 reply = new Message(MessageType.REPLY_STABLE_PROCEED_TO_STABLE);
                 break;
             case STABLE_PROCEED_TO_STABLE_WITH_RACE_ID:

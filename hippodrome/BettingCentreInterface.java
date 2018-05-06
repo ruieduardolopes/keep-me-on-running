@@ -14,9 +14,9 @@ public interface BettingCentreInterface {
 
     boolean haveIWon(int spectatorId) throws InterruptedException;
 
-    boolean areThereAnyWinners(int winner);
+    boolean areThereAnyWinners(int winner) throws InterruptedException;
 
-    int getNumberOfHorses();
+    int getNumberOfHorses() throws InterruptedException;
 
-    void setAbility(int horse, int ability) throws UnknownHorseJockeyException;
+    void setAbility(int horse, int ability) throws InterruptedException, RuntimeException;
 }

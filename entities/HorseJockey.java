@@ -31,20 +31,24 @@ public class HorseJockey extends Thread {
      * @param ability number with characterizes the Horse maximum ability to run.
      *
      */
-    public HorseJockey(int identification, int ability) {
-        this.repository = new GeneralInformationRepositoryStub();
-        this.identification = identification;
-        this.repository.setWereWaitingTheHorses(true);
-        this.repository.setHorseJockeyStatus(identification, state);
-        this.ability = ability;
-        this.repository.setHorseJockeyAbility(this.identification, this.ability);
-        this.controlCentre = new ControlCentreStub();
-        this.paddock = new PaddockStub();
-        this.racingTrack = new RacingTrackStub();
-        this.raceNumber = this.racingTrack.getRace().getIdentification();
-        this.stable = new StableStub();
-        this.bettingCentre = new BettingCentreStub();
-        Logger.printError("Creating a new Horse for the race number %d", this.raceNumber);
+    public HorseJockey(int identification, int ability) throws Exception {
+        try {
+            this.repository = new GeneralInformationRepositoryStub();
+            this.identification = identification;
+            this.repository.setWereWaitingTheHorses(true);
+            this.repository.setHorseJockeyStatus(identification, state);
+            this.ability = ability;
+            this.repository.setHorseJockeyAbility(this.identification, this.ability);
+            this.controlCentre = new ControlCentreStub();
+            this.paddock = new PaddockStub();
+            this.racingTrack = new RacingTrackStub();
+            this.raceNumber = this.racingTrack.getRace().getIdentification();
+            this.stable = new StableStub();
+            this.bettingCentre = new BettingCentreStub();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception();
+        }
     }
 
     /**

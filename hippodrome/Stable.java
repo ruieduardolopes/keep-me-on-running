@@ -36,12 +36,17 @@ public class Stable implements StableInterface {
      * @throws InterruptedException if the wait() is interrupted.
      */
     public synchronized void proceedToStable(int raceNumber) throws InterruptedException {
-        Logger.printError("On proceed to stable, the race number is %d", raceNumber);
+
         ((ServiceProviderAgent)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_STABLE);
         repository.setHorseJockeyStatus(((ServiceProviderAgent)(Thread.currentThread())).getHorseJockeyIdentification(), HorseJockeyState.AT_THE_STABLE);
         brokerDidNotSaidToAdvance = true;
+        if (++numberOfHorsesOnStable == SimulationConfigurations.NUMBER_OF_PAIRS_HORSE_JOCKEY && raceNumber == 0) {
+            horsesAreNotAvailable = false;
+            notifyAll();
+        }
         while (currentRaceNumber != raceNumber) {
             try {
+
                 wait();
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
@@ -81,7 +86,16 @@ public class Stable implements StableInterface {
      * @param raceNumber number identification of the next race, where the called pairs Horse/Jockey will be competing
      *                   against each other.
      */
-    public synchronized void summonHorsesToPaddock(int raceNumber) {
+    public synchronized void summonHorsesToPaddock(int raceNumber) throws InterruptedException {
+        while (horsesAreNotAvailable) {
+            try {
+
+                wait();
+            } catch (InterruptedException ie) {
+                ie.printStackTrace();
+                throw new InterruptedException("The proceedToStable() has been firstly interrupted on its wait().");
+            }
+        }
         currentRaceNumber = raceNumber;
         brokerDidNotSaidToAdvance = false;
         notifyAll();
@@ -91,6 +105,10 @@ public class Stable implements StableInterface {
      * Current race number identifier, as an integer.
      */
     private int currentRaceNumber = -1;
+
+    private int numberOfHorsesOnStable = 0;
+
+    private boolean horsesAreNotAvailable = true;
 
     private boolean thisIsAfterTheLastRun = false;
 

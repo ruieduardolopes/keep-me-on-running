@@ -4,21 +4,21 @@ public interface ControlCentreInterface {
 
     void startTheRace() throws InterruptedException;
 
-    void entertainTheGuests();
+    void entertainTheGuests() throws InterruptedException;
 
     boolean waitForTheNextRace() throws InterruptedException;
 
     void goWatchTheRace() throws InterruptedException;
 
-    void relaxABit();
+    void relaxABit() throws InterruptedException;
 
-    int reportResults();
+    int reportResults() throws InterruptedException;
 
     void summonHorsesToPaddock() throws InterruptedException;
 
-    void proceedToPaddock();
+    void proceedToPaddock() throws InterruptedException;
 
-    void goCheckHorses();
+    void goCheckHorses() throws InterruptedException;
 
-    void makeAMove();
+    void makeAMove() throws InterruptedException;
 }

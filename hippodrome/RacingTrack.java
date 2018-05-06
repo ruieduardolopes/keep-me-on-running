@@ -32,19 +32,29 @@ public class RacingTrack implements RacingTrackInterface {
      * @param race A race to be executed over this Racing Track.
      *
      */
-    private RacingTrack(Race race) {
-        this.race = race;
-        this.repository = new GeneralInformationRepositoryStub();
-        this.currentHorsesPositions = new int[race.getNumberOfTracks()];
-        this.repository.setRaceDistance(race.getDistance());
-        this.repository.setRaceNumber(race.getIdentification());
+    private RacingTrack(Race race) throws Exception {
+        try {
+            this.race = race;
+            this.repository = new GeneralInformationRepositoryStub();
+            this.currentHorsesPositions = new int[race.getNumberOfTracks()];
+            this.repository.setRaceDistance(race.getDistance());
+            this.repository.setRaceNumber(race.getIdentification());
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception();
+        }
     }
 
-    public static RacingTrack getInstance() {
-        if (instance == null) {
-            instance = new RacingTrack(new Race(NUMBER_OF_TRACKS, identification, generateDistance())); // TODO : fill with new race identification and distance
+    public static RacingTrack getInstance() throws Exception {
+        try {
+            if (instance == null) {
+                instance = new RacingTrack(new Race(NUMBER_OF_TRACKS, identification, generateDistance())); // TODO : fill with new race identification and distance
+            }
+            return instance;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception();
         }
-        return instance;
     }
 
     /**
@@ -116,10 +126,15 @@ public class RacingTrack implements RacingTrackInterface {
      *
      * @return {@code true} if the pair Horse/Jockey had crossed the finish line; otherwise it will return {@code false}.
      */
-    public synchronized boolean hasFinishLineBeenCrossed(int horseJockeyId) {
+    public synchronized boolean hasFinishLineBeenCrossed(int horseJockeyId) throws Exception {
         if (currentHorsesPositions[horseJockeyId] >= race.getDistance()) {
-            brokerDidNotOrderToStartTheRace = true;
-            markFinalPosition(horseJockeyId);
+            try {
+                brokerDidNotOrderToStartTheRace = true;
+                markFinalPosition(horseJockeyId);
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new Exception();
+            }
             return true;
         }
         return false;
@@ -159,9 +174,14 @@ public class RacingTrack implements RacingTrackInterface {
      *
      * @param horse the identification of the pair Horse/Jockey which has finished its race.
      */
-    private void markFinalPosition(int horse) {
+    private void markFinalPosition(int horse) throws Exception {
         numberOfFinishedHorses++;
-        repository.setHorseJockeyFinalStandPosition(horse, numberOfFinishedHorses);
+        try {
+            repository.setHorseJockeyFinalStandPosition(horse, numberOfFinishedHorses);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            throw new Exception();
+        }
     }
 
     /** TODO : documentation */
@@ -170,8 +190,15 @@ public class RacingTrack implements RacingTrackInterface {
     }
 
     /** TODO : documentation */
-    public void setRace(Race race) {
+    public void setRace(Race race) throws InterruptedException {
         this.race = race;
+        try {
+            this.repository.setRaceDistance(race.getDistance());
+            this.repository.setRaceNumber(race.getIdentification());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            throw new InterruptedException();
+        }
     }
 
     /** TODO : documentation */

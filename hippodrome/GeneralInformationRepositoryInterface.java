@@ -7,41 +7,41 @@ import hippodrome.rollfilm.UnknownHorseJockeyException;
 import hippodrome.rollfilm.UnknownSpectatorException;
 
 public interface GeneralInformationRepositoryInterface {
-    void newSnapshot(boolean nullable);
+    void newSnapshot(boolean nullable) throws InterruptedException;
 
-    void setRaceNumber(int number);
+    void setRaceNumber(int number) throws InterruptedException;
 
-    void setRaceDistance(int distance);
+    void setRaceDistance(int distance) throws InterruptedException;
 
-    void setBrokerStatus(BrokerState status);
+    void setBrokerStatus(BrokerState status) throws InterruptedException, RuntimeException;
 
-    void setSpectatorStatus(int spectatorId, SpectatorState status) throws UnknownSpectatorException;
+    void setSpectatorStatus(int spectatorId, SpectatorState status) throws InterruptedException, RuntimeException;
 
-    void setSpectatorAmountOfMoney(int spectatorId, int amount) throws UnknownSpectatorException;
+    void setSpectatorAmountOfMoney(int spectatorId, int amount) throws InterruptedException, RuntimeException;
 
-    void setSpectatorBetSelection(int spectatorId, int selection) throws UnknownSpectatorException;
+    void setSpectatorBetSelection(int spectatorId, int selection) throws InterruptedException, RuntimeException;
 
-    void setSpectatorBetAmount(int spectatorId, int bet) throws UnknownSpectatorException;
+    void setSpectatorBetAmount(int spectatorId, int bet) throws InterruptedException, RuntimeException;
 
-    void setHorseJockeyStatus(int horseJockeyId, HorseJockeyState status) throws UnknownHorseJockeyException;
+    void setHorseJockeyStatus(int horseJockeyId, HorseJockeyState status) throws InterruptedException, RuntimeException;
 
-    void setHorseJockeyAbility(int horseJockeyId, int ability) throws UnknownHorseJockeyException;
+    void setHorseJockeyAbility(int horseJockeyId, int ability) throws InterruptedException, RuntimeException;
 
-    void setHorseJockeyProbabilityToWin(int horseJockeyId, int probability) throws UnknownHorseJockeyException;
+    void setHorseJockeyProbabilityToWin(int horseJockeyId, int probability) throws InterruptedException, RuntimeException;
 
-    void setHorseJockeyNumberOfIncrementsDid(int horseJockeyId, int iterations) throws UnknownHorseJockeyException;
+    void setHorseJockeyNumberOfIncrementsDid(int horseJockeyId, int iterations) throws InterruptedException, RuntimeException;
 
-    int getHorseJockeyNumberOfIncrementsDid(int horseJockeyId) throws UnknownHorseJockeyException;
+    int getHorseJockeyNumberOfIncrementsDid(int horseJockeyId) throws InterruptedException, RuntimeException;
 
-    void setHorseJockeyPositionOnTrack(int horseJockeyId, int position) throws UnknownHorseJockeyException;
+    void setHorseJockeyPositionOnTrack(int horseJockeyId, int position) throws InterruptedException, RuntimeException;
 
-    void setHorseJockeyFinalStandPosition(int horseJockeyId, int position) throws UnknownHorseJockeyException;
+    void setHorseJockeyFinalStandPosition(int horseJockeyId, int position) throws InterruptedException, RuntimeException;
 
-    void setWereWaitingTheHorses(boolean value);
+    void setWereWaitingTheHorses(boolean value) throws InterruptedException;
 
-    int getRaceNumber();
+    int getRaceNumber() throws InterruptedException;
 
-    int getCurrentRaceDistance();
+    int getCurrentRaceDistance() throws InterruptedException;
 
-    void raceIsOver();
+    void raceIsOver() throws InterruptedException;
 }

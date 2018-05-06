@@ -2,6 +2,7 @@ package entities;
 
 import clients.*;
 import hippodrome.*;
+import lib.logging.Logger;
 
 import java.util.Random;
 
@@ -27,16 +28,20 @@ public class Spectator extends Thread {
      * @param numberOfRaces number of races which will happen in this event.
      *
      */
-    public Spectator(int identification, int money, int numberOfRaces) {
-        this.repository = new GeneralInformationRepositoryStub();
-        this.identification = identification;
-        this.repository.setSpectatorStatus(identification, state);
-        this.money = money;
-        this.repository.setSpectatorAmountOfMoney(this.identification, this.money);
-        this.bettingCentre = new BettingCentreStub();
-        this.controlCentre = new ControlCentreStub();
-        this.paddock = new PaddockStub();
-        this.numberOfRaces = numberOfRaces;
+    public Spectator(int identification, int money, int numberOfRaces) throws InterruptedException {
+        try {
+            this.repository = new GeneralInformationRepositoryStub();
+            this.identification = identification;
+            this.repository.setSpectatorStatus(identification, state);
+            this.money = money;
+            this.repository.setSpectatorAmountOfMoney(this.identification, this.money);
+            this.bettingCentre = new BettingCentreStub();
+            this.controlCentre = new ControlCentreStub();
+            this.paddock = new PaddockStub();
+            this.numberOfRaces = numberOfRaces;
+        } catch (InterruptedException e) {
+            throw new InterruptedException();
+        }
     }
 
     /**
@@ -115,17 +120,27 @@ public class Spectator extends Thread {
      *
      * @return a random horse identifier, as an integer.
      */
-    private int horse() {
-        return (new Random()).nextInt(bettingCentre.getNumberOfHorses());
+    private int horse() throws InterruptedException {
+        int value = -1;
+        try {
+            value = (new Random()).nextInt(bettingCentre.getNumberOfHorses());
+        } catch (InterruptedException ie) {
+            throw new InterruptedException();
+        }
+        return value;
     }
 
-    private void shutdown() {
-        bettingCentre.shutdown();
-        controlCentre.shutdown();
-        repository.shutdown();
-        paddock.shutdown();
-        new RacingTrackStub().shutdown();
-        new StableStub().shutdown();
+    private void shutdown() throws InterruptedException {
+        try {
+            bettingCentre.shutdown();
+            controlCentre.shutdown();
+            repository.shutdown();
+            paddock.shutdown();
+            new RacingTrackStub().shutdown();
+            new StableStub().shutdown();
+        } catch (InterruptedException e) {
+            throw new InterruptedException();
+        }
     }
 
     /**

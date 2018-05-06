@@ -6,7 +6,7 @@ public interface PaddockInterface {
 
     void goCheckHorses(boolean isTheLastSpectator) throws InterruptedException;
 
-    void proceedToStartLine();
+    void proceedToStartLine() throws InterruptedException;
 
-    boolean goCheckHorses();
+    boolean goCheckHorses() throws InterruptedException;
 }

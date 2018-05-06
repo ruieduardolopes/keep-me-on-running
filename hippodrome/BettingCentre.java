@@ -204,7 +204,7 @@ public class BettingCentre implements BettingCentreInterface {
                 throw new InterruptedException("The haveIWon() has been interrupted on its wait().");
             }
         }
-        Logger.printError("At Have I Won, we have these winners: %s", Arrays.toString(winners));
+
         for (int winner : winners) {
             if (winner == spectatorId) {
                 return true;
@@ -221,7 +221,7 @@ public class BettingCentre implements BettingCentreInterface {
      * @return {@code true} if anybody had won indeed; otherwise it will return {@code false}.
      */
     public synchronized boolean areThereAnyWinners(int winner) {
-        Logger.printError("We received %d as a winner!", winner);
+
         winnersArrived = 0;
         ArrayList<Integer> winningList = new ArrayList<>();
         for (int i = 0; i != bets.length; i++) {
@@ -229,9 +229,9 @@ public class BettingCentre implements BettingCentreInterface {
                 winningList.add(i);
             }
         }
-        Logger.printError("The winners are %s", winningList);
+
         for (int i = 0; i != bets.length; i++) {
-            Logger.printError("Spectator %d voted for %d by %d.", i, bets[i].getHorseJockeyId(), bets[i].getAmount());
+
         }
         winners = new int[winningList.size()];
         for (int i = 0; i != winners.length; i++) {
@@ -271,10 +271,14 @@ public class BettingCentre implements BettingCentreInterface {
     /**
      * Evaluates the odds of all the pair Horse/Jockey.
      */
-    private void evaluateOdds() {
-        for (int i = 0; i != horsesOdds.length; i++) {
-            horsesOdds[i] = sumOf(horsesAbilities) / horsesAbilities[i];
-            repository.setHorseJockeyProbabilityToWin(i, horsesOdds[i]);
+    private void evaluateOdds() throws InterruptedException {
+        try {
+            for (int i = 0; i != horsesOdds.length; i++) {
+                horsesOdds[i] = sumOf(horsesAbilities) / horsesAbilities[i];
+                repository.setHorseJockeyProbabilityToWin(i, horsesOdds[i]);
+            }
+        } catch (InterruptedException e) {
+            throw new InterruptedException();
         }
     }
 

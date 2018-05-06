@@ -12,7 +12,6 @@ public class BettingCentreProxy implements Server {
 
     @Override
     public Message processAndAnswerRequest(Message message) throws Exception {
-        Logger.printWarning("I'm inside the ProcessNRequest of Betting Centre");
         Message reply = null;
         switch (message.getType()) {
             case BETTING_CENTRE_ACCEPT_THE_BETS:
@@ -37,16 +36,11 @@ public class BettingCentreProxy implements Server {
                 break;
             case BETTING_CENTRE_HAVE_I_WON:
                 boolean haveIWon = bettingCentre.haveIWon(message.getSpectatorID());
-                Logger.printError("I'm in the Have I Won (BettingCentreProxy) with value %s", haveIWon);
                 reply = new Message(MessageType.REPLY_BETTING_CENTRE_HAVE_I_WON, haveIWon);
-                Logger.printError("I'm in the Have I Won (BettingCentreProxy) with value %s (Created message)", haveIWon);
                 break;
             case BETTING_CENTRE_HONOUR_THE_BETS:
-                Logger.printError("qqqqqqqqqqqq");
                 bettingCentre.honourTheBets();
-                Logger.printError("uuuuuuuuuuuuuu");
                 reply = new Message(MessageType.REPLY_BETTING_CENTRE_HONOUR_THE_BETS);
-                Logger.printError("hhhhhhhhhhhhhhhhh");
                 break;
             case BETTING_CENTRE_SET_ABILITY:
                 Logger.printInformation("Received a request %s to the horse %d with ability %d", message.getType(), message.getHorseID(), message.getAbility());

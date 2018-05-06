@@ -31,14 +31,18 @@ public class Broker extends Thread {
      * @param numberOfRaces The number of races in which this Entities will work on.
      *
      */
-    public Broker(int numberOfRaces) {
-        this.bettingCentre = new BettingCentreStub();
-        this.controlCentre = new ControlCentreStub();
-        this.racingTrack = new RacingTrackStub();
-        this.stable = new StableStub();
-        this.repository = new GeneralInformationRepositoryStub();
-        this.totalOfRaces = numberOfRaces;
-        this.repository.setBrokerStatus(state);
+    public Broker(int numberOfRaces) throws InterruptedException {
+        try {
+            this.bettingCentre = new BettingCentreStub();
+            this.controlCentre = new ControlCentreStub();
+            this.racingTrack = new RacingTrackStub();
+            this.stable = new StableStub();
+            this.repository = new GeneralInformationRepositoryStub();
+            this.totalOfRaces = numberOfRaces;
+            this.repository.setBrokerStatus(state);
+        } catch (InterruptedException e) {
+            throw new InterruptedException();
+        }
     }
 
     /**
@@ -62,7 +66,9 @@ public class Broker extends Thread {
                 if (bettingCentre.areThereAnyWinners(winner)) {                     //   if there are any bet winners at the Betting Centre:
                     bettingCentre.honourTheBets();                                  //     then i should honour the bets and retrieve its money;
                 }                                                                   //
-                setRace(raceNumber+1);                                              //
+                if (raceNumber < totalOfRaces-1) {
+                    setRace(raceNumber+1);                                          //
+                }
                 repository.raceIsOver();                                            //
             }                                                                       //
             controlCentre.entertainTheGuests();                                     // as the races are over, then i should go entertain the guests.
@@ -90,17 +96,25 @@ public class Broker extends Thread {
      * Sets the Entities's current Racing Track's instance {@link RacingTrack}.
      *
      */
-    public synchronized void setRace(int identification) {
-        this.racingTrack.setRace(new Race(SimulationConfigurations.NUMBER_OF_TRACKS, identification, Race.generateDistance()));
+    public synchronized void setRace(int identification) throws InterruptedException {
+        try {
+            this.racingTrack.setRace(new Race(SimulationConfigurations.NUMBER_OF_TRACKS, identification, Race.generateDistance()));
+        } catch (InterruptedException e) {
+            throw new InterruptedException();
+        }
     }
 
-    private void shutdown() {
-        bettingCentre.shutdown();
-        controlCentre.shutdown();
-        repository.shutdown();
-        new PaddockStub().shutdown();
-        racingTrack.shutdown();
-        stable.shutdown();
+    private void shutdown() throws InterruptedException {
+        try {
+            bettingCentre.shutdown();
+            controlCentre.shutdown();
+            repository.shutdown();
+            new PaddockStub().shutdown();
+            racingTrack.shutdown();
+            stable.shutdown();
+        } catch (InterruptedException e) {
+            throw new InterruptedException();
+        }
     }
 
     /**

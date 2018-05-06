@@ -295,7 +295,11 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
             line += " ";
         }
         line += " ";
-        line += String.format("%1d", raceNumber);                               /* RN */
+        if (!brokerStatus.matches("OTE|PHATB")) {
+            line += String.format("%1d", raceNumber);                               /* RN */
+        } else {
+            line += "-";
+        }
         line += " ";
         for (HorseJockey horseJockey : horseJockeys) {
             switch (horseJockey.getStatus()) {
@@ -399,13 +403,13 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
      */
     private String printClassicRaceLine() {
         String line = "  ";
-        if (brokerStatus.equals("OTE")) {
+        if (brokerStatus.matches("OTE|PHATB")) {
             line += "-";
         } else {
             line += String.format("%1d", raceNumber);                                    /* RN */
         }
         line += " ";
-        if (brokerStatus.equals("OTE")) {
+        if (brokerStatus.matches("OTE|PHATB")) {
             line += "--";
         } else {
             line += String.format("%2d", currentRaceDistance);                           /* Dist */
@@ -579,7 +583,6 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
      */
     public synchronized void setHorseJockeyStatus(int horseJockeyId, HorseJockeyState status) throws UnknownHorseJockeyException {
         try {
-            Logger.printWarning("The pair %d Horse/Jockey status is %s.", horseJockeyId, status); // TODO : unnecessary comment
             horseJockeys[horseJockeyId].setStatus(status);
         } catch (IndexOutOfBoundsException ioobe) {
             throw new UnknownHorseJockeyException(horseJockeyId);

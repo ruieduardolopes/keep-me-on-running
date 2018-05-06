@@ -2,6 +2,7 @@ package clients;
 
 import communications.Message;
 import communications.MessageType;
+import communications.UnexpectedReplyTypeException;
 import entities.Broker;
 import entities.HorseJockey;
 import entities.Spectator;
@@ -15,7 +16,7 @@ import static configurations.ServerConfigurations.CONTROL_CENTRE_TIME_TO_SLEEP;
 
 public class ControlCentreStub implements ControlCentreInterface {
     @Override
-    public void startTheRace() throws InterruptedException {
+    public void startTheRace() throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_START_THE_RACE);
         Logger.printNotification("Sending %s message to server", messageToSend.getType());
@@ -23,14 +24,15 @@ public class ControlCentreStub implements ControlCentreInterface {
         Message messageReceived = (Message) connection.readObject();
         Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.REPLY_CONTROL_CENTRE_START_THE_RACE) {
-            // TODO : Handle this error
+            Logger.printError("Received a unexpected reply type (%s)", messageReceived.getType());
+            throw new UnexpectedReplyTypeException(messageReceived.getType());
         }
         ((Broker)Thread.currentThread()).setBrokerState(messageReceived.getBrokerState());
         connection.close();
     }
 
     @Override
-    public void entertainTheGuests() {
+    public void entertainTheGuests() throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_ENTERTAIN_THE_GUESTS);
         Logger.printNotification("Sending %s message to server", messageToSend.getType());
@@ -38,14 +40,15 @@ public class ControlCentreStub implements ControlCentreInterface {
         Message messageReceived = (Message) connection.readObject();
         Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.REPLY_CONTROL_CENTRE_ENTERTAIN_THE_GUESTS) {
-            // TODO : Handle this error
+            Logger.printError("Received a unexpected reply type (%s)", messageReceived.getType());
+            throw new UnexpectedReplyTypeException(messageReceived.getType());
         }
         ((Broker)Thread.currentThread()).setBrokerState(messageReceived.getBrokerState());
         connection.close();
     }
 
     @Override
-    public boolean waitForTheNextRace() throws InterruptedException {
+    public boolean waitForTheNextRace() throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_WAIT_FOR_THE_NEXT_RACE);
         Logger.printNotification("Sending %s message to server", messageToSend.getType());
@@ -54,7 +57,8 @@ public class ControlCentreStub implements ControlCentreInterface {
         Message messageReceived = (Message) connection.readObject();
         Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.REPLY_CONTROL_CENTRE_WAIT_FOR_NEXT_RACE) {
-            // TODO : Handle this error
+            Logger.printError("Received a unexpected reply type (%s)", messageReceived.getType());
+            throw new UnexpectedReplyTypeException(messageReceived.getType());
         }
         ((Spectator)Thread.currentThread()).setSpectatorState(messageReceived.getSpectatorState());
         connection.close();
@@ -62,7 +66,7 @@ public class ControlCentreStub implements ControlCentreInterface {
     }
 
     @Override
-    public void goWatchTheRace() throws InterruptedException {
+    public void goWatchTheRace() throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_GO_WATCH_THE_RACE);
         Logger.printNotification("Sending %s message to server", messageToSend.getType());
@@ -71,14 +75,15 @@ public class ControlCentreStub implements ControlCentreInterface {
         Message messageReceived = (Message) connection.readObject();
         Logger.printInformation("Received a %s message (spectator thread number %d)", messageReceived.getType(), ((Spectator)Thread.currentThread()).getIdentification());
         if (messageReceived.getType() != MessageType.REPLY_CONTROL_CENTRE_GO_WATCH_THE_RACE) {
-            // TODO : Handle this error
+            Logger.printError("Received a unexpected reply type (%s)", messageReceived.getType());
+            throw new UnexpectedReplyTypeException(messageReceived.getType());
         }
         ((Spectator)Thread.currentThread()).setSpectatorState(messageReceived.getSpectatorState());
         connection.close();
     }
 
     @Override
-    public void relaxABit() {
+    public void relaxABit() throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_RELAX_A_BIT);
         Logger.printNotification("Sending %s message to server", messageToSend.getType());
@@ -87,14 +92,15 @@ public class ControlCentreStub implements ControlCentreInterface {
         Message messageReceived = (Message) connection.readObject();
         Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.REPLY_CONTROL_CENTRE_RELAX_A_BIT) {
-            // TODO : Handle this error
+            Logger.printError("Received a unexpected reply type (%s)", messageReceived.getType());
+            throw new UnexpectedReplyTypeException(messageReceived.getType());
         }
         ((Spectator)Thread.currentThread()).setSpectatorState(messageReceived.getSpectatorState());
         connection.close();
     }
 
     @Override
-    public int reportResults() {
+    public int reportResults() throws InterruptedException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_REPORT_RESULTS);
         Logger.printNotification("Sending %s message to server", messageToSend.getType());
@@ -106,7 +112,7 @@ public class ControlCentreStub implements ControlCentreInterface {
     }
 
     @Override
-    public void summonHorsesToPaddock() throws InterruptedException {
+    public void summonHorsesToPaddock() throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_SUMMON_HORSES_TO_PADDOCK);
         Logger.printNotification("Sending %s message to server", messageToSend.getType());
@@ -114,14 +120,15 @@ public class ControlCentreStub implements ControlCentreInterface {
         Message messageReceived = (Message) connection.readObject();
         Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.REPLY_CONTROL_CENTRE_SUMMON_HORSES_TO_PADDOCK) {
-            // TODO : Handle this error
+            Logger.printError("Received a unexpected reply type (%s)", messageReceived.getType());
+            throw new UnexpectedReplyTypeException(messageReceived.getType());
         }
         ((Broker)Thread.currentThread()).setBrokerState(messageReceived.getBrokerState());
         connection.close();
     }
 
     @Override
-    public void proceedToPaddock() {
+    public void proceedToPaddock() throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_PROCEED_TO_PADDOCK);
         messageToSend.setHorseID(((HorseJockey)Thread.currentThread()).getIdentification());
@@ -130,14 +137,15 @@ public class ControlCentreStub implements ControlCentreInterface {
         Message messageReceived = (Message) connection.readObject();
         Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.REPLY_CONTROL_CENTRE_PROCEED_TO_PADDOCK) {
-            // TODO : Handle this error
+            Logger.printError("Received a unexpected reply type (%s)", messageReceived.getType());
+            throw new UnexpectedReplyTypeException(messageReceived.getType());
         }
         ((HorseJockey)Thread.currentThread()).setHorseJockeyState(messageReceived.getHorseJockeyState());
         connection.close();
     }
 
     @Override
-    public void goCheckHorses() {
+    public void goCheckHorses() throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_GO_CHECK_HORSES);
         Logger.printNotification("Sending %s message to server", messageToSend.getType());
@@ -145,13 +153,14 @@ public class ControlCentreStub implements ControlCentreInterface {
         Message messageReceived = (Message) connection.readObject();
         Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.OK) {
-            // TODO : Handle this error
+            Logger.printError("Received a unexpected reply type (%s)", messageReceived.getType());
+            throw new UnexpectedReplyTypeException(messageReceived.getType());
         }
         connection.close();
     }
 
     @Override
-    public void makeAMove() {
+    public void makeAMove() throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_MAKE_A_MOVE);
         Logger.printNotification("Sending %s message to server", messageToSend.getType());
@@ -160,12 +169,13 @@ public class ControlCentreStub implements ControlCentreInterface {
         Message messageReceived = (Message) connection.readObject();
         Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.OK) {
-            // TODO : Handle this error
+            Logger.printError("Received a unexpected reply type (%s)", messageReceived.getType());
+            throw new UnexpectedReplyTypeException(messageReceived.getType());
         }
         connection.close();
     }
 
-    public void shutdown() {
+    public void shutdown() throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.CONTROL_CENTRE_SHUTDOWN);
         Logger.printNotification("Sending %s message to server", messageToSend.getType());
@@ -173,18 +183,19 @@ public class ControlCentreStub implements ControlCentreInterface {
         Message messageReceived = (Message) connection.readObject();
         Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.OK) {
-            // TODO : Handle this error
+            Logger.printError("Received a unexpected reply type (%s)", messageReceived.getType());
+            throw new UnexpectedReplyTypeException(messageReceived.getType());
         }
         connection.close();
     }
 
-    private ClientCom createConnectionWithServer() {
+    private ClientCom createConnectionWithServer() throws InterruptedException {
         ClientCom connection = new ClientCom(CONTROL_CENTRE_HOST, CONTROL_CENTRE_PORT);
         while (!connection.open()) {
             try {
                 Thread.sleep(CONTROL_CENTRE_TIME_TO_SLEEP);
             } catch (InterruptedException ie) {
-                // TODO : Handle this exception
+                throw new InterruptedException("The Control Centre createConnectionWithServer() has been interrupted on its sleep().");
             }
         }
         return connection;

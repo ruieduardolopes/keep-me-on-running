@@ -102,15 +102,19 @@ public class Paddock implements PaddockInterface {
      * Note that this method changes the value of the condition variable to the {@link Paddock#goCheckHorses(boolean)}
      * wait condition, notifying its changes.
      */
-    public synchronized void proceedToStartLine() {
-        currentNumberOfSpectators = 0;
-        ((ServiceProviderAgent)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_START_LINE);
-        repository.setHorseJockeyStatus(((ServiceProviderAgent)(Thread.currentThread())).getHorseJockeyIdentification(), HorseJockeyState.AT_THE_START_LINE);
-        currentNumberOfHorses++;
-        if (currentNumberOfHorses == numberOfHorses*2) {
-            lastHorseDidNotProceedToStartLine = false;
-            currentNumberOfHorses = 0;
-            notifyAll();
+    public synchronized void proceedToStartLine() throws InterruptedException {
+        try {
+            currentNumberOfSpectators = 0;
+            ((ServiceProviderAgent)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_START_LINE);
+            repository.setHorseJockeyStatus(((ServiceProviderAgent)(Thread.currentThread())).getHorseJockeyIdentification(), HorseJockeyState.AT_THE_START_LINE);
+            currentNumberOfHorses++;
+            if (currentNumberOfHorses == numberOfHorses*2) {
+                lastHorseDidNotProceedToStartLine = false;
+                currentNumberOfHorses = 0;
+                notifyAll();
+            }
+        } catch (InterruptedException e) {
+            throw new InterruptedException();
         }
     }
 

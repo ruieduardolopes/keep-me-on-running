@@ -5,5 +5,5 @@ public interface StableInterface {
 
     void proceedToStable() throws InterruptedException ;
 
-    void summonHorsesToPaddock(int raceNumber);
+    void summonHorsesToPaddock(int raceNumber) throws InterruptedException;
 }

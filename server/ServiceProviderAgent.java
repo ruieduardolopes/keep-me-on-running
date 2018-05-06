@@ -47,7 +47,6 @@ public class ServiceProviderAgent extends Thread {
             case BETTING_CENTRE_ACCEPT_THE_BETS:
                 break;
             case BETTING_CENTRE_HONOUR_THE_BETS:
-                Logger.printError("1234567890987654321");
                 break;
             case BETTING_CENTRE_PLACE_A_BET:
                 break;
@@ -89,13 +88,11 @@ public class ServiceProviderAgent extends Thread {
                 break;
         }
         Logger.printDebug("%s",message.getType());
-        Logger.printDebug("iqowdjioqwdjq %s",server.getClass().getName());
         try {
             reply = server.processAndAnswerRequest(message);
         } catch (Exception e) {
             // TODO : Handle this exception
         }
-        Logger.printWarning("The type is %s", reply.getType());
         switch (reply.getType()) {
             case REPLY_CONTROL_CENTRE_SUMMON_HORSES_TO_PADDOCK:
                 reply.setBrokerState(brokerState);
@@ -105,7 +102,6 @@ public class ServiceProviderAgent extends Thread {
                 break;
             case REPLY_BETTING_CENTRE_HONOUR_THE_BETS:
                 reply.setBrokerState(brokerState);
-                Logger.printError("OI!OIJIO!JWOI!JW!");
                 break;
             case REPLY_CONTROL_CENTRE_START_THE_RACE:
                 reply.setBrokerState(brokerState);
@@ -126,7 +122,6 @@ public class ServiceProviderAgent extends Thread {
                 reply.setHorseJockeyState(horseJockeyState);
                 break;
             case REPLY_STABLE_PROCEED_TO_STABLE:
-                Logger.printError("This is a reply on the SPA of the proceed to stable (simple)");
                 reply.setHorseJockeyState(horseJockeyState);
                 break;
             case REPLY_STABLE_PROCEED_TO_STABLE_WITH_RACE_ID:

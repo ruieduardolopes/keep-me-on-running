@@ -2,6 +2,7 @@ package clients;
 
 import communications.Message;
 import communications.MessageType;
+import communications.UnexpectedReplyTypeException;
 import entities.HorseJockey;
 import entities.Spectator;
 import hippodrome.PaddockInterface;
@@ -14,7 +15,7 @@ import static configurations.ServerConfigurations.PADDOCK_TIME_TO_SLEEP;
 
 public class PaddockStub implements PaddockInterface {
     @Override
-    public void proceedToPaddock(int raceNumber) throws InterruptedException {
+    public void proceedToPaddock(int raceNumber) throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.PADDOCK_PROCEED_TO_PADDOCK, raceNumber);
         Logger.printNotification("Sending %s message to server with argument (raceNumber: %d)", messageToSend.getType(), raceNumber);
@@ -22,13 +23,14 @@ public class PaddockStub implements PaddockInterface {
         Message messageReceived = (Message) connection.readObject();
         Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.OK) {
-            // TODO : Handle this error
+            Logger.printError("Received a unexpected reply type (%s)", messageReceived.getType());
+            throw new UnexpectedReplyTypeException(messageReceived.getType());
         }
         connection.close();
     }
 
     @Override
-    public void goCheckHorses(boolean isTheLastSpectator) throws InterruptedException {
+    public void goCheckHorses(boolean isTheLastSpectator) throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.PADDOCK_GO_CHECK_HORSES_WITH_LAST_SPECTATOR, isTheLastSpectator);
         Logger.printNotification("Sending %s message to server with argument (isTheLastSpectator: %s)", messageToSend.getType(), isTheLastSpectator);
@@ -37,14 +39,15 @@ public class PaddockStub implements PaddockInterface {
         Message messageReceived = (Message) connection.readObject();
         Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.REPLY_PADDOCK_GO_CHECK_HORSES_WITH_LAST_SPECTATOR) {
-            // TODO : Handle this error
+            Logger.printError("Received a unexpected reply type (%s)", messageReceived.getType());
+            throw new UnexpectedReplyTypeException(messageReceived.getType());
         }
         ((Spectator)Thread.currentThread()).setSpectatorState(messageReceived.getSpectatorState());
         connection.close();
     }
 
     @Override
-    public void proceedToStartLine() {
+    public void proceedToStartLine() throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.PADDOCK_PROCEED_TO_START_LINE);
         Logger.printNotification("Sending %s message to server", messageToSend.getType());
@@ -53,14 +56,15 @@ public class PaddockStub implements PaddockInterface {
         Message messageReceived = (Message) connection.readObject();
         Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.REPLY_PADDOCK_PROCEED_TO_START_LINE) {
-            // TODO : Handle this error
+            Logger.printError("Received a unexpected reply type (%s)", messageReceived.getType());
+            throw new UnexpectedReplyTypeException(messageReceived.getType());
         }
         ((HorseJockey)Thread.currentThread()).setHorseJockeyState(messageReceived.getHorseJockeyState());
         connection.close();
     }
 
     @Override
-    public boolean goCheckHorses() {
+    public boolean goCheckHorses() throws InterruptedException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.PADDOCK_GO_CHECK_HORSES);
         Logger.printNotification("Sending %s message to server", messageToSend.getType());
@@ -71,7 +75,7 @@ public class PaddockStub implements PaddockInterface {
         return messageReceived.getValue();
     }
 
-    public void shutdown() {
+    public void shutdown() throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.PADDOCK_SHUTDOWN);
         Logger.printNotification("Sending %s message to server", messageToSend.getType());
@@ -79,18 +83,19 @@ public class PaddockStub implements PaddockInterface {
         Message messageReceived = (Message) connection.readObject();
         Logger.printInformation("Received a %s message", messageReceived.getType());
         if (messageReceived.getType() != MessageType.OK) {
-            // TODO : Handle this error
+            Logger.printError("Received a unexpected reply type (%s)", messageReceived.getType());
+            throw new UnexpectedReplyTypeException(messageReceived.getType());
         }
         connection.close();
     }
 
-    private ClientCom createConnectionWithServer() {
+    private ClientCom createConnectionWithServer() throws InterruptedException {
         ClientCom connection = new ClientCom(PADDOCK_HOST, PADDOCK_PORT);
         while (!connection.open()) {
             try {
                 Thread.sleep(PADDOCK_TIME_TO_SLEEP);
             } catch (InterruptedException ie) {
-                // TODO : Handle this exception
+                throw new InterruptedException("The Paddock createConnectionWithServer() has been interrupted on its sleep().");
             }
         }
         return connection;

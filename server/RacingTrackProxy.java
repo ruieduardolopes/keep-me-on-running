@@ -9,8 +9,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.ObjectOutputStream;
 
 public class RacingTrackProxy implements Server {
-    public RacingTrackProxy() {
-        racingTrack = RacingTrack.getInstance();
+    public RacingTrackProxy() throws InterruptedException {
+        try {
+            racingTrack = RacingTrack.getInstance();
+        } catch (Exception e) {
+            throw new InterruptedException();
+        }
     }
 
     @Override
