@@ -8,12 +8,30 @@ import entities.SpectatorState;
 import lib.communication.ServerCom;
 import lib.logging.Logger;
 
+/**
+ * A Service Provider Agent which provides the how-to process the messages after the
+ * passive hippodrome regions.
+ *
+ * @author Hugo Fragata
+ * @author Rui Lopes
+ * @since 2.0
+ * @version 2.0
+ */
 public class ServiceProviderAgent extends Thread {
+    /**
+     * Creates a Service Provider Agent.
+     *
+     * @param connection a connection to clients over a socket.
+     * @param server an instance of a server.
+     */
     public ServiceProviderAgent(ServerCom connection, Server server) {
         this.connection = connection;
         this.server = server;
     }
 
+    /**
+     * The running function for this thread.
+     */
     @Override
     public void run() {
         Message reply = null;
@@ -148,6 +166,12 @@ public class ServiceProviderAgent extends Thread {
         connection.close();
     }
 
+    /**
+     * Counts the times the entities asked to get the hippodrome regions down.
+     *
+     * @param region the region to be shutdown.
+     * @return {@code true} if the {@code region} must be shutdown; otherwise {@code false}.
+     */
     public static boolean getShutdownCounter(String region) {
         int index = -1;
         switch (region) {
@@ -178,79 +202,84 @@ public class ServiceProviderAgent extends Thread {
         return shutdownArray[index] == (1 + SimulationConfigurations.NUMBER_OF_SPECTATORS);
     }
 
-    public int getSpectatorAmountOfMoney() {
-        return spectatorAmountOfMoney;
-    }
-
-    public void setSpectatorAmountOfMoney(int spectatorAmountOfMoney) {
-        this.spectatorAmountOfMoney = spectatorAmountOfMoney;
-    }
-
+    /**
+     * Gets the identification of a Spectator.
+     *
+     * @return the identification of a Spectator.
+     */
     public int getSpectatorIdentification() {
         return spectatorIdentification;
     }
 
-    public void setSpectatorIdentification(int spectatorIdentification) {
-        this.spectatorIdentification = spectatorIdentification;
-    }
-
-    public int getHorseJockeyOdd() {
-        return horseJockeyOdd;
-    }
-
-    public void setHorseJockeyOdd(int horseJockeyOdd) {
-        this.horseJockeyOdd = horseJockeyOdd;
-    }
-
+    /**
+     * Gets the identification of a pair Horse/Jockey.
+     *
+     * @return the identification of a pair Horse/Jockey.
+     */
     public int getHorseJockeyIdentification() {
         return horseJockeyIdentification;
     }
 
-    public void setHorseJockeyIdentification(int horseJockeyIdentification) {
-        this.horseJockeyIdentification = horseJockeyIdentification;
-    }
-
+    /**
+     * Gets the agility of a pair Horse/Jockey.
+     *
+     * @return the agility value of a pair Horse/Jockey.
+     */
     public int getHorseJockeyAgility() {
         return horseJockeyAgility;
     }
 
-    public void setHorseJockeyAgility(int horseJockeyAgility) {
-        this.horseJockeyAgility = horseJockeyAgility;
-    }
-
-    public HorseJockeyState getHorseJockeyState() {
-        return horseJockeyState;
-    }
-
+    /**
+     * Sets the state of the pair Horse/Jockey.
+     *
+     * @param horseJockeyState the state to be set.
+     */
     public void setHorseJockeyState(HorseJockeyState horseJockeyState) {
         this.horseJockeyState = horseJockeyState;
     }
 
-    public SpectatorState getSpectatorState() {
-        return spectatorState;
-    }
-
+    /**
+     * Sets the state of the Spectator.
+     *
+     * @param spectatorState the state to be set.
+     */
     public void setSpectatorState(SpectatorState spectatorState) {
         this.spectatorState = spectatorState;
     }
 
-    public BrokerState getBrokerState() {
-        return brokerState;
-    }
-
+    /**
+     * Sets the state of the Broker.
+     *
+     * @param brokerState the state to be set.
+     */
     public void setBrokerState(BrokerState brokerState) {
         this.brokerState = brokerState;
     }
 
-    private int spectatorAmountOfMoney;
+    /** The identification of a Spectator */
     private int spectatorIdentification;
-    private int horseJockeyOdd;
+
+    /** The identification of a pair Horse/Jockey */
     private int horseJockeyIdentification;
+
+    /** The agility of a pair Horse/Jockey */
     private int horseJockeyAgility;
+
+    /** The state of a pair Horse/Jockey */
     private HorseJockeyState horseJockeyState;
+
+    /** The state of a Spectator */
     private SpectatorState spectatorState;
+
+    /** The state of a Broker */
     private BrokerState brokerState;
+
+    /** The instance of a connection received from the outside */
     private ServerCom connection;
+
+    /** The instance of a server received from the outside */
     private Server server;
+
+    /** An internal structure to manage the hippodrome regions which must be shutdown */
     private static int[] shutdownArray = new int[6];
 }

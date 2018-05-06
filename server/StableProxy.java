@@ -5,11 +5,29 @@ import communications.MessageType;
 import hippodrome.Stable;
 import lib.logging.Logger;
 
+/**
+ * Stable endpoint representation on the server side.
+ *
+ * @author Hugo Fragata
+ * @author Rui Lopes
+ * @since 2.0
+ * @version 2.0
+ */
 public class StableProxy implements Server {
+    /**
+     * Creates a Stable Proxy instance.
+     */
     public StableProxy() {
         stable = Stable.getInstance();
     }
 
+    /**
+     * Implementation of the {@link Server}'s method to process and answer the requests.
+     *
+     * @param message the message to process and to reply on.
+     * @return the reply message to the {@code message} given as input.
+     * @throws Exception if a unexpected message type is given.
+     */
     @Override
     public Message processAndAnswerRequest(Message message) throws Exception {
         Message reply = null;
@@ -36,5 +54,8 @@ public class StableProxy implements Server {
         return reply;
     }
 
+    /**
+     * A Stable instance.
+     */
     private final Stable stable;
 }

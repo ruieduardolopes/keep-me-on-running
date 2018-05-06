@@ -8,7 +8,18 @@ import hippodrome.actions.Race;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectOutputStream;
 
+/**
+ * Racing Track endpoint representation on the server side.
+ *
+ * @author Hugo Fragata
+ * @author Rui Lopes
+ * @since 2.0
+ * @version 2.0
+ */
 public class RacingTrackProxy implements Server {
+    /**
+     * Creates a Racing Track Proxy instance.
+     */
     public RacingTrackProxy() throws InterruptedException {
         try {
             racingTrack = RacingTrack.getInstance();
@@ -17,6 +28,13 @@ public class RacingTrackProxy implements Server {
         }
     }
 
+    /**
+     * Implementation of the {@link Server}'s method to process and answer the requests.
+     *
+     * @param message the message to process and to reply on.
+     * @return the reply message to the {@code message} given as input.
+     * @throws Exception if a unexpected message type is given.
+     */
     @Override
     public Message processAndAnswerRequest(Message message) throws Exception {
         Message reply = null;
@@ -60,5 +78,8 @@ public class RacingTrackProxy implements Server {
         return reply;
     }
 
+    /**
+     * A Racing Track instance.
+     */
     private final RacingTrack racingTrack;
 }

@@ -7,7 +7,20 @@ import lib.logging.Logger;
 
 import java.net.SocketTimeoutException;
 
+/**
+ * Main function which must be used to run the various entities classified on {@link entities}.
+ *
+ * @author Hugo Fragata
+ * @author Rui Lopes
+ * @since 2.0
+ * @version 2.0
+ */
 public class ServerLauncher {
+    /**
+     * The main function for this execution.
+     *
+     * @param args the entity to run.
+     */
     public static void main(String[] args) {
         if (args.length != 1) {
             printUsage();
@@ -67,6 +80,9 @@ public class ServerLauncher {
         }
     }
 
+    /**
+     * Prints the help message for this method.
+     */
     private static void printUsage() {
         System.err.println("Invalid arguments.");
         System.err.println("Usage: java -classpath \"project-folder:genclass-jar-folder\" ServerLauncher <hippodrome-region>");
@@ -79,10 +95,34 @@ public class ServerLauncher {
                 "  - stable              (Stable)");
     }
 
+
+    /**
+     * Boolean variable to signal when the execution must be terminated
+     */
     private static boolean terminateExecution = false;
+
+    /**
+     * The instance of a general server.
+     */
     private static Server server = null;
+
+    /**
+     * The identification of the service port.
+     */
     private static int port;
+
+    /**
+     * The request channel for communications with the clients.
+     */
     private static ServerCom serverConnectionRequest;
+
+    /**
+     * The instance of the communication channel.
+     */
     private static ServerCom serverConnectionInstance;
+
+    /**
+     * The instance of the service provider agent.
+     */
     private static ServiceProviderAgent serviceProviderAgent;
 }

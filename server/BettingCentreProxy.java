@@ -5,11 +5,29 @@ import communications.MessageType;
 import hippodrome.BettingCentre;
 import lib.logging.Logger;
 
+/**
+ * Betting Centre endpoint representation on the server side.
+ *
+ * @author Hugo Fragata
+ * @author Rui Lopes
+ * @since 2.0
+ * @version 2.0
+ */
 public class BettingCentreProxy implements Server {
+    /**
+     * Creates a Betting Centre Proxy instance.
+     */
     public BettingCentreProxy() {
         bettingCentre = BettingCentre.getInstance();
     }
 
+    /**
+     * Implementation of the {@link Server}'s method to process and answer the requests.
+     *
+     * @param message the message to process and to reply on.
+     * @return the reply message to the {@code message} given as input.
+     * @throws Exception if a unexpected message type is given.
+     */
     @Override
     public Message processAndAnswerRequest(Message message) throws Exception {
         Message reply = null;
@@ -56,5 +74,8 @@ public class BettingCentreProxy implements Server {
         return reply;
     }
 
+    /**
+     * A Betting Centre instance.
+     */
     private final BettingCentre bettingCentre;
 }
