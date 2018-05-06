@@ -285,6 +285,7 @@ public class GeneralInformationRepositoryStub implements GeneralInformationRepos
      * Stub entity to represent the will of the {@link entities.HorseJockey} to Get its Number of Increments performed on
      * the {@link hippodrome.GeneralInformationRepository}.
      *
+     * @return an int representing the Number of Increments performed by the passed {@link entities.HorseJockey} id.
      * @throws InterruptedException if a connection could not be established with success.
      * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
      * unexpected reply message has been received.
@@ -365,6 +366,7 @@ public class GeneralInformationRepositoryStub implements GeneralInformationRepos
     /**
      * Stub entity to represent the get Race Number provided by the {@link hippodrome.GeneralInformationRepository}.
      *
+     * @return an int representing the current {@link hippodrome.actions.Race} number.
      * @throws InterruptedException if a connection could not be established with success.
      * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
      * unexpected reply message has been received.
@@ -382,6 +384,7 @@ public class GeneralInformationRepositoryStub implements GeneralInformationRepos
     /**
      * Stub entity to represent the get Current Race Distance provided by the {@link hippodrome.GeneralInformationRepository}.
      *
+     * @return an int representing the current {@link hippodrome.actions.Race} distance.
      * @throws InterruptedException if a connection could not be established with success.
      * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
      * unexpected reply message has been received.
@@ -397,7 +400,7 @@ public class GeneralInformationRepositoryStub implements GeneralInformationRepos
     }
 
     /**
-     * Stub entity to represent the get if Race the is Over provided by the {@link hippodrome.GeneralInformationRepository}.
+     * Stub entity to represent the affirmation that the Race the is Over provided by the {@link hippodrome.GeneralInformationRepository}.
      *
      * @throws InterruptedException if a connection could not be established with success.
      * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a

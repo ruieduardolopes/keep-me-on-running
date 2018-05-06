@@ -97,6 +97,7 @@ public class PaddockStub implements PaddockInterface {
     /**
      * Stub entity to represent the will of the last {@link Spectator} to go Check The {@link HorseJockey}s on the {@link hippodrome.Paddock}.
      *
+     * @return a boolean representing the this is the last {@link Spectator}.
      * @throws InterruptedException if a connection could not be established with success.
      * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
      * unexpected reply message has been received.

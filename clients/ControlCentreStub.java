@@ -76,6 +76,7 @@ public class ControlCentreStub implements ControlCentreInterface {
      * Stub entity to represent the will of a {@link Spectator} to Wait for the Next Race to start on
      * the {@link hippodrome.ControlCentre}.
      *
+     * @return a boolean representing whether if the next race has begun.
      * @throws InterruptedException if a connection could not be established with success.
      * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
      * unexpected reply message has been received.
@@ -152,6 +153,7 @@ public class ControlCentreStub implements ControlCentreInterface {
      * Stub entity to represent the will of a {@link Broker} to Report the Results to the {@link Spectator}s on
      * the {@link hippodrome.ControlCentre}.
      *
+     * @return the int identification of the winner of the race.
      * @throws InterruptedException if a connection could not be established with success.
      * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
      * unexpected reply message has been received.
