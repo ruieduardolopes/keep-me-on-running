@@ -1,10 +1,8 @@
 /**
  * Provides the classes necessary to represent any messages to be shared between entities and hippodrome regions.
  *
- * Its contents are a {@link clients.BettingCentreStub}, a
- * {@link clients.ControlCentreStub}, a {@link clients.PaddockStub},
- * a {@link clients.GeneralInformationRepositoryStub}, a {@link clients.RacingTrackStub}
- * and a {@link clients.StableStub}.
+ * Its contents are a {@link communications.Message}, a
+ * {@link communications.MessageType} and a {@link communications.UnexpectedReplyTypeException}.
  *
  * @author Hugo Fragata
  * @author Rui Lopes
