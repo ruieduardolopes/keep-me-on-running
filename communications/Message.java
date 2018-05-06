@@ -37,8 +37,7 @@ public class Message implements Serializable {
                 this.value = value;
                 break;
             default:
-                // TODO : Handle this case
-                break;
+                throw new IllegalArgumentException();
         }
     }
 
@@ -103,8 +102,7 @@ public class Message implements Serializable {
                 winner = value;
                 break;
             default:
-                // TODO : Handle this case
-                break;
+                throw new IllegalArgumentException();
         }
     }
 
@@ -148,8 +146,7 @@ public class Message implements Serializable {
                 horsePosition = value2;
                 break;
             default:
-                // TODO : Handle this case
-                break;
+                throw new IllegalArgumentException();
         }
     }
 
@@ -162,8 +159,7 @@ public class Message implements Serializable {
                 horseID = value3;
                 break;
             default:
-                // TODO : Handle this case
-                break;
+                throw new IllegalArgumentException();
         }
     }
 
