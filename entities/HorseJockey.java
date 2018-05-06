@@ -15,7 +15,7 @@ import lib.logging.Logger;
  * @see Broker
  * @see Spectator
  * @since 0.1
- * @version 1.1
+ * @version 2.0
  */
 public class HorseJockey extends Thread {
 
@@ -88,7 +88,6 @@ public class HorseJockey extends Thread {
      */
     public synchronized void setHorseJockeyState(HorseJockeyState state) {
         this.state = state;
-        //repository.setHorseJockeyStatus(identification, state);
     }
 
     /**

@@ -11,8 +11,7 @@
  * @author Hugo Fragata
  * @author Rui Lopes
  * @see hippodrome
- * @see stage
  * @since 0.1
- * @version 1.1
+ * @version 2.0
  */
 package entities;

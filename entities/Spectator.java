@@ -17,7 +17,7 @@ import java.util.Random;
  * @see Broker
  * @see HorseJockey
  * @since 0.1
- * @version 1.1
+ * @version 2.0
  */
 public class Spectator extends Thread {
     /**
@@ -88,7 +88,6 @@ public class Spectator extends Thread {
      */
     public synchronized void setSpectatorState(SpectatorState state) {
         this.state = state;
-        //repository.setSpectatorStatus(this.identification, state);
     }
 
     /**
@@ -109,6 +108,11 @@ public class Spectator extends Thread {
         return money;
     }
 
+    /**
+     * Chooses a bet proportion randomly.
+     *
+     * @return a randomly generated bet.
+     */
     private int bet() {
         double[] portion = {0.25, 0.375, 0.0625};
         Random random = new Random();
@@ -130,6 +134,11 @@ public class Spectator extends Thread {
         return value;
     }
 
+    /**
+     * Send request to shutdown the hippodrome regions, since anything more is needed after then.
+     *
+     * @throws InterruptedException if the communication channel cannot be used.
+     */
     private void shutdown() throws InterruptedException {
         try {
             bettingCentre.shutdown();

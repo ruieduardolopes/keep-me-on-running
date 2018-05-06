@@ -10,7 +10,7 @@ import hippodrome.Paddock;
  * @author Rui Lopes
  * @see HorseJockey#run()
  * @since 0.1
- * @version 0.1
+ * @version 2.0
  */
 public enum HorseJockeyState {
     /**
