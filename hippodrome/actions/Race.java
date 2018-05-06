@@ -11,7 +11,7 @@ import static hippodrome.actions.RaceConfiguration.TRACK_DISTANCE_MIN_BOUND;
  * @author Hugo Fragata
  * @author Rui Lopes
  * @since 0.1
- * @version 1.1
+ * @version 2.0
  */
 public class Race implements Serializable {
     /**

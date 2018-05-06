@@ -6,7 +6,7 @@ package hippodrome.actions;
  * @author Hugo Fragata
  * @author Rui Lopes
  * @since 0.1
- * @version 1.1
+ * @version 2.0
  */
 public class Bet {
     /**
