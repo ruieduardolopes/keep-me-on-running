@@ -6,6 +6,6 @@
  * @author Rui Lopes
  * @see hippodrome.actions
  * @since 0.1
- * @version 1.1
+ * @version 2.0
  */
 package hippodrome.rollfilm;
