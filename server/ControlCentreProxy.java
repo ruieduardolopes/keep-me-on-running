@@ -59,8 +59,7 @@ public class ControlCentreProxy implements Server {
                 reply = new Message(MessageType.OK);
                 break;
             default:
-                // TODO : handle this case
-                break;
+                throw new IllegalArgumentException();
         }
         return reply;
     }

@@ -93,9 +93,7 @@ public class GeneralInformationRepositoryProxy implements Server {
                 reply = new Message(MessageType.OK);
                 break;
             default:
-                // TODO : handle this case
-                System.out.print("AHEHF"+message.getType());
-                break;
+                throw new IllegalArgumentException();
         }
         return reply;
     }

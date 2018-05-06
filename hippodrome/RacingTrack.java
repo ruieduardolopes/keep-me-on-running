@@ -48,7 +48,7 @@ public class RacingTrack implements RacingTrackInterface {
     public static RacingTrack getInstance() throws Exception {
         try {
             if (instance == null) {
-                instance = new RacingTrack(new Race(NUMBER_OF_TRACKS, identification, generateDistance())); // TODO : fill with new race identification and distance
+                instance = new RacingTrack(new Race(NUMBER_OF_TRACKS, identification, generateDistance()));
             }
             return instance;
         } catch (Exception e) {
