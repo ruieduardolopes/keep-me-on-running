@@ -91,7 +91,7 @@ public class ServiceProviderAgent extends Thread {
         try {
             reply = server.processAndAnswerRequest(message);
         } catch (Exception e) {
-            // TODO : Handle this exception
+            throw new IllegalArgumentException();
         }
         switch (reply.getType()) {
             case REPLY_CONTROL_CENTRE_SUMMON_HORSES_TO_PADDOCK:
@@ -142,9 +142,6 @@ public class ServiceProviderAgent extends Thread {
             case REPLY_PADDOCK_GO_CHECK_HORSES_WITH_LAST_SPECTATOR:
                 reply.setSpectatorState(spectatorState);
                 break;
-            default:
-                // TODO : handle this case
-                break;
         }
         Logger.printDebug("%s",reply.getType());
         connection.writeObject(reply);
@@ -173,7 +170,7 @@ public class ServiceProviderAgent extends Thread {
                 index = 5;
                 break;
             default:
-                // TODO: handle this case
+                throw new IllegalArgumentException();
         }
         if (index == -1) {
             return false;
