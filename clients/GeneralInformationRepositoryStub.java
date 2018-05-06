@@ -7,16 +7,30 @@ import entities.BrokerState;
 import entities.HorseJockeyState;
 import entities.SpectatorState;
 import hippodrome.GeneralInformationRepositoryInterface;
-import hippodrome.rollfilm.UnknownHorseJockeyException;
-import hippodrome.rollfilm.UnknownSpectatorException;
 import lib.communication.ClientCom;
 import lib.logging.Logger;
-
 import static configurations.ServerConfigurations.GENERAL_INFORMATION_REPOSITORY_HOST;
 import static configurations.ServerConfigurations.GENERAL_INFORMATION_REPOSITORY_PORT;
 import static configurations.ServerConfigurations.GENERAL_INFORMATION_REPOSITORY_TIME_TO_SLEEP;
 
+/**
+ * Representation of a place where the {@link entities} log their state transitions.
+ *
+ * @author Hugo Fragata
+ * @author Rui Lopes
+ * @since 2.0
+ * @version 2.0
+ */
 public class GeneralInformationRepositoryStub implements GeneralInformationRepositoryInterface {
+
+    /**
+     * Stub entity to represent the will of the {@link entities.Broker} to issue a New Snapshot on
+     * the {@link hippodrome.GeneralInformationRepository}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public void newSnapshot(boolean nullable) throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -30,6 +44,14 @@ public class GeneralInformationRepositoryStub implements GeneralInformationRepos
         connection.close();
     }
 
+    /**
+     * Stub entity to represent the will of the {@link hippodrome.RacingTrack} to issue a New Race Number on
+     * the {@link hippodrome.GeneralInformationRepository}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public void setRaceNumber(int number) throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -43,6 +65,14 @@ public class GeneralInformationRepositoryStub implements GeneralInformationRepos
         connection.close();
     }
 
+    /**
+     * Stub entity to represent the will of the {@link hippodrome.RacingTrack} to issue a New Race Distance on
+     * the {@link hippodrome.GeneralInformationRepository}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public void setRaceDistance(int distance) throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -56,6 +86,16 @@ public class GeneralInformationRepositoryStub implements GeneralInformationRepos
         connection.close();
     }
 
+    /**
+     * Stub entity to represent the will of the {@link entities.Broker},{@link hippodrome.BettingCentre}
+     * and {@link hippodrome.ControlCentre}
+     * to issue a New {@link entities.BrokerState} on
+     * the {@link hippodrome.GeneralInformationRepository}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public void setBrokerStatus(BrokerState status) throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -69,6 +109,16 @@ public class GeneralInformationRepositoryStub implements GeneralInformationRepos
         connection.close();
     }
 
+    /**
+     * Stub entity to represent the will of the {@link entities.Spectator},{@link hippodrome.BettingCentre},
+     * {@link hippodrome.ControlCentre} and {@link hippodrome.Paddock}
+     * to issue a New {@link entities.SpectatorState} on
+     * the {@link hippodrome.GeneralInformationRepository}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public void setSpectatorStatus(int spectatorId, SpectatorState status) throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -82,6 +132,14 @@ public class GeneralInformationRepositoryStub implements GeneralInformationRepos
         connection.close();
     }
 
+    /**
+     * Stub entity to represent the will of the {@link entities.Spectator} to Set its Amount of Money on
+     * the {@link hippodrome.GeneralInformationRepository}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public void setSpectatorAmountOfMoney(int spectatorId, int amount) throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -95,6 +153,14 @@ public class GeneralInformationRepositoryStub implements GeneralInformationRepos
         connection.close();
     }
 
+    /**
+     * Stub entity to represent the will of the {@link entities.Spectator} to Set its Bet Selection of Money on
+     * the {@link hippodrome.GeneralInformationRepository}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public void setSpectatorBetSelection(int spectatorId, int selection) throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -108,6 +174,14 @@ public class GeneralInformationRepositoryStub implements GeneralInformationRepos
         connection.close();
     }
 
+    /**
+     * Stub entity to represent the will of the {@link entities.Spectator} to Set its Bet Amount of Money on
+     * the {@link hippodrome.GeneralInformationRepository}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public void setSpectatorBetAmount(int spectatorId, int bet) throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -121,6 +195,16 @@ public class GeneralInformationRepositoryStub implements GeneralInformationRepos
         connection.close();
     }
 
+    /**
+     * Stub entity to represent the will of the {@link entities.HorseJockey},{@link hippodrome.Stable},
+     * {@link hippodrome.ControlCentre}, {@link hippodrome.RacingTrack} and {@link hippodrome.Paddock}
+     * to issue a New {@link entities.HorseJockeyState} on
+     * the {@link hippodrome.GeneralInformationRepository}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public void setHorseJockeyStatus(int horseJockeyId, HorseJockeyState status) throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -134,6 +218,14 @@ public class GeneralInformationRepositoryStub implements GeneralInformationRepos
         connection.close();
     }
 
+    /**
+     * Stub entity to represent the will of the {@link entities.HorseJockey} to Set its Ability on
+     * the {@link hippodrome.GeneralInformationRepository}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public void setHorseJockeyAbility(int horseJockeyId, int ability) throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -147,6 +239,14 @@ public class GeneralInformationRepositoryStub implements GeneralInformationRepos
         connection.close();
     }
 
+    /**
+     * Stub entity to represent the will of the {@link entities.HorseJockey} to Set its Probability to Win on
+     * the {@link hippodrome.GeneralInformationRepository}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public void setHorseJockeyProbabilityToWin(int horseJockeyId, int probability) throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -160,6 +260,14 @@ public class GeneralInformationRepositoryStub implements GeneralInformationRepos
         connection.close();
     }
 
+    /**
+     * Stub entity to represent the will of the {@link entities.HorseJockey} to Set its Number of Increments performed on
+     * the {@link hippodrome.GeneralInformationRepository}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public void setHorseJockeyNumberOfIncrementsDid(int horseJockeyId, int iterations) throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -173,6 +281,14 @@ public class GeneralInformationRepositoryStub implements GeneralInformationRepos
         connection.close();
     }
 
+    /**
+     * Stub entity to represent the will of the {@link entities.HorseJockey} to Get its Number of Increments performed on
+     * the {@link hippodrome.GeneralInformationRepository}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public int getHorseJockeyNumberOfIncrementsDid(int horseJockeyId) throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -183,6 +299,14 @@ public class GeneralInformationRepositoryStub implements GeneralInformationRepos
         return messageReceived.getIncrements();
     }
 
+    /**
+     * Stub entity to represent the will of the {@link entities.HorseJockey} to Set its Position on the {@link hippodrome.RacingTrack} on
+     * the {@link hippodrome.GeneralInformationRepository}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public void setHorseJockeyPositionOnTrack(int horseJockeyId, int position) throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -196,6 +320,14 @@ public class GeneralInformationRepositoryStub implements GeneralInformationRepos
         connection.close();
     }
 
+    /**
+     * Stub entity to represent the will of the {@link entities.HorseJockey} to Set its Final Position on the {@link hippodrome.RacingTrack} on
+     * the {@link hippodrome.GeneralInformationRepository}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public void setHorseJockeyFinalStandPosition(int horseJockeyId, int position) throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -209,6 +341,14 @@ public class GeneralInformationRepositoryStub implements GeneralInformationRepos
         connection.close();
     }
 
+    /**
+     * Stub entity to represent the will of the {@link entities.HorseJockey} to wait For All the Horses on
+     * the {@link hippodrome.GeneralInformationRepository}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public void setWereWaitingTheHorses(boolean value) throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -222,6 +362,13 @@ public class GeneralInformationRepositoryStub implements GeneralInformationRepos
         connection.close();
     }
 
+    /**
+     * Stub entity to represent the get Race Number provided by the {@link hippodrome.GeneralInformationRepository}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public int getRaceNumber() throws InterruptedException {
         ClientCom connection = createConnectionWithServer();
@@ -232,6 +379,13 @@ public class GeneralInformationRepositoryStub implements GeneralInformationRepos
         return messageReceived.getRaceNumber();
     }
 
+    /**
+     * Stub entity to represent the get Current Race Distance provided by the {@link hippodrome.GeneralInformationRepository}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public int getCurrentRaceDistance() throws InterruptedException {
         ClientCom connection = createConnectionWithServer();
@@ -242,6 +396,13 @@ public class GeneralInformationRepositoryStub implements GeneralInformationRepos
         return messageReceived.getRaceDistance();
     }
 
+    /**
+     * Stub entity to represent the get if Race the is Over provided by the {@link hippodrome.GeneralInformationRepository}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     * unexpected reply message has been received.
+     */
     @Override
     public void raceIsOver() throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
@@ -255,6 +416,13 @@ public class GeneralInformationRepositoryStub implements GeneralInformationRepos
         connection.close();
     }
 
+    /**
+     * Stub entity to shutdown the premises of the {@link hippodrome.GeneralInformationRepository}.
+     *
+     * @throws InterruptedException if a connection could not be established with success.
+     * @throws RuntimeException (more precisely a {@link UnexpectedReplyTypeException}) if a
+     *         unexpected reply message has been received.
+     */
     public void shutdown() throws InterruptedException, RuntimeException {
         ClientCom connection = createConnectionWithServer();
         Message messageToSend = new Message(MessageType.GENERAL_INFORMATION_REPOSITORY_SHUTDOWN);
@@ -269,6 +437,12 @@ public class GeneralInformationRepositoryStub implements GeneralInformationRepos
         connection.close();
     }
 
+    /**
+     * Creates a connection to the correspondent server (meaning the {@link hippodrome.GeneralInformationRepository}).
+     *
+     * @return the communication with the server, already defined over a {@link ClientCom} object.
+     * @throws InterruptedException if a connection could not be established with success.
+     */
     private ClientCom createConnectionWithServer() throws InterruptedException {
         ClientCom connection = new ClientCom(GENERAL_INFORMATION_REPOSITORY_HOST, GENERAL_INFORMATION_REPOSITORY_PORT);
         while (!connection.open()) {
