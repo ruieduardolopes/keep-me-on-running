@@ -10,7 +10,8 @@ import static configurations.SimulationConfigurations.*;
 public class ClientLauncher {
     public static void main(String[] args) {
         if (args.length != 1) {
-            // TODO: handle this case
+            printUsage();
+            System.exit(1);
         }
         try {
             switch (args[0]) {
@@ -20,7 +21,9 @@ public class ClientLauncher {
                     try {
                         broker.join();
                     } catch (InterruptedException ie) {
-                        // TODO : catch this exception
+                        Logger.printError("An exception has been thrown... catch it man! Below there is some information about it");
+                        ie.printStackTrace();
+                        System.exit(2);
                     }
                     break;
                 case "spectators" :
@@ -34,7 +37,9 @@ public class ClientLauncher {
                             spectators[i].join();
                         }
                     } catch (InterruptedException ie) {
-                        // TODO : catch this exception
+                        Logger.printError("An exception has been thrown... catch it man! Below there is some information about it");
+                        ie.printStackTrace();
+                        System.exit(3);
                     }
                     break;
                 case "horses" :
@@ -50,18 +55,29 @@ public class ClientLauncher {
                                 Logger.printInformation("The pair Horse/Jockey number %d deceased.",i);
                             }
                         } catch (InterruptedException ie) {
-                            // TODO : catch this exception
+                            Logger.printError("An exception has been thrown... catch it man! Below there is some information about it");
+                            ie.printStackTrace();
+                            System.exit(4);
                         }
                     }
                     break;
                 default :
-                    // TODO : handle this case
-                    break;
+                    printUsage();
+                    System.exit(5);
             }
         } catch (Exception e) {
             Logger.printError("An exception has been thrown... catch it man! Below there is some information about it");
             e.printStackTrace();
         }
+    }
+
+    private static void printUsage() {
+        System.err.println("Invalid arguments.");
+        System.err.println("Usage: java -classpath \"project-folder:genclass-jar-folder\" ClientLauncher <entity>");
+        System.err.println("Entities:");
+        System.err.println("  - broker          (Broker)" +
+                "  - spectator       (Spectators)" +
+                "  - horses          (Pairs Horse/Jockey)");
     }
 
     /**
