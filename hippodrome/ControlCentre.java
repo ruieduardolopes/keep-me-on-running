@@ -15,7 +15,7 @@ import static configurations.SimulationConfigurations.*;
  * @author Hugo Fragata
  * @author Rui Lopes
  * @since 0.1
- * @version 1.1
+ * @version 2.0
  */
 public class ControlCentre implements ControlCentreInterface {
     /**
@@ -31,7 +31,11 @@ public class ControlCentre implements ControlCentreInterface {
         this.repository = new GeneralInformationRepositoryStub();
     }
 
-    /** TODO : Documentation */
+    /**
+     * Get a singleton instance of a Control Centre.
+     *
+     * @return an instance of the Control Centre.
+     */
     public static ControlCentre getInstance() {
         if (instance == null) {
             instance = new ControlCentre(NUMBER_OF_PAIRS_HORSE_JOCKEY);
@@ -277,8 +281,13 @@ public class ControlCentre implements ControlCentreInterface {
      */
     private int raceWinner = -1;
 
+    /**
+     * An entity which represents the repository.
+     */
     private GeneralInformationRepositoryStub repository;
 
-    /** TODO : documentation */
+    /**
+     * The created instance of this class
+     */
     private static ControlCentre instance;
 }

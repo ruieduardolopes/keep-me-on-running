@@ -1,14 +1,12 @@
 package communications;
 
 /**
- * This exception exists to be thrown when a file cannot be accessed with
- * the current permissions (by the current user) or something's gone wrong
- * manipulating it.
+ * This exception exists to be thrown when a reply cannot be recognized.
  *
  * @author Hugo Fragata
  * @author Rui Lopes
- * @version 1.1
- * @since 0.1
+ * @version 2.0
+ * @since 2.0
  */
 public class UnexpectedReplyTypeException extends RuntimeException {
     /**

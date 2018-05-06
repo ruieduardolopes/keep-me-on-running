@@ -1,5 +1,13 @@
 package configurations;
 
+/**
+ * Definition of the configurations for the simulation (also known as server).
+ *
+ * @author Hugo Fragata
+ * @author Rui Lopes
+ * @since 2.0
+ * @version 2.0
+ */
 public class SimulationConfigurations {
     /**
      * Number of Pairs Horse/Jockey to compete on the simulation.

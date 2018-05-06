@@ -6,6 +6,17 @@ import entities.SpectatorState;
 import hippodrome.rollfilm.UnknownHorseJockeyException;
 import hippodrome.rollfilm.UnknownSpectatorException;
 
+/**
+ * Interface of the class which represents an archive of all hippodrome's actions
+ * and memorabilia. This item allows the entities playing at an
+ * hippodrome to collect information about the various statuses
+ * and snapshots all the instants while something is happening.
+ *
+ * @author Hugo Fragata
+ * @author Rui Lopes
+ * @since 2.0
+ * @version 2.0
+ */
 public interface GeneralInformationRepositoryInterface {
     void newSnapshot(boolean nullable) throws InterruptedException;
 

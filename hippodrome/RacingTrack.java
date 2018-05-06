@@ -19,7 +19,7 @@ import static configurations.SimulationConfigurations.*;
  * @author Hugo Fragata
  * @author Rui Lopes
  * @since 0.1
- * @version 1.1
+ * @version 2.0
  */
 public class RacingTrack implements RacingTrackInterface {
 
@@ -45,6 +45,11 @@ public class RacingTrack implements RacingTrackInterface {
         }
     }
 
+    /**
+     * Get a singleton instance of a General Repository of Information.
+     *
+     * @return an instance of the General Repository of Information.
+     */
     public static RacingTrack getInstance() throws Exception {
         try {
             if (instance == null) {
@@ -184,12 +189,21 @@ public class RacingTrack implements RacingTrackInterface {
         }
     }
 
-    /** TODO : documentation */
+    /**
+     * Generate a distance for a race.
+     *
+     * @return a distance of a race.
+     */
     private static int generateDistance() {
         return (int)(Math.random() * (TRACK_DISTANCE_MAX_BOUND - TRACK_DISTANCE_MIN_BOUND)) + TRACK_DISTANCE_MIN_BOUND;
     }
 
-    /** TODO : documentation */
+    /**
+     * Set a new Race instance.
+     *
+     * @param race the new Race.
+     * @throws InterruptedException if the communication channel is busy and cannot be open.
+     */
     public void setRace(Race race) throws InterruptedException {
         this.race = race;
         try {
@@ -201,7 +215,9 @@ public class RacingTrack implements RacingTrackInterface {
         }
     }
 
-    /** TODO : documentation */
+    /**
+     * The identification of a race.
+     */
     private static int identification = 0;
 
     /**
@@ -261,7 +277,9 @@ public class RacingTrack implements RacingTrackInterface {
      */
     private GeneralInformationRepositoryStub repository;
 
-    /** TODO : documentation */
+    /**
+     * The created instance of this class
+     */
     private static RacingTrack instance;
 }
 

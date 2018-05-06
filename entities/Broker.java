@@ -16,7 +16,7 @@ import hippodrome.actions.Race;
  * @see Spectator
  * @see HorseJockey
  * @since 0.1
- * @version 1.1
+ * @version 2.0
  */
 public class Broker extends Thread {
 
@@ -89,7 +89,6 @@ public class Broker extends Thread {
      */
     public synchronized void setBrokerState(BrokerState state) {
         this.state = state;
-        //repository.setBrokerStatus(state);
     }
 
     /**
@@ -104,6 +103,11 @@ public class Broker extends Thread {
         }
     }
 
+    /**
+     * Send request to shutdown the hippodrome regions, since anything more is needed after then.
+     *
+     * @throws InterruptedException if the communication channel cannot be used.
+     */
     private void shutdown() throws InterruptedException {
         try {
             bettingCentre.shutdown();
