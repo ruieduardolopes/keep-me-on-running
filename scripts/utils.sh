@@ -132,7 +132,8 @@ print_execserver_usage () {
 }
 
 killscenario () {
-    for item in "ps aux | grep java | grep sd0402 | awk '{ print $2 }'| column"; do
+    tokill=ps aux | grep java | grep sd0402 | awk '{ print $2 }'| column
+    for item in $tokill; do
         kill $item
     done
 }
