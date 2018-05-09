@@ -104,7 +104,7 @@ print_compile_code_usage () {
 # Method to execute the server.
 #
 execserver () {
-    if [[ "$#" -eq 1 && "$1" -eq '-h' ]]; then
+    if [ "$#" -eq 1 ] && [ "$1" -eq '-h' ]; then
         print_execserver_usage
         return 0
     fi
@@ -134,7 +134,7 @@ print_execserver_usage () {
 # Method to execute the client.
 #
 execclient () {
-    if [[ "$1" -eq '-h' && "$#" -eq 1 ]]; then
+    if [ "$#" -eq 1 ] && [ "$1" -eq '-h' ]; then
         print_execclient_usage
         return 0
     fi
