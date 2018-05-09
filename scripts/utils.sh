@@ -104,7 +104,7 @@ print_compile_code_usage () {
 # Method to execute the server.
 #
 execserver () {
-    if [[ "$1" -eq '-h' && "$#" -eq 1 ]]; then
+    if [[ "$#" -eq 1 && "$1" -eq '-h' ]]; then
         print_execserver_usage
         return 0
     fi
