@@ -30,15 +30,15 @@ preparehippodrome () {
 }
 
 execute_code () {
-    ssh sd0402@l040101-ws01.ua.pt 'execserver general-repo'
-    ssh sd0402@l040101-ws02.ua.pt 'execserver betting-centre'
-    ssh sd0402@l040101-ws03.ua.pt 'execserver control-centre'
-    ssh sd0402@l040101-ws04.ua.pt 'execserver paddock'
-    ssh sd0402@l040101-ws05.ua.pt 'execserver racing-track'
-    ssh sd0402@l040101-ws06.ua.pt 'execserver stable'
-    ssh sd0402@l040101-ws07.ua.pt 'execclient broker'
-    ssh sd0402@l040101-ws08.ua.pt 'execclient spectators'
-    ssh sd0402@l040101-ws09.ua.pt 'execclient horses'
+    ssh sd0402@l040101-ws01.ua.pt 'execserver general-repo' &
+    ssh sd0402@l040101-ws02.ua.pt 'execserver betting-centre' &
+    ssh sd0402@l040101-ws03.ua.pt 'execserver control-centre' &
+    ssh sd0402@l040101-ws04.ua.pt 'execserver paddock' &
+    ssh sd0402@l040101-ws05.ua.pt 'execserver racing-track' &
+    ssh sd0402@l040101-ws06.ua.pt 'execserver stable' &
+    ssh sd0402@l040101-ws07.ua.pt 'execclient broker' &
+    ssh sd0402@l040101-ws08.ua.pt 'execclient spectators' &
+    ssh sd0402@l040101-ws09.ua.pt 'execclient horses' 
 }
 
 deployall () {
