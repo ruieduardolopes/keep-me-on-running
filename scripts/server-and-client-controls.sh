@@ -19,23 +19,23 @@ chhost () {
     fi
 
     if [ "$1" = 'betting-centre' ]; then
-        sed -ie 's/BETTING_CENTRE_HOST.*/BETTING_CENTRE_HOST = "$2";/g' $WORK_PATH/configurations/ServerConfigurations.java
+        sed -ie 's/BETTING_CENTRE_HOST.*/BETTING_CENTRE_HOST = '$2';/g' $WORK_PATH/configurations/ServerConfigurations.java
     elif [ "$1" = 'control-centre' ]; then
-        sed -ie 's/CONTROL_CENTRE_HOST.*/CONTROL_CENTRE_HOST = "$2";/g' $WORK_PATH/configurations/ServerConfigurations.java
+        sed -ie 's/CONTROL_CENTRE_HOST.*/CONTROL_CENTRE_HOST = '$2';/g' $WORK_PATH/configurations/ServerConfigurations.java
     elif [ "$1" = 'general-repo' ]; then
-        sed -ie 's/GENERAL_INFORMATION_REPOSITORY_HOST.*/GENERAL_INFORMATION_REPOSITORY_HOST = "$2";/g' $WORK_PATH/configurations/ServerConfigurations.java
+        sed -ie 's/GENERAL_INFORMATION_REPOSITORY_HOST.*/GENERAL_INFORMATION_REPOSITORY_HOST = '$2';/g' $WORK_PATH/configurations/ServerConfigurations.java
     elif [ "$1" = 'paddock' ]; then
-        sed -ie 's/PADDOCK_HOST.*/PADDOCK_HOST = "$2";/g' $WORK_PATH/configurations/ServerConfigurations.java
+        sed -ie 's/PADDOCK_HOST.*/PADDOCK_HOST = '$2';/g' $WORK_PATH/configurations/ServerConfigurations.java
     elif [ "$1" = 'racing-track' ]; then
-        sed -ie 's/RACING_TRACK_HOST.*/RACING_TRACK_HOST = "$2";/g' $WORK_PATH/configurations/ServerConfigurations.java
+        sed -ie 's/RACING_TRACK_HOST.*/RACING_TRACK_HOST = '$2';/g' $WORK_PATH/configurations/ServerConfigurations.java
     elif [ "$1" = 'stable' ]; then
-        sed -ie 's/STABLE_HOST.*/STABLE_HOST = "$2";/g' $WORK_PATH/configurations/ServerConfigurations.java
+        sed -ie 's/STABLE_HOST.*/STABLE_HOST = '$2';/g' $WORK_PATH/configurations/ServerConfigurations.java
     elif [ "$1" = 'broker' ]; then
-        sed -ie 's/BROKER_HOST.*/BROKER_HOST = "$2";/g' $WORK_PATH/configurations/ClientConfigurations.java
+        sed -ie 's/BROKER_HOST.*/BROKER_HOST = '$2';/g' $WORK_PATH/configurations/ClientConfigurations.java
     elif [ "$1" = 'spectators' ]; then
-        sed -ie 's/SPECTATORS_HOST.*/SPECTATORS_HOST = "$2";/g' $WORK_PATH/configurations/ClientConfigurations.java
+        sed -ie 's/SPECTATORS_HOST.*/SPECTATORS_HOST = '$2';/g' $WORK_PATH/configurations/ClientConfigurations.java
     elif [ "$1" = 'horses' ]; then
-        sed -ie 's/HORSES_HOST.*/HORSES_HOST = "$2";/g' $WORK_PATH/configurations/ClientConfigurations.java
+        sed -ie 's/HORSES_HOST.*/HORSES_HOST = '$2';/g' $WORK_PATH/configurations/ClientConfigurations.java
     else
         echo "Invalid hippodrome service or entity. Please try one of the following ones"
         print_chhost_usage
@@ -83,23 +83,23 @@ chport () {
     fi
 
     if [ "$1" = 'betting-centre' ]; then
-        sed -ie 's/BETTING_CENTRE_PORT.*/BETTING_CENTRE_PORT = $2;/g' $WORK_PATH/configurations/ServerConfigurations.java
+        sed -ie 's/BETTING_CENTRE_PORT.*/BETTING_CENTRE_PORT = '$2';/g' $WORK_PATH/configurations/ServerConfigurations.java
     elif [ "$1" = 'control-centre' ]; then
-        sed -ie 's/CONTROL_CENTRE_PORT.*/CONTROL_CENTRE_PORT = $2;/g' $WORK_PATH/configurations/ServerConfigurations.java
+        sed -ie 's/CONTROL_CENTRE_PORT.*/CONTROL_CENTRE_PORT = '$2';/g' $WORK_PATH/configurations/ServerConfigurations.java
     elif [ "$1" = 'general-repo' ]; then
-        sed -ie 's/GENERAL_INFORMATION_REPOSITORY_PORT.*/GENERAL_INFORMATION_REPOSITORY_PORT = $2;/g' $WORK_PATH/configurations/ServerConfigurations.java
+        sed -ie 's/GENERAL_INFORMATION_REPOSITORY_PORT.*/GENERAL_INFORMATION_REPOSITORY_PORT = '$2';/g' $WORK_PATH/configurations/ServerConfigurations.java
     elif [ "$1" = 'paddock' ]; then
-        sed -ie 's/PADDOCK_PORT.*/PADDOCK_PORT = $2;/g' $WORK_PATH/configurations/ServerConfigurations.java
+        sed -ie 's/PADDOCK_PORT.*/PADDOCK_PORT = '$2';/g' $WORK_PATH/configurations/ServerConfigurations.java
     elif [ "$1" = 'racing-track' ]; then
-        sed -ie 's/RACING_TRACK_PORT.*/RACING_TRACK_PORT = $2;/g' $WORK_PATH/configurations/ServerConfigurations.java
+        sed -ie 's/RACING_TRACK_PORT.*/RACING_TRACK_PORT = '$2';/g' $WORK_PATH/configurations/ServerConfigurations.java
     elif [ "$1" = 'stable' ]; then
-        sed -ie 's/STABLE_PORT.*/STABLE_PORT = $2;/g' $WORK_PATH/configurations/ServerConfigurations.java
+        sed -ie 's/STABLE_PORT.*/STABLE_PORT = '$2';/g' $WORK_PATH/configurations/ServerConfigurations.java
     elif [ "$1" = 'broker' ]; then
-        sed -ie 's/BROKER_PORT.*/BROKER_PORT = $2;/g' $WORK_PATH/configurations/ClientConfigurations.java
+        sed -ie 's/BROKER_PORT.*/BROKER_PORT = '$2';/g' $WORK_PATH/configurations/ClientConfigurations.java
     elif [ "$1" = 'spectators' ]; then
-        sed -ie 's/SPECTATORS_PORT.*/SPECTATORS_PORT = $2;/g' $WORK_PATH/configurations/ClientConfigurations.java
+        sed -ie 's/SPECTATORS_PORT.*/SPECTATORS_PORT = '$2';/g' $WORK_PATH/configurations/ClientConfigurations.java
     elif [ "$1" = 'horses' ]; then
-        sed -ie 's/HORSES_PORT.*/HORSES_PORT = $2;/g' $WORK_PATH/configurations/ClientConfigurations.java
+        sed -ie 's/HORSES_PORT.*/HORSES_PORT = '$2';/g' $WORK_PATH/configurations/ClientConfigurations.java
     else
         echo "Invalid hippodrome service or entity. Please try one of the following ones"
         print_chport_usage
@@ -147,17 +147,17 @@ chsleeptime () {
     fi
 
     if [ "$1" = 'betting-centre' ]; then
-        sed -ie 's/BETTING_CENTRE_TIME_TO_SLEEP.*/BETTING_CENTRE_TIME_TO_SLEEP = $2;/g' $WORK_PATH/configurations/ServerConfigurations.java
+        sed -ie 's/BETTING_CENTRE_TIME_TO_SLEEP.*/BETTING_CENTRE_TIME_TO_SLEEP = '$2';/g' $WORK_PATH/configurations/ServerConfigurations.java
     elif [ "$1" = 'control-centre' ]; then
-        sed -ie 's/CONTROL_CENTRE_TIME_TO_SLEEP.*/CONTROL_CENTRE_TIME_TO_SLEEP = $2;/g' $WORK_PATH/configurations/ServerConfigurations.java
+        sed -ie 's/CONTROL_CENTRE_TIME_TO_SLEEP.*/CONTROL_CENTRE_TIME_TO_SLEEP = '$2';/g' $WORK_PATH/configurations/ServerConfigurations.java
     elif [ "$1" = 'general-repo' ]; then
-        sed -ie 's/GENERAL_INFORMATION_REPOSITORY_TIME_TO_SLEEP.*/GENERAL_INFORMATION_REPOSITORY_TIME_TO_SLEEP = $2;/g' $WORK_PATH/configurations/ServerConfigurations.java
+        sed -ie 's/GENERAL_INFORMATION_REPOSITORY_TIME_TO_SLEEP.*/GENERAL_INFORMATION_REPOSITORY_TIME_TO_SLEEP = '$2';/g' $WORK_PATH/configurations/ServerConfigurations.java
     elif [ "$1" = 'paddock' ]; then
-        sed -ie 's/PADDOCK_TIME_TO_SLEEP.*/PADDOCK_TIME_TO_SLEEP = $2;/g' $WORK_PATH/configurations/ServerConfigurations.java
+        sed -ie 's/PADDOCK_TIME_TO_SLEEP.*/PADDOCK_TIME_TO_SLEEP = '$2';/g' $WORK_PATH/configurations/ServerConfigurations.java
     elif [ "$1" = 'racing-track' ]; then
-        sed -ie 's/RACING_TRACK_TIME_TO_SLEEP.*/RACING_TRACK_TIME_TO_SLEEP = $2;/g' $WORK_PATH/configurations/ServerConfigurations.java
+        sed -ie 's/RACING_TRACK_TIME_TO_SLEEP.*/RACING_TRACK_TIME_TO_SLEEP = '$2';/g' $WORK_PATH/configurations/ServerConfigurations.java
     elif [ "$1" = 'stable' ]; then
-        sed -ie 's/STABLE_TIME_TO_SLEEP.*/STABLE_TIME_TO_SLEEP = $2;/g' $WORK_PATH/configurations/ServerConfigurations.java
+        sed -ie 's/STABLE_TIME_TO_SLEEP.*/STABLE_TIME_TO_SLEEP = '$2';/g' $WORK_PATH/configurations/ServerConfigurations.java
     else
         echo "Invalid hippodrome service or entity. Please try one of the following ones"
         print_chsleeptime_usage
