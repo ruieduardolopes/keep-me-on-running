@@ -131,6 +131,12 @@ print_execserver_usage () {
     echo "Usage: execserver <hippodrome-region>"
 }
 
+killscenario () {
+    for item in "ps aux | grep java | grep sd0402 | awk '{ print $2 }'| column"; do
+        kill $item
+    done
+}
+
 # Method to execute the client.
 #
 execclient () {

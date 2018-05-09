@@ -31,16 +31,30 @@ preparehippodrome () {
 
 execute_code () {
     ssh sd0402@l040101-ws01.ua.pt 'execserver general-repo' &
+    sleep 2
     ssh sd0402@l040101-ws02.ua.pt 'execserver betting-centre' &
+    sleep 2
     ssh sd0402@l040101-ws03.ua.pt 'execserver control-centre' &
+    sleep 2
     ssh sd0402@l040101-ws04.ua.pt 'execserver paddock' &
+    sleep 2
     ssh sd0402@l040101-ws05.ua.pt 'execserver racing-track' &
+    sleep 2
     ssh sd0402@l040101-ws06.ua.pt 'execserver stable' &
+    sleep 2
     ssh sd0402@l040101-ws07.ua.pt 'execclient broker' &
+    sleep 2
     ssh sd0402@l040101-ws08.ua.pt 'execclient spectators' &
-    ssh sd0402@l040101-ws09.ua.pt 'execclient horses' 
+    sleep 2
+    ssh sd0402@l040101-ws09.ua.pt 'execclient horses'
 }
 
+killallentities () {
+    for node in {01,02,03,04,05,06,07,08,09}; do
+        echo "Clearing execution on machine number $node..."
+        ssh sd0402@l040101-ws$node.ua.pt "killscenario"
+    done
+}
 deployall () {
     git checkout tests
     git merge dev
