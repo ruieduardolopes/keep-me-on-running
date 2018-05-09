@@ -81,7 +81,7 @@ public class ServerCom
    {
       try
       { listeningSocket = new ServerSocket (serverPortNumb);
-        listeningSocket.setSoTimeout(10000); // TODO : socket timeout
+        listeningSocket.setSoTimeout(20000); // TODO : socket timeout
       }
       catch (BindException e)                         // erro fatal --- port ja em uso
       { GenericIO.writelnString (Thread.currentThread ().getName () +
