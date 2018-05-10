@@ -1,5 +1,6 @@
 package hippodrome;
 
+import configurations.SimulationConfigurations;
 import entities.BrokerState;
 import entities.HorseJockeyState;
 import entities.SpectatorState;
@@ -271,7 +272,13 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
     private String printClassicEntitiesLine() {
         String line = "  ";
         switch (brokerStatus) {
-            case "OTE" : line += "OpTE"; break;
+            case "OTE" :
+                if (horseJockeys[0] == null || horseJockeys[1] == null || horseJockeys[2] == null || horseJockeys[3] == null) {
+                    line += "OpTE";
+                } else {
+                    line += "ANR";
+                }
+                break;
             case "ANR" : line += "AnNR"; break;
             case "WFB" : line += "WaFB"; break;
             case "STR" : line += "SuTR"; break;
@@ -316,7 +323,11 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
             }
             line += "  ";
             if (horseJockey.getAbility() == 0) {
-                line += "--";
+                if (raceNumber == 0) {
+                    line += "--";
+                } else {
+                    line += SimulationConfigurations.ABILITY_MAX_BOUND;
+                }
             } else {
                 line += String.format("%2d", horseJockey.getAbility());             /* Len# */
             }
