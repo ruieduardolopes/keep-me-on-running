@@ -198,6 +198,7 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
         line += "\n";
         String raceLine = printClassicRaceLine();
         if (raceLine == null) {
+            file.close();
             return;
         } else {
             line += raceLine;
