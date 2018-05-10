@@ -1,0 +1,33 @@
+# no welcome message and huge scrollback buffer
+defscrollback 5000
+startup_message off
+
+# 256 colors
+attrcolor b ".I"
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+defbce on
+
+# mouse tracking
+mousetrack on
+
+# default windows
+screen -t Repository 1 'echo "Hello"' #'execserver general-repo'
+screen -t Betting-Centre 2 'echo "Hello"' #'execserver betting-centre'
+screen -t Control-Centre 3 'echo "Hello"' #'execserver control-centre'
+screen -t Paddock 4 'echo "Hello"' #'execserver paddock'
+screen -t Racing-Track 5 'echo "Hello"' #'execserver racing-track'
+screen -t Stable 6 'echo "Hello"' #'execserver stable'
+select 0
+bind c screen 1
+bind 0 select 10
+
+# get rid of silly xoff stuff
+bind s split
+
+# layouts
+layout autosave on
+layout new one
+select 1
+layout new two
+select 2
+split
