@@ -196,13 +196,7 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
         String line = "";
         line += printClassicEntitiesLine();
         line += "\n";
-        String raceLine = printClassicRaceLine();
-        if (raceLine == null) {
-            file.close();
-            return;
-        } else {
-            line += raceLine;
-        }
+        line += printClassicRaceLine();
         if (!(line).equals(lastSnapshotLine)) {
             if (!onlyLogOnFile) {
                 GenericIO.writelnString(line);
@@ -426,9 +420,6 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
         String line = "  ";
         if (brokerStatus.matches("OTE|PHATB")) {
             line += "-";
-            if (horseJockeys[0] == null || horseJockeys[1] == null || horseJockeys[2] == null || horseJockeys[3] == null) {
-                return null;
-            }
         } else {
             line += String.format("%1d", raceNumber);                                    /* RN */
         }
@@ -516,6 +507,8 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
      * @param status the current state represented by a {@link BrokerState} enumeration value.
      */
     public synchronized void setBrokerStatus(BrokerState status) {
+        brokerHasUpdatedItself = true;
+        notifyAll();
         brokerStatus = "";
         for (String word : status.name().split("_")) {
             brokerStatus += word.charAt(0);
@@ -606,6 +599,13 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
      * {@code horseJockeys} array.
      */
     public synchronized void setHorseJockeyStatus(int horseJockeyId, HorseJockeyState status) throws UnknownHorseJockeyException {
+        while (!brokerHasUpdatedItself) {
+            try {
+                wait();
+            } catch (InterruptedException ie) {
+                throw new RuntimeException();
+            }
+        }
         try {
             horseJockeys[horseJockeyId].setStatus(status);
         } catch (IndexOutOfBoundsException ioobe) {
@@ -833,4 +833,6 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
      * The created instance of this class
      */
     private static GeneralInformationRepository instance;
+
+    private boolean brokerHasUpdatedItself = false;
 }
