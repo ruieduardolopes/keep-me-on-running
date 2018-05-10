@@ -108,7 +108,7 @@ public class ClientLauncher {
     /**
      * Generate a value for representation of pair Horse/Jockey's ability.
      *
-     * @return a value between 0 and 5 which must be considered as the step
+     * @return a value between 2 and 5 which must be considered as the step
      * of the horse on track, while running.
      */
     private static int generateAbility() {
