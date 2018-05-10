@@ -507,8 +507,6 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
      * @param status the current state represented by a {@link BrokerState} enumeration value.
      */
     public synchronized void setBrokerStatus(BrokerState status) {
-        brokerHasUpdatedItself = true;
-        notifyAll();
         brokerStatus = "";
         for (String word : status.name().split("_")) {
             brokerStatus += word.charAt(0);
@@ -599,13 +597,6 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
      * {@code horseJockeys} array.
      */
     public synchronized void setHorseJockeyStatus(int horseJockeyId, HorseJockeyState status) throws UnknownHorseJockeyException {
-        while (!brokerHasUpdatedItself) {
-            try {
-                wait();
-            } catch (InterruptedException ie) {
-                throw new RuntimeException();
-            }
-        }
         try {
             horseJockeys[horseJockeyId].setStatus(status);
         } catch (IndexOutOfBoundsException ioobe) {
@@ -833,6 +824,4 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
      * The created instance of this class
      */
     private static GeneralInformationRepository instance;
-
-    private boolean brokerHasUpdatedItself = false;
 }
