@@ -196,7 +196,12 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
         String line = "";
         line += printClassicEntitiesLine();
         line += "\n";
-        line += printClassicRaceLine();
+        String raceLine = printClassicRaceLine();
+        if (raceLine == null) {
+            return;
+        } else {
+            line += raceLine;
+        }
         if (!(line).equals(lastSnapshotLine)) {
             if (!onlyLogOnFile) {
                 GenericIO.writelnString(line);
@@ -420,6 +425,9 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
         String line = "  ";
         if (brokerStatus.matches("OTE|PHATB")) {
             line += "-";
+            if (horseJockeys[0] == null || horseJockeys[1] == null || horseJockeys[2] == null || horseJockeys[3] == null) {
+                return null;
+            }
         } else {
             line += String.format("%1d", raceNumber);                                    /* RN */
         }
