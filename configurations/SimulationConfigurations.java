@@ -47,7 +47,7 @@ public class SimulationConfigurations {
     /**
      * Minimum ability of the pairs Horse/Jockey.
      */
-    public static final int ABILITY_MIN_BOUND = 1;
+    public static final int ABILITY_MIN_BOUND = 2;
 
     /**
      * Flag to control if user wants to have colored information about the system's status on the {@code stdout} and

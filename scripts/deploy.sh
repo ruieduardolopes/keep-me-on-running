@@ -36,23 +36,24 @@ preparehippodrome () {
 }
 
 execute_code () {
-    ssh sd0402@l040101-ws01.ua.pt 'execserver general-repo' &
+    ssh sd0402@l040101-ws01.ua.pt 'execserver general-repo > /dev/null' &
     sleep 2
-    ssh sd0402@l040101-ws02.ua.pt 'execserver betting-centre' &
+    ssh sd0402@l040101-ws02.ua.pt 'execserver betting-centre > /dev/null' &
     sleep 2
-    ssh sd0402@l040101-ws03.ua.pt 'execserver control-centre' &
+    ssh sd0402@l040101-ws03.ua.pt 'execserver control-centre > /dev/null' &
     sleep 2
-    ssh sd0402@l040101-ws04.ua.pt 'execserver paddock' &
+    ssh sd0402@l040101-ws04.ua.pt 'execserver paddock > /dev/null' &
     sleep 2
-    ssh sd0402@l040101-ws05.ua.pt 'execserver racing-track' &
+    ssh sd0402@l040101-ws05.ua.pt 'execserver racing-track > /dev/null' &
     sleep 2
-    ssh sd0402@l040101-ws06.ua.pt 'execserver stable' &
+    ssh sd0402@l040101-ws06.ua.pt 'execserver stable > /dev/null' &
     sleep 2
-    ssh sd0402@l040101-ws07.ua.pt 'execclient broker' &
+    ssh sd0402@l040101-ws07.ua.pt 'execclient broker > /dev/null' &
     sleep 2
-    ssh sd0402@l040101-ws08.ua.pt 'execclient spectators' &
+    ssh sd0402@l040101-ws08.ua.pt 'execclient spectators > /dev/null' &
     sleep 2
-    ssh sd0402@l040101-ws09.ua.pt 'execclient horses'
+    ssh sd0402@l040101-ws09.ua.pt 'execclient horses > /dev/null'
+    echo "Execution done"
 }
 
 killallentities () {
@@ -61,6 +62,7 @@ killallentities () {
         ssh sd0402@l040101-ws$node.ua.pt "killscenario"
     done
 }
+
 deployall () {
     git checkout tests
     git merge dev
@@ -69,4 +71,8 @@ deployall () {
     git push origin tests
     preparehippodrome
     execute_code
+}
+
+shlastlog () {
+    ssh sd0402@l040101-ws01.ua.pt 'cat $WORK_PATH/$(ls $WORK_PATH | grep horse-run | tail -n1)' | less
 }
