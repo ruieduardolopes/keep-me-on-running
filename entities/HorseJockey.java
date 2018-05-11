@@ -39,13 +39,13 @@ public class HorseJockey extends Thread {
             this.ability = ability;
             this.repository.setHorseJockeyAbility(this.identification, this.ability);
             this.repository.setHorseJockeyStatus(identification, state);
+            this.repository.setWereWaitingTheHorses(true);
             this.controlCentre = new ControlCentreStub();
             this.paddock = new PaddockStub();
             this.racingTrack = new RacingTrackStub();
             this.raceNumber = this.racingTrack.getRace().getIdentification();
             this.stable = new StableStub();
             this.bettingCentre = new BettingCentreStub();
-            this.repository.setWereWaitingTheHorses(true);
         } catch (Exception e) {
             e.printStackTrace();
             throw new Exception();
