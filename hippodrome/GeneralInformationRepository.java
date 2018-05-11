@@ -329,7 +329,7 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
                     line += SimulationConfigurations.ABILITY_MAX_BOUND;
                 }
             } else {
-                line += String.format("The get ability value is %2d", horseJockey.getAbility());             /* Len# */
+                line += String.format("%2d", horseJockey.getAbility());             /* Len# */
             }
             line += "  ";
         }
