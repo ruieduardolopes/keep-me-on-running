@@ -1,6 +1,7 @@
 package entities;
 
 import clients.*;
+import configurations.SimulationConfigurations;
 import hippodrome.*;
 import lib.logging.Logger;
 
@@ -37,7 +38,6 @@ public class HorseJockey extends Thread {
             this.identification = identification;
             this.ability = ability;
             this.repository.setHorseJockeyAbility(this.identification, this.ability);
-            this.repository.setWereWaitingTheHorses(true);
             this.repository.setHorseJockeyStatus(identification, state);
             this.controlCentre = new ControlCentreStub();
             this.paddock = new PaddockStub();
@@ -45,6 +45,9 @@ public class HorseJockey extends Thread {
             this.raceNumber = this.racingTrack.getRace().getIdentification();
             this.stable = new StableStub();
             this.bettingCentre = new BettingCentreStub();
+            if (identification == SimulationConfigurations.NUMBER_OF_PAIRS_HORSE_JOCKEY - 1) {
+                this.repository.setWereWaitingTheHorses(true);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             throw new Exception();

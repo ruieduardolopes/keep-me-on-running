@@ -64,8 +64,6 @@ killallentities () {
 }
 
 deployall () {
-    git checkout tests
-    git merge dev
     git add *
     git commit -m "Added the last version on tests"
     git push origin tests
@@ -76,3 +74,4 @@ deployall () {
 shlastlog () {
     ssh sd0402@l040101-ws01.ua.pt 'cat $WORK_PATH/$(ls $WORK_PATH | grep horse-run | tail -n1)' | less
 }
+
