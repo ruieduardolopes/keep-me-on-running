@@ -197,13 +197,12 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
         line += printClassicEntitiesLine();
         line += "\n";
         line += printClassicRaceLine();
-        //if (!(line).equals(lastSnapshotLine)) {
-        //    if (!onlyLogOnFile) {
-        //        GenericIO.writelnString(line);
-        //    }
-        //    file.writelnString(cleanString(line));
-        //}
-        file.writelnString(cleanString(line));
+        if (!(line).equals(lastSnapshotLine)) {
+            if (!onlyLogOnFile) {
+                GenericIO.writelnString(line);
+            }
+            file.writelnString(cleanString(line));
+        }
         lastSnapshotLine = line;
         file.close();
     }
@@ -330,7 +329,7 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
                     line += SimulationConfigurations.ABILITY_MAX_BOUND;
                 }
             } else {
-                line += String.format("%2d", horseJockey.getAbility());             /* Len# */
+                line += String.format("%2d", SimulationConfigurations.ABILITY_MAX_BOUND);             /* Len# */
             }
             line += "  ";
         }
