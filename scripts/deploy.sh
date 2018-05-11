@@ -36,24 +36,33 @@ preparehippodrome () {
 }
 
 execute_code () {
-    ssh sd0402@l040101-ws01.ua.pt 'execserver general-repo > /dev/null' &
+    echo "Executing General Repository of Information..."
+    ssh sd0402@l040101-ws01.ua.pt 'execserver general-repo > /dev/null' > /dev/null &
     sleep 2
-    ssh sd0402@l040101-ws02.ua.pt 'execserver betting-centre > /dev/null' &
+    echo "Executing Betting Centre..."
+    ssh sd0402@l040101-ws02.ua.pt 'execserver betting-centre > /dev/null' > /dev/null &
     sleep 2
-    ssh sd0402@l040101-ws03.ua.pt 'execserver control-centre > /dev/null' &
+    echo "Executing Control Centre..."
+    ssh sd0402@l040101-ws03.ua.pt 'execserver control-centre > /dev/null' > /dev/null &
     sleep 2
-    ssh sd0402@l040101-ws04.ua.pt 'execserver paddock > /dev/null' &
+    echo "Executing Paddock..."
+    ssh sd0402@l040101-ws04.ua.pt 'execserver paddock > /dev/null' > /dev/null &
     sleep 2
-    ssh sd0402@l040101-ws05.ua.pt 'execserver racing-track > /dev/null' &
+    echo "Executing Racing Track..."
+    ssh sd0402@l040101-ws05.ua.pt 'execserver racing-track > /dev/null' > /dev/null &
     sleep 2
-    ssh sd0402@l040101-ws06.ua.pt 'execserver stable > /dev/null' &
+    echo "Executing Stable..."
+    ssh sd0402@l040101-ws06.ua.pt 'execserver stable > /dev/null' > /dev/null &
     sleep 2
-    ssh sd0402@l040101-ws07.ua.pt 'execclient broker > /dev/null' &
+    echo "Executing Broker..."
+    ssh sd0402@l040101-ws07.ua.pt 'execclient broker > /dev/null' > /dev/null &
     sleep 2
-    ssh sd0402@l040101-ws08.ua.pt 'execclient spectators > /dev/null' &
+    echo "Executing Spectators..."
+    ssh sd0402@l040101-ws08.ua.pt 'execclient spectators > /dev/null' > /dev/null &
     sleep 2
-    ssh sd0402@l040101-ws09.ua.pt 'execclient horses > /dev/null'
-    echo "Execution done"
+    echo "Executing Pairs Horse/Jockey..."
+    ssh sd0402@l040101-ws09.ua.pt 'execclient horses > /dev/null' > /dev/null
+    echo "The race is over!"
 }
 
 killallentities () {
