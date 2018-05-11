@@ -184,7 +184,7 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
     private synchronized void newSnapshot() {
         if (brokerStatus.equals("OTE")) {
             for (int i = 0; i != horseJockeys.length; i++) {
-                if (horseJockeys[i].getAbility() == 0 && wereWaitingTheHorses) {
+                if ((horseJockeys[i].getAbility() == 0 || horseJockeys[i].getStatus() == null) && wereWaitingTheHorses) {
                     return;
                 }
             }
