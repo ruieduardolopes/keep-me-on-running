@@ -19,7 +19,7 @@ chhost () {
     fi
 
     if [ "$1" = 'betting-centre' ]; then
-        sed -ie 's/BETTING_CENTRE_HOST.*/BETTING_CENTRE_HOST = \"'$2'\";/g' $WORK_PATH/configurations/ServerConfigurations.java
+        sed -ie 's/BETTING_CENTRE_HOST.*/BETTING_CENTRE_HOST = \"\"'$2'\"\";/g' $WORK_PATH/configurations/ServerConfigurations.java
     elif [ "$1" = 'control-centre' ]; then
         sed -ie 's/CONTROL_CENTRE_HOST.*/CONTROL_CENTRE_HOST = \"'$2'\";/g' $WORK_PATH/configurations/ServerConfigurations.java
     elif [ "$1" = 'general-repo' ]; then

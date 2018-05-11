@@ -11,26 +11,26 @@ preparehippodrome () {
         echo "Working on machine number $node."
         echo "Updating and compiling the code..."
         ssh sd0402@l040101-ws$node.ua.pt 'updcode; compile_code'
-        echo "Updating the host addresses..."
-        ssh sd0402@l040101-ws$node.ua.pt 'chhost general-repo l040101-ws01.ua.pt'
-        ssh sd0402@l040101-ws$node.ua.pt 'chhost betting-centre l040101-ws02.ua.pt'
-        ssh sd0402@l040101-ws$node.ua.pt 'chhost control-centre l040101-ws03.ua.pt'
-        ssh sd0402@l040101-ws$node.ua.pt 'chhost paddock l040101-ws04.ua.pt'
-        ssh sd0402@l040101-ws$node.ua.pt 'chhost racing-track l040101-ws05.ua.pt'
-        ssh sd0402@l040101-ws$node.ua.pt 'chhost stable l040101-ws06.ua.pt'
-        ssh sd0402@l040101-ws$node.ua.pt 'chhost broker l040101-ws07.ua.pt'
-        ssh sd0402@l040101-ws$node.ua.pt 'chhost spectators l040101-ws08.ua.pt'
-        ssh sd0402@l040101-ws$node.ua.pt 'chhost horses l040101-ws09.ua.pt'
-        echo "Updating the ports..."
-        ssh sd0402@l040101-ws$node.ua.pt 'chport general-repo 22411'
-        ssh sd0402@l040101-ws$node.ua.pt 'chport betting-centre 22412'
-        ssh sd0402@l040101-ws$node.ua.pt 'chport control-centre 22413'
-        ssh sd0402@l040101-ws$node.ua.pt 'chport paddock 22414'
-        ssh sd0402@l040101-ws$node.ua.pt 'chport racing-track 22415'
-        ssh sd0402@l040101-ws$node.ua.pt 'chport stable 22416'
-        ssh sd0402@l040101-ws$node.ua.pt 'chport broker 22417'
-        ssh sd0402@l040101-ws$node.ua.pt 'chport spectators 22418'
-        ssh sd0402@l040101-ws$node.ua.pt 'chport horses 22419'
+        #echo "Updating the host addresses..."
+        #ssh sd0402@l040101-ws$node.ua.pt 'chhost general-repo l040101-ws01.ua.pt'
+        #ssh sd0402@l040101-ws$node.ua.pt 'chhost betting-centre l040101-ws02.ua.pt'
+        #ssh sd0402@l040101-ws$node.ua.pt 'chhost control-centre l040101-ws03.ua.pt'
+        #ssh sd0402@l040101-ws$node.ua.pt 'chhost paddock l040101-ws04.ua.pt'
+        #ssh sd0402@l040101-ws$node.ua.pt 'chhost racing-track l040101-ws05.ua.pt'
+        #ssh sd0402@l040101-ws$node.ua.pt 'chhost stable l040101-ws06.ua.pt'
+        #ssh sd0402@l040101-ws$node.ua.pt 'chhost broker l040101-ws07.ua.pt'
+        #ssh sd0402@l040101-ws$node.ua.pt 'chhost spectators l040101-ws08.ua.pt'
+        #ssh sd0402@l040101-ws$node.ua.pt 'chhost horses l040101-ws09.ua.pt'
+        #echo "Updating the ports..."
+        #ssh sd0402@l040101-ws$node.ua.pt 'chport general-repo 22411'
+        #ssh sd0402@l040101-ws$node.ua.pt 'chport betting-centre 22412'
+        #ssh sd0402@l040101-ws$node.ua.pt 'chport control-centre 22413'
+        #ssh sd0402@l040101-ws$node.ua.pt 'chport paddock 22414'
+        #ssh sd0402@l040101-ws$node.ua.pt 'chport racing-track 22415'
+        #ssh sd0402@l040101-ws$node.ua.pt 'chport stable 22416'
+        #ssh sd0402@l040101-ws$node.ua.pt 'chport broker 22417'
+        #ssh sd0402@l040101-ws$node.ua.pt 'chport spectators 22418'
+        #ssh sd0402@l040101-ws$node.ua.pt 'chport horses 22419'
         echo "All configurations were successfully applied."
     done
 }

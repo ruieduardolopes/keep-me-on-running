@@ -22,7 +22,7 @@ public class ServerConfigurations {
     /**
      * Definition of the General Repository of Information port for the execution.
      */
-    public static final int GENERAL_INFORMATION_REPOSITORY_PORT = 22411;
+    public static final int GENERAL_INFORMATION_REPOSITORY_PORT = 22410;
 
     /**
      * Definition of the Paddock port for the execution.
