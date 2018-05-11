@@ -37,38 +37,38 @@ preparehippodrome () {
 
 execute_code () {
     echo "Executing General Repository of Information..."
-    ssh sd0402@l040101-ws01.ua.pt 'execserver general-repo > /dev/null' > /dev/null &
+    ssh sd0402@l040101-ws01.ua.pt 'execserver general-repo > /dev/null' 2> /dev/null &
     sleep 2
     echo "Executing Betting Centre..."
-    ssh sd0402@l040101-ws02.ua.pt 'execserver betting-centre > /dev/null' > /dev/null &
+    ssh sd0402@l040101-ws02.ua.pt 'execserver betting-centre > /dev/null' 2> /dev/null &
     sleep 2
     echo "Executing Control Centre..."
-    ssh sd0402@l040101-ws03.ua.pt 'execserver control-centre > /dev/null' > /dev/null &
+    ssh sd0402@l040101-ws03.ua.pt 'execserver control-centre > /dev/null' 2> /dev/null &
     sleep 2
     echo "Executing Paddock..."
-    ssh sd0402@l040101-ws04.ua.pt 'execserver paddock > /dev/null' > /dev/null &
+    ssh sd0402@l040101-ws04.ua.pt 'execserver paddock > /dev/null' 2> /dev/null &
     sleep 2
     echo "Executing Racing Track..."
-    ssh sd0402@l040101-ws05.ua.pt 'execserver racing-track > /dev/null' > /dev/null &
+    ssh sd0402@l040101-ws05.ua.pt 'execserver racing-track > /dev/null' 2> /dev/null &
     sleep 2
     echo "Executing Stable..."
-    ssh sd0402@l040101-ws06.ua.pt 'execserver stable > /dev/null' > /dev/null &
+    ssh sd0402@l040101-ws06.ua.pt 'execserver stable > /dev/null' 2> /dev/null &
     sleep 2
     echo "Executing Broker..."
-    ssh sd0402@l040101-ws07.ua.pt 'execclient broker > /dev/null' > /dev/null &
+    ssh sd0402@l040101-ws07.ua.pt 'execclient broker > /dev/null' 2> /dev/null &
     sleep 2
     echo "Executing Spectators..."
-    ssh sd0402@l040101-ws08.ua.pt 'execclient spectators > /dev/null' > /dev/null &
+    ssh sd0402@l040101-ws08.ua.pt 'execclient spectators > /dev/null' 2> /dev/null &
     sleep 2
     echo "Executing Pairs Horse/Jockey..."
-    ssh sd0402@l040101-ws09.ua.pt 'execclient horses > /dev/null' > /dev/null
+    ssh sd0402@l040101-ws09.ua.pt 'execclient horses > /dev/null' 2> /dev/null
     echo "The race is over!"
 }
 
 killallentities () {
     for node in {01,02,03,04,05,06,07,08,09}; do
         echo "Clearing execution on machine number $node..."
-        ssh sd0402@l040101-ws$node.ua.pt "killscenario"
+        ssh sd0402@l040101-ws$node.ua.pt "killscenario" 2> /dev/null
     done
 }
 
