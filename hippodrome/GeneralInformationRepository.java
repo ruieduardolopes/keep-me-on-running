@@ -325,7 +325,7 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
             if (horseJockey.getAbility() == 0) {
                 if (alreadyPrinted) {
                     alreadyPrinted = false;
-                    line += "**";
+                    line += "--";
                 } else {
                     line += SimulationConfigurations.ABILITY_MAX_BOUND;
                 }
