@@ -324,12 +324,12 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
             line += "  ";
             if (horseJockey.getAbility() == 0) {
                 if (raceNumber == 0) {
-                    line += "xx";
+                    line += "--";
                 } else {
                     line += SimulationConfigurations.ABILITY_MAX_BOUND;
                 }
             } else {
-                line += String.format("%2d", horseJockey.getAbility());             /* Len# */
+                line += String.format("The get ability value is %2d", horseJockey.getAbility());             /* Len# */
             }
             line += "  ";
         }
