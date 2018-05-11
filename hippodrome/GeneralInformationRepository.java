@@ -323,9 +323,8 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
             }
             line += "  ";
             if (horseJockey.getAbility() == 0) {
-                if (alreadyPrinted) {
-                    alreadyPrinted = false;
-                    line += "--";
+                if (raceNumber == 0) {
+                    line += "xx";
                 } else {
                     line += SimulationConfigurations.ABILITY_MAX_BOUND;
                 }
@@ -825,6 +824,4 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
      * The created instance of this class
      */
     private static GeneralInformationRepository instance;
-
-    private boolean alreadyPrinted = true;
 }
