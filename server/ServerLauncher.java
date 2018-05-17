@@ -68,10 +68,11 @@ public class ServerLauncher {
                     Logger.printInformation("An agent was already made available to attend the situation");
                     serviceProviderAgent.start();
                 } catch (SocketTimeoutException ste) {
-                    System.exit(0);
+
                 }
                 terminateExecution = ServiceProviderAgent.getShutdownCounter(args[0]);
             }
+            serverConnectionRequest.close();
         } catch (InterruptedException ie) {
             Logger.printError("An exception has been thrown... catch it man! Below there is some information about it");
             ie.printStackTrace();

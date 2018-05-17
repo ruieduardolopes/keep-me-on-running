@@ -134,7 +134,7 @@ print_execserver_usage () {
 killscenario () {
     tokill=$(ps aux | grep java | grep sd0402 | awk '{ print $2 }'| column)
     for item in $tokill; do
-        kill $item
+        kill -9 $item
     done
 }
 
