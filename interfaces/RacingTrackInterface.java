@@ -1,9 +1,10 @@
-package server;
+package interfaces;
 
 import communications.Message;
 import communications.MessageType;
 import hippodrome.RacingTrack;
 import hippodrome.actions.Race;
+import server.Server;
 
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectOutputStream;
@@ -16,12 +17,12 @@ import java.io.ObjectOutputStream;
  * @since 2.0
  * @version 2.0
  */
-public class RacingTrackProxy implements Server {
+public class RacingTrackInterface implements Server {
     /**
      * Creates a Racing Track Proxy instance.
      * @throws InterruptedException if a communication channel could not be established.
      */
-    public RacingTrackProxy() throws InterruptedException {
+    public RacingTrackInterface() throws InterruptedException {
         try {
             racingTrack = RacingTrack.getInstance();
         } catch (Exception e) {

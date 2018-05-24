@@ -2,6 +2,8 @@ package hippodrome;
 
 import hippodrome.actions.Race;
 
+import java.rmi.Remote;
+
 /**
  * Interface of the place where the races take place. Here each race is represented by an element
  * of the class {@link Race}, described by a given number of tracks, an identification
@@ -12,7 +14,7 @@ import hippodrome.actions.Race;
  * @since 2.0
  * @version 2.0
  */
-public interface RacingTrackInterface {
+public interface RacingTrackInterface extends Remote {
     void proceedToStartLine() throws InterruptedException;
 
     void makeAMove(int horseId) throws InterruptedException;

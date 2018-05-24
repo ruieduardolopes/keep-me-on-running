@@ -1,9 +1,10 @@
-package server;
+package interfaces;
 
 import communications.Message;
 import communications.MessageType;
 import hippodrome.BettingCentre;
 import lib.logging.Logger;
+import server.Server;
 
 /**
  * Betting Centre endpoint representation on the server side.
@@ -13,11 +14,11 @@ import lib.logging.Logger;
  * @since 2.0
  * @version 2.0
  */
-public class BettingCentreProxy implements Server {
+public class BettingCentreInterface implements Server {
     /**
      * Creates a Betting Centre Proxy instance.
      */
-    public BettingCentreProxy() {
+    public BettingCentreInterface() {
         bettingCentre = BettingCentre.getInstance();
     }
 

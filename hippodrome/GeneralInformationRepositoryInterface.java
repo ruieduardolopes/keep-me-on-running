@@ -6,6 +6,8 @@ import entities.SpectatorState;
 import hippodrome.rollfilm.UnknownHorseJockeyException;
 import hippodrome.rollfilm.UnknownSpectatorException;
 
+import java.rmi.Remote;
+
 /**
  * Interface of the class which represents an archive of all hippodrome's actions
  * and memorabilia. This item allows the entities playing at an
@@ -17,7 +19,7 @@ import hippodrome.rollfilm.UnknownSpectatorException;
  * @since 2.0
  * @version 2.0
  */
-public interface GeneralInformationRepositoryInterface {
+public interface GeneralInformationRepositoryInterface extends Remote {
     void newSnapshot(boolean nullable) throws InterruptedException;
 
     void setRaceNumber(int number) throws InterruptedException;

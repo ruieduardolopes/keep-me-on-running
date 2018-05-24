@@ -2,6 +2,8 @@ package hippodrome;
 
 import entities.Spectator;
 
+import java.rmi.Remote;
+
 /**
  * Interface of the place where the {@link Spectator}s place their bets on the winning horse. As they come here
  * to place their bets, they also come here to collect his (or hers) further gains, if such a
@@ -12,7 +14,7 @@ import entities.Spectator;
  * @since 2.0
  * @version 2.0
  */
-public interface BettingCentreInterface {
+public interface BettingCentreInterface extends Remote {
 
     void acceptTheBets() throws InterruptedException;
 

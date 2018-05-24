@@ -1,9 +1,10 @@
-package server;
+package interfaces;
 
 import communications.Message;
 import communications.MessageType;
 import hippodrome.ControlCentre;
 import lib.logging.Logger;
+import server.Server;
 
 /**
  * Control Centre endpoint representation on the server side.
@@ -13,11 +14,11 @@ import lib.logging.Logger;
  * @since 2.0
  * @version 2.0
  */
-public class ControlCentreProxy implements Server {
+public class ControlCentreInterface implements Server {
     /**
      * Creates a Control Centre Proxy instance.
      */
-    public ControlCentreProxy() {
+    public ControlCentreInterface() {
         controlCentre = ControlCentre.getInstance();
     }
 

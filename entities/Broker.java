@@ -31,18 +31,14 @@ public class Broker extends Thread {
      * @param numberOfRaces The number of races in which this Entities will work on.
      * @throws InterruptedException if the communication channel is busy.
      */
-    public Broker(int numberOfRaces) throws InterruptedException {
-        try {
-            this.bettingCentre = new BettingCentreStub();
-            this.controlCentre = new ControlCentreStub();
-            this.racingTrack = new RacingTrackStub();
-            this.stable = new StableStub();
-            this.repository = new GeneralInformationRepositoryStub();
-            this.totalOfRaces = numberOfRaces;
-            this.repository.setBrokerStatus(state);
-        } catch (InterruptedException e) {
-            throw new InterruptedException();
-        }
+    public Broker(int numberOfRaces, BettingCentreInterface bettingCentre, ControlCentreInterface controlCentre, RacingTrackInterface racingTrack, StableInterface stable, GeneralInformationRepositoryInterface repository) throws InterruptedException {
+        this.bettingCentre = bettingCentre;
+        this.controlCentre = controlCentre;
+        this.racingTrack = racingTrack;
+        this.stable = stable;
+        this.repository = repository;
+        this.totalOfRaces = numberOfRaces;
+        this.repository.setBrokerStatus(state);
     }
 
     /**
@@ -73,7 +69,7 @@ public class Broker extends Thread {
             }                                                                       //
             controlCentre.entertainTheGuests();                                     // as the races are over, then i should go entertain the guests.
             repository.newSnapshot(true);
-            shutdown();
+            //shutdown();                                                           // TODO : shutdown invocation
         } catch (InterruptedException ie) {
             ie.printStackTrace();
             System.exit(4);
@@ -106,10 +102,11 @@ public class Broker extends Thread {
 
     /**
      * Send request to shutdown the hippodrome regions, since anything more is needed after then.
+     * TODO : perform a shutdown.
      *
      * @throws InterruptedException if the communication channel cannot be used.
      */
-    private void shutdown() throws InterruptedException {
+    /*private void shutdown() throws InterruptedException {
         try {
             bettingCentre.shutdown();
             controlCentre.shutdown();
@@ -120,7 +117,7 @@ public class Broker extends Thread {
         } catch (InterruptedException e) {
             throw new InterruptedException();
         }
-    }
+    }*/
 
     /**
      * A representation of the Entities's state given by the {@link BrokerState}
@@ -136,25 +133,25 @@ public class Broker extends Thread {
     /**
      * The {@link BettingCentre} instance where this {@link Broker} will perform its actions.
      */
-    private BettingCentreStub bettingCentre;
+    private BettingCentreInterface bettingCentre;
 
     /**
      * The {@link ControlCentre} instance where this {@link Broker} will perform its actions.
      */
-    private ControlCentreStub controlCentre;
+    private ControlCentreInterface controlCentre;
 
     /**
      * The {@link RacingTrack} instance where this {@link Broker} will perform its actions.
      */
-    private RacingTrackStub racingTrack;
+    private RacingTrackInterface racingTrack;
 
     /**
      * The {@link Stable} instance where this {@link Broker} will perform its actions.
      */
-    private StableStub stable;
+    private StableInterface stable;
 
     /**
      * The {@link GeneralInformationRepository} instance where all the {@link Broker}'s actions will be reported.
      */
-    private GeneralInformationRepositoryStub repository;
+    private GeneralInformationRepositoryInterface repository;
 }

@@ -32,20 +32,20 @@ public class HorseJockey extends Thread {
      * @param ability number with characterizes the Horse maximum ability to run.
      * @throws Exception if an illegal argument is given.
      */
-    public HorseJockey(int identification, int ability) throws Exception {
+    public HorseJockey(int identification, int ability, BettingCentreInterface bettingCentre, ControlCentreInterface controlCentre, PaddockInterface paddock, RacingTrackInterface racingTrack, StableInterface stable, GeneralInformationRepositoryInterface repository) throws Exception {
         try {
-            this.repository = new GeneralInformationRepositoryStub();
+            this.repository = repository;
             this.identification = identification;
             this.ability = ability;
             this.repository.setHorseJockeyAbility(this.identification, this.ability);
             this.repository.setWereWaitingTheHorses(true);
             this.repository.setHorseJockeyStatus(identification, state);
-            this.controlCentre = new ControlCentreStub();
-            this.paddock = new PaddockStub();
-            this.racingTrack = new RacingTrackStub();
+            this.controlCentre = controlCentre;
+            this.paddock = paddock;
+            this.racingTrack = racingTrack;
             this.raceNumber = this.racingTrack.getRace().getIdentification();
-            this.stable = new StableStub();
-            this.bettingCentre = new BettingCentreStub();
+            this.stable = stable;
+            this.bettingCentre = bettingCentre;
         } catch (Exception e) {
             e.printStackTrace();
             throw new Exception();
@@ -74,8 +74,8 @@ public class HorseJockey extends Thread {
             }                                                                   //
             controlCentre.makeAMove();                                          // As I crossed the line I must advance one step further to get off the line;
             stable.proceedToStable();                                           // Then I should go to the Stable and rest till the next round, if that applies.
-        } catch (InterruptedException ie) {
-            ie.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
             System.exit(2);
         }
     }
@@ -154,30 +154,30 @@ public class HorseJockey extends Thread {
     /**
      * The {@link ControlCentre} instance where this pair Horse/Jockey ({@link HorseJockey}) will perform its actions.
      */
-    private ControlCentreStub controlCentre;
+    private ControlCentreInterface controlCentre;
 
     /**
      * The {@link Paddock} instance where this pair Horse/Jockey ({@link HorseJockey}) will perform its actions.
      */
-    private PaddockStub paddock;
+    private PaddockInterface paddock;
 
     /**
      * The {@link RacingTrack} instance where this pair Horse/Jockey ({@link HorseJockey}) will perform its actions.
      */
-    private RacingTrackStub racingTrack;
+    private RacingTrackInterface racingTrack;
 
     /**
      * The {@link Stable} instance where this pair Horse/Jockey ({@link HorseJockey}) will perform its actions.
      */
-    private StableStub stable;
+    private StableInterface stable;
 
     /**
      * The {@link BettingCentre} instance where this pair Horse/Jockey ({@link HorseJockey}) will perform its actions.
      */
-    private BettingCentreStub bettingCentre;
+    private BettingCentreInterface bettingCentre;
 
     /**
      * The {@link GeneralInformationRepository} instance where all this pair Horse/Jockey's actions will be reported.
      */
-    private GeneralInformationRepositoryStub repository;
+    private GeneralInformationRepositoryInterface repository;
 }

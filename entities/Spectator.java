@@ -28,16 +28,16 @@ public class Spectator extends Thread {
      * @param numberOfRaces number of races which will happen in this event.
      * @throws InterruptedException if the communication channel is busy.
      */
-    public Spectator(int identification, int money, int numberOfRaces) throws InterruptedException {
+    public Spectator(int identification, int money, int numberOfRaces, BettingCentreInterface bettingCentre, ControlCentreInterface controlCentre, PaddockInterface paddock, GeneralInformationRepositoryInterface repository) throws InterruptedException {
         try {
-            this.repository = new GeneralInformationRepositoryStub();
+            this.repository = repository;
             this.identification = identification;
             this.repository.setSpectatorStatus(identification, state);
             this.money = money;
             this.repository.setSpectatorAmountOfMoney(this.identification, this.money);
-            this.bettingCentre = new BettingCentreStub();
-            this.controlCentre = new ControlCentreStub();
-            this.paddock = new PaddockStub();
+            this.bettingCentre = bettingCentre;
+            this.controlCentre = controlCentre;
+            this.paddock = paddock;
             this.numberOfRaces = numberOfRaces;
         } catch (InterruptedException e) {
             throw new InterruptedException();
@@ -73,7 +73,7 @@ public class Spectator extends Thread {
                 }                                                                   //
             }                                                                       //
             controlCentre.relaxABit();                                              // And relax a bit.
-            shutdown();
+            //shutdown();                                                           // TODO : shutdown invocation
         } catch (InterruptedException ie) {
             ie.printStackTrace();
             System.exit(3);
@@ -137,10 +137,11 @@ public class Spectator extends Thread {
 
     /**
      * Send request to shutdown the hippodrome regions, since anything more is needed after then.
+     * TODO : perform a shutdown
      *
      * @throws InterruptedException if the communication channel cannot be used.
      */
-    private void shutdown() throws InterruptedException {
+    /*private void shutdown() throws InterruptedException {
         try {
             bettingCentre.shutdown();
             controlCentre.shutdown();
@@ -151,7 +152,7 @@ public class Spectator extends Thread {
         } catch (InterruptedException e) {
             throw new InterruptedException();
         }
-    }
+    }*/
 
     /**
      * A representation of the Spectator's state given by the {@link SpectatorState}
@@ -182,20 +183,20 @@ public class Spectator extends Thread {
     /**
      * The {@link BettingCentre} instance where this {@link Spectator} will perform its actions.
      */
-    private BettingCentreStub bettingCentre;
+    private BettingCentreInterface bettingCentre;
 
     /**
      * The {@link ControlCentre} instance where this {@link Spectator} will perform its actions.
      */
-    private ControlCentreStub controlCentre;
+    private ControlCentreInterface controlCentre;
 
     /**
      * The {@link Paddock} instance where this {@link Spectator} will perform its actions.
      */
-    private PaddockStub paddock;
+    private PaddockInterface paddock;
 
     /**
      * The {@link GeneralInformationRepository} instance where all this Spectator's actions will be reported.
      */
-    private GeneralInformationRepositoryStub repository;
+    private GeneralInformationRepositoryInterface repository;
 }

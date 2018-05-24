@@ -1,5 +1,7 @@
 package hippodrome;
 
+import java.rmi.Remote;
+
 /**
  * Interface of the place where the horses rest waiting their turn to enter the competition.
  *
@@ -8,7 +10,7 @@ package hippodrome;
  * @since 2.0
  * @version 2.0
  */
-public interface StableInterface {
+public interface StableInterface extends Remote {
     void proceedToStable(int raceNumber) throws InterruptedException;
 
     void proceedToStable() throws InterruptedException ;

@@ -1,8 +1,9 @@
-package server;
+package interfaces;
 
 import communications.Message;
 import communications.MessageType;
 import hippodrome.GeneralInformationRepository;
+import server.Server;
 
 /**
  * General Repository of Information endpoint representation on the server side.
@@ -12,11 +13,11 @@ import hippodrome.GeneralInformationRepository;
  * @since 2.0
  * @version 2.0
  */
-public class GeneralInformationRepositoryProxy implements Server {
+public class GeneralInformationRepositoryInterface implements Server {
     /**
      * Creates a General Repository of Information Proxy instance.
      */
-    public GeneralInformationRepositoryProxy() {
+    public GeneralInformationRepositoryInterface() {
         repository = GeneralInformationRepository.getInstance();
     }
 

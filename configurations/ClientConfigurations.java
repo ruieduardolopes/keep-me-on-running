@@ -27,15 +27,15 @@ public class ClientConfigurations {
     /**
      * Definition of the Broker port for the execution.
      */
-    public static final String BROKER_HOST = "l040101-ws07.ua.pt";
+    public static final String BROKER_HOST = "localhost";//"l040101-ws07.ua.pt";
 
     /**
      * Definition of the Spectators port for the execution.
      */
-    public static final String SPECTATOR_HOST = "l040101-ws08.ua.pt";
+    public static final String SPECTATOR_HOST = "localhost";//"l040101-ws08.ua.pt";
 
     /**
      * Definition of the pairs Horse/Jockey port for the execution.
      */
-    public static final String HORSE_JOCKEY_HOST = "l040101-ws09.ua.pt";
+    public static final String HORSE_JOCKEY_HOST = "localhost";//"l040101-ws09.ua.pt";
 }

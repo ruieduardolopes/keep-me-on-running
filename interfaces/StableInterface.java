@@ -1,9 +1,10 @@
-package server;
+package interfaces;
 
 import communications.Message;
 import communications.MessageType;
 import hippodrome.Stable;
 import lib.logging.Logger;
+import server.Server;
 
 /**
  * Stable endpoint representation on the server side.
@@ -13,11 +14,11 @@ import lib.logging.Logger;
  * @since 2.0
  * @version 2.0
  */
-public class StableProxy implements Server {
+public class StableInterface implements Server {
     /**
      * Creates a Stable Proxy instance.
      */
-    public StableProxy() {
+    public StableInterface() {
         stable = Stable.getInstance();
     }
 

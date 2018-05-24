@@ -1,9 +1,18 @@
 package clients;
 
+import configurations.ClientConfigurations;
+import configurations.RMIConfigurations;
 import entities.Broker;
 import entities.HorseJockey;
 import entities.Spectator;
+import hippodrome.*;
 import lib.logging.Logger;
+
+import java.rmi.AccessException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
 import static configurations.SimulationConfigurations.*;
 
@@ -27,9 +36,24 @@ public class ClientLauncher {
             System.exit(1);
         }
         try {
+            registry = LocateRegistry.getRegistry(RMIConfigurations.RMI_REGISTER_NAME, RMIConfigurations.RMI_PORT);
+        } catch (RemoteException re) {
+            Logger.printError("OMG, this happened!"); // TODO : refactor this error handling
+        }
+        try {
+            bettingCentreInterface = (BettingCentreInterface) registry.lookup(RMIConfigurations.BETTING_CENTRE_NAME);
+            controlCentreInterface = (ControlCentreInterface) registry.lookup(RMIConfigurations.CONTROL_CENTRE_NAME);
+            repositoryInterface = (GeneralInformationRepositoryInterface) registry.lookup(RMIConfigurations.GLOBAL_REPOSITORY_OF_INFORMATION_NAME);
+            paddockInterface = (PaddockInterface) registry.lookup(RMIConfigurations.PADDOCK_NAME);
+            racingTrackInterface = (RacingTrackInterface) registry.lookup(RMIConfigurations.RACING_TRACK_NAME);
+            stableInterface = (StableInterface) registry.lookup(RMIConfigurations.STABLE_NAME);
+        } catch (RemoteException | NotBoundException e) {
+            Logger.printError("Something went terribly wrong!"); // TODO : handle this error
+        }
+        try {
             switch (args[0]) {
                 case "broker" :
-                    Broker broker = new Broker(NUMBER_OF_RACES);
+                    Broker broker = new Broker(NUMBER_OF_RACES, bettingCentreInterface, controlCentreInterface, racingTrackInterface, stableInterface, repositoryInterface);
                     broker.start();
                     try {
                         broker.join();
@@ -42,7 +66,7 @@ public class ClientLauncher {
                 case "spectators" :
                     Spectator[] spectators = new Spectator[NUMBER_OF_SPECTATORS];
                     for (int i = 0; i != spectators.length; i++) {
-                        spectators[i] = new Spectator(i, generateMoney(), NUMBER_OF_RACES);
+                        spectators[i] = new Spectator(i, generateMoney(), NUMBER_OF_RACES, bettingCentreInterface, controlCentreInterface, paddockInterface, repositoryInterface);
                         spectators[i].start();
                     }
                     try {
@@ -59,7 +83,7 @@ public class ClientLauncher {
                     for (int race = 0; race != NUMBER_OF_RACES; race++) {
                         HorseJockey[] horseJockeys = new HorseJockey[NUMBER_OF_PAIRS_HORSE_JOCKEY];
                         for (int i = 0; i != horseJockeys.length; i++) {
-                            horseJockeys[i] = new HorseJockey(i, generateAbility());
+                            horseJockeys[i] = new HorseJockey(i, generateAbility(), bettingCentreInterface, controlCentreInterface, paddockInterface, racingTrackInterface, stableInterface, repositoryInterface);
                             horseJockeys[i].start();
                         }
                         try {
@@ -114,4 +138,37 @@ public class ClientLauncher {
     private static int generateAbility() {
         return (int)(Math.random()*(ABILITY_MAX_BOUND - ABILITY_MIN_BOUND)) + ABILITY_MIN_BOUND;
     }
+
+    private static Registry registry = null;
+
+    /**
+     * An interface for the remote method invocations over the Betting Centre hippodrome region.
+     */
+    private static BettingCentreInterface bettingCentreInterface = null;
+
+    /**
+     * An interface for the remote method invocations over the Control Centre hippodrome region.
+     */
+    private static ControlCentreInterface controlCentreInterface = null;
+
+    /**
+     * An interface for the remote method invocations over the General Repository of Information hippodrome region.
+     */
+    private static GeneralInformationRepositoryInterface repositoryInterface = null;
+
+    /**
+     * An interface for the remote method invocations over the Paddock hippodrome region.
+     */
+    private static PaddockInterface paddockInterface = null;
+
+    /**
+     * An interface for the remote method invocations over the Racing Track hippodrome region.
+     */
+    private static RacingTrackInterface racingTrackInterface = null;
+
+    /**
+     * An interface for the remote method invocations over the Stable hippodrome region.
+     */
+    private static StableInterface stableInterface = null;
+
 }

@@ -1,11 +1,26 @@
 package server;
 
 import configurations.ServerConfigurations;
-import configurations.SimulationConfigurations;
+import hippodrome.*;
+import interfaces.BettingCentreInterface;
+import interfaces.ControlCentreInterface;
+import interfaces.GeneralInformationRepositoryInterface;
+import interfaces.PaddockInterface;
+import interfaces.RacingTrackInterface;
+import interfaces.StableInterface;
 import lib.communication.ServerCom;
 import lib.logging.Logger;
+import registry.Register;
 
-import java.net.SocketTimeoutException;
+import java.rmi.AlreadyBoundException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
+
+import static configurations.RMIConfigurations.*;
+import static configurations.ServerConfigurations.*;
 
 /**
  * Main function which must be used to run the various entities classified on {@link entities}.
@@ -26,57 +41,120 @@ public class ServerLauncher {
             printUsage();
             System.exit(1);
         }
-        try {
-            switch (args[0]) {
-                case "betting-centre" :
-                    server = new BettingCentreProxy();
-                    port = ServerConfigurations.BETTING_CENTRE_PORT;
-                    break;
-                case "control-centre" :
-                    server = new ControlCentreProxy();
-                    port = ServerConfigurations.CONTROL_CENTRE_PORT;
-                    break;
-                case "general-repo" :
-                    server = new GeneralInformationRepositoryProxy();
-                    port = ServerConfigurations.GENERAL_INFORMATION_REPOSITORY_PORT;
-                    break;
-                case "paddock" :
-                    server = new PaddockProxy();
-                    port = ServerConfigurations.PADDOCK_PORT;
-                    break;
-                case "racing-track" :
-                    server = new RacingTrackProxy();
-                    port = ServerConfigurations.RACING_TRACK_PORT;
-                    break;
-                case "stable" :
-                    server = new StableProxy();
-                    port = ServerConfigurations.STABLE_PORT;
-                    break;
-                default :
-                    printUsage();
-                    System.exit(2);
-            }
-            Logger.printNotification("Preparing to run %s server on port %d", args[0], port);
-            serverConnectionRequest = new ServerCom(port);
-            serverConnectionRequest.start();
-            Logger.printInformation("Server already running and waiting for new messages");
-            while (!terminateExecution) {
-                try {
-                    serverConnectionInstance = serverConnectionRequest.accept();
-                    Logger.printNotification("Preparing to attend to request");
-                    serviceProviderAgent = new ServiceProviderAgent(serverConnectionInstance, server);
-                    Logger.printInformation("An agent was already made available to attend the situation");
-                    serviceProviderAgent.start();
-                } catch (SocketTimeoutException ste) {
-
-                }
-                terminateExecution = ServiceProviderAgent.getShutdownCounter(args[0]);
-            }
-            serverConnectionRequest.close();
-        } catch (InterruptedException ie) {
-            Logger.printError("An exception has been thrown... catch it man! Below there is some information about it");
-            ie.printStackTrace();
+        if (System.getSecurityManager() == null) {
+            System.setSecurityManager(new SecurityManager());
         }
+        Logger.printInformation("A Security Manager has been installed");
+        Registry registry = null;
+        String nameEntryObject = null;
+        try {
+            registry = LocateRegistry.getRegistry(rmiHostname, rmiPort);
+        } catch (RemoteException re) {
+            Logger.printError("North Korea killed this thing..."); // TODO : redo this error handling...
+            System.exit(1);
+        }
+        switch (args[0]) {
+            case "betting-centre" :
+                BettingCentre bettingCentre = BettingCentre.getInstance();
+                port = ServerConfigurations.BETTING_CENTRE_PORT;
+                nameEntryObject = BETTING_CENTRE_NAME;
+                try {
+                    server = (BettingCentreInterface) UnicastRemoteObject.exportObject(bettingCentre, port);
+                } catch (RemoteException re) {
+                    Logger.printError("Again... damn Kim Jong Un!"); // TODO : redo this error handling
+                    System.exit(2);
+                }
+                break;
+            case "control-centre" :
+                ControlCentre controlCentre = ControlCentre.getInstance();
+                port = ServerConfigurations.CONTROL_CENTRE_PORT;
+                nameEntryObject = CONTROL_CENTRE_NAME;
+                try {
+                    server = (ControlCentreInterface) UnicastRemoteObject.exportObject(controlCentre, port);
+                } catch (RemoteException re) {
+                    Logger.printError("Again... damn Kim Jong Un!"); // TODO : redo this error handling
+                    System.exit(2);
+                }
+                break;
+            case "general-repo" :
+                GeneralInformationRepository repository = GeneralInformationRepository.getInstance();
+                port = ServerConfigurations.GENERAL_INFORMATION_REPOSITORY_PORT;
+                nameEntryObject = GLOBAL_REPOSITORY_OF_INFORMATION_NAME;
+                try {
+                    server = (GeneralInformationRepositoryInterface) UnicastRemoteObject.exportObject(repository, port);
+                } catch (RemoteException re) {
+                    Logger.printError("Again... damn Kim Jong Un!"); // TODO : redo this error handling
+                    System.exit(2);
+                }
+                break;
+            case "paddock" :
+                Paddock paddock = Paddock.getInstance();
+                port = ServerConfigurations.PADDOCK_PORT;
+                nameEntryObject = PADDOCK_NAME;
+                try {
+                    server = (PaddockInterface) UnicastRemoteObject.exportObject(paddock, port);
+                } catch (RemoteException re) {
+                    Logger.printError("Again... damn Kim Jong Un!"); // TODO : redo this error handling
+                    System.exit(2);
+                }
+                break;
+            case "racing-track" :
+                RacingTrack racingTrack = null;
+                try {
+                    racingTrack = RacingTrack.getInstance();
+                } catch (Exception e) {
+                    Logger.printError("Something went wrong with the creation of the Racing Track");
+                    System.exit(3);
+                }
+                port = ServerConfigurations.RACING_TRACK_PORT;
+                nameEntryObject = RACING_TRACK_NAME;
+                try {
+                    server = (RacingTrackInterface) UnicastRemoteObject.exportObject(racingTrack, port);
+                } catch (RemoteException re) {
+                    Logger.printError("Again... damn Kim Jong Un!"); // TODO : redo this error handling
+                    System.exit(2);
+                }
+                break;
+            case "stable" :
+                Stable stable = Stable.getInstance();
+                port = ServerConfigurations.STABLE_PORT;
+                nameEntryObject = STABLE_NAME;
+                try {
+                    server = (StableInterface) UnicastRemoteObject.exportObject(stable, port);
+                } catch (RemoteException re) {
+                    Logger.printError("Again... damn Kim Jong Un!"); // TODO : redo this error handling
+                    System.exit(2);
+                }
+                break;
+            default :
+                printUsage();
+                System.exit(2);
+        }
+        Logger.printNotification("Preparing to run %s server on port %d", args[0], port);
+        String nameEntryBase = RMI_REGISTER_NAME;
+        Register register = null;
+        try {
+            register = (Register) registry.lookup(nameEntryBase);
+        } catch (RemoteException | NotBoundException e) {
+            Logger.printError("Oh damn... again..."); // TODO : another error handling
+            System.exit(4);
+        }
+        try {
+            register.bind(nameEntryObject, server);
+        } catch (RemoteException | AlreadyBoundException e) {
+            Logger.printError("Oh damn... again..."); // TODO : another error handling
+            System.exit(5);
+        }
+        Logger.printInformation("Registry server already running and waiting for new messages");
+        while (!terminateExecution) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ie) {
+
+            }
+            terminateExecution = ServiceProviderAgent.getShutdownCounter(args[0]);
+        }
+        serverConnectionRequest.close();
     }
 
     /**
@@ -109,6 +187,16 @@ public class ServerLauncher {
      * The identification of the service port.
      */
     private static int port;
+
+    /**
+     * The port of the RMI Registry Server
+     */
+    private static int rmiPort; // TODO : RMI port on server
+
+    /**
+     * The hostname of the RMI Registry Server
+     */
+    private static String rmiHostname; // TODO : RMI hostname on server
 
     /**
      * The request channel for communications with the clients.

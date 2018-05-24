@@ -2,10 +2,10 @@
  * Provides the classes necessary to represent any hippodrome region on the server side of
  * the execution.
  *
- * Its contents are a {@link server.BettingCentreProxy}, a
- * {@link server.ControlCentreProxy}, a {@link server.PaddockProxy},
- * a {@link server.GeneralInformationRepositoryProxy}, a {@link server.RacingTrackProxy},
- * a {@link server.StableProxy}, a {@link server.ServerLauncher} and {@link server.ServiceProviderAgent}.
+ * Its contents are a {@link interfaces.BettingCentreInterface}, a
+ * {@link interfaces.ControlCentreInterface}, a {@link interfaces.PaddockInterface},
+ * a {@link interfaces.GeneralInformationRepositoryInterface}, a {@link interfaces.RacingTrackInterface},
+ * a {@link interfaces.StableInterface}, a {@link server.ServerLauncher} and {@link server.ServiceProviderAgent}.
  *
  * @author Hugo Fragata
  * @author Rui Lopes

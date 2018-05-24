@@ -1,8 +1,9 @@
-package server;
+package interfaces;
 
 import communications.Message;
 import communications.MessageType;
 import hippodrome.Paddock;
+import server.Server;
 
 /**
  * Paddock endpoint representation on the server side.
@@ -12,11 +13,11 @@ import hippodrome.Paddock;
  * @since 2.0
  * @version 2.0
  */
-public class PaddockProxy implements Server {
+public class PaddockInterface implements Server {
     /**
      * Creates a Paddock Proxy instance.
      */
-    public PaddockProxy() {
+    public PaddockInterface() {
         paddock = Paddock.getInstance();
     }
 
