@@ -158,7 +158,6 @@ public class ServerLauncher {
             }
             //terminateExecution = ServiceProviderAgent.getShutdownCounter(args[0]); // TODO : remove the service provider agent
         }
-        serverConnectionRequest.close();
     }
 
     /**
