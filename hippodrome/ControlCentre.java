@@ -1,10 +1,7 @@
 package hippodrome;
 
-import clients.ControlCentreStub;
 import clients.GeneralInformationRepositoryStub;
 import entities.*;
-import lib.logging.Logger;
-import server.ServiceProviderAgent;
 
 import static configurations.SimulationConfigurations.*;
 

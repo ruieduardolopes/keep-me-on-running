@@ -5,8 +5,6 @@ import entities.*;
 import hippodrome.actions.Bet;
 import hippodrome.rollfilm.UnknownHorseJockeyException;
 import hippodrome.rollfilm.UnknownSpectatorException;
-import lib.logging.Logger;
-import server.ServiceProviderAgent;
 
 /**
  * This class needs a Queue implementation in order to accomplish the creation of such a
@@ -17,7 +15,6 @@ import server.ServiceProviderAgent;
  * Further documentation on this matter could be accessed here: {@link Queue}.
  */
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 

@@ -2,10 +2,7 @@ package hippodrome;
 
 import clients.GeneralInformationRepositoryStub;
 import configurations.SimulationConfigurations;
-import entities.HorseJockey;
 import entities.HorseJockeyState;
-import lib.logging.Logger;
-import server.ServiceProviderAgent;
 
 /**
  * Place where the horses rest waiting their turn to enter the competition.

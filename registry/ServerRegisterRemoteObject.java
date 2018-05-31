@@ -1,55 +1,71 @@
 package registry;
 
 import configurations.RMIConfigurations;
-import lib.logging.Logger;
+import genclass.GenericIO;
 
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-public class ServerRegisterRemoteObject {
-    public static void main(String[] args) {
-        // TODO : create validation of program input
-        String hostname = "rmi-registry";
-        int port = RMIConfigurations.RMI_PORT;
-        Logger.printNotification("Trying to run RMI Registry Server on %s with port %s", hostname, port);
+/**
+ *  This data type instantiates and registers a remote object that enables the registration of other remote objects
+ *  located in the same or other processing nodes in the local registry service.
+ *  Communication is based in Java RMI.
+ */
 
-        // first phase : create and install the Java's security manager
-        if (System.getSecurityManager() == null) {
-            System.setSecurityManager(new SecurityManager());
-        }
-        Logger.printInformation("A Security Manager has been installed");
+public class ServerRegisterRemoteObject
+{
+  /**
+   *  Main task.
+   */
 
-        // second phase : instantiation of a remote registration object and generation of a stub for it
-        RegisterRemoteObject registryEngine = new RegisterRemoteObject(hostname, port);
-        Register registryEngineStub = null;
-        int listeningPort = RMIConfigurations.RMI_PORT;
-        try {
-            registryEngineStub = (Register) UnicastRemoteObject.exportObject(registryEngine, listeningPort);
-        } catch (RemoteException re) {
-            Logger.printError("An exception has been thrown on Stub creation: %s", re.getMessage());
-            System.exit(1);
-        }
-        Logger.printInformation("A Stub has been successfully created");
+  public static void main(String[] args)
+  {
+    /* get location of the registry service */
 
-        // third phase : register stub with the local registry service
-        String nameEntry = "RegisterHandler";
-        Registry registry = null;
-        try {
-            registry = LocateRegistry.getRegistry(hostname, port);
-        } catch (RemoteException re) {
-            Logger.printError("An exception has been thrown on getting registry location: %s", re.getMessage());
-            System.exit(2);
-        }
-        Logger.printInformation("The registry has been successfully located");
-        try {
-            registry.rebind(nameEntry, registryEngineStub);
-        } catch (RemoteException re) {
-            Logger.printError("An exception has been thrown on registry registration: %s", re.getMessage());
-            re.printStackTrace();
-            System.exit(3);
-        }
-        Logger.printInformation("This registry remote object has been successfully registered");
+    String rmiRegHostName;
+    int rmiRegPortNumb;
+
+    rmiRegHostName = "localhost";
+    rmiRegPortNumb = RMIConfigurations.RMI_PORT_REGISTRY;
+
+    /* instantiate a registration remote object and generate a stub for it */
+
+    RegisterRemoteObject regEngine = new RegisterRemoteObject(rmiRegHostName, rmiRegPortNumb);
+    Register regEngineStub = null;
+    int listeningPort = RMIConfigurations.RMI_LISTENING_PORT;                            /* it should be set accordingly in each case */
+
+    try
+    { regEngineStub = (Register) UnicastRemoteObject.exportObject (regEngine, listeningPort);
     }
+    catch (RemoteException e)
+    { GenericIO.writelnString ("RegisterRemoteObject stub generation exception: " + e.getMessage ());
+      System.exit (1);
+    }
+    GenericIO.writelnString ("Stub was generated!");
+
+    /* register it with the local registry service */
+
+    String nameEntry = "rmi-register";
+    Registry registry = null;
+
+    try
+    { registry = LocateRegistry.getRegistry (rmiRegHostName, rmiRegPortNumb);
+    }
+    catch (RemoteException e)
+    { GenericIO.writelnString ("RMI registry creation exception: " + e.getMessage ());
+      System.exit (2);
+    }
+    GenericIO.writelnString ("RMI registry was created!");
+
+    try
+    { registry.rebind (nameEntry, regEngineStub);
+    }
+    catch (RemoteException e)
+    { GenericIO.writelnString ("RegisterRemoteObject remote exception on registration: " + e.getMessage ());
+      System.exit (3);
+    }
+    GenericIO.writelnString ("RegisterRemoteObject object was registered!");
+  }
 }

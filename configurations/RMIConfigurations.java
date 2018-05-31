@@ -37,7 +37,17 @@ public class RMIConfigurations {
     public static final String RMI_REGISTER_NAME = "rmi-register";
 
     /**
-     * Port number of the RMI Registry.
+     * Port number of the RMI listening port.
      */
-    public static final int RMI_PORT = 22411;
+    public static final int RMI_LISTENING_PORT = 22421;
+
+    /**
+     * Port number of the RMI registry.
+     */
+    public static final int RMI_PORT_REGISTRY = 22420; // TODO: change this value
+
+    /**
+     * Hostname of the RMI Registry.
+     */
+    public static final String RMI_HOSTNAME = "localhost";
 }

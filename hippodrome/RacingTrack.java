@@ -3,8 +3,6 @@ package hippodrome;
 import clients.GeneralInformationRepositoryStub;
 import entities.HorseJockeyState;
 import hippodrome.actions.Race;
-import entities.HorseJockey;
-import server.ServiceProviderAgent;
 
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;

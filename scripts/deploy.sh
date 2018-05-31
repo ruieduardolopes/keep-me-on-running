@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [ "$SHELL" = '/bin/zsh' ]; then
+    WORK_PATH="$( cd "$( dirname "${(%):-%N}" )" && pwd )/../"
+else
+    WORK_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/../"
+fi
+
 updatecoderemote () {
     for node in {01,02,03,04,05,06,07,08,09}; do
         ssh sd0402@l040101-ws$node.ua.pt 'updcode'
@@ -84,3 +90,40 @@ shlastlog () {
     ssh sd0402@l040101-ws01.ua.pt 'cat $WORK_PATH/$(ls $WORK_PATH | grep horse-run | tail -n1)' | less
 }
 
+startrmi () {
+    cd ~
+    rmiregistry8 -J-Djava.rmi.server.useCodebaseOnly=false 22420 &
+    cd -
+}
+
+compileregister () {
+    cd $WORK_PATH
+    javac8 -cp ".:lib/genclass.jar" registry/*.java
+    cd -
+    cp $WORK_PATH/registry/Register.java $WORK_PATH/out/registry/registry
+    mv $WORK_PATH/registry/*.class $WORK_PATH/out/registry/registry
+    mv $WORK_PATH/configurations/RMIConfigurations.class $WORK_PATH/out/registry/configurations
+}
+
+runregistry () {
+    cd $WORK_PATH/out/registry
+    java8 -cp . -Djava.rmi.server.codebase="file://$(echo $WORK_PATH)out/registry/" -Djava.rmi.server.useCodebaseOnly=false registry.ServerRegisterRemoteObject
+    cd -
+}
+
+compileservers () {
+    cd $WORK_PATH
+    javac8 -cp ".:lib/genclass.jar" server/*.java
+    cd -
+    mv $(echo $WORK_PATH)configurations/*.class $(echo $WORK_PATH)out/servers/configurations
+    mv $(echo $WORK_PATH)entities/*.class $(echo $WORK_PATH)out/servers/entities
+    mv $(echo $WORK_PATH)hippodrome/*.class $(echo $WORK_PATH)out/servers/hippodrome
+    mv $(echo $WORK_PATH)hippodrome/actions/*.class $(echo $WORK_PATH)out/servers/hippodrome/actions
+    mv $(echo $WORK_PATH)hippodrome/rollfilm/*.class $(echo $WORK_PATH)out/servers/hippodrome/rollfilm
+    cp $(echo $WORK_PATH)hippodrome/*Interface.java $(echo $WORK_PATH)out/servers/hippodrome
+    mv $(echo $WORK_PATH)lib/logging/*.class $(echo $WORK_PATH)out/servers/lib/logging
+    cp $(echo $WORK_PATH)lib/genclass.jar $(echo $WORK_PATH)out/servers/lib
+    mv $(echo $WORK_PATH)registry/*.class $(echo $WORK_PATH)out/servers/registry
+    cp $(echo $WORK_PATH)registry/Register.java $(echo $WORK_PATH)out/servers/registry
+    mv $(echo $WORK_PATH)server/*.class $(echo $WORK_PATH)out/servers/server
+}

@@ -2,13 +2,6 @@ package server;
 
 import configurations.ServerConfigurations;
 import hippodrome.*;
-import interfaces.BettingCentreInterface;
-import interfaces.ControlCentreInterface;
-import interfaces.GeneralInformationRepositoryInterface;
-import interfaces.PaddockInterface;
-import interfaces.RacingTrackInterface;
-import interfaces.StableInterface;
-import lib.communication.ServerCom;
 import lib.logging.Logger;
 import registry.Register;
 
@@ -20,7 +13,6 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
 import static configurations.RMIConfigurations.*;
-import static configurations.ServerConfigurations.*;
 
 /**
  * Main function which must be used to run the various entities classified on {@link entities}.
@@ -41,27 +33,26 @@ public class ServerLauncher {
             printUsage();
             System.exit(1);
         }
-        if (System.getSecurityManager() == null) {
-            System.setSecurityManager(new SecurityManager());
-        }
-        Logger.printInformation("A Security Manager has been installed");
+
         Registry registry = null;
         String nameEntryObject = null;
+
         try {
-            registry = LocateRegistry.getRegistry(rmiHostname, rmiPort);
+            registry = LocateRegistry.getRegistry(RMI_HOSTNAME, RMI_PORT_REGISTRY);
         } catch (RemoteException re) {
-            Logger.printError("North Korea killed this thing..."); // TODO : redo this error handling...
+            Logger.printError("Error message 1");
             System.exit(1);
         }
+
         switch (args[0]) {
             case "betting-centre" :
                 BettingCentre bettingCentre = BettingCentre.getInstance();
                 port = ServerConfigurations.BETTING_CENTRE_PORT;
                 nameEntryObject = BETTING_CENTRE_NAME;
                 try {
-                    server = (BettingCentreInterface) UnicastRemoteObject.exportObject(bettingCentre, port);
+                    bettingCentreInterface = (BettingCentreInterface) UnicastRemoteObject.exportObject(bettingCentre, port);
                 } catch (RemoteException re) {
-                    Logger.printError("Again... damn Kim Jong Un!"); // TODO : redo this error handling
+                    Logger.printError("Error message 2");
                     System.exit(2);
                 }
                 break;
@@ -70,9 +61,9 @@ public class ServerLauncher {
                 port = ServerConfigurations.CONTROL_CENTRE_PORT;
                 nameEntryObject = CONTROL_CENTRE_NAME;
                 try {
-                    server = (ControlCentreInterface) UnicastRemoteObject.exportObject(controlCentre, port);
+                    controlCentreInterface = (ControlCentreInterface) UnicastRemoteObject.exportObject(controlCentre, port);
                 } catch (RemoteException re) {
-                    Logger.printError("Again... damn Kim Jong Un!"); // TODO : redo this error handling
+                    Logger.printError("Error message 2");
                     System.exit(2);
                 }
                 break;
@@ -81,9 +72,9 @@ public class ServerLauncher {
                 port = ServerConfigurations.GENERAL_INFORMATION_REPOSITORY_PORT;
                 nameEntryObject = GLOBAL_REPOSITORY_OF_INFORMATION_NAME;
                 try {
-                    server = (GeneralInformationRepositoryInterface) UnicastRemoteObject.exportObject(repository, port);
+                    repositoryInterface = (GeneralInformationRepositoryInterface) UnicastRemoteObject.exportObject(repository, port);
                 } catch (RemoteException re) {
-                    Logger.printError("Again... damn Kim Jong Un!"); // TODO : redo this error handling
+                    Logger.printError("Error message 2");
                     System.exit(2);
                 }
                 break;
@@ -92,9 +83,9 @@ public class ServerLauncher {
                 port = ServerConfigurations.PADDOCK_PORT;
                 nameEntryObject = PADDOCK_NAME;
                 try {
-                    server = (PaddockInterface) UnicastRemoteObject.exportObject(paddock, port);
+                    paddockInterface = (PaddockInterface) UnicastRemoteObject.exportObject(paddock, port);
                 } catch (RemoteException re) {
-                    Logger.printError("Again... damn Kim Jong Un!"); // TODO : redo this error handling
+                    Logger.printError("Error message 2");
                     System.exit(2);
                 }
                 break;
@@ -109,9 +100,9 @@ public class ServerLauncher {
                 port = ServerConfigurations.RACING_TRACK_PORT;
                 nameEntryObject = RACING_TRACK_NAME;
                 try {
-                    server = (RacingTrackInterface) UnicastRemoteObject.exportObject(racingTrack, port);
+                    racingTrackInterface = (RacingTrackInterface) UnicastRemoteObject.exportObject(racingTrack, port);
                 } catch (RemoteException re) {
-                    Logger.printError("Again... damn Kim Jong Un!"); // TODO : redo this error handling
+                    Logger.printError("Error Message 2");
                     System.exit(2);
                 }
                 break;
@@ -120,16 +111,17 @@ public class ServerLauncher {
                 port = ServerConfigurations.STABLE_PORT;
                 nameEntryObject = STABLE_NAME;
                 try {
-                    server = (StableInterface) UnicastRemoteObject.exportObject(stable, port);
+                    stableInterface = (StableInterface) UnicastRemoteObject.exportObject(stable, port);
                 } catch (RemoteException re) {
-                    Logger.printError("Again... damn Kim Jong Un!"); // TODO : redo this error handling
+                    Logger.printError("Error message 2");
                     System.exit(2);
                 }
                 break;
             default :
                 printUsage();
-                System.exit(2);
+                System.exit(3);
         }
+
         Logger.printNotification("Preparing to run %s server on port %d", args[0], port);
         String nameEntryBase = RMI_REGISTER_NAME;
         Register register = null;
@@ -140,7 +132,19 @@ public class ServerLauncher {
             System.exit(4);
         }
         try {
-            register.bind(nameEntryObject, server);
+            if (bettingCentreInterface != null) {
+                register.bind(nameEntryObject, bettingCentreInterface);
+            } else if (controlCentreInterface != null) {
+                register.bind(nameEntryObject, controlCentreInterface);
+            } else if (repositoryInterface != null) {
+                register.bind(nameEntryObject, repositoryInterface);
+            } else if (paddockInterface != null) {
+                register.bind(nameEntryObject, paddockInterface);
+            } else if (racingTrackInterface != null) {
+                register.bind(nameEntryObject, racingTrackInterface);
+            } else if (stableInterface != null) {
+                register.bind(nameEntryObject, stableInterface);
+            }
         } catch (RemoteException | AlreadyBoundException e) {
             Logger.printError("Oh damn... again..."); // TODO : another error handling
             System.exit(5);
@@ -150,9 +154,9 @@ public class ServerLauncher {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException ie) {
-
+                System.exit(1000); // TODO: remove this
             }
-            terminateExecution = ServiceProviderAgent.getShutdownCounter(args[0]);
+            //terminateExecution = ServiceProviderAgent.getShutdownCounter(args[0]); // TODO : remove the service provider agent
         }
         serverConnectionRequest.close();
     }
@@ -172,44 +176,24 @@ public class ServerLauncher {
                 "  - stable              (Stable)\n");
     }
 
+    private static BettingCentreInterface bettingCentreInterface = null;
+
+    private static ControlCentreInterface controlCentreInterface = null;
+
+    private static GeneralInformationRepositoryInterface repositoryInterface = null;
+
+    private static PaddockInterface paddockInterface = null;
+
+    private static RacingTrackInterface racingTrackInterface = null;
+
+    private static StableInterface stableInterface = null;
+
+    private static int port = 0;
+
+    private static final String RMI_HOSTNAME = "localhost"; // TODO: switch this for a proper configuration
 
     /**
      * Boolean variable to signal when the execution must be terminated
      */
     private static boolean terminateExecution = false;
-
-    /**
-     * The instance of a general server.
-     */
-    private static Server server = null;
-
-    /**
-     * The identification of the service port.
-     */
-    private static int port;
-
-    /**
-     * The port of the RMI Registry Server
-     */
-    private static int rmiPort; // TODO : RMI port on server
-
-    /**
-     * The hostname of the RMI Registry Server
-     */
-    private static String rmiHostname; // TODO : RMI hostname on server
-
-    /**
-     * The request channel for communications with the clients.
-     */
-    private static ServerCom serverConnectionRequest;
-
-    /**
-     * The instance of the communication channel.
-     */
-    private static ServerCom serverConnectionInstance;
-
-    /**
-     * The instance of the service provider agent.
-     */
-    private static ServiceProviderAgent serviceProviderAgent;
 }

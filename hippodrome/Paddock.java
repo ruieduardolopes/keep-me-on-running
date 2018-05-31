@@ -5,7 +5,6 @@ import entities.HorseJockey;
 import entities.HorseJockeyState;
 import entities.Spectator;
 import entities.SpectatorState;
-import server.ServiceProviderAgent;
 
 import static configurations.SimulationConfigurations.*;
 
