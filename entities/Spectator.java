@@ -2,6 +2,7 @@ package entities;
 
 import clients.*;
 import hippodrome.*;
+import hippodrome.responses.Response;
 import lib.logging.Logger;
 
 import java.util.Random;
@@ -60,7 +61,12 @@ public class Spectator extends Thread {
                     controlCentre.goCheckHorses();                                  //     then the Control Centre must know, in order to advance something else;
                 }                                                                   //
                 paddock.goCheckHorses(isLastSpectator);                             //   I then must change my state to Appraising the Horses;
-                money -= bettingCentre.placeABet(identification, bet(), horse());   //   Having changed my state, then I must place my bet on the horse on my choice;
+
+                //money -= bettingCentre.placeABet(identification, bet(), horse()); //   Having changed my state, then I must place my bet on the horse on my choice;
+                Response response = bettingCentre.placeABet(identification, bet(), horse());
+                money -= response.bet;
+                setSpectatorState(response.newSpectatorState);
+
                 repository.setSpectatorAmountOfMoney(identification, money);        //
                 controlCentre.goWatchTheRace();                                     //   With the bet already placed, then I should go watch the race;
                 if (bettingCentre.haveIWon(identification)) {                       //   If the I already know that I've won the race, then:

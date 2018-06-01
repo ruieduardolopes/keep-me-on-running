@@ -1,6 +1,7 @@
 package hippodrome;
 
 import entities.Spectator;
+import hippodrome.responses.Response;
 
 import java.rmi.Remote;
 
@@ -20,7 +21,7 @@ public interface BettingCentreInterface extends Remote {
 
     void honourTheBets() throws InterruptedException;
 
-    int placeABet(int spectator, int bet, int horse) throws InterruptedException;
+    Response placeABet(int spectator, int bet, int horse) throws InterruptedException;
 
     int goCollectTheGains() throws InterruptedException;
 

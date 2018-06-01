@@ -1,8 +1,12 @@
 package hippodrome;
 
 import clients.GeneralInformationRepositoryStub;
+import configurations.RMIConfigurations;
+import configurations.ServerConfigurations;
 import entities.*;
 import hippodrome.actions.Bet;
+import hippodrome.responses.Response;
+import hippodrome.responses.ResponseType;
 import hippodrome.rollfilm.UnknownHorseJockeyException;
 import hippodrome.rollfilm.UnknownSpectatorException;
 
@@ -14,6 +18,10 @@ import hippodrome.rollfilm.UnknownSpectatorException;
  *
  * Further documentation on this matter could be accessed here: {@link Queue}.
  */
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -48,7 +56,14 @@ public class BettingCentre implements BettingCentreInterface {
         this.bets = new Bet[numberOfSpectators];
         this.moneyOnSafe = 0;
         this.bettingQueue = new LinkedBlockingQueue<>();
-        this.repository = new GeneralInformationRepositoryStub();
+        //this.repository = new GeneralInformationRepositoryStub();
+        Registry registry;
+        try {
+            registry = LocateRegistry.getRegistry(RMIConfigurations.RMI_HOSTNAME, RMIConfigurations.RMI_PORT_REGISTRY);
+            this.repository = (GeneralInformationRepositoryInterface) registry.lookup(ServerConfigurations.GENERAL_INFORMATION_REPOSITORY_HOST);
+        } catch (RemoteException | NotBoundException re) {
+            re.printStackTrace();
+        }
         this.winners = new int[numberOfSpectators];
         this.horsesOdds = new int[numberOfHorses];
         this.horsesAbilities = new int[numberOfHorses];
@@ -133,8 +148,8 @@ public class BettingCentre implements BettingCentreInterface {
      *
      * @return the amount of money which was accepted by the {@link Broker} to place the bet.
      */
-    public synchronized int placeABet(int spectator, int bet, int horse) throws InterruptedException {
-        ((ServiceProviderAgent)Thread.currentThread()).setSpectatorState(SpectatorState.PLACING_A_BET);
+    public synchronized Response placeABet(int spectator, int bet, int horse) throws InterruptedException {
+        //((ServiceProviderAgent)Thread.currentThread()).setSpectatorState(SpectatorState.PLACING_A_BET);
         repository.setSpectatorStatus(spectator, SpectatorState.PLACING_A_BET);
         bettingQueue.add(spectator);
         try {
@@ -154,7 +169,7 @@ public class BettingCentre implements BettingCentreInterface {
                 throw new InterruptedException("The placeABet() has been interrupted on its wait().");
             }
         }
-        return bet;
+        return new Response(ResponseType.BETTING_CENTRE_PLACE_A_BET, bet, SpectatorState.PLACING_A_BET);
     }
 
     /**
@@ -386,7 +401,7 @@ public class BettingCentre implements BettingCentreInterface {
     /**
      * The {@link GeneralInformationRepository} instance where all this region's actions will be reported.
      */
-    private GeneralInformationRepositoryStub repository;
+    private GeneralInformationRepositoryInterface repository;
 
     /**
      * The created instance of this class
