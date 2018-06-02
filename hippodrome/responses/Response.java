@@ -2,8 +2,9 @@ package hippodrome.responses;
 
 import entities.BrokerState;
 import entities.SpectatorState;
+import java.io.Serializable;
 
-public class Response {
+public class Response implements Serializable {
     public Response(ResponseType type, BrokerState state) {
         this.type = type;
         this.brokerState = state;

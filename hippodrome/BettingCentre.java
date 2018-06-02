@@ -1,5 +1,7 @@
 package hippodrome;
 
+import configurations.RMIConfigurations;
+import configurations.ServerConfigurations;
 import entities.*;
 import hippodrome.actions.Bet;
 import hippodrome.responses.Response;
@@ -15,6 +17,10 @@ import hippodrome.rollfilm.UnknownSpectatorException;
  *
  * Further documentation on this matter could be accessed here: {@link Queue}.
  */
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -388,7 +394,7 @@ public class BettingCentre implements BettingCentreInterface {
     /**
      * The {@link GeneralInformationRepository} instance where all this region's actions will be reported.
      */
-    private GeneralInformationRepositoryInterface repository; // TODO : what do we do with the repository here?
+    private GeneralInformationRepositoryInterface repository;
 
     /**
      * The created instance of this class
