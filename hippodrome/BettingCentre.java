@@ -1,8 +1,9 @@
 package hippodrome;
 
-import clients.GeneralInformationRepositoryStub;
 import entities.*;
 import hippodrome.actions.Bet;
+import hippodrome.responses.Response;
+import hippodrome.responses.ResponseType;
 import hippodrome.rollfilm.UnknownHorseJockeyException;
 import hippodrome.rollfilm.UnknownSpectatorException;
 
@@ -48,7 +49,6 @@ public class BettingCentre implements BettingCentreInterface {
         this.bets = new Bet[numberOfSpectators];
         this.moneyOnSafe = 0;
         this.bettingQueue = new LinkedBlockingQueue<>();
-        this.repository = new GeneralInformationRepositoryStub();
         this.winners = new int[numberOfSpectators];
         this.horsesOdds = new int[numberOfHorses];
         this.horsesAbilities = new int[numberOfHorses];
@@ -74,11 +74,11 @@ public class BettingCentre implements BettingCentreInterface {
      *
      * @throws InterruptedException if the wait() is interrupted.
      */
-    public synchronized void acceptTheBets() throws InterruptedException {
+    public synchronized Response acceptTheBets() throws InterruptedException {
         evaluateOdds();
         brokerDoesNotAllowToProceedToHaveIWon = true;
         allWinnersAreNotOnBettingCentre = true;
-        ((ServiceProviderAgent)Thread.currentThread()).setBrokerState(BrokerState.WAITING_FOR_BETS);
+        //((ServiceProviderAgent)Thread.currentThread()).setBrokerState(BrokerState.WAITING_FOR_BETS);
         repository.setBrokerStatus(BrokerState.WAITING_FOR_BETS);
         while (bettingQueue.size() !=  numberOfSpectators) {
             try {
@@ -91,6 +91,7 @@ public class BettingCentre implements BettingCentreInterface {
         brokerHaveNotAcceptedTheBet = false;
         notifyAll();
         bettingQueue = new LinkedBlockingQueue<>();
+        return new Response(ResponseType.BETTING_CENTRE_ACCEPT_THE_BETS, BrokerState.WAITING_FOR_BETS);
     }
 
     /**
@@ -101,8 +102,8 @@ public class BettingCentre implements BettingCentreInterface {
      *
      * @throws InterruptedException if the wait() is interrupted.
      */
-    public synchronized void honourTheBets() throws InterruptedException {
-        ((ServiceProviderAgent)Thread.currentThread()).setBrokerState(BrokerState.SETTLING_ACCOUNTS);
+    public synchronized Response honourTheBets() throws InterruptedException {
+        //((ServiceProviderAgent)Thread.currentThread()).setBrokerState(BrokerState.SETTLING_ACCOUNTS);
         repository.setBrokerStatus(BrokerState.SETTLING_ACCOUNTS);
         while (allWinnersAreNotOnBettingCentre) {
             try {
@@ -114,6 +115,7 @@ public class BettingCentre implements BettingCentreInterface {
         }
         winnersMustNotReceiveTheirMoney = false;
         notifyAll();
+        return new Response(ResponseType.BETTING_CENTRE_HONOUR_THE_BETS, BrokerState.SETTLING_ACCOUNTS);
     }
 
     /**
@@ -133,8 +135,8 @@ public class BettingCentre implements BettingCentreInterface {
      *
      * @return the amount of money which was accepted by the {@link Broker} to place the bet.
      */
-    public synchronized int placeABet(int spectator, int bet, int horse) throws InterruptedException {
-        ((ServiceProviderAgent)Thread.currentThread()).setSpectatorState(SpectatorState.PLACING_A_BET);
+    public synchronized Response placeABet(int spectator, int bet, int horse) throws InterruptedException {
+        //((ServiceProviderAgent)Thread.currentThread()).setSpectatorState(SpectatorState.PLACING_A_BET);
         repository.setSpectatorStatus(spectator, SpectatorState.PLACING_A_BET);
         bettingQueue.add(spectator);
         try {
@@ -154,7 +156,7 @@ public class BettingCentre implements BettingCentreInterface {
                 throw new InterruptedException("The placeABet() has been interrupted on its wait().");
             }
         }
-        return bet;
+        return new Response(ResponseType.BETTING_CENTRE_PLACE_A_BET, SpectatorState.PLACING_A_BET, spectator, bet);
     }
 
     /**
@@ -168,10 +170,10 @@ public class BettingCentre implements BettingCentreInterface {
      *
      * @return the amount of money collected by the {@code spectator}, as an integer.
      */
-    public synchronized int goCollectTheGains() throws InterruptedException {
-        ServiceProviderAgent agent = ((ServiceProviderAgent)Thread.currentThread());
-        agent.setSpectatorState(SpectatorState.COLLECTING_THE_GAINS);
-        repository.setSpectatorStatus(agent.getSpectatorIdentification(), SpectatorState.COLLECTING_THE_GAINS);
+    public synchronized Response goCollectTheGains(int spectator) throws InterruptedException {
+        //ServiceProviderAgent agent = ((ServiceProviderAgent)Thread.currentThread());
+        //agent.setSpectatorState(SpectatorState.COLLECTING_THE_GAINS);
+        repository.setSpectatorStatus(spectator, SpectatorState.COLLECTING_THE_GAINS);
         winnersArrived++;
         if (winnersArrived == winners.length) {
             allWinnersAreNotOnBettingCentre = false;
@@ -185,7 +187,7 @@ public class BettingCentre implements BettingCentreInterface {
                 throw new InterruptedException("The goCollectTheGains() has been interrupted on its wait().");
             }
         }
-        return bets[agent.getSpectatorIdentification()].getAmount()*horsesOdds[bets[agent.getSpectatorIdentification()].getHorseJockeyId()];
+        return new Response(ResponseType.BETTING_CENTRE_GO_COLLECT_THE_GAINS, SpectatorState.COLLECTING_THE_GAINS, spectator, bets[spectator].getAmount()*horsesOdds[bets[spectator].getHorseJockeyId()]);
     }
 
     /**
@@ -386,7 +388,7 @@ public class BettingCentre implements BettingCentreInterface {
     /**
      * The {@link GeneralInformationRepository} instance where all this region's actions will be reported.
      */
-    private GeneralInformationRepositoryStub repository;
+    private GeneralInformationRepositoryInterface repository; // TODO : what do we do with the repository here?
 
     /**
      * The created instance of this class

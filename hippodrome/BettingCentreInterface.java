@@ -1,6 +1,7 @@
 package hippodrome;
 
 import entities.Spectator;
+import hippodrome.responses.Response;
 
 import java.rmi.Remote;
 
@@ -16,13 +17,13 @@ import java.rmi.Remote;
  */
 public interface BettingCentreInterface extends Remote {
 
-    void acceptTheBets() throws InterruptedException;
+    Response acceptTheBets() throws InterruptedException;
 
-    void honourTheBets() throws InterruptedException;
+    Response honourTheBets() throws InterruptedException;
 
-    int placeABet(int spectator, int bet, int horse) throws InterruptedException;
+    Response placeABet(int spectator, int bet, int horse) throws InterruptedException;
 
-    int goCollectTheGains() throws InterruptedException;
+    Response goCollectTheGains(int spectator) throws InterruptedException;
 
     boolean haveIWon(int spectatorId) throws InterruptedException;
 
