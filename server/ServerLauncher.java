@@ -1,7 +1,9 @@
 package server;
 
 import configurations.ServerConfigurations;
+import configurations.SimulationConfigurations;
 import hippodrome.*;
+import hippodrome.actions.Race;
 import lib.logging.Logger;
 import registry.Register;
 
@@ -13,6 +15,7 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
 import static configurations.RMIConfigurations.*;
+import static configurations.SimulationConfigurations.*;
 
 /**
  * Main function which must be used to run the various entities classified on {@link entities}.
@@ -54,7 +57,7 @@ public class ServerLauncher {
 
         switch (args[0]) {
             case "betting-centre" :
-                BettingCentre bettingCentre = BettingCentre.getInstance(); // TODO : change construction
+                BettingCentre bettingCentre = new BettingCentre(repositoryInterface, NUMBER_OF_PAIRS_HORSE_JOCKEY, NUMBER_OF_SPECTATORS);
                 port = ServerConfigurations.BETTING_CENTRE_PORT;
                 nameEntryObject = BETTING_CENTRE_NAME;
                 try {
@@ -65,7 +68,7 @@ public class ServerLauncher {
                 }
                 break;
             case "control-centre" :
-                ControlCentre controlCentre = ControlCentre.getInstance(); // TODO : change construction
+                ControlCentre controlCentre = new ControlCentre(repositoryInterface, NUMBER_OF_PAIRS_HORSE_JOCKEY);
                 port = ServerConfigurations.CONTROL_CENTRE_PORT;
                 nameEntryObject = CONTROL_CENTRE_NAME;
                 try {
@@ -76,7 +79,7 @@ public class ServerLauncher {
                 }
                 break;
             case "general-repo" :
-                GeneralInformationRepository repository = GeneralInformationRepository.getInstance(); // TODO : change construction
+                GeneralInformationRepository repository = new GeneralInformationRepository(NUMBER_OF_PAIRS_HORSE_JOCKEY, NUMBER_OF_SPECTATORS, true);
                 port = ServerConfigurations.GENERAL_INFORMATION_REPOSITORY_PORT;
                 nameEntryObject = GLOBAL_REPOSITORY_OF_INFORMATION_NAME;
                 try {
@@ -87,7 +90,7 @@ public class ServerLauncher {
                 }
                 break;
             case "paddock" :
-                Paddock paddock = Paddock.getInstance(); // TODO : change construction
+                Paddock paddock = new Paddock(repositoryInterface, NUMBER_OF_SPECTATORS, NUMBER_OF_PAIRS_HORSE_JOCKEY);
                 port = ServerConfigurations.PADDOCK_PORT;
                 nameEntryObject = PADDOCK_NAME;
                 try {
@@ -100,7 +103,7 @@ public class ServerLauncher {
             case "racing-track" :
                 RacingTrack racingTrack = null;
                 try {
-                    racingTrack = RacingTrack.getInstance(); // TODO : change construction
+                    racingTrack = new RacingTrack(repositoryInterface, new Race(NUMBER_OF_TRACKS, 0, Race.generateDistance()));
                 } catch (Exception e) {
                     Logger.printError("Something went wrong with the creation of the Racing Track");
                     System.exit(3);
@@ -115,7 +118,7 @@ public class ServerLauncher {
                 }
                 break;
             case "stable" :
-                Stable stable = Stable.getInstance(); // TODO : change construction
+                Stable stable = new Stable(repositoryInterface);
                 port = ServerConfigurations.STABLE_PORT;
                 nameEntryObject = STABLE_NAME;
                 try {
