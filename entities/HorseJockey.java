@@ -73,7 +73,7 @@ public class HorseJockey extends Thread {
                 racingTrack.makeAMove(identification, ability);                          //   I should make a move on the track;
             }                                                                   //
             controlCentre.makeAMove(identification);                                          // As I crossed the line I must advance one step further to get off the line;
-            stable.proceedToStable();                                           // Then I should go to the Stable and rest till the next round, if that applies.
+            stable.proceedToStable(identification);                                           // Then I should go to the Stable and rest till the next round, if that applies.
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(2);

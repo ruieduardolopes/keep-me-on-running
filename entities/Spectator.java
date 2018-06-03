@@ -55,22 +55,22 @@ public class Spectator extends Thread {
     @Override
     public void run() { // TODO : change the processing mechanism of the returns
         try {
-            while (controlCentre.waitForTheNextRace(identification)) {              //x While a next race is about to happen:
+            while (controlCentre.waitForTheNextRace(identification).getBooleanValue()) {              //x While a next race is about to happen:
                 boolean isLastSpectator = paddock.goCheckHorses();                  //   the Paddock calls me to go check the horses and I retrieve if I'm the last to go;
                 if (isLastSpectator) {                                              //   if I'm the last Spectator to come:
                     controlCentre.goCheckHorses();                                  //     then the Control Centre must know, in order to advance something else;
                 }                                                                   //
-                paddock.goCheckHorses(isLastSpectator);                             //   I then must change my state to Appraising the Horses;
+                paddock.goCheckHorses(identification, isLastSpectator);                             //   I then must change my state to Appraising the Horses;
 
                 //money -= bettingCentre.placeABet(identification, bet(), horse()); //   Having changed my state, then I must place my bet on the horse on my choice;
                 Response response = bettingCentre.placeABet(identification, bet(), horse());
-                money -= response.bet;
-                setSpectatorState(response.newSpectatorState);
+                money -= response.getValueInt();
+                setSpectatorState(response.getSpectatorState());
 
                 repository.setSpectatorAmountOfMoney(identification, money);        //
                 controlCentre.goWatchTheRace(identification);                                     //   With the bet already placed, then I should go watch the race;
                 if (bettingCentre.haveIWon(identification)) {                       //   If the I already know that I've won the race, then:
-                    money += bettingCentre.goCollectTheGains(identification);       //     I should collect my gains at the Betting Centre;
+                    money += bettingCentre.goCollectTheGains(identification).getValueInt();       //     I should collect my gains at the Betting Centre;
                     repository.setSpectatorAmountOfMoney(identification, money);    //
                 }                                                                   //
                 raceNumber++;                                                       //   Then the number of races must increase;
@@ -78,7 +78,7 @@ public class Spectator extends Thread {
                     break;                                                          //     then I should stop;
                 }                                                                   //
             }                                                                       //
-            controlCentre.relaxABit();                                              // And relax a bit.
+            controlCentre.relaxABit(identification);                                              // And relax a bit.
             //shutdown();                                                           // TODO : shutdown invocation
         } catch (InterruptedException ie) {
             ie.printStackTrace();
