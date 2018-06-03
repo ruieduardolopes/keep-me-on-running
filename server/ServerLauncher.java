@@ -43,10 +43,18 @@ public class ServerLauncher {
             Logger.printError("Error message 1");
             System.exit(1);
         }
+        if (!args[0].equals("general-repo")) {
+            try {
+                repositoryInterface = (GeneralInformationRepositoryInterface) registry.lookup(GLOBAL_REPOSITORY_OF_INFORMATION_NAME);
+            } catch (RemoteException | NotBoundException e) {
+                Logger.printError("Error message 0");
+                System.exit(11);
+            }
+        }
 
         switch (args[0]) {
             case "betting-centre" :
-                BettingCentre bettingCentre = BettingCentre.getInstance();
+                BettingCentre bettingCentre = BettingCentre.getInstance(); // TODO : change construction
                 port = ServerConfigurations.BETTING_CENTRE_PORT;
                 nameEntryObject = BETTING_CENTRE_NAME;
                 try {
@@ -57,7 +65,7 @@ public class ServerLauncher {
                 }
                 break;
             case "control-centre" :
-                ControlCentre controlCentre = ControlCentre.getInstance();
+                ControlCentre controlCentre = ControlCentre.getInstance(); // TODO : change construction
                 port = ServerConfigurations.CONTROL_CENTRE_PORT;
                 nameEntryObject = CONTROL_CENTRE_NAME;
                 try {
@@ -68,7 +76,7 @@ public class ServerLauncher {
                 }
                 break;
             case "general-repo" :
-                GeneralInformationRepository repository = GeneralInformationRepository.getInstance();
+                GeneralInformationRepository repository = GeneralInformationRepository.getInstance(); // TODO : change construction
                 port = ServerConfigurations.GENERAL_INFORMATION_REPOSITORY_PORT;
                 nameEntryObject = GLOBAL_REPOSITORY_OF_INFORMATION_NAME;
                 try {
@@ -79,7 +87,7 @@ public class ServerLauncher {
                 }
                 break;
             case "paddock" :
-                Paddock paddock = Paddock.getInstance();
+                Paddock paddock = Paddock.getInstance(); // TODO : change construction
                 port = ServerConfigurations.PADDOCK_PORT;
                 nameEntryObject = PADDOCK_NAME;
                 try {
@@ -92,7 +100,7 @@ public class ServerLauncher {
             case "racing-track" :
                 RacingTrack racingTrack = null;
                 try {
-                    racingTrack = RacingTrack.getInstance();
+                    racingTrack = RacingTrack.getInstance(); // TODO : change construction
                 } catch (Exception e) {
                     Logger.printError("Something went wrong with the creation of the Racing Track");
                     System.exit(3);
@@ -107,7 +115,7 @@ public class ServerLauncher {
                 }
                 break;
             case "stable" :
-                Stable stable = Stable.getInstance();
+                Stable stable = Stable.getInstance(); // TODO : change construction
                 port = ServerConfigurations.STABLE_PORT;
                 nameEntryObject = STABLE_NAME;
                 try {
