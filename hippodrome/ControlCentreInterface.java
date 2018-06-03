@@ -1,6 +1,7 @@
 package hippodrome;
 
 import entities.Spectator;
+import hippodrome.responses.Response;
 
 import java.rmi.Remote;
 
@@ -15,23 +16,23 @@ import java.rmi.Remote;
  */
 public interface ControlCentreInterface extends Remote {
 
-    void startTheRace() throws InterruptedException;
+    Response startTheRace() throws InterruptedException;
 
-    void entertainTheGuests() throws InterruptedException;
+    Response entertainTheGuests() throws InterruptedException;
 
-    boolean waitForTheNextRace() throws InterruptedException;
+    Response waitForTheNextRace(int spectator) throws InterruptedException;
 
-    void goWatchTheRace() throws InterruptedException;
+    Response goWatchTheRace(int spectator) throws InterruptedException;
 
-    void relaxABit() throws InterruptedException;
+    Response relaxABit(int spectator) throws InterruptedException;
 
     int reportResults() throws InterruptedException;
 
-    void summonHorsesToPaddock() throws InterruptedException;
+    Response summonHorsesToPaddock() throws InterruptedException;
 
-    void proceedToPaddock() throws InterruptedException;
+    Response proceedToPaddock(int horseJockeyId) throws InterruptedException;
 
     void goCheckHorses() throws InterruptedException;
 
-    void makeAMove() throws InterruptedException;
+    void makeAMove(int horseJockeyId) throws InterruptedException;
 }
