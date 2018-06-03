@@ -63,21 +63,21 @@ public class HorseJockey extends Thread {
     @Override
     public void run() {
         try {
-            bettingCentre.setAbility(identification, ability);                  // Set my ability on the Betting Centre to evaluate odds;
-            stable.proceedToStable(raceNumber);                                 // I receive a call to go to the Paddock and I'll go if I'm from this race;
-            controlCentre.proceedToPaddock(identification);                                   // I should retrieve a signal to the Control Centre as I moved to the Paddock;
-            paddock.proceedToPaddock(raceNumber);                               // Then I should change my own state to At the Paddock;
-            paddock.proceedToStartLine(identification);                                       // If every other Jockeys are at the Paddock and the Spectators saw us, then
-            racingTrack.proceedToStartLine(identification);                                   //   we must proceed to the start line and change my state to At the Start Line;
-            while (!racingTrack.hasFinishLineBeenCrossed(identification)) {     // While the finish line is not crossed by me:
-                racingTrack.makeAMove(identification, ability);                          //   I should make a move on the track;
-            }                                                                   //
-            controlCentre.makeAMove(identification);                                          // As I crossed the line I must advance one step further to get off the line;
-            stable.proceedToStable(identification);                                           // Then I should go to the Stable and rest till the next round, if that applies.
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.exit(2);
-        }
+            bettingCentre.setAbility(identification, ability);                                              // Set my ability on the Betting Centre to evaluate odds;
+            setHorseJockeyState(stable.proceedToStable(raceNumber).getHorseJockeyState());                  // I receive a call to go to the Paddock and I'll go if I'm from this race;
+            setHorseJockeyState(controlCentre.proceedToPaddock(identification).getHorseJockeyState());      // I should retrieve a signal to the Control Centre as I moved to the Paddock;
+            paddock.proceedToPaddock(raceNumber);                                                           // Then I should change my own state to At the Paddock;
+            setHorseJockeyState(paddock.proceedToStartLine(identification).getHorseJockeyState());          // If every other Jockeys are at the Paddock and the Spectators saw us, then
+            racingTrack.proceedToStartLine(identification);                                                 //   we must proceed to the start line and change my state to At the Start Line;
+            while (!racingTrack.hasFinishLineBeenCrossed(identification)) {                                 // While the finish line is not crossed by me:
+                setHorseJockeyState(racingTrack.makeAMove(identification, ability).getHorseJockeyState());  //   I should make a move on the track;
+            }                                                                                               //
+            controlCentre.makeAMove(identification);                                                        // As I crossed the line I must advance one step further to get off the line;
+            setHorseJockeyState(stable.proceedToStable(identification).getHorseJockeyState());              // Then I should go to the Stable and rest till the next round, if that applies.
+        } catch (Exception e) {                                                                             //
+            e.printStackTrace();                                                                            //
+            System.exit(2);                                                                                 //
+        }                                                                                                   //
     }
 
     /**
