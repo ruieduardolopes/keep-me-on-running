@@ -20,20 +20,8 @@ public class Stable implements StableInterface {
      * This constructor creates a Stable. Plus, an instance of the
      * repository is also given in order to report status changes on the course of its actions.
      */
-    public Stable() {
-
-    }
-
-    /**
-     * Get a singleton instance of a General Repository of Information.
-     *
-     * @return an instance of the General Repository of Information.
-     */
-    public static Stable getInstance() {
-        if (instance == null) {
-            instance = new Stable();
-        }
-        return instance;
+    public Stable(GeneralInformationRepositoryInterface repository) {
+        this.repository = repository;
     }
 
     /**
@@ -133,11 +121,6 @@ public class Stable implements StableInterface {
      * Condition variable for noticing when the Broker does not want to the Spectators to advance.
      */
     private boolean brokerDidNotSaidToAdvance = true;
-
-    /**
-     * The created instance of this class
-     */
-    private static Stable instance;
 
     /**
      * An entity which represents the repository.

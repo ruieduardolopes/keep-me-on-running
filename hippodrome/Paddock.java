@@ -7,8 +7,6 @@ import entities.SpectatorState;
 import hippodrome.responses.Response;
 import hippodrome.responses.ResponseType;
 
-import static configurations.SimulationConfigurations.*;
-
 /**
  * Place where the horses are paradded before the {@link entities.Spectator}s. As the
  * pairs Horse/Jockey comes here, it means that each and everyone of them is getting prepared
@@ -29,21 +27,10 @@ public class Paddock implements PaddockInterface {
      * @param numberOfSpectators The number of Spectators which will be attending the event.
      * @param numberOfHorses The number of pairs Horse/Jockey which will be competing.
      */
-    private Paddock(int numberOfSpectators, int numberOfHorses) {
+    public Paddock(GeneralInformationRepositoryInterface repository, int numberOfSpectators, int numberOfHorses) {
+        this.repository = repository;
         this.numberOfSpectators = numberOfSpectators;
         this.numberOfHorses = numberOfHorses;
-    }
-
-    /**
-     * Get a singleton instance of a General Repository of Information.
-     *
-     * @return an instance of the General Repository of Information.
-     */
-    public static Paddock getInstance() {
-        if (instance == null) {
-            instance = new Paddock(NUMBER_OF_SPECTATORS, NUMBER_OF_PAIRS_HORSE_JOCKEY);
-        }
-        return instance;
     }
 
     /**
@@ -172,11 +159,6 @@ public class Paddock implements PaddockInterface {
      * {@link Paddock#goCheckHorses(boolean)} method.
      */
     private boolean lastSpectatorHasNotArrivedOnPaddock = true;
-
-    /**
-     * The created instance of this class
-     */
-    private static Paddock instance;
 
     /**
      * An entity which represents the repository.

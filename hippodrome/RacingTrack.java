@@ -1,6 +1,5 @@
 package hippodrome;
 
-import clients.GeneralInformationRepositoryStub;
 import entities.HorseJockeyState;
 import hippodrome.actions.Race;
 import hippodrome.responses.Response;
@@ -32,8 +31,9 @@ public class RacingTrack implements RacingTrackInterface {
      * @param race A race to be executed over this Racing Track.
      * @throws Exception if a illegal argument is sent.
      */
-    private RacingTrack(Race race) throws Exception {
+    public RacingTrack(GeneralInformationRepositoryInterface repository, Race race) throws Exception {
         try {
+            this.repository = repository;
             this.race = race;
             this.currentHorsesPositions = new int[race.getNumberOfTracks()];
             this.repository.setRaceDistance(race.getDistance());
@@ -50,7 +50,7 @@ public class RacingTrack implements RacingTrackInterface {
      * @return an instance of the General Repository of Information.
      * @throws Exception if a illegal argument is sent.
      */
-    public static RacingTrack getInstance() throws Exception {
+    /*public static RacingTrack getInstance() throws Exception {
         try {
             if (instance == null) {
                 instance = new RacingTrack(new Race(NUMBER_OF_TRACKS, identification, generateDistance()));
@@ -60,7 +60,7 @@ public class RacingTrack implements RacingTrackInterface {
             e.printStackTrace();
             throw new Exception();
         }
-    }
+    }*/
 
     /**
      * Changes the state of the pair Horse/Jockey to At the Start Line ({@code ATSL}) and waits till the last
@@ -281,11 +281,6 @@ public class RacingTrack implements RacingTrackInterface {
      * The {@link GeneralInformationRepository} instance where all this region's actions will be reported.
      */
     private GeneralInformationRepositoryInterface repository;
-
-    /**
-     * The created instance of this class
-     */
-    private static RacingTrack instance;
 }
 
 

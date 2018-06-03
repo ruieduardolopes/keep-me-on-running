@@ -36,7 +36,7 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
      * @param numberOfSpectators number of Spectators to attend on track.
      * @param onlyLogonFile flag for deactivate the debug on {@code stdout}.
      */
-    private GeneralInformationRepository(int numberOfHorses, int numberOfSpectators, boolean onlyLogonFile) {
+    public GeneralInformationRepository(int numberOfHorses, int numberOfSpectators, boolean onlyLogonFile) {
         this.onlyLogOnFile = onlyLogonFile;
         this.numberOfHorses = numberOfHorses;
         this.numberOfSpectators = numberOfSpectators;
@@ -61,18 +61,6 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
             System.err.println("Quitting...");
             System.exit(1);
         }
-    }
-
-    /**
-     * Get a singleton instance of a General Repository of Information.
-     *
-     * @return an instance of the General Repository of Information.
-     */
-    public static GeneralInformationRepository getInstance() {
-        if (instance == null) {
-            instance = new GeneralInformationRepository(NUMBER_OF_PAIRS_HORSE_JOCKEY, NUMBER_OF_SPECTATORS, ONLY_LOG_ON_FILE);
-        }
-        return instance;
     }
 
     /**
@@ -819,9 +807,4 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
      * Internal variable to inform that both the Spectators and the Entities are already created.
      */
     private boolean wereWaitingTheHorses = false;
-
-    /**
-     * The created instance of this class
-     */
-    private static GeneralInformationRepository instance;
 }

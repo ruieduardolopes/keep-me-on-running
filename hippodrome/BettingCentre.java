@@ -49,7 +49,8 @@ public class BettingCentre implements BettingCentreInterface {
      * @param numberOfSpectators the number of Spectators which will attend the events.
      *
      */
-    private BettingCentre(int numberOfHorses, int numberOfSpectators) {
+    public BettingCentre(GeneralInformationRepositoryInterface repository, int numberOfHorses, int numberOfSpectators) {
+        this.repository = repository;
         this.numberOfHorses = numberOfHorses;
         this.numberOfSpectators = numberOfSpectators;
         this.bets = new Bet[numberOfSpectators];
@@ -58,18 +59,6 @@ public class BettingCentre implements BettingCentreInterface {
         this.winners = new int[numberOfSpectators];
         this.horsesOdds = new int[numberOfHorses];
         this.horsesAbilities = new int[numberOfHorses];
-    }
-
-    /**
-     * Get a singleton instance of a Betting Centre.
-     *
-     * @return an instance of the Betting Centre.
-     */
-    public static BettingCentre getInstance() {
-        if (instance == null) {
-            instance = new BettingCentre(NUMBER_OF_PAIRS_HORSE_JOCKEY, NUMBER_OF_SPECTATORS);
-        }
-        return instance;
     }
 
     /**
@@ -395,9 +384,4 @@ public class BettingCentre implements BettingCentreInterface {
      * The {@link GeneralInformationRepository} instance where all this region's actions will be reported.
      */
     private GeneralInformationRepositoryInterface repository;
-
-    /**
-     * The created instance of this class
-     */
-    private static BettingCentre instance;
 }

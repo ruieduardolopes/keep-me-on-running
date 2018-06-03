@@ -13,58 +13,63 @@ public class Response implements Serializable {
 
     public Response(ResponseType type, SpectatorState state, int spectatorId) {
         this.type = type;
-        switch (this.type) {
-            case CONTROL_CENTRE_GO_WATCH_THE_RACE:
-                this.spectatorState = state;
-                this.spectatorId = spectatorId;
-                break;
-            default:
-                // TODO : handle this case
-                break;
-        }
+        this.spectatorState = state;
+        this.spectatorId = spectatorId;
     }
 
     public Response(ResponseType type, SpectatorState state, int spectatorId, int value) {
         this.type = type;
-        switch (this.type) { // TODO : do the other cases
-            case BETTING_CENTRE_PLACE_A_BET:
-                this.spectatorState = state;
-                this.spectatorId = spectatorId;
-                this.bet = value;
-                break;
-            default:
-                // TODO : handle this case
-                break;
-        }
+        this.spectatorState = state;
+        this.spectatorId = spectatorId;
+        this.valueInt = value;
     }
 
     public Response(ResponseType type, SpectatorState state, int spectatorId, boolean value) {
         this.type = type;
-        switch (this.type) { // TODO : verify the cases
-            case BETTING_CENTRE_PLACE_A_BET:
-                this.spectatorState = state;
-                this.spectatorId = spectatorId;
-                this.booleanValue = value;
-                break;
-            default:
-                // TODO : handle this case
-                break;
-        }
+        this.spectatorState = state;
+        this.spectatorId = spectatorId;
+        this.booleanValue = value;
     }
 
     public Response(ResponseType type, HorseJockeyState state, int horseJockeyId) {
         this.type = type;
-        switch (this.type) {
-            case CONTROL_CENTRE_PROCEED_TO_PADDOCK:
-                this.horseJockeyState = state;
-                this.horseJockeyId = horseJockeyId;
-                break;
-            default:
-                break;
-        }
+        this.horseJockeyState = state;
+        this.horseJockeyId = horseJockeyId;
     }
 
-    private int bet = 0;
+    public int getValueInt() {
+        return valueInt;
+    }
+
+    public int getSpectatorId() {
+        return spectatorId;
+    }
+
+    public int getHorseJockeyId() {
+        return horseJockeyId;
+    }
+
+    public ResponseType getType() {
+        return type;
+    }
+
+    public boolean getBooleanValue() {
+        return booleanValue;
+    }
+
+    public BrokerState getBrokerState() {
+        return brokerState;
+    }
+
+    public SpectatorState getSpectatorState() {
+        return spectatorState;
+    }
+
+    public HorseJockeyState getHorseJockeyState() {
+        return horseJockeyState;
+    }
+
+    private int valueInt = 0;
     private int spectatorId = 0;
     private int horseJockeyId = 0;
     private ResponseType type = null;

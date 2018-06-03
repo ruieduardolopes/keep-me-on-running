@@ -25,20 +25,9 @@ public class ControlCentre implements ControlCentreInterface {
      *
      * @param numberOfHorses the number of pairs Horse/Jockeys which will compete against one another.
      */
-    private ControlCentre(int numberOfHorses) {
+    public ControlCentre(GeneralInformationRepositoryInterface repository, int numberOfHorses) {
+        this.repository = repository;
         this.numberOfHorses = numberOfHorses;
-    }
-
-    /**
-     * Get a singleton instance of a Control Centre.
-     *
-     * @return an instance of the Control Centre.
-     */
-    public static ControlCentre getInstance() {
-        if (instance == null) {
-            instance = new ControlCentre(NUMBER_OF_PAIRS_HORSE_JOCKEY);
-        }
-        return instance;
     }
 
     /**
@@ -289,9 +278,4 @@ public class ControlCentre implements ControlCentreInterface {
      * An entity which represents the repository.
      */
     private GeneralInformationRepositoryInterface repository;
-
-    /**
-     * The created instance of this class
-     */
-    private static ControlCentre instance;
 }
