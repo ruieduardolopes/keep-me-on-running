@@ -1,9 +1,6 @@
 package entities;
 
-import clients.*;
-import configurations.SimulationConfigurations;
 import hippodrome.*;
-import lib.logging.Logger;
 
 /**
  * Implementation of a pair Horse/Jockey, the main horse race character. This entity,

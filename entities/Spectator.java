@@ -1,9 +1,7 @@
 package entities;
 
-import clients.*;
 import hippodrome.*;
 import hippodrome.responses.Response;
-import lib.logging.Logger;
 
 import java.util.Random;
 
