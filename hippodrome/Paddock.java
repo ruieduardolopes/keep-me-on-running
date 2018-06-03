@@ -1,10 +1,11 @@
 package hippodrome;
 
-import clients.GeneralInformationRepositoryStub;
 import entities.HorseJockey;
 import entities.HorseJockeyState;
 import entities.Spectator;
 import entities.SpectatorState;
+import hippodrome.responses.Response;
+import hippodrome.responses.ResponseType;
 
 import static configurations.SimulationConfigurations.*;
 
@@ -31,7 +32,6 @@ public class Paddock implements PaddockInterface {
     private Paddock(int numberOfSpectators, int numberOfHorses) {
         this.numberOfSpectators = numberOfSpectators;
         this.numberOfHorses = numberOfHorses;
-        this.repository = new GeneralInformationRepositoryStub();
     }
 
     /**
@@ -80,9 +80,9 @@ public class Paddock implements PaddockInterface {
      *
      * @throws InterruptedException if the wait() is interrupted.
      */
-    public synchronized void goCheckHorses(boolean isTheLastSpectator) throws InterruptedException {
-        ((ServiceProviderAgent)Thread.currentThread()).setSpectatorState(SpectatorState.APPRAISING_THE_HORSES);
-        repository.setSpectatorStatus(((ServiceProviderAgent)(Thread.currentThread())).getSpectatorIdentification(), SpectatorState.APPRAISING_THE_HORSES);
+    public synchronized Response goCheckHorses(int spectator, boolean isTheLastSpectator) throws InterruptedException {
+        //((ServiceProviderAgent)Thread.currentThread()).setSpectatorState(SpectatorState.APPRAISING_THE_HORSES);
+        repository.setSpectatorStatus(spectator, SpectatorState.APPRAISING_THE_HORSES);
 
         if (isTheLastSpectator) {
             lastSpectatorHasNotArrivedOnPaddock = false;
@@ -97,6 +97,7 @@ public class Paddock implements PaddockInterface {
             }
         }
         lastSpectatorHasNotArrivedOnPaddock = true;
+        return new Response(ResponseType.PADDOCK_GO_CHECK_HORSES, SpectatorState.APPRAISING_THE_HORSES, spectator);
     }
 
     /**
@@ -105,11 +106,11 @@ public class Paddock implements PaddockInterface {
      * Note that this method changes the value of the condition variable to the {@link Paddock#goCheckHorses(boolean)}
      * wait condition, notifying its changes.
      */
-    public synchronized void proceedToStartLine() throws InterruptedException {
+    public synchronized Response proceedToStartLine(int horseJockeyId) throws InterruptedException {
         try {
             currentNumberOfSpectators = 0;
-            ((ServiceProviderAgent)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_START_LINE);
-            repository.setHorseJockeyStatus(((ServiceProviderAgent)(Thread.currentThread())).getHorseJockeyIdentification(), HorseJockeyState.AT_THE_START_LINE);
+            //((ServiceProviderAgent)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_START_LINE);
+            repository.setHorseJockeyStatus(horseJockeyId, HorseJockeyState.AT_THE_START_LINE);
             currentNumberOfHorses++;
             if (currentNumberOfHorses == numberOfHorses*2) {
                 lastHorseDidNotProceedToStartLine = false;
@@ -119,6 +120,7 @@ public class Paddock implements PaddockInterface {
         } catch (InterruptedException e) {
             throw new InterruptedException();
         }
+        return new Response(ResponseType.PADDOCK_PROCEED_TO_START_LINE, HorseJockeyState.AT_THE_START_LINE, horseJockeyId)
     }
 
     /**
@@ -179,5 +181,5 @@ public class Paddock implements PaddockInterface {
     /**
      * An entity which represents the repository.
      */
-    private GeneralInformationRepositoryStub repository;
+    private GeneralInformationRepositoryInterface repository;
 }
