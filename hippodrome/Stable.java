@@ -1,8 +1,9 @@
 package hippodrome;
 
-import clients.GeneralInformationRepositoryStub;
 import configurations.SimulationConfigurations;
 import entities.HorseJockeyState;
+import hippodrome.responses.Response;
+import hippodrome.responses.ResponseType;
 
 /**
  * Place where the horses rest waiting their turn to enter the competition.
@@ -20,7 +21,7 @@ public class Stable implements StableInterface {
      * repository is also given in order to report status changes on the course of its actions.
      */
     public Stable() {
-        repository = new GeneralInformationRepositoryStub();
+
     }
 
     /**
@@ -43,10 +44,9 @@ public class Stable implements StableInterface {
      *
      * @throws InterruptedException if the wait() is interrupted.
      */
-    public synchronized void proceedToStable(int raceNumber) throws InterruptedException {
-
-        ((ServiceProviderAgent)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_STABLE);
-        repository.setHorseJockeyStatus(((ServiceProviderAgent)(Thread.currentThread())).getHorseJockeyIdentification(), HorseJockeyState.AT_THE_STABLE);
+    public synchronized Response proceedToStable(int horseJockeyId, int raceNumber) throws InterruptedException {
+        //((ServiceProviderAgent)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_STABLE);
+        repository.setHorseJockeyStatus(horseJockeyId, HorseJockeyState.AT_THE_STABLE);
         brokerDidNotSaidToAdvance = true;
         if (++numberOfHorsesOnStable == SimulationConfigurations.NUMBER_OF_PAIRS_HORSE_JOCKEY && raceNumber == 0) {
             horsesAreNotAvailable = false;
@@ -54,13 +54,13 @@ public class Stable implements StableInterface {
         }
         while (currentRaceNumber != raceNumber) {
             try {
-
                 wait();
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
                 throw new InterruptedException("The proceedToStable() has been interrupted on its wait().");
             }
         }
+        return new Response(ResponseType.STABLE_PROCEED_TO_STABLE_WITH_RACE_ID, HorseJockeyState.AT_THE_STABLE, horseJockeyId);
     }
 
     /**
@@ -68,11 +68,11 @@ public class Stable implements StableInterface {
      * <br>
      * This method is useful to finish the lifecycle of the pairs Horse/Jockey.
      */
-    public synchronized void proceedToStable() throws InterruptedException {
-        ((ServiceProviderAgent)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_STABLE);
-        repository.setHorseJockeyStatus(((ServiceProviderAgent)(Thread.currentThread())).getHorseJockeyIdentification(), HorseJockeyState.AT_THE_STABLE);
+    public synchronized Response proceedToStable(int horseJockeyId) throws InterruptedException {
+        //((ServiceProviderAgent)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_STABLE);
+        repository.setHorseJockeyStatus(horseJockeyId, HorseJockeyState.AT_THE_STABLE);
         if (thisIsAfterTheLastRun) {
-            return;
+            return null; // TODO : verify the possibility of returning null
         }
         while (brokerDidNotSaidToAdvance) {
             try {
@@ -85,6 +85,7 @@ public class Stable implements StableInterface {
         if (currentRaceNumber == SimulationConfigurations.NUMBER_OF_RACES-1) {
             thisIsAfterTheLastRun = true;
         }
+        return new Response(ResponseType.STABLE_PROCEED_TO_STABLE, HorseJockeyState.AT_THE_STABLE, horseJockeyId);
     }
 
     /**
@@ -97,7 +98,6 @@ public class Stable implements StableInterface {
     public synchronized void summonHorsesToPaddock(int raceNumber) throws InterruptedException {
         while (horsesAreNotAvailable) {
             try {
-
                 wait();
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
@@ -142,5 +142,5 @@ public class Stable implements StableInterface {
     /**
      * An entity which represents the repository.
      */
-    private GeneralInformationRepositoryStub repository;
+    private GeneralInformationRepositoryInterface repository;
 }
