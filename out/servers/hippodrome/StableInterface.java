@@ -1,5 +1,7 @@
 package hippodrome;
 
+import hippodrome.responses.Response;
+
 import java.rmi.Remote;
 
 /**
@@ -12,9 +14,9 @@ import java.rmi.Remote;
  */
 public interface StableInterface extends Remote {
 
-    void proceedToStable(int raceNumber) throws InterruptedException;
+    Response proceedToStable(int horseJockeyId, int raceNumber) throws InterruptedException;
 
-    void proceedToStable() throws InterruptedException ;
+    Response proceedToStable(int horseJockeyId) throws InterruptedException;
 
     void summonHorsesToPaddock(int raceNumber) throws InterruptedException;
 }

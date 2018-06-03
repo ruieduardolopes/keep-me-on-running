@@ -119,6 +119,7 @@ compileservers () {
     mv $(echo $WORK_PATH)entities/*.class $(echo $WORK_PATH)out/servers/entities
     mv $(echo $WORK_PATH)hippodrome/*.class $(echo $WORK_PATH)out/servers/hippodrome
     mv $(echo $WORK_PATH)hippodrome/actions/*.class $(echo $WORK_PATH)out/servers/hippodrome/actions
+    mv $(echo $WORK_PATH)hippodrome/responses/*.class $(echo $WORK_PATH)out/servers/hippodrome/responses
     mv $(echo $WORK_PATH)hippodrome/rollfilm/*.class $(echo $WORK_PATH)out/servers/hippodrome/rollfilm
     cp $(echo $WORK_PATH)hippodrome/*Interface.java $(echo $WORK_PATH)out/servers/hippodrome
     mv $(echo $WORK_PATH)lib/logging/*.class $(echo $WORK_PATH)out/servers/lib/logging

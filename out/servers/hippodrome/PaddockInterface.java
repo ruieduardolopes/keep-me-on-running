@@ -1,5 +1,7 @@
 package hippodrome;
 
+import hippodrome.responses.Response;
+
 import java.rmi.Remote;
 
 /**
@@ -16,9 +18,9 @@ public interface PaddockInterface extends Remote {
 
     void proceedToPaddock(int raceNumber) throws InterruptedException;
 
-    void goCheckHorses(boolean isTheLastSpectator) throws InterruptedException;
+    Response goCheckHorses(int spectator, boolean isTheLastSpectator) throws InterruptedException;
 
-    void proceedToStartLine() throws InterruptedException;
+    Response proceedToStartLine(int horseJockeyId) throws InterruptedException;
 
     boolean goCheckHorses() throws InterruptedException;
 }
