@@ -16,11 +16,11 @@ import java.rmi.Remote;
  */
 public interface PaddockInterface extends Remote {
 
-    void proceedToPaddock(int raceNumber) throws InterruptedException;
+    void proceedToPaddock(int raceNumber) throws Exception;
 
-    Response goCheckHorses(int spectator, boolean isTheLastSpectator) throws InterruptedException;
+    Response goCheckHorses(int spectator, boolean isTheLastSpectator) throws Exception;
 
-    Response proceedToStartLine(int horseJockeyId) throws InterruptedException;
+    Response proceedToStartLine(int horseJockeyId) throws Exception;
 
-    boolean goCheckHorses() throws InterruptedException;
+    boolean goCheckHorses() throws Exception;
 }

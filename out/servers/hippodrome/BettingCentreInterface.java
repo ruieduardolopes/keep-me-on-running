@@ -17,19 +17,19 @@ import java.rmi.Remote;
  */
 public interface BettingCentreInterface extends Remote {
 
-    Response acceptTheBets() throws InterruptedException;
+    Response acceptTheBets() throws Exception;
 
-    Response honourTheBets() throws InterruptedException;
+    Response honourTheBets() throws Exception;
 
-    Response placeABet(int spectator, int bet, int horse) throws InterruptedException;
+    Response placeABet(int spectator, int bet, int horse) throws Exception;
 
-    Response goCollectTheGains(int spectator) throws InterruptedException;
+    Response goCollectTheGains(int spectator) throws Exception;
 
-    boolean haveIWon(int spectatorId) throws InterruptedException;
+    boolean haveIWon(int spectatorId) throws Exception;
 
-    boolean areThereAnyWinners(int winner) throws InterruptedException;
+    boolean areThereAnyWinners(int winner) throws Exception;
 
-    int getNumberOfHorses() throws InterruptedException;
+    int getNumberOfHorses() throws Exception;
 
-    void setAbility(int horse, int ability) throws InterruptedException, RuntimeException;
+    void setAbility(int horse, int ability) throws Exception;
 }

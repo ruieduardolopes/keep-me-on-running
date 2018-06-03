@@ -27,7 +27,7 @@ public class Spectator extends Thread {
      * @param numberOfRaces number of races which will happen in this event.
      * @throws InterruptedException if the communication channel is busy.
      */
-    public Spectator(int identification, int money, int numberOfRaces, BettingCentreInterface bettingCentre, ControlCentreInterface controlCentre, PaddockInterface paddock, GeneralInformationRepositoryInterface repository) throws InterruptedException {
+    public Spectator(int identification, int money, int numberOfRaces, BettingCentreInterface bettingCentre, ControlCentreInterface controlCentre, PaddockInterface paddock, GeneralInformationRepositoryInterface repository) throws Exception {
         try {
             this.repository = repository;
             this.identification = identification;
@@ -38,8 +38,8 @@ public class Spectator extends Thread {
             this.controlCentre = controlCentre;
             this.paddock = paddock;
             this.numberOfRaces = numberOfRaces;
-        } catch (InterruptedException e) {
-            throw new InterruptedException();
+        } catch (Exception e) {
+            throw new Exception();
         }
     }
 
@@ -78,7 +78,7 @@ public class Spectator extends Thread {
             }                                                                                                   //
             setSpectatorState(controlCentre.relaxABit(identification).getSpectatorState());                     // And relax a bit.
             //shutdown();                                                                                       // TODO : shutdown invocation
-        } catch (InterruptedException ie) {                                                                     //
+        } catch (Exception ie) {                                                                                //
             ie.printStackTrace();                                                                               //
             System.exit(3);                                                                                     //
         }                                                                                                       //
@@ -134,7 +134,7 @@ public class Spectator extends Thread {
      * @return a random horse identifier, as an integer.
      * @throws InterruptedException if the communication channel is busy.
      */
-    private int horse() throws InterruptedException {
+    private int horse() throws Exception {
         int value = -1;
         try {
             value = (new Random()).nextInt(bettingCentre.getNumberOfHorses());

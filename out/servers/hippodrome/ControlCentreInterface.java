@@ -16,23 +16,23 @@ import java.rmi.Remote;
  */
 public interface ControlCentreInterface extends Remote {
 
-    Response startTheRace() throws InterruptedException;
+    Response startTheRace() throws Exception;
 
-    Response entertainTheGuests() throws InterruptedException;
+    Response entertainTheGuests() throws Exception;
 
-    Response waitForTheNextRace(int spectator) throws InterruptedException;
+    Response waitForTheNextRace(int spectator) throws Exception;
 
-    Response goWatchTheRace(int spectator) throws InterruptedException;
+    Response goWatchTheRace(int spectator) throws Exception;
 
-    Response relaxABit(int spectator) throws InterruptedException;
+    Response relaxABit(int spectator) throws Exception;
 
-    int reportResults() throws InterruptedException;
+    int reportResults() throws Exception;
 
-    Response summonHorsesToPaddock() throws InterruptedException;
+    Response summonHorsesToPaddock() throws Exception;
 
-    Response proceedToPaddock(int horseJockeyId) throws InterruptedException;
+    Response proceedToPaddock(int horseJockeyId) throws Exception;
 
-    void goCheckHorses() throws InterruptedException;
+    void goCheckHorses() throws Exception;
 
-    void makeAMove(int horseJockeyId) throws InterruptedException;
+    void makeAMove(int horseJockeyId) throws Exception;
 }

@@ -4,6 +4,7 @@ import hippodrome.actions.Race;
 import hippodrome.responses.Response;
 
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 
 /**
  * Interface of the place where the races take place. Here each race is represented by an element
@@ -17,17 +18,17 @@ import java.rmi.Remote;
  */
 public interface RacingTrackInterface extends Remote {
 
-    void proceedToStartLine(int horseJockeyId) throws InterruptedException;
+    void proceedToStartLine(int horseJockeyId) throws Exception;
 
-    Response makeAMove(int horseId, int ability) throws InterruptedException;
+    Response makeAMove(int horseId, int ability) throws Exception;
 
-    boolean hasFinishLineBeenCrossed(int horseJockeyId) throws InterruptedException, Exception;
+    boolean hasFinishLineBeenCrossed(int horseJockeyId) throws Exception;
 
-    void startTheRace() throws InterruptedException;
+    void startTheRace() throws Exception;
 
-    Race getRace() throws InterruptedException;
+    Race getRace() throws Exception;
 
-    void setRace(Race race) throws InterruptedException;
+    void setRace(Race race) throws Exception;
 
-    int getWinner() throws InterruptedException;
+    int getWinner() throws Exception;
 }

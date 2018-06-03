@@ -33,17 +33,17 @@ public class ControlCentre implements ControlCentreInterface {
      * Changes the state of the {@link Broker} to Supervising the Race ({@code STR}) and waits till the last
      * {@link ControlCentre#makeAMove(int)} is performed by a pair Horse/Jockey.
      *
-     * @throws InterruptedException if the wait() is interrupted.
+     * @throws Exception if the wait() is interrupted.
      */
-    public synchronized Response startTheRace() throws InterruptedException {
+    public synchronized Response startTheRace() throws Exception {
         //((ServiceProviderAgent)Thread.currentThread()).setBrokerState(BrokerState.SUPERVISING_THE_RACE);
         repository.setBrokerStatus(BrokerState.SUPERVISING_THE_RACE);
         while (thereIsStillHorsesToFinishRace) {
             try {
                 wait();
-            } catch (InterruptedException ie) {
+            } catch (Exception ie) {
                 ie.printStackTrace();
-                throw new InterruptedException("The startTheRace() has been interrupted on its wait().");
+                throw new Exception("The startTheRace() has been interrupted on its wait().");
             }
         }
         return new Response(ResponseType.CONTROL_CENTRE_START_THE_RACE, BrokerState.SUPERVISING_THE_RACE);
@@ -53,13 +53,13 @@ public class ControlCentre implements ControlCentreInterface {
      * Start entertaining the guests (representation of the {@link Spectator}s), as the {@link entities.Broker}'s actions
      * can be considered as terminated.
      */
-    public synchronized Response entertainTheGuests() throws InterruptedException {
+    public synchronized Response entertainTheGuests() throws Exception {
         try {
             //((ServiceProviderAgent)Thread.currentThread()).setBrokerState(BrokerState.PLAYING_HOST_AT_THE_BAR);
             repository.setBrokerStatus(BrokerState.PLAYING_HOST_AT_THE_BAR);
-        } catch (InterruptedException ie) {
+        } catch (Exception ie) {
             ie.printStackTrace();
-            throw new InterruptedException();
+            throw new Exception();
         }
         return new Response(ResponseType.CONTROL_CENTRE_ENTERTAIN_THE_RACE, BrokerState.PLAYING_HOST_AT_THE_BAR);
     }
@@ -68,20 +68,20 @@ public class ControlCentre implements ControlCentreInterface {
      * Changes the {@link Spectator}'s state to Waiting for a Race to Start ({@code WFRTS}) and waits till the last
      * {@link ControlCentre#proceedToPaddock(int)} of the pair Horse/Jockey.
      *
-     * @throws InterruptedException if the wait() is interrupted.
+     * @throws Exception if the wait() is interrupted.
      *
      * @return if the last pair Horse/Jockey has arrived on Paddock.
      */
-    public synchronized Response waitForTheNextRace(int spectator) throws InterruptedException {
+    public synchronized Response waitForTheNextRace(int spectator) throws Exception {
         brokerDidNotReportResults = true;
         //((ServiceProviderAgent)Thread.currentThread()).setSpectatorState(SpectatorState.WAITING_FOR_A_RACE_TO_START);
         repository.setSpectatorStatus(spectator, SpectatorState.WAITING_FOR_A_RACE_TO_START);
         while (lastHorseJockeyHasNotArrivedOnPaddock) {
             try {
                 wait();
-            } catch (InterruptedException ie) {
+            } catch (Exception ie) {
                 ie.printStackTrace();
-                throw new InterruptedException("The waitForTheNextRace() has been interrupted on its wait().");
+                throw new Exception("The waitForTheNextRace() has been interrupted on its wait().");
             }
         }
         return new Response(ResponseType.CONTROL_CENTRE_WAIT_FOR_THE_NEXT_RACE, SpectatorState.WAITING_FOR_A_RACE_TO_START, spectator, true);
@@ -94,9 +94,9 @@ public class ControlCentre implements ControlCentreInterface {
      * This method also resets the control variable for the last race results report, the number of horses which have
      * finished the race and the control variable for the {@link ControlCentre#startTheRace()}.
      *
-     * @throws InterruptedException if the wait() is interrupted.
+     * @throws Exception if the wait() is interrupted.
      */
-    public synchronized Response goWatchTheRace(int spectator) throws InterruptedException {
+    public synchronized Response goWatchTheRace(int spectator) throws Exception {
         //((ServiceProviderAgent)Thread.currentThread()).setSpectatorState(SpectatorState.WATCHING_A_RACE);
         repository.setSpectatorStatus(spectator, SpectatorState.WATCHING_A_RACE);
         finishedHorses = 0;
@@ -105,9 +105,9 @@ public class ControlCentre implements ControlCentreInterface {
         while (brokerDidNotReportResults) {
             try {
                 wait();
-            } catch (InterruptedException ie) {
+            } catch (Exception ie) {
                 ie.printStackTrace();
-                throw new InterruptedException("The goWatchTheRace() has been interrupted on its wait().");
+                throw new Exception("The goWatchTheRace() has been interrupted on its wait().");
             }
         }
         return new Response(ResponseType.CONTROL_CENTRE_GO_WATCH_THE_RACE, SpectatorState.WATCHING_A_RACE, spectator);
@@ -120,7 +120,7 @@ public class ControlCentre implements ControlCentreInterface {
         try {
             //((ServiceProviderAgent)Thread.currentThread()).setSpectatorState(SpectatorState.CELEBRATING);
             repository.setSpectatorStatus(spectator, SpectatorState.CELEBRATING);
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return new Response(ResponseType.CONTROL_CENTRE_RELAX_A_BIT, SpectatorState.CELEBRATING, spectator);
@@ -146,17 +146,17 @@ public class ControlCentre implements ControlCentreInterface {
      * <br>
      * Note that this method also resets its proper condition variable after unlocking itself.
      *
-     * @throws InterruptedException if the wait() is interrupted.
+     * @throws Exception if the wait() is interrupted.
      */
-    public synchronized Response summonHorsesToPaddock() throws InterruptedException {
+    public synchronized Response summonHorsesToPaddock() throws Exception {
         //((ServiceProviderAgent)Thread.currentThread()).setBrokerState(BrokerState.ANNOUNCING_NEXT_RACE);
         repository.setBrokerStatus(BrokerState.ANNOUNCING_NEXT_RACE);
         while (lastSpectatorHasNotArrivedOnPaddock) {
             try {
                 wait();
-            } catch (InterruptedException ie) {
+            } catch (Exception ie) {
                 ie.printStackTrace();
-                throw new InterruptedException("The summonHorsesToPaddock() has been interrupted on its wait().");
+                throw new Exception("The summonHorsesToPaddock() has been interrupted on its wait().");
             }
         }
         lastSpectatorHasNotArrivedOnPaddock = true;
@@ -169,7 +169,7 @@ public class ControlCentre implements ControlCentreInterface {
      * <br>
      * Note that this method also resets the condition variable of itself after the notification.
      */
-    public synchronized Response proceedToPaddock(int horseJockeyId) throws InterruptedException {
+    public synchronized Response proceedToPaddock(int horseJockeyId) throws Exception {
         try {
             ++numberOfHorseJockeysOnPaddock;
             //((ServiceProviderAgent)(Thread.currentThread())).setHorseJockeyState(HorseJockeyState.AT_THE_PADDOCK);
@@ -180,9 +180,9 @@ public class ControlCentre implements ControlCentreInterface {
                 notifyAll();
                 numberOfHorseJockeysOnPaddock = 0;
             }
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            throw new InterruptedException();
+            throw new Exception();
         }
         return new Response(ResponseType.CONTROL_CENTRE_PROCEED_TO_PADDOCK, HorseJockeyState.AT_THE_PADDOCK, horseJockeyId);
     }

@@ -67,20 +67,19 @@ public class BettingCentre implements BettingCentreInterface {
      * <br>
      * This method also notifies the Spectators when the bets are accepted.
      *
-     * @throws InterruptedException if the wait() is interrupted.
+     * @throws Exception if the wait() is interrupted.
      */
-    public synchronized Response acceptTheBets() throws InterruptedException {
+    public synchronized Response acceptTheBets() throws Exception {
         evaluateOdds();
         brokerDoesNotAllowToProceedToHaveIWon = true;
         allWinnersAreNotOnBettingCentre = true;
-        //((ServiceProviderAgent)Thread.currentThread()).setBrokerState(BrokerState.WAITING_FOR_BETS);
         repository.setBrokerStatus(BrokerState.WAITING_FOR_BETS);
         while (bettingQueue.size() !=  numberOfSpectators) {
             try {
                 wait();
-            } catch (InterruptedException ie) {
+            } catch (Exception ie) {
                 ie.printStackTrace();
-                throw new InterruptedException("The acceptTheBets() has been interrupted on its wait().");
+                throw new Exception("The acceptTheBets() has been interrupted on its wait().");
             }
         }
         brokerHaveNotAcceptedTheBet = false;
@@ -91,21 +90,20 @@ public class BettingCentre implements BettingCentreInterface {
 
     /**
      * Changes the state of the Entities to Settling Accounts ({@code SA}) and waits till the last
-     * {@link BettingCentre#goCollectTheGains()} is done by a Spectator.
+     * {@link BettingCentre#goCollectTheGains(int)} is done by a Spectator.
      * <br>
      * This method also notifies the Spectators when the Entities is about to give their money.
      *
-     * @throws InterruptedException if the wait() is interrupted.
+     * @throws Exception if the wait() is interrupted.
      */
-    public synchronized Response honourTheBets() throws InterruptedException {
-        //((ServiceProviderAgent)Thread.currentThread()).setBrokerState(BrokerState.SETTLING_ACCOUNTS);
+    public synchronized Response honourTheBets() throws Exception {
         repository.setBrokerStatus(BrokerState.SETTLING_ACCOUNTS);
         while (allWinnersAreNotOnBettingCentre) {
             try {
                 wait();
-            } catch (InterruptedException ie) {
+            } catch (Exception ie) {
                 ie.printStackTrace();
-                throw new InterruptedException("The honourTheBets() has been interrupted on its wait().");
+                throw new Exception("The honourTheBets() has been interrupted on its wait().");
             }
         }
         winnersMustNotReceiveTheirMoney = false;
@@ -126,11 +124,11 @@ public class BettingCentre implements BettingCentreInterface {
      * @param bet an amount of money represented as an integer, which the {@code spectator} wants to bet.
      * @param horse the identification of the pair Horse/Jockey in which the {@code spectator} wants to bet.
      *
-     * @throws InterruptedException if the wait() is interrupted.
+     * @throws Exception if the wait() is interrupted.
      *
      * @return the amount of money which was accepted by the {@link Broker} to place the bet.
      */
-    public synchronized Response placeABet(int spectator, int bet, int horse) throws InterruptedException {
+    public synchronized Response placeABet(int spectator, int bet, int horse) throws Exception {
         //((ServiceProviderAgent)Thread.currentThread()).setSpectatorState(SpectatorState.PLACING_A_BET);
         repository.setSpectatorStatus(spectator, SpectatorState.PLACING_A_BET);
         bettingQueue.add(spectator);
@@ -146,9 +144,9 @@ public class BettingCentre implements BettingCentreInterface {
         while (brokerHaveNotAcceptedTheBet) {
             try {
                 wait();
-            } catch (InterruptedException ie) {
+            } catch (Exception ie) {
                 ie.printStackTrace();
-                throw new InterruptedException("The placeABet() has been interrupted on its wait().");
+                throw new Exception("The placeABet() has been interrupted on its wait().");
             }
         }
         return new Response(ResponseType.BETTING_CENTRE_PLACE_A_BET, SpectatorState.PLACING_A_BET, spectator, bet);
@@ -161,13 +159,11 @@ public class BettingCentre implements BettingCentreInterface {
      * After the Entities alerted that its honouring the bets, each Spectator must then execute this method in order
      * to collect its gains.
      *
-     * @throws InterruptedException if the wait() is interrupted.
+     * @throws Exception if the wait() is interrupted.
      *
      * @return the amount of money collected by the {@code spectator}, as an integer.
      */
-    public synchronized Response goCollectTheGains(int spectator) throws InterruptedException {
-        //ServiceProviderAgent agent = ((ServiceProviderAgent)Thread.currentThread());
-        //agent.setSpectatorState(SpectatorState.COLLECTING_THE_GAINS);
+    public synchronized Response goCollectTheGains(int spectator) throws Exception {
         repository.setSpectatorStatus(spectator, SpectatorState.COLLECTING_THE_GAINS);
         winnersArrived++;
         if (winnersArrived == winners.length) {
@@ -177,9 +173,9 @@ public class BettingCentre implements BettingCentreInterface {
         while (winnersMustNotReceiveTheirMoney) {
             try {
                 wait();
-            } catch (InterruptedException ie) {
+            } catch (Exception ie) {
                 ie.printStackTrace();
-                throw new InterruptedException("The goCollectTheGains() has been interrupted on its wait().");
+                throw new Exception("The goCollectTheGains() has been interrupted on its wait().");
             }
         }
         return new Response(ResponseType.BETTING_CENTRE_GO_COLLECT_THE_GAINS, SpectatorState.COLLECTING_THE_GAINS, spectator, bets[spectator].getAmount()*horsesOdds[bets[spectator].getHorseJockeyId()]);
@@ -193,13 +189,13 @@ public class BettingCentre implements BettingCentreInterface {
      *
      * @return {@code true} if {@code spectator} has won his (or hers) bet; otherwise, it will return {@code false}.
      */
-    public synchronized boolean haveIWon(int spectatorId) throws InterruptedException {
+    public synchronized boolean haveIWon(int spectatorId) throws Exception {
         while (brokerDoesNotAllowToProceedToHaveIWon) {
             try {
                 wait();
-            } catch (InterruptedException ie) {
+            } catch (Exception ie) {
                 ie.printStackTrace();
-                throw new InterruptedException("The haveIWon() has been interrupted on its wait().");
+                throw new Exception("The haveIWon() has been interrupted on its wait().");
             }
         }
 
@@ -219,7 +215,6 @@ public class BettingCentre implements BettingCentreInterface {
      * @return {@code true} if anybody had won indeed; otherwise it will return {@code false}.
      */
     public synchronized boolean areThereAnyWinners(int winner) {
-
         winnersArrived = 0;
         ArrayList<Integer> winningList = new ArrayList<>();
         for (int i = 0; i != bets.length; i++) {
@@ -229,7 +224,7 @@ public class BettingCentre implements BettingCentreInterface {
         }
 
         for (int i = 0; i != bets.length; i++) {
-
+            // TODO : what's happening here?
         }
         winners = new int[winningList.size()];
         for (int i = 0; i != winners.length; i++) {
@@ -268,16 +263,16 @@ public class BettingCentre implements BettingCentreInterface {
 
     /**
      * Evaluates the odds of all the pair Horse/Jockey.
-     * @throws InterruptedException if the communication channel is busy.
+     * @throws Exception if the communication channel is busy.
      */
-    private void evaluateOdds() throws InterruptedException {
+    private void evaluateOdds() throws Exception {
         try {
             for (int i = 0; i != horsesOdds.length; i++) {
                 horsesOdds[i] = sumOf(horsesAbilities) / horsesAbilities[i];
                 repository.setHorseJockeyProbabilityToWin(i, horsesOdds[i]);
             }
-        } catch (InterruptedException e) {
-            throw new InterruptedException();
+        } catch (Exception e) {
+            throw new Exception();
         }
     }
 
@@ -352,7 +347,7 @@ public class BettingCentre implements BettingCentreInterface {
     /**
      * Condition variable for noticing when Spectators must receive their money or not, if they have won the bet.
      * <br>
-     * This is a condition variable of the {@link BettingCentre#goCollectTheGains()} method.
+     * This is a condition variable of the {@link BettingCentre#goCollectTheGains(int)} method.
      */
     private boolean winnersMustNotReceiveTheirMoney = true;
 
@@ -375,7 +370,7 @@ public class BettingCentre implements BettingCentreInterface {
     /**
      * Condition variable for noticing the number of winning Spectators who arrived at this Betting Centre.
      * <br>
-     * This is a condition variable of the {@link BettingCentre#goCollectTheGains()} and it is reset on the
+     * This is a condition variable of the {@link BettingCentre#goCollectTheGains(int)} and it is reset on the
      * {@link BettingCentre#areThereAnyWinners(int)} method.
      */
     private int winnersArrived = 0;

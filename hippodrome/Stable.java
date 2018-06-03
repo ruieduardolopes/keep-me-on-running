@@ -30,9 +30,9 @@ public class Stable implements StableInterface {
      *
      * @param raceNumber the race number which is about to start.
      *
-     * @throws InterruptedException if the wait() is interrupted.
+     * @throws Exception if the wait() is interrupted.
      */
-    public synchronized Response proceedToStable(int horseJockeyId, int raceNumber) throws InterruptedException {
+    public synchronized Response proceedToStable(int horseJockeyId, int raceNumber) throws Exception {
         //((ServiceProviderAgent)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_STABLE);
         repository.setHorseJockeyStatus(horseJockeyId, HorseJockeyState.AT_THE_STABLE);
         brokerDidNotSaidToAdvance = true;
@@ -43,9 +43,9 @@ public class Stable implements StableInterface {
         while (currentRaceNumber != raceNumber) {
             try {
                 wait();
-            } catch (InterruptedException ie) {
+            } catch (Exception ie) {
                 ie.printStackTrace();
-                throw new InterruptedException("The proceedToStable() has been interrupted on its wait().");
+                throw new Exception("The proceedToStable() has been interrupted on its wait().");
             }
         }
         return new Response(ResponseType.STABLE_PROCEED_TO_STABLE_WITH_RACE_ID, HorseJockeyState.AT_THE_STABLE, horseJockeyId);
@@ -56,7 +56,7 @@ public class Stable implements StableInterface {
      * <br>
      * This method is useful to finish the lifecycle of the pairs Horse/Jockey.
      */
-    public synchronized Response proceedToStable(int horseJockeyId) throws InterruptedException {
+    public synchronized Response proceedToStable(int horseJockeyId) throws Exception {
         //((ServiceProviderAgent)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_STABLE);
         repository.setHorseJockeyStatus(horseJockeyId, HorseJockeyState.AT_THE_STABLE);
         if (thisIsAfterTheLastRun) {
@@ -65,9 +65,9 @@ public class Stable implements StableInterface {
         while (brokerDidNotSaidToAdvance) {
             try {
                 wait();
-            } catch (InterruptedException ie) {
+            } catch (Exception ie) {
                 ie.printStackTrace();
-                throw new InterruptedException("The proceedToStable() has been interrupted on its wait().");
+                throw new Exception("The proceedToStable() has been interrupted on its wait().");
             }
         }
         if (currentRaceNumber == SimulationConfigurations.NUMBER_OF_RACES-1) {
@@ -83,13 +83,13 @@ public class Stable implements StableInterface {
      * @param raceNumber number identification of the next race, where the called pairs Horse/Jockey will be competing
      *                   against each other.
      */
-    public synchronized void summonHorsesToPaddock(int raceNumber) throws InterruptedException {
+    public synchronized void summonHorsesToPaddock(int raceNumber) throws Exception {
         while (horsesAreNotAvailable) {
             try {
                 wait();
-            } catch (InterruptedException ie) {
+            } catch (Exception ie) {
                 ie.printStackTrace();
-                throw new InterruptedException("The proceedToStable() has been firstly interrupted on its wait().");
+                throw new Exception("The proceedToStable() has been firstly interrupted on its wait().");
             }
         }
         currentRaceNumber = raceNumber;

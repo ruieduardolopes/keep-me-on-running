@@ -14,9 +14,9 @@ import java.rmi.Remote;
  */
 public interface StableInterface extends Remote {
 
-    Response proceedToStable(int horseJockeyId, int raceNumber) throws InterruptedException;
+    Response proceedToStable(int horseJockeyId, int raceNumber) throws Exception;
 
-    Response proceedToStable(int horseJockeyId) throws InterruptedException;
+    Response proceedToStable(int horseJockeyId) throws Exception;
 
-    void summonHorsesToPaddock(int raceNumber) throws InterruptedException;
+    void summonHorsesToPaddock(int raceNumber) throws Exception;
 }

@@ -66,9 +66,9 @@ public class RacingTrack implements RacingTrackInterface {
      * Changes the state of the pair Horse/Jockey to At the Start Line ({@code ATSL}) and waits till the last
      * {@link RacingTrack#startTheRace()} is performed by the Entities.
      *
-     * @throws InterruptedException if the wait() is interrupted.
+     * @throws Exception if the wait() is interrupted.
      */
-    public synchronized void proceedToStartLine(int horseJockeyId) throws InterruptedException {
+    public synchronized void proceedToStartLine(int horseJockeyId) throws Exception {
         currentHorsesPositions = new int[race.getNumberOfTracks()]; // <--
         horsesToRun.add(horseJockeyId);
         numberOfFinishedHorses = 0;
@@ -76,9 +76,9 @@ public class RacingTrack implements RacingTrackInterface {
         while (brokerDidNotOrderToStartTheRace) {
             try {
                 wait();
-            } catch (InterruptedException ie) {
+            } catch (Exception ie) {
                 ie.printStackTrace();
-                throw new InterruptedException("The proceedToStartLine() has been interrupted on its wait().");
+                throw new Exception("The proceedToStartLine() has been interrupted on its wait().");
             }
         }
     }
@@ -86,21 +86,21 @@ public class RacingTrack implements RacingTrackInterface {
     /**
      * Let a pair Horse/Jockey {@code horse} make a move on the track, accordingly to its abilities to move.
      * <br>
-     * This methods waits till the {@link RacingTrack#makeAMove(int)} of the last pair Horse/Jockey. Plus, it also
+     * This methods waits till the {@link RacingTrack#makeAMove(int, int)} of the last pair Horse/Jockey. Plus, it also
      * notifies when the first pair Horse/Jockey has crossed the finish line.
      *
      * @param horseId the identification of the pair Horse/Jockey which wants to make a move.
      *
-     * @throws InterruptedException if the wait() is interrupted.
+     * @throws Exception if the wait() is interrupted.
      */
-    public synchronized Response makeAMove(int horseId, int ability) throws InterruptedException {
+    public synchronized Response makeAMove(int horseId, int ability) throws Exception {
         Response response = null;
         while (horsesToRun.peek() != horseId) {
             try {
                 wait();
-            } catch (InterruptedException ie) {
+            } catch (Exception ie) {
                 ie.printStackTrace();
-                throw new InterruptedException("The makeAMove() has been interrupted on its wait().");
+                throw new Exception("The makeAMove() has been interrupted on its wait().");
             }
         }
         //((ServiceProviderAgent)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.RUNNING);
@@ -129,7 +129,7 @@ public class RacingTrack implements RacingTrackInterface {
     /**
      * Verification if the pair Horse/Jockey {@code horse} has crossed the finish line.
      * <br>
-     * This method reset the condition variable of {@link RacingTrack#proceedToStartLine()}.
+     * This method reset the condition variable of {@link RacingTrack#proceedToStartLine(int)}.
      *
      * @param horseJockeyId the pair Horse/Jockey which we want to verify if had crossed the finish line.
      *
@@ -152,7 +152,7 @@ public class RacingTrack implements RacingTrackInterface {
     /**
      * Signal that the race is about to start, by the {@link entities.Broker} performing its job.
      * <br>
-     * Note that this method changes the value of the condition variable to the {@link RacingTrack#proceedToStartLine()}
+     * Note that this method changes the value of the condition variable to the {@link RacingTrack#proceedToStartLine(int)}
      * wait condition, notifying its changes.
      */
     public synchronized void startTheRace() {
@@ -188,7 +188,7 @@ public class RacingTrack implements RacingTrackInterface {
         numberOfFinishedHorses++;
         try {
             repository.setHorseJockeyFinalStandPosition(horse, numberOfFinishedHorses);
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             throw new Exception();
         }
@@ -207,16 +207,16 @@ public class RacingTrack implements RacingTrackInterface {
      * Set a new Race instance.
      *
      * @param race the new Race.
-     * @throws InterruptedException if the communication channel is busy and cannot be open.
+     * @throws Exception if the communication channel is busy and cannot be open.
      */
-    public void setRace(Race race) throws InterruptedException {
+    public void setRace(Race race) throws Exception {
         this.race = race;
         try {
             this.repository.setRaceDistance(race.getDistance());
             this.repository.setRaceNumber(race.getIdentification());
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            throw new InterruptedException();
+            throw new Exception();
         }
     }
 
@@ -257,15 +257,15 @@ public class RacingTrack implements RacingTrackInterface {
     /**
      * Condition variable for the first pair Horse/Jockey to announce that has crossed the finish line.
      * <br>
-     * This is a condition variable of {@link RacingTrack#makeAMove(int)} and it is reset on the
-     * {@link RacingTrack#makeAMove(int)} method itself.
+     * This is a condition variable of {@link RacingTrack#makeAMove(int,int)} and it is reset on the
+     * {@link RacingTrack#makeAMove(int,int)} method itself.
      */
     private boolean hasFirstHorseCrossedTheFinishLine = false;
 
     /**
      * Condition variable for the Entities to order the race to start.
      * <br>
-     * This is a condition variable of {@link RacingTrack#proceedToStartLine()} and it is reset on the
+     * This is a condition variable of {@link RacingTrack#proceedToStartLine(int)} and it is reset on the
      * {@link RacingTrack#hasFinishLineBeenCrossed(int)} method.
      */
     private boolean brokerDidNotOrderToStartTheRace = true;
@@ -273,7 +273,7 @@ public class RacingTrack implements RacingTrackInterface {
     /**
      * Condition variable for noticing when a race is about to end.
      * <br>
-     * This is a condition variable of {@link RacingTrack#makeAMove(int)}.
+     * This is a condition variable of {@link RacingTrack#makeAMove(int,int)}.
      */
     private boolean raceIsAboutToEnd = true;
 

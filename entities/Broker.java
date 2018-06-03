@@ -31,7 +31,7 @@ public class Broker extends Thread {
      * @param numberOfRaces The number of races in which this Entities will work on.
      * @throws InterruptedException if the communication channel is busy.
      */
-    public Broker(int numberOfRaces, BettingCentreInterface bettingCentre, ControlCentreInterface controlCentre, RacingTrackInterface racingTrack, StableInterface stable, GeneralInformationRepositoryInterface repository) throws InterruptedException {
+    public Broker(int numberOfRaces, BettingCentreInterface bettingCentre, ControlCentreInterface controlCentre, RacingTrackInterface racingTrack, StableInterface stable, GeneralInformationRepositoryInterface repository) throws Exception {
         this.bettingCentre = bettingCentre;
         this.controlCentre = controlCentre;
         this.racingTrack = racingTrack;
@@ -70,7 +70,7 @@ public class Broker extends Thread {
             setBrokerState(controlCentre.entertainTheGuests().getBrokerState());        // as the races are over, then i should go entertain the guests.
             repository.newSnapshot(true);                                               //
             //shutdown();                                                               // TODO : shutdown invocation
-        } catch (InterruptedException ie) {                                             //
+        } catch (Exception ie) {                                                        //
             ie.printStackTrace();                                                       //
             System.exit(4);                                                             //
         }                                                                               //
@@ -92,10 +92,10 @@ public class Broker extends Thread {
      * @param identification the identification of the race to set.
      * @throws InterruptedException if the communication channel is busy.
      */
-    public synchronized void setRace(int identification) throws InterruptedException {
+    public synchronized void setRace(int identification) throws Exception {
         try {
             this.racingTrack.setRace(new Race(SimulationConfigurations.NUMBER_OF_TRACKS, identification, Race.generateDistance()));
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             throw new InterruptedException();
         }
     }

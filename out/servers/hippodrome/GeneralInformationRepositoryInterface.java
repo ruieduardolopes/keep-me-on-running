@@ -3,10 +3,9 @@ package hippodrome;
 import entities.BrokerState;
 import entities.HorseJockeyState;
 import entities.SpectatorState;
-import hippodrome.rollfilm.UnknownHorseJockeyException;
-import hippodrome.rollfilm.UnknownSpectatorException;
 
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 
 /**
  * Interface of the class which represents an archive of all hippodrome's actions
@@ -20,42 +19,42 @@ import java.rmi.Remote;
  * @version 2.0
  */
 public interface GeneralInformationRepositoryInterface extends Remote {
-    
-    void newSnapshot(boolean nullable) throws InterruptedException;
 
-    void setRaceNumber(int number) throws InterruptedException;
+    void newSnapshot(boolean nullable) throws Exception;
 
-    void setRaceDistance(int distance) throws InterruptedException;
+    void setRaceNumber(int number) throws Exception;
 
-    void setBrokerStatus(BrokerState status) throws InterruptedException, RuntimeException;
+    void setRaceDistance(int distance) throws Exception;
 
-    void setSpectatorStatus(int spectatorId, SpectatorState status) throws InterruptedException, RuntimeException;
+    void setBrokerStatus(BrokerState status) throws Exception;
 
-    void setSpectatorAmountOfMoney(int spectatorId, int amount) throws InterruptedException, RuntimeException;
+    void setSpectatorStatus(int spectatorId, SpectatorState status) throws Exception;
 
-    void setSpectatorBetSelection(int spectatorId, int selection) throws InterruptedException, RuntimeException;
+    void setSpectatorAmountOfMoney(int spectatorId, int amount) throws Exception;
 
-    void setSpectatorBetAmount(int spectatorId, int bet) throws InterruptedException, RuntimeException;
+    void setSpectatorBetSelection(int spectatorId, int selection) throws Exception;
 
-    void setHorseJockeyStatus(int horseJockeyId, HorseJockeyState status) throws InterruptedException, RuntimeException;
+    void setSpectatorBetAmount(int spectatorId, int bet) throws Exception;
 
-    void setHorseJockeyAbility(int horseJockeyId, int ability) throws InterruptedException, RuntimeException;
+    void setHorseJockeyStatus(int horseJockeyId, HorseJockeyState status) throws Exception;
 
-    void setHorseJockeyProbabilityToWin(int horseJockeyId, int probability) throws InterruptedException, RuntimeException;
+    void setHorseJockeyAbility(int horseJockeyId, int ability) throws Exception;
 
-    void setHorseJockeyNumberOfIncrementsDid(int horseJockeyId, int iterations) throws InterruptedException, RuntimeException;
+    void setHorseJockeyProbabilityToWin(int horseJockeyId, int probability) throws Exception;
 
-    int getHorseJockeyNumberOfIncrementsDid(int horseJockeyId) throws InterruptedException, RuntimeException;
+    void setHorseJockeyNumberOfIncrementsDid(int horseJockeyId, int iterations) throws Exception;
 
-    void setHorseJockeyPositionOnTrack(int horseJockeyId, int position) throws InterruptedException, RuntimeException;
+    int getHorseJockeyNumberOfIncrementsDid(int horseJockeyId) throws Exception;
 
-    void setHorseJockeyFinalStandPosition(int horseJockeyId, int position) throws InterruptedException, RuntimeException;
+    void setHorseJockeyPositionOnTrack(int horseJockeyId, int position) throws Exception;
 
-    void setWereWaitingTheHorses(boolean value) throws InterruptedException;
+    void setHorseJockeyFinalStandPosition(int horseJockeyId, int position) throws Exception;
 
-    int getRaceNumber() throws InterruptedException;
+    void setWereWaitingTheHorses(boolean value) throws Exception;
 
-    int getCurrentRaceDistance() throws InterruptedException;
+    int getRaceNumber() throws Exception;
 
-    void raceIsOver() throws InterruptedException;
+    int getCurrentRaceDistance() throws Exception;
+
+    void raceIsOver() throws Exception;
 }

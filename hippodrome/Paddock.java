@@ -41,17 +41,17 @@ public class Paddock implements PaddockInterface {
      *
      * @param raceNumber number identification of the race which is about to begin.
      *
-     * @throws InterruptedException if the wait() is interrupted.
+     * @throws Exception if the wait() is interrupted.
      */
-    public synchronized void proceedToPaddock(int raceNumber) throws InterruptedException {
+    public synchronized void proceedToPaddock(int raceNumber) throws Exception {
         lastHorseDidNotProceedToStartLine = true;
         currentNumberOfHorses++;
         while (lastSpectatorHasNotArrivedOnPaddock) {
             try {
                 wait();
-            } catch (InterruptedException ie) {
+            } catch (Exception ie) {
                 ie.printStackTrace();
-                throw new InterruptedException("The proceedToPaddock() has been interrupted on its wait().");
+                throw new Exception("The proceedToPaddock() has been interrupted on its wait().");
             }
         }
         notifyAll();
@@ -65,9 +65,9 @@ public class Paddock implements PaddockInterface {
      * @param isTheLastSpectator identification if the last {@link entities.Spectator}
      *                           has reached the premises - if {@code true}; otherwise {@code false}.
      *
-     * @throws InterruptedException if the wait() is interrupted.
+     * @throws Exception if the wait() is interrupted.
      */
-    public synchronized Response goCheckHorses(int spectator, boolean isTheLastSpectator) throws InterruptedException {
+    public synchronized Response goCheckHorses(int spectator, boolean isTheLastSpectator) throws Exception {
         //((ServiceProviderAgent)Thread.currentThread()).setSpectatorState(SpectatorState.APPRAISING_THE_HORSES);
         repository.setSpectatorStatus(spectator, SpectatorState.APPRAISING_THE_HORSES);
 
@@ -78,9 +78,9 @@ public class Paddock implements PaddockInterface {
         while (lastHorseDidNotProceedToStartLine) {
             try {
                 wait();
-            } catch (InterruptedException ie) {
+            } catch (Exception ie) {
                 ie.printStackTrace();
-                throw new InterruptedException("The goCheckHorses() has been interrupted on its wait().");
+                throw new Exception("The goCheckHorses() has been interrupted on its wait().");
             }
         }
         lastSpectatorHasNotArrivedOnPaddock = true;
@@ -93,7 +93,7 @@ public class Paddock implements PaddockInterface {
      * Note that this method changes the value of the condition variable to the {@link Paddock#goCheckHorses(int, boolean)}
      * wait condition, notifying its changes.
      */
-    public synchronized Response proceedToStartLine(int horseJockeyId) throws InterruptedException {
+    public synchronized Response proceedToStartLine(int horseJockeyId) throws Exception {
         try {
             currentNumberOfSpectators = 0;
             //((ServiceProviderAgent)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_START_LINE);
@@ -104,8 +104,8 @@ public class Paddock implements PaddockInterface {
                 currentNumberOfHorses = 0;
                 notifyAll();
             }
-        } catch (InterruptedException e) {
-            throw new InterruptedException();
+        } catch (Exception e) {
+            throw new Exception();
         }
         return new Response(ResponseType.PADDOCK_PROCEED_TO_START_LINE, HorseJockeyState.AT_THE_START_LINE, horseJockeyId);
     }
