@@ -1,6 +1,7 @@
 package hippodrome;
 
 import hippodrome.actions.Race;
+import hippodrome.responses.Response;
 
 import java.rmi.Remote;
 
@@ -16,9 +17,9 @@ import java.rmi.Remote;
  */
 public interface RacingTrackInterface extends Remote {
 
-    void proceedToStartLine() throws InterruptedException;
+    void proceedToStartLine(int horseJockeyId) throws InterruptedException;
 
-    void makeAMove(int horseId) throws InterruptedException;
+    Response makeAMove(int horseId, int ability) throws InterruptedException;
 
     boolean hasFinishLineBeenCrossed(int horseJockeyId) throws InterruptedException, Exception;
 

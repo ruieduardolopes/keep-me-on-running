@@ -3,6 +3,8 @@ package hippodrome;
 import clients.GeneralInformationRepositoryStub;
 import entities.HorseJockeyState;
 import hippodrome.actions.Race;
+import hippodrome.responses.Response;
+import hippodrome.responses.ResponseType;
 
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -33,7 +35,6 @@ public class RacingTrack implements RacingTrackInterface {
     private RacingTrack(Race race) throws Exception {
         try {
             this.race = race;
-            this.repository = new GeneralInformationRepositoryStub();
             this.currentHorsesPositions = new int[race.getNumberOfTracks()];
             this.repository.setRaceDistance(race.getDistance());
             this.repository.setRaceNumber(race.getIdentification());
@@ -67,11 +68,11 @@ public class RacingTrack implements RacingTrackInterface {
      *
      * @throws InterruptedException if the wait() is interrupted.
      */
-    public synchronized void proceedToStartLine() throws InterruptedException {
+    public synchronized void proceedToStartLine(int horseJockeyId) throws InterruptedException {
         currentHorsesPositions = new int[race.getNumberOfTracks()]; // <--
-        horsesToRun.add(((ServiceProviderAgent)Thread.currentThread()).getHorseJockeyIdentification());
+        horsesToRun.add(horseJockeyId);
         numberOfFinishedHorses = 0;
-        repository.setHorseJockeyFinalStandPosition(((ServiceProviderAgent)Thread.currentThread()).getHorseJockeyIdentification(), 0);
+        repository.setHorseJockeyFinalStandPosition(horseJockeyId, 0);
         while (brokerDidNotOrderToStartTheRace) {
             try {
                 wait();
@@ -92,7 +93,8 @@ public class RacingTrack implements RacingTrackInterface {
      *
      * @throws InterruptedException if the wait() is interrupted.
      */
-    public synchronized void makeAMove(int horseId) throws InterruptedException {
+    public synchronized Response makeAMove(int horseId, int ability) throws InterruptedException {
+        Response response = null;
         while (horsesToRun.peek() != horseId) {
             try {
                 wait();
@@ -101,15 +103,17 @@ public class RacingTrack implements RacingTrackInterface {
                 throw new InterruptedException("The makeAMove() has been interrupted on its wait().");
             }
         }
-        ((ServiceProviderAgent)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.RUNNING);
-        repository.setHorseJockeyStatus(((ServiceProviderAgent)(Thread.currentThread())).getHorseJockeyIdentification(), HorseJockeyState.RUNNING);
+        //((ServiceProviderAgent)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.RUNNING);
+        response = new Response(ResponseType.RACING_TRACK_MAKE_A_MOVE, HorseJockeyState.RUNNING, horseId);
+        repository.setHorseJockeyStatus(horseId, HorseJockeyState.RUNNING);
         int thisHorse = horsesToRun.remove();
-        currentHorsesPositions[thisHorse] += (int)(Math.random()*((ServiceProviderAgent) Thread.currentThread()).getHorseJockeyAgility()) + 1;
+        currentHorsesPositions[thisHorse] += (int)(Math.random()*ability) + 1;
         repository.setHorseJockeyPositionOnTrack(horseId, currentHorsesPositions[thisHorse]);
         repository.setHorseJockeyNumberOfIncrementsDid(horseId, repository.getHorseJockeyNumberOfIncrementsDid(horseId)+1);
         if (currentHorsesPositions[thisHorse] >= race.getDistance()) {
-            ((ServiceProviderAgent)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_FINNISH_LINE);
-            repository.setHorseJockeyStatus(((ServiceProviderAgent)(Thread.currentThread())).getHorseJockeyIdentification(), HorseJockeyState.AT_THE_FINNISH_LINE);
+            //((ServiceProviderAgent)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_FINNISH_LINE);
+            response = new Response(ResponseType.RACING_TRACK_MAKE_A_MOVE, HorseJockeyState.AT_THE_FINNISH_LINE, horseId);
+            repository.setHorseJockeyStatus(horseId, HorseJockeyState.AT_THE_FINNISH_LINE);
             hasFirstHorseCrossedTheFinishLine = true;
         } else {
             horsesToRun.add(thisHorse);
@@ -117,8 +121,9 @@ public class RacingTrack implements RacingTrackInterface {
         notifyAll();
         if (hasFirstHorseCrossedTheFinishLine && raceIsAboutToEnd) {
             raceIsAboutToEnd = false;
-            winner = ((ServiceProviderAgent)Thread.currentThread()).getHorseJockeyIdentification();
+            winner = horseId;
         }
+        return response;
     }
 
     /**
@@ -275,7 +280,7 @@ public class RacingTrack implements RacingTrackInterface {
     /**
      * The {@link GeneralInformationRepository} instance where all this region's actions will be reported.
      */
-    private GeneralInformationRepositoryStub repository;
+    private GeneralInformationRepositoryInterface repository;
 
     /**
      * The created instance of this class
