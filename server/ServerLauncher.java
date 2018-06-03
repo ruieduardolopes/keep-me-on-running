@@ -1,7 +1,6 @@
 package server;
 
 import configurations.ServerConfigurations;
-import configurations.SimulationConfigurations;
 import hippodrome.*;
 import hippodrome.actions.Race;
 import lib.logging.Logger;
@@ -35,6 +34,10 @@ public class ServerLauncher {
         if (args.length != 1) {
             printUsage();
             System.exit(1);
+        }
+
+        if (System.getSecurityManager() == null) {
+            System.setSecurityManager(new SecurityManager());
         }
 
         Registry registry = null;
@@ -86,6 +89,7 @@ public class ServerLauncher {
                     repositoryInterface = (GeneralInformationRepositoryInterface) UnicastRemoteObject.exportObject(repository, port);
                 } catch (RemoteException re) {
                     Logger.printError("Error message 2");
+                    re.printStackTrace();
                     System.exit(2);
                 }
                 break;
@@ -140,6 +144,7 @@ public class ServerLauncher {
             register = (Register) registry.lookup(nameEntryBase);
         } catch (RemoteException | NotBoundException e) {
             Logger.printError("Oh damn... again..."); // TODO : another error handling
+            e.printStackTrace();
             System.exit(4);
         }
         try {
@@ -158,6 +163,7 @@ public class ServerLauncher {
             }
         } catch (RemoteException | AlreadyBoundException e) {
             Logger.printError("Oh damn... again..."); // TODO : another error handling
+            e.printStackTrace();
             System.exit(5);
         }
         Logger.printInformation("Registry server already running and waiting for new messages");

@@ -105,9 +105,9 @@ compileregister () {
     mv $WORK_PATH/configurations/RMIConfigurations.class $WORK_PATH/out/registry/configurations
 }
 
-runregistry () {
+runregister () {
     cd $WORK_PATH/out/registry
-    java8 -cp . -Djava.rmi.server.codebase="file://$(echo $WORK_PATH)out/registry/" -Djava.rmi.server.useCodebaseOnly=false registry.ServerRegisterRemoteObject
+    java8 -cp . -Djava.rmi.server.codebase="file://$(echo $WORK_PATH)out/registry/" -Djava.security.policy=java.policy -Djava.rmi.server.useCodebaseOnly=false registry.ServerRegisterRemoteObject
     cd -
 }
 
@@ -127,4 +127,24 @@ compileservers () {
     mv $(echo $WORK_PATH)registry/*.class $(echo $WORK_PATH)out/servers/registry
     cp $(echo $WORK_PATH)registry/Register.java $(echo $WORK_PATH)out/servers/registry
     mv $(echo $WORK_PATH)server/*.class $(echo $WORK_PATH)out/servers/server
+}
+
+runserver () {
+    cd $WORK_PATH/out/servers
+    java8 -cp . -Djava.rmi.server.codebase="file://$(echo $WORK_PATH)out/servers/" -Djava.security.policy=java.policy -Djava.rmi.server.useCodebaseOnly=false server.ServerLauncher $1
+    cd -
+}
+
+runall () {
+    runserver "general-repo"
+    sleep 2
+    runserver "betting-centre"
+    sleep 2
+    runserver "control-centre"
+    sleep 2
+    runserver "paddock"
+    sleep 2
+    runserver "racing-track"
+    sleep 2
+    runserver "stable"
 }

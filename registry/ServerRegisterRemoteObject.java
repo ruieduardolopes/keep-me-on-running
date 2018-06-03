@@ -30,6 +30,10 @@ public class ServerRegisterRemoteObject
     rmiRegHostName = "localhost";
     rmiRegPortNumb = RMIConfigurations.RMI_PORT_REGISTRY;
 
+    if (System.getSecurityManager() == null) {
+      System.setSecurityManager(new SecurityManager());
+    }
+
     /* instantiate a registration remote object and generate a stub for it */
 
     RegisterRemoteObject regEngine = new RegisterRemoteObject(rmiRegHostName, rmiRegPortNumb);
