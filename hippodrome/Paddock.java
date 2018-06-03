@@ -35,9 +35,9 @@ public class Paddock implements PaddockInterface {
 
     /**
      * Changes the state of the pair Horse/Jockey to At the Paddock ({@code ATP}) and waits for the last Spectator to
-     * arrive on Paddock on the {@link Paddock#goCheckHorses(boolean)} method.
+     * arrive on Paddock on the {@link Paddock#goCheckHorses(int, boolean)} method.
      * <br>
-     * This method also resets the condition variable of the {@link Paddock#goCheckHorses(boolean)} method.
+     * This method also resets the condition variable of the {@link Paddock#goCheckHorses(int, boolean)} method.
      *
      * @param raceNumber number identification of the race which is about to begin.
      *
@@ -59,7 +59,7 @@ public class Paddock implements PaddockInterface {
 
     /**
      * Changes the Spectator's state to Appraising the Horses ({@code ATH}) and waits till the last
-     * {@link Paddock#proceedToStartLine()}. It also notifies {@link Paddock#proceedToPaddock(int)} when the last
+     * {@link Paddock#proceedToStartLine(int)}. It also notifies {@link Paddock#proceedToPaddock(int)} when the last
      * Spectator is about to appraise the horse - you fool.
      *
      * @param isTheLastSpectator identification if the last {@link entities.Spectator}
@@ -90,7 +90,7 @@ public class Paddock implements PaddockInterface {
     /**
      * Signal that the race is about to start, by a {@link entities.HorseJockey}.
      * <br>
-     * Note that this method changes the value of the condition variable to the {@link Paddock#goCheckHorses(boolean)}
+     * Note that this method changes the value of the condition variable to the {@link Paddock#goCheckHorses(int, boolean)}
      * wait condition, notifying its changes.
      */
     public synchronized Response proceedToStartLine(int horseJockeyId) throws InterruptedException {
@@ -107,7 +107,7 @@ public class Paddock implements PaddockInterface {
         } catch (InterruptedException e) {
             throw new InterruptedException();
         }
-        return new Response(ResponseType.PADDOCK_PROCEED_TO_START_LINE, HorseJockeyState.AT_THE_START_LINE, horseJockeyId)
+        return new Response(ResponseType.PADDOCK_PROCEED_TO_START_LINE, HorseJockeyState.AT_THE_START_LINE, horseJockeyId);
     }
 
     /**
@@ -147,7 +147,7 @@ public class Paddock implements PaddockInterface {
      * Condition variable for noticing when the last pair Horse/Jockey have (or have not) proceeded to the
      * start line.
      * <br>
-     * This is a condition variable of the {@link Paddock#goCheckHorses(boolean)} method and it is reset on the
+     * This is a condition variable of the {@link Paddock#goCheckHorses(int, boolean)} method and it is reset on the
      * {@link Paddock#proceedToPaddock(int)} method.
      */
     private boolean lastHorseDidNotProceedToStartLine = true;
@@ -156,7 +156,7 @@ public class Paddock implements PaddockInterface {
      * Condition variable for noticing when the last Spectator has (or has not) arrived to the Paddock.
      * <br>
      * This is a condition variable of the {@link Paddock#proceedToPaddock(int)} method and it is reset on the
-     * {@link Paddock#goCheckHorses(boolean)} method.
+     * {@link Paddock#goCheckHorses(int, boolean)} method.
      */
     private boolean lastSpectatorHasNotArrivedOnPaddock = true;
 

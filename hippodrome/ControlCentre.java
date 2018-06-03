@@ -1,6 +1,5 @@
 package hippodrome;
 
-import clients.GeneralInformationRepositoryStub;
 import entities.*;
 import hippodrome.responses.Response;
 import hippodrome.responses.ResponseType;
@@ -32,7 +31,7 @@ public class ControlCentre implements ControlCentreInterface {
 
     /**
      * Changes the state of the {@link Broker} to Supervising the Race ({@code STR}) and waits till the last
-     * {@link ControlCentre#makeAMove()} is performed by a pair Horse/Jockey.
+     * {@link ControlCentre#makeAMove(int)} is performed by a pair Horse/Jockey.
      *
      * @throws InterruptedException if the wait() is interrupted.
      */
@@ -67,7 +66,7 @@ public class ControlCentre implements ControlCentreInterface {
 
     /**
      * Changes the {@link Spectator}'s state to Waiting for a Race to Start ({@code WFRTS}) and waits till the last
-     * {@link ControlCentre#proceedToPaddock()} of the pair Horse/Jockey.
+     * {@link ControlCentre#proceedToPaddock(int)} of the pair Horse/Jockey.
      *
      * @throws InterruptedException if the wait() is interrupted.
      *
@@ -130,7 +129,7 @@ public class ControlCentre implements ControlCentreInterface {
     /**
      * Signal that the race is over, having the publishing of the results by the {@link entities.Broker} performing its job.
      * <br>
-     * Note that this method changes the value of the condition variable to the {@link ControlCentre#goWatchTheRace()}
+     * Note that this method changes the value of the condition variable to the {@link ControlCentre#goWatchTheRace(int)}
      * wait condition, notifying its changes.
      *
      * @return the winner of the current race.
@@ -165,7 +164,7 @@ public class ControlCentre implements ControlCentreInterface {
     }
 
     /**
-     * Signal given by the last pair Horse/Jockey that arrives on Paddock, notifying the {@link ControlCentre#waitForTheNextRace()}
+     * Signal given by the last pair Horse/Jockey that arrives on Paddock, notifying the {@link ControlCentre#waitForTheNextRace(int)}
      * of the {@link Spectator}s.
      * <br>
      * Note that this method also resets the condition variable of itself after the notification.
@@ -192,7 +191,7 @@ public class ControlCentre implements ControlCentreInterface {
      * Signal given by the last Spectator which arrives at the {@link Paddock} to appraise the horses, notifying the
      * {@link ControlCentre#summonHorsesToPaddock()} of the {@link Broker}.
      * <br>
-     * Note that this method also resets the condition variable used on the {@link ControlCentre#waitForTheNextRace()}.
+     * Note that this method also resets the condition variable used on the {@link ControlCentre#waitForTheNextRace(int)}.
      */
     public synchronized void goCheckHorses() {
         lastSpectatorHasNotArrivedOnPaddock = false;
@@ -224,16 +223,16 @@ public class ControlCentre implements ControlCentreInterface {
     /**
      * The number of pairs Horse/Jockey which have arrived on Paddock.
      * <br>
-     * This is a condition variable of {@link ControlCentre#proceedToPaddock()} and it is reset on the
-     * {@link ControlCentre#proceedToPaddock()} method itself.
+     * This is a condition variable of {@link ControlCentre#proceedToPaddock(int)} and it is reset on the
+     * {@link ControlCentre#proceedToPaddock(int)} method itself.
      */
     private int numberOfHorseJockeysOnPaddock = 0;
 
     /**
      * The number of pairs Horse/Jockey which have crossed the finish line.
      * <br>
-     * This is a condition variable of {@link ControlCentre#makeAMove()} and it is reset on the
-     * {@link ControlCentre#goWatchTheRace()} method.
+     * This is a condition variable of {@link ControlCentre#makeAMove(int)} and it is reset on the
+     * {@link ControlCentre#goWatchTheRace(int)} method.
      */
     private int finishedHorses = 0;
 
@@ -248,7 +247,7 @@ public class ControlCentre implements ControlCentreInterface {
     /**
      * Condition variable for the last pair Horse/Jockey which has not arrived on the Paddock yet.
      * <br>
-     * This is a condition variable of the {@link ControlCentre#waitForTheNextRace()} and it is reset on the
+     * This is a condition variable of the {@link ControlCentre#waitForTheNextRace(int)} and it is reset on the
      * {@link ControlCentre#goCheckHorses()} method.
      */
     private boolean lastHorseJockeyHasNotArrivedOnPaddock = true;
@@ -257,15 +256,15 @@ public class ControlCentre implements ControlCentreInterface {
      * Condition variable for the last pair Horse/Jockey to finish the race.
      * <br>
      * This is a condition variable of the {@link ControlCentre#startTheRace()} and it is reset on the
-     * {@link ControlCentre#goWatchTheRace()} method.
+     * {@link ControlCentre#goWatchTheRace(int)} method.
      */
     private boolean thereIsStillHorsesToFinishRace = true;
 
     /**
      * Condition variable for the Entities to report the results of the race.
      * <br>
-     * This is a condition variable of the {@link ControlCentre#goWatchTheRace()} and it is reset on the
-     * {@link ControlCentre#goWatchTheRace()} method itself.
+     * This is a condition variable of the {@link ControlCentre#goWatchTheRace(int)} and it is reset on the
+     * {@link ControlCentre#goWatchTheRace(int)} method itself.
      */
     private boolean brokerDidNotReportResults = true;
 
