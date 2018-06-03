@@ -67,12 +67,12 @@ public class HorseJockey extends Thread {
             stable.proceedToStable(raceNumber);                                 // I receive a call to go to the Paddock and I'll go if I'm from this race;
             controlCentre.proceedToPaddock(identification);                                   // I should retrieve a signal to the Control Centre as I moved to the Paddock;
             paddock.proceedToPaddock(raceNumber);                               // Then I should change my own state to At the Paddock;
-            paddock.proceedToStartLine();                                       // If every other Jockeys are at the Paddock and the Spectators saw us, then
-            racingTrack.proceedToStartLine();                                   //   we must proceed to the start line and change my state to At the Start Line;
+            paddock.proceedToStartLine(identification);                                       // If every other Jockeys are at the Paddock and the Spectators saw us, then
+            racingTrack.proceedToStartLine(identification);                                   //   we must proceed to the start line and change my state to At the Start Line;
             while (!racingTrack.hasFinishLineBeenCrossed(identification)) {     // While the finish line is not crossed by me:
-                racingTrack.makeAMove(identification);                          //   I should make a move on the track;
+                racingTrack.makeAMove(identification, ability);                          //   I should make a move on the track;
             }                                                                   //
-            controlCentre.makeAMove();                                          // As I crossed the line I must advance one step further to get off the line;
+            controlCentre.makeAMove(identification);                                          // As I crossed the line I must advance one step further to get off the line;
             stable.proceedToStable();                                           // Then I should go to the Stable and rest till the next round, if that applies.
         } catch (Exception e) {
             e.printStackTrace();
