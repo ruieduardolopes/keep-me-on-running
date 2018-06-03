@@ -55,7 +55,7 @@ public class Spectator extends Thread {
     @Override
     public void run() { // TODO : change the processing mechanism of the returns
         try {
-            while (controlCentre.waitForTheNextRace()) {                            //x While a next race is about to happen:
+            while (controlCentre.waitForTheNextRace(identification)) {              //x While a next race is about to happen:
                 boolean isLastSpectator = paddock.goCheckHorses();                  //   the Paddock calls me to go check the horses and I retrieve if I'm the last to go;
                 if (isLastSpectator) {                                              //   if I'm the last Spectator to come:
                     controlCentre.goCheckHorses();                                  //     then the Control Centre must know, in order to advance something else;
@@ -68,7 +68,7 @@ public class Spectator extends Thread {
                 setSpectatorState(response.newSpectatorState);
 
                 repository.setSpectatorAmountOfMoney(identification, money);        //
-                controlCentre.goWatchTheRace();                                     //   With the bet already placed, then I should go watch the race;
+                controlCentre.goWatchTheRace(identification);                                     //   With the bet already placed, then I should go watch the race;
                 if (bettingCentre.haveIWon(identification)) {                       //   If the I already know that I've won the race, then:
                     money += bettingCentre.goCollectTheGains(identification);       //     I should collect my gains at the Betting Centre;
                     repository.setSpectatorAmountOfMoney(identification, money);    //
