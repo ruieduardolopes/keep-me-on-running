@@ -98,11 +98,16 @@ startrmi () {
 
 compileregister () {
     cd $WORK_PATH
-    javac8 -cp ".:lib/genclass.jar" registry/*.java
+    javac8 -cp ".:lib/genclass.jar" registry/*.java hippodrome/*.java entities/*.java
     cd -
     cp $WORK_PATH/registry/Register.java $WORK_PATH/out/registry/registry
     mv $WORK_PATH/registry/*.class $WORK_PATH/out/registry/registry
     mv $WORK_PATH/configurations/RMIConfigurations.class $WORK_PATH/out/registry/configurations
+    mv $WORK_PATH/hippodrome/*.class $WORK_PATH/out/registry/hippodrome
+    mv $WORK_PATH/hippodrome/actions/*.class $WORK_PATH/out/registry/hippodrome/actions
+    mv $WORK_PATH/hippodrome/responses/*.class $WORK_PATH/out/registry/hippodrome/responses
+    mv $WORK_PATH/hippodrome/rollfilm/*.class $WORK_PATH/out/registry/hippodrome/rollfilm
+    mv $WORK_PATH/entities/*.class $WORK_PATH/out/registry/entities
 }
 
 runregister () {
@@ -113,7 +118,7 @@ runregister () {
 
 compileservers () {
     cd $WORK_PATH
-    javac8 -cp ".:lib/genclass.jar" server/*.java
+    javac8 -cp ".:lib/genclass.jar" server/*.java clients/*.java hippodrome/*.java
     cd -
     mv $(echo $WORK_PATH)configurations/*.class $(echo $WORK_PATH)out/servers/configurations
     mv $(echo $WORK_PATH)entities/*.class $(echo $WORK_PATH)out/servers/entities
@@ -127,6 +132,7 @@ compileservers () {
     mv $(echo $WORK_PATH)registry/*.class $(echo $WORK_PATH)out/servers/registry
     cp $(echo $WORK_PATH)registry/Register.java $(echo $WORK_PATH)out/servers/registry
     mv $(echo $WORK_PATH)server/*.class $(echo $WORK_PATH)out/servers/server
+    mv $(echo $WORK_PATH)clients/*.class $(echo $WORK_PATH)out/servers/clients
 }
 
 runserver () {
@@ -136,18 +142,26 @@ runserver () {
 }
 
 compileclients () {
-    cd $WORK_PATH/out/clients
-    javac8 -cp ".:lib/genclass.jar" clients/*.java
+    cd $WORK_PATH
+    javac8 -cp ".:lib/genclass.jar" clients/*.java hippodrome/*.java server/*.java
     cd -
     mv $(echo $WORK_PATH)configurations/*.class $(echo $WORK_PATH)out/clients/configurations
     mv $(echo $WORK_PATH)entities/*.class $(echo $WORK_PATH)out/clients/entities
     mv $(echo $WORK_PATH)hippodrome/*.class $(echo $WORK_PATH)out/clients/hippodrome
-    mv $(echo $WORK_PATH)lib/loggeing/*.class $(echo $WORK_PATH)out/clients/lib/logging
+    mv $(echo $WORK_PATH)hippodrome/actions/*.class $(echo $WORK_PATH)out/clients/hippodrome/actions
+    mv $(echo $WORK_PATH)hippodrome/responses/*.class $(echo $WORK_PATH)out/clients/hippodrome/responses
+    mv $(echo $WORK_PATH)hippodrome/rollfilm/*.class $(echo $WORK_PATH)out/clients/hippodrome/rollfilm
+    cp $(echo $WORK_PATH)hippodrome/*Interface.java $(echo $WORK_PATH)out/servers/hippodrome
+    mv $(echo $WORK_PATH)lib/logging/*.class $(echo $WORK_PATH)out/clients/lib/logging
+    cp $(echo $WORK_PATH)lib/genclass.jar $(echo $WORK_PATH)out/clients/lib
+    mv $(echo $WORK_PATH)registry/*.class $(echo $WORK_PATH)out/clients/registry
+    cp $(echo $WORK_PATH)registry/Register.java $(echo $WORK_PATH)out/clients/registry
+    mv $(echo $WORK_PATH)server/*.class $(echo $WORK_PATH)out/clients/server
     mv $(echo $WORK_PATH)clients/*.class $(echo $WORK_PATH)out/clients/clients
 }
 
 runclient () {
     cd $WORK_PATH/out/clients
-    java8 -cp . -Djava.rmi.server.codebase="file://$(echo $WORK_PATH)out/clients/" -Djava.security.policy=java.policy -Djava.rmi.server.useCodebaseOnly=false client.ClientLauncher $1
+    java8 -cp . -Djava.rmi.server.codebase="file://$(echo $WORK_PATH)out/clients/" -Djava.rmi.server.useCodebaseOnly=false clients.ClientLauncher $1
     cd -
 }

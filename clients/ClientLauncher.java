@@ -35,23 +35,20 @@ public class ClientLauncher {
             printUsage();
             System.exit(1);
         }
-
-        if (System.getSecurityManager() == null) {
-            System.setSecurityManager(new SecurityManager());
-        }
-
         try {
-            registry = LocateRegistry.getRegistry(RMIConfigurations.RMI_REGISTER_NAME, RMIConfigurations.RMI_PORT_REGISTRY);
+            registry = LocateRegistry.getRegistry(RMIConfigurations.RMI_HOSTNAME, RMIConfigurations.RMI_PORT_REGISTRY);
         } catch (RemoteException re) {
             Logger.printError("OMG, this happened!"); // TODO : refactor this error handling
         }
         try {
+            repositoryInterface = (GeneralInformationRepositoryInterface) registry.lookup(RMIConfigurations.GLOBAL_REPOSITORY_OF_INFORMATION_NAME);
             bettingCentreInterface = (BettingCentreInterface) registry.lookup(RMIConfigurations.BETTING_CENTRE_NAME);
             controlCentreInterface = (ControlCentreInterface) registry.lookup(RMIConfigurations.CONTROL_CENTRE_NAME);
-            repositoryInterface = (GeneralInformationRepositoryInterface) registry.lookup(RMIConfigurations.GLOBAL_REPOSITORY_OF_INFORMATION_NAME);
-            paddockInterface = (PaddockInterface) registry.lookup(RMIConfigurations.PADDOCK_NAME);
-            racingTrackInterface = (RacingTrackInterface) registry.lookup(RMIConfigurations.RACING_TRACK_NAME);
+
+            System.out.printf("The reference of the registration is %s and its toString is %s", registry.lookup(RMIConfigurations.STABLE_NAME), registry.lookup(RMIConfigurations.STABLE_NAME).toString());
             stableInterface = (StableInterface) registry.lookup(RMIConfigurations.STABLE_NAME);
+            racingTrackInterface = (RacingTrackInterface) registry.lookup(RMIConfigurations.RACING_TRACK_NAME);
+            paddockInterface = (PaddockInterface) registry.lookup(RMIConfigurations.PADDOCK_NAME);
         } catch (RemoteException | NotBoundException e) {
             Logger.printError("Something went terribly wrong!"); // TODO : handle this error
         }

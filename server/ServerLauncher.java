@@ -152,14 +152,14 @@ public class ServerLauncher {
                 register.bind(nameEntryObject, bettingCentreInterface);
             } else if (controlCentreInterface != null) {
                 register.bind(nameEntryObject, controlCentreInterface);
-            } else if (repositoryInterface != null) {
-                register.bind(nameEntryObject, repositoryInterface);
             } else if (paddockInterface != null) {
                 register.bind(nameEntryObject, paddockInterface);
             } else if (racingTrackInterface != null) {
                 register.bind(nameEntryObject, racingTrackInterface);
             } else if (stableInterface != null) {
                 register.bind(nameEntryObject, stableInterface);
+            } else if (repositoryInterface != null) {
+                register.bind(nameEntryObject, repositoryInterface);
             }
         } catch (RemoteException | AlreadyBoundException e) {
             Logger.printError("Oh damn... again..."); // TODO : another error handling
@@ -168,11 +168,11 @@ public class ServerLauncher {
         }
         Logger.printInformation("Registry server already running and waiting for new messages");
         while (!terminateExecution) {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException ie) {
-                System.exit(1000); // TODO: remove this
-            }
+            //try {
+            //    Thread.sleep(1000);
+            //} catch (InterruptedException ie) {
+            //    System.exit(1000); // TODO: remove this
+            //}
             //terminateExecution = ServiceProviderAgent.getShutdownCounter(args[0]); // TODO : remove the service provider agent
         }
     }
