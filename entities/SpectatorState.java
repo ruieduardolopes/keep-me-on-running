@@ -20,7 +20,7 @@ public enum SpectatorState {
     WAITING_FOR_A_RACE_TO_START,
     /**
      * This is a <strong>blocking state</strong>. Here, the {@link Spectator} is waken up by the operation
-     * {@link RacingTrack#proceedToStartLine()} of the pair Horse/Jockey to leave the {@link hippodrome.Paddock}.
+     * {@link RacingTrack#proceedToStartLine(int)} of the pair Horse/Jockey to leave the {@link hippodrome.Paddock}.
      */
     APPRAISING_THE_HORSES,
     /**
