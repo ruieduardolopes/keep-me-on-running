@@ -35,8 +35,13 @@ public class ClientLauncher {
             printUsage();
             System.exit(1);
         }
+
+        if (System.getSecurityManager() == null) {
+            System.setSecurityManager(new SecurityManager());
+        }
+
         try {
-            registry = LocateRegistry.getRegistry(RMIConfigurations.RMI_REGISTER_NAME, RMIConfigurations.RMI_PORT);
+            registry = LocateRegistry.getRegistry(RMIConfigurations.RMI_REGISTER_NAME, RMIConfigurations.RMI_PORT_REGISTRY);
         } catch (RemoteException re) {
             Logger.printError("OMG, this happened!"); // TODO : refactor this error handling
         }
