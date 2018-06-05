@@ -135,16 +135,19 @@ runserver () {
     cd -
 }
 
-runall () {
-    runserver "general-repo"
-    sleep 2
-    runserver "betting-centre"
-    sleep 2
-    runserver "control-centre"
-    sleep 2
-    runserver "paddock"
-    sleep 2
-    runserver "racing-track"
-    sleep 2
-    runserver "stable"
+compileclients () {
+    cd $WORK_PATH/out/clients
+    javac8 -cp ".:lib/genclass.jar" clients/*.java
+    cd -
+    mv $(echo $WORK_PATH)configurations/*.class $(echo $WORK_PATH)out/clients/configurations
+    mv $(echo $WORK_PATH)entities/*.class $(echo $WORK_PATH)out/clients/entities
+    mv $(echo $WORK_PATH)hippodrome/*.class $(echo $WORK_PATH)out/clients/hippodrome
+    mv $(echo $WORK_PATH)lib/loggeing/*.class $(echo $WORK_PATH)out/clients/lib/logging
+    mv $(echo $WORK_PATH)clients/*.class $(echo $WORK_PATH)out/clients/clients
+}
+
+runclient () {
+    cd $WORK_PATH/out/clients
+    java8 -cp . -Djava.rmi.server.codebase="file://$(echo $WORK_PATH)out/clients/" -Djava.security.policy=java.policy -Djava.rmi.server.useCodebaseOnly=false client.ClientLauncher $1
+    cd -
 }
