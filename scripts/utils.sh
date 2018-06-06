@@ -174,12 +174,3 @@ letsstarttheraces () {
     opentaboniterm ""
     cd -
 }
-opentaboniterm() {
-    osascript &>/dev/null <<EOF
-      tell application "iTerm"
-        activate
-        tell current window to set tb to create tab with default profile
-        tell current session of current window to write text "$1"
-      end tell
-    EOF
-}
