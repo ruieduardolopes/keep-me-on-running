@@ -27,7 +27,7 @@ public class ServerRegisterRemoteObject
     String rmiRegHostName;
     int rmiRegPortNumb;
 
-    rmiRegHostName = "localhost";
+    rmiRegHostName = RMIConfigurations.RMI_HOSTNAME;
     rmiRegPortNumb = RMIConfigurations.RMI_PORT_REGISTRY;
 
     if (System.getSecurityManager() == null) {

@@ -49,5 +49,5 @@ public class RMIConfigurations {
     /**
      * Hostname of the RMI Registry.
      */
-    public static final String RMI_HOSTNAME = "localhost";
+    public static final String RMI_HOSTNAME = "l040101-ws01.ua.pt";
 }
