@@ -12,12 +12,12 @@ public class ServerConfigurations {
     /**
      * Definition of the Betting Centre port for the execution.
      */
-    public static final int BETTING_CENTRE_PORT = 22412;
+    public static final int BETTING_CENTRE_PORT = 22411;
 
     /**
      * Definition of the Control Centre port for the execution.
      */
-    public static final int CONTROL_CENTRE_PORT = 22413;
+    public static final int CONTROL_CENTRE_PORT = 22412;
 
     /**
      * Definition of the General Repository of Information port for the execution.
@@ -27,17 +27,17 @@ public class ServerConfigurations {
     /**
      * Definition of the Paddock port for the execution.
      */
-    public static final int PADDOCK_PORT = 22414;
+    public static final int PADDOCK_PORT = 22413;
 
     /**
      * Definition of the Racing Track port for the execution.
      */
-    public static final int RACING_TRACK_PORT = 22415;
+    public static final int RACING_TRACK_PORT = 22414;
 
     /**
      * Definition of the Stable port for the execution.
      */
-    public static final int STABLE_PORT = 22416;
+    public static final int STABLE_PORT = 22415;
 
     /**
      * Definition of the Betting Centre host for the execution.

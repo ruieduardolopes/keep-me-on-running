@@ -39,12 +39,12 @@ public class RMIConfigurations {
     /**
      * Port number of the RMI listening port.
      */
-    public static final int RMI_LISTENING_PORT = 22421;
+    public static final int RMI_LISTENING_PORT = 22416;
 
     /**
      * Port number of the RMI registry.
      */
-    public static final int RMI_PORT_REGISTRY = 22420; // TODO: change this value
+    public static final int RMI_PORT_REGISTRY = 22417; // TODO: change this value
 
     /**
      * Hostname of the RMI Registry.

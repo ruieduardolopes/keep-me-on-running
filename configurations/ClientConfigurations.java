@@ -12,17 +12,17 @@ public class ClientConfigurations {
     /**
      * Definition of the Broker port for the execution.
      */
-    public static final int BROKER_PORT = 22417;
+    public static final int BROKER_PORT = 22418;
 
     /**
      * Definition of the Spectators port for the execution.
      */
-    public static final int SPECTATOR_PORT = 22418;
+    public static final int SPECTATOR_PORT = 22419;
 
     /**
      * Definition of the pairs Horse/Jockey port for the execution.
      */
-    public static final int HORSE_JOCKEY_PORT = 22419;
+    public static final int HORSE_JOCKEY_PORT = 55666; // TODO : verify the ports
 
     /**
      * Definition of the Broker port for the execution.

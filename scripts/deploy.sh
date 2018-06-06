@@ -92,7 +92,7 @@ shlastlog () {
 
 startrmi () {
     cd ~
-    rmiregistry8 -J-Djava.rmi.server.useCodebaseOnly=false 22420 &
+    rmiregistry8 -J-Djava.rmi.server.useCodebaseOnly=false 22417 &
     cd -
 }
 
