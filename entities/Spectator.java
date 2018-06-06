@@ -90,7 +90,7 @@ public class Spectator extends Thread {
      *
      * @param state Enumeration value represented by {@link SpectatorState}
      */
-    public synchronized void setSpectatorState(SpectatorState state) {
+    public void setSpectatorState(SpectatorState state) {
         this.state = state;
     }
 

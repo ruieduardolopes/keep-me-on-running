@@ -60,7 +60,7 @@ public class Stable implements StableInterface {
         //((ServiceProviderAgent)Thread.currentThread()).setHorseJockeyState(HorseJockeyState.AT_THE_STABLE);
         repository.setHorseJockeyStatus(horseJockeyId, HorseJockeyState.AT_THE_STABLE);
         if (thisIsAfterTheLastRun) {
-            return null; // TODO : verify the possibility of returning null
+            return new Response(ResponseType.STABLE_PROCEED_TO_STABLE, HorseJockeyState.AT_THE_STABLE, horseJockeyId);
         }
         while (brokerDidNotSaidToAdvance) {
             try {

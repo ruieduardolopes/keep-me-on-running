@@ -61,7 +61,7 @@ public class HorseJockey extends Thread {
     public void run() {
         try {
             bettingCentre.setAbility(identification, ability);                                              // Set my ability on the Betting Centre to evaluate odds;
-            setHorseJockeyState(stable.proceedToStable(raceNumber).getHorseJockeyState());                  // I receive a call to go to the Paddock and I'll go if I'm from this race;
+            setHorseJockeyState(stable.proceedToStable(identification, raceNumber).getHorseJockeyState());  // I receive a call to go to the Paddock and I'll go if I'm from this race;
             setHorseJockeyState(controlCentre.proceedToPaddock(identification).getHorseJockeyState());      // I should retrieve a signal to the Control Centre as I moved to the Paddock;
             paddock.proceedToPaddock(raceNumber);                                                           // Then I should change my own state to At the Paddock;
             setHorseJockeyState(paddock.proceedToStartLine(identification).getHorseJockeyState());          // If every other Jockeys are at the Paddock and the Spectators saw us, then
@@ -84,7 +84,7 @@ public class HorseJockey extends Thread {
      *
      * @param state Enumeration value represented by {@link HorseJockeyState}
      */
-    public synchronized void setHorseJockeyState(HorseJockeyState state) {
+    public void setHorseJockeyState(HorseJockeyState state) {
         this.state = state;
     }
 
@@ -121,7 +121,7 @@ public class HorseJockey extends Thread {
      *
      * @param raceNumber an integer representing the identification.
      */
-    public synchronized void setRaceNumber(int raceNumber) {
+    public void setRaceNumber(int raceNumber) {
         this.raceNumber = raceNumber;
     }
 

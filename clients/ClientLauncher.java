@@ -44,8 +44,6 @@ public class ClientLauncher {
             repositoryInterface = (GeneralInformationRepositoryInterface) registry.lookup(RMIConfigurations.GLOBAL_REPOSITORY_OF_INFORMATION_NAME);
             bettingCentreInterface = (BettingCentreInterface) registry.lookup(RMIConfigurations.BETTING_CENTRE_NAME);
             controlCentreInterface = (ControlCentreInterface) registry.lookup(RMIConfigurations.CONTROL_CENTRE_NAME);
-
-            System.out.printf("The reference of the registration is %s and its toString is %s", registry.lookup(RMIConfigurations.STABLE_NAME), registry.lookup(RMIConfigurations.STABLE_NAME).toString());
             stableInterface = (StableInterface) registry.lookup(RMIConfigurations.STABLE_NAME);
             racingTrackInterface = (RacingTrackInterface) registry.lookup(RMIConfigurations.RACING_TRACK_NAME);
             paddockInterface = (PaddockInterface) registry.lookup(RMIConfigurations.PADDOCK_NAME);

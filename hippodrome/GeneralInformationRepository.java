@@ -12,6 +12,7 @@ import lib.logging.Logger;
 
 
 import java.time.Instant;
+import java.util.Arrays;
 
 import static configurations.SimulationConfigurations.*;
 
@@ -261,10 +262,10 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
         String line = "  ";
         switch (brokerStatus) {
             case "OTE" :
-                if (horseJockeys[0] == null || horseJockeys[1] == null || horseJockeys[2] == null || horseJockeys[3] == null) {
+                if (horseJockeys[0].getStatus().equals("---") || horseJockeys[1].getStatus().equals("---") || horseJockeys[2].getStatus().equals("---") || horseJockeys[3].getStatus().equals("---")) {
                     line += "OpTE";
                 } else {
-                    line += "ANR";
+                    line += "AnNR";
                 }
                 break;
             case "ANR" : line += "AnNR"; break;

@@ -72,7 +72,7 @@ public class Broker extends Thread {
             //shutdown();                                                               // TODO : shutdown invocation
         } catch (Exception ie) {                                                        //
             ie.printStackTrace();                                                       //
-            System.exit(4);                                                             //
+                                                                                        //
         }                                                                               //
     }
 
@@ -83,7 +83,7 @@ public class Broker extends Thread {
      *
      * @param state Enumeration value represented by {@link BrokerState}
      */
-    public synchronized void setBrokerState(BrokerState state) {
+    public void setBrokerState(BrokerState state) {
         this.state = state;
     }
 

@@ -168,3 +168,18 @@ print_execclient_usage () {
     echo "Usage: execclient <entity>"
 }
 
+letsstarttheraces () {
+    cd $WORK_PATH
+    opentaboniterm "cd $(echo $WORK_PATH) && source scripts/deploy.sh && startrmi"
+    opentaboniterm ""
+    cd -
+}
+opentaboniterm() {
+    osascript &>/dev/null <<EOF
+      tell application "iTerm"
+        activate
+        tell current window to set tb to create tab with default profile
+        tell current session of current window to write text "$1"
+      end tell
+    EOF
+}

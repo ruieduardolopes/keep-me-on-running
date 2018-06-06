@@ -168,11 +168,11 @@ public class ServerLauncher {
         }
         Logger.printInformation("Registry server already running and waiting for new messages");
         while (!terminateExecution) {
-            //try {
-            //    Thread.sleep(1000);
-            //} catch (InterruptedException ie) {
-            //    System.exit(1000); // TODO: remove this
-            //}
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ie) {
+                System.exit(1000); // TODO: remove this
+            }
             //terminateExecution = ServiceProviderAgent.getShutdownCounter(args[0]); // TODO : remove the service provider agent
         }
     }
