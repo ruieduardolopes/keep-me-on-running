@@ -84,6 +84,7 @@ public class Paddock implements PaddockInterface {
             }
         }
         lastSpectatorHasNotArrivedOnPaddock = true;
+        numberOfEntitiesDeclaringExit++;
         return new Response(ResponseType.PADDOCK_GO_CHECK_HORSES, SpectatorState.APPRAISING_THE_HORSES, spectator);
     }
 
@@ -122,6 +123,19 @@ public class Paddock implements PaddockInterface {
         currentNumberOfSpectators++;
         return currentNumberOfSpectators == numberOfSpectators;
     }
+
+    /**
+     * Gives the number of entities running on this hippodrome region which will exit the simulation.
+     * @return the number of entities which declares death.
+     */
+    public int getNumberOfEntitiesDeclaringExit() {
+        return numberOfEntitiesDeclaringExit;
+    }
+
+    /**
+     * The number of entities running on this hippodrome region which will exit the simulation.
+     */
+    private int numberOfEntitiesDeclaringExit = 0;
 
     /**
      * Current number of {@link HorseJockey} present in the {@link Paddock}.

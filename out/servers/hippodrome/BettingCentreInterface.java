@@ -32,4 +32,6 @@ public interface BettingCentreInterface extends Remote {
     int getNumberOfHorses() throws Exception;
 
     void setAbility(int horse, int ability) throws Exception;
+
+    public int getNumberOfEntitiesDeclaringExit() throws Exception;
 }

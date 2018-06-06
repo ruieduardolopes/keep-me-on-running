@@ -56,7 +56,7 @@ public class Spectator extends Thread {
         try {
             while (aNextRaceIsAboutToHappen(controlCentre.waitForTheNextRace(identification))) {                // While a next race is about to happen:
                 boolean isLastSpectator = paddock.goCheckHorses();                                              //   the Paddock calls me to go check the horses and I retrieve if I'm the last to go;
-            if (isLastSpectator) {                                                                              //   if I'm the last Spectator to come:
+                if (isLastSpectator) {                                                                          //   if I'm the last Spectator to come:
                     controlCentre.goCheckHorses();                                                              //     then the Control Centre must know, in order to advance something else;
                 }                                                                                               //
                 setSpectatorState(paddock.goCheckHorses(identification, isLastSpectator).getSpectatorState());  //   I then must change my state to Appraising the Horses;

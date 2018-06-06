@@ -69,7 +69,8 @@ public class Broker extends Thread {
             }                                                                           //
             setBrokerState(controlCentre.entertainTheGuests().getBrokerState());        // as the races are over, then i should go entertain the guests.
             repository.newSnapshot(true);                                               //
-            //shutdown();                                                               // TODO : shutdown invocation
+            racingTrack.getOut();                                                       //
+            stable.getOut();                                                            //
         } catch (Exception ie) {                                                        //
             ie.printStackTrace();                                                       //
                                                                                         //

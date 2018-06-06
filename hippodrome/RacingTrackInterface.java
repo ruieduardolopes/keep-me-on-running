@@ -31,4 +31,8 @@ public interface RacingTrackInterface extends Remote {
     void setRace(Race race) throws Exception;
 
     int getWinner() throws Exception;
+
+    public int getNumberOfEntitiesDeclaringExit() throws Exception;
+
+    public void getOut() throws Exception;
 }

@@ -108,6 +108,9 @@ public class BettingCentre implements BettingCentreInterface {
         }
         winnersMustNotReceiveTheirMoney = false;
         notifyAll();
+        if (!nobodyWon) {
+            numberOfEntitiesDeclaringExit++;
+        }
         return new Response(ResponseType.BETTING_CENTRE_HONOUR_THE_BETS, BrokerState.SETTLING_ACCOUNTS);
     }
 
@@ -199,6 +202,8 @@ public class BettingCentre implements BettingCentreInterface {
             }
         }
 
+        numberOfEntitiesDeclaringExit++;
+
         for (int winner : winners) {
             if (winner == spectatorId) {
                 return true;
@@ -232,6 +237,10 @@ public class BettingCentre implements BettingCentreInterface {
         }
         brokerDoesNotAllowToProceedToHaveIWon = false;
         notifyAll();
+        nobodyWon = winners.length == 0;
+        if (nobodyWon) {
+            numberOfEntitiesDeclaringExit++;
+        }
         return winners.length != 0;
     }
 
@@ -292,6 +301,20 @@ public class BettingCentre implements BettingCentreInterface {
     }
 
     /**
+     * Gives the number of entities running on this hippodrome region which will exit the simulation.
+     * @return the number of entities which declares death.
+     */
+    @Override
+    public int getNumberOfEntitiesDeclaringExit() {
+        return numberOfEntitiesDeclaringExit;
+    }
+
+    /**
+     * The number of entities running on this hippodrome region which will exit the simulation.
+     */
+    private int numberOfEntitiesDeclaringExit = 0;
+
+    /**
      * The waiting queue to contact the {@link Broker} on its tasks. This could be used while waiting to a {@link Spectator}
      * place a bet, or while wainting to a {@link Spectator} go collect his (or hers) gains. This structure is granted by a
      * {@link LinkedBlockingQueue} Java class, which performs a blocking queue under the logic of a linked list.
@@ -310,6 +333,8 @@ public class BettingCentre implements BettingCentreInterface {
      * number of winners and its content is the set of {@code Spectator}'s IDs of who won the bet.
      */
     private int[] winners;
+
+    private boolean nobodyWon = true;
 
     /**
      * Internal knowledge of the number of horses which are competing on track.

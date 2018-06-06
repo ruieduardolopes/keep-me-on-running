@@ -19,4 +19,8 @@ public interface StableInterface extends Remote {
     Response proceedToStable(int horseJockeyId) throws Exception;
 
     void summonHorsesToPaddock(int raceNumber) throws Exception;
+
+    public int getNumberOfEntitiesDeclaringExit() throws Exception;
+
+    public void getOut() throws Exception;
 }

@@ -60,7 +60,7 @@ public class ServerLauncher {
 
         switch (args[0]) {
             case "betting-centre" :
-                BettingCentre bettingCentre = new BettingCentre(repositoryInterface, NUMBER_OF_PAIRS_HORSE_JOCKEY, NUMBER_OF_SPECTATORS);
+                bettingCentre = new BettingCentre(repositoryInterface, NUMBER_OF_PAIRS_HORSE_JOCKEY, NUMBER_OF_SPECTATORS);
                 port = ServerConfigurations.BETTING_CENTRE_PORT;
                 nameEntryObject = BETTING_CENTRE_NAME;
                 try {
@@ -71,7 +71,7 @@ public class ServerLauncher {
                 }
                 break;
             case "control-centre" :
-                ControlCentre controlCentre = new ControlCentre(repositoryInterface, NUMBER_OF_PAIRS_HORSE_JOCKEY);
+                controlCentre = new ControlCentre(repositoryInterface, NUMBER_OF_PAIRS_HORSE_JOCKEY);
                 port = ServerConfigurations.CONTROL_CENTRE_PORT;
                 nameEntryObject = CONTROL_CENTRE_NAME;
                 try {
@@ -82,7 +82,7 @@ public class ServerLauncher {
                 }
                 break;
             case "general-repo" :
-                GeneralInformationRepository repository = new GeneralInformationRepository(NUMBER_OF_PAIRS_HORSE_JOCKEY, NUMBER_OF_SPECTATORS, true);
+                repository = new GeneralInformationRepository(NUMBER_OF_PAIRS_HORSE_JOCKEY, NUMBER_OF_SPECTATORS, true);
                 port = ServerConfigurations.GENERAL_INFORMATION_REPOSITORY_PORT;
                 nameEntryObject = GLOBAL_REPOSITORY_OF_INFORMATION_NAME;
                 try {
@@ -94,7 +94,7 @@ public class ServerLauncher {
                 }
                 break;
             case "paddock" :
-                Paddock paddock = new Paddock(repositoryInterface, NUMBER_OF_SPECTATORS, NUMBER_OF_PAIRS_HORSE_JOCKEY);
+                paddock = new Paddock(repositoryInterface, NUMBER_OF_SPECTATORS, NUMBER_OF_PAIRS_HORSE_JOCKEY);
                 port = ServerConfigurations.PADDOCK_PORT;
                 nameEntryObject = PADDOCK_NAME;
                 try {
@@ -105,7 +105,7 @@ public class ServerLauncher {
                 }
                 break;
             case "racing-track" :
-                RacingTrack racingTrack = null;
+                racingTrack = null;
                 try {
                     racingTrack = new RacingTrack(repositoryInterface, new Race(NUMBER_OF_TRACKS, 0, Race.generateDistance()));
                 } catch (Exception e) {
@@ -122,7 +122,7 @@ public class ServerLauncher {
                 }
                 break;
             case "stable" :
-                Stable stable = new Stable(repositoryInterface);
+                stable = new Stable(repositoryInterface);
                 port = ServerConfigurations.STABLE_PORT;
                 nameEntryObject = STABLE_NAME;
                 try {
@@ -167,13 +167,81 @@ public class ServerLauncher {
             System.exit(5);
         }
         Logger.printInformation("Registry server already running and waiting for new messages");
-        while (!terminateExecution) {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException ie) {
-                System.exit(1000); // TODO: remove this
+
+        try {
+            switch (nameEntryObject) {
+                case BETTING_CENTRE_NAME:
+                    while (bettingCentreInterface.getNumberOfEntitiesDeclaringExit() < NUMBER_OF_SPECTATORS*NUMBER_OF_RACES + NUMBER_OF_RACES) {
+                        Thread.sleep(1000);
+                    }
+                    break;
+                case CONTROL_CENTRE_NAME:
+                    while (controlCentreInterface.getNumberOfEntitiesDeclaringExit() < NUMBER_OF_SPECTATORS + 1) {
+                        Thread.sleep(1000);
+                    }
+                    break;
+                case GLOBAL_REPOSITORY_OF_INFORMATION_NAME:
+                    while (!repositoryInterface.isBrokerReadyToGiveTheMasterFart()) {
+                        Thread.sleep(1000);
+                    }
+                    break;
+                case PADDOCK_NAME:
+                    while (paddockInterface.getNumberOfEntitiesDeclaringExit() < NUMBER_OF_SPECTATORS*NUMBER_OF_RACES) {
+                        Thread.sleep(1000);
+                    }
+                    break;
+                case RACING_TRACK_NAME:
+                    while (racingTrackInterface.getNumberOfEntitiesDeclaringExit() < 1) {
+                        Thread.sleep(1000);
+                    }
+                    break;
+                case STABLE_NAME:
+                    while (stableInterface.getNumberOfEntitiesDeclaringExit() < 1) {
+                        Thread.sleep(1000);
+                    }
+                    break;
+                default:
+                    break;
             }
-            //terminateExecution = ServiceProviderAgent.getShutdownCounter(args[0]); // TODO : remove the service provider agent
+        } catch (Exception e) {
+            e.printStackTrace();
+            Logger.printError("What an error!");
+            System.exit(17);
+        }
+        resetRegistry(register, nameEntryObject);
+        Logger.printInformation("This machine is going to blow up!");
+        System.exit(0);
+    }
+
+    private static void resetRegistry(Register register, String name) {
+        try {
+            register.unbind(name);
+            switch (name) {
+                case BETTING_CENTRE_NAME:
+                    UnicastRemoteObject.unexportObject(bettingCentre, true);
+                    break;
+                case CONTROL_CENTRE_NAME:
+                    UnicastRemoteObject.unexportObject(controlCentre, true);
+                    break;
+                case GLOBAL_REPOSITORY_OF_INFORMATION_NAME:
+                    UnicastRemoteObject.unexportObject(repository, true);
+                    break;
+                case PADDOCK_NAME:
+                    UnicastRemoteObject.unexportObject(paddock, true);
+                    break;
+                case RACING_TRACK_NAME:
+                    UnicastRemoteObject.unexportObject(racingTrack, true);
+                    break;
+                case STABLE_NAME:
+                    UnicastRemoteObject.unexportObject(stable, true);
+                    break;
+                default:
+                    break;
+            }
+            Logger.printInformation("Everything's clear.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            Logger.printError("Something's missing");
         }
     }
 
@@ -191,6 +259,18 @@ public class ServerLauncher {
                 "  - racing-track        (Racing Track)\n" +
                 "  - stable              (Stable)\n");
     }
+
+    private static BettingCentre bettingCentre;
+
+    private static ControlCentre controlCentre;
+
+    private static GeneralInformationRepository repository;
+
+    private static Paddock paddock;
+
+    private static RacingTrack racingTrack;
+
+    private static Stable stable;
 
     private static BettingCentreInterface bettingCentreInterface = null;
 

@@ -57,6 +57,7 @@ public class ControlCentre implements ControlCentreInterface {
         try {
             //((ServiceProviderAgent)Thread.currentThread()).setBrokerState(BrokerState.PLAYING_HOST_AT_THE_BAR);
             repository.setBrokerStatus(BrokerState.PLAYING_HOST_AT_THE_BAR);
+            numberOfEntitiesDeclaringExit++;
         } catch (Exception ie) {
             ie.printStackTrace();
             throw new Exception();
@@ -120,6 +121,7 @@ public class ControlCentre implements ControlCentreInterface {
         try {
             //((ServiceProviderAgent)Thread.currentThread()).setSpectatorState(SpectatorState.CELEBRATING);
             repository.setSpectatorStatus(spectator, SpectatorState.CELEBRATING);
+            numberOfEntitiesDeclaringExit++;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -214,6 +216,19 @@ public class ControlCentre implements ControlCentreInterface {
             notifyAll();
         }
     }
+
+    /**
+     * Gives the number of entities running on this hippodrome region which will exit the simulation.
+     * @return the number of entities which declares death.
+     */
+    public int getNumberOfEntitiesDeclaringExit() {
+        return numberOfEntitiesDeclaringExit;
+    }
+
+    /**
+     * The number of entities running on this hippodrome region which will exit the simulation.
+     */
+    private int numberOfEntitiesDeclaringExit = 0;
 
     /**
      * The number of pairs Horse/Jockey that will be running and controlled on this region.

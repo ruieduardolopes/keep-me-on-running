@@ -57,4 +57,6 @@ public interface GeneralInformationRepositoryInterface extends Remote {
     int getCurrentRaceDistance() throws Exception;
 
     void raceIsOver() throws Exception;
+
+    boolean isBrokerReadyToGiveTheMasterFart() throws Exception;
 }

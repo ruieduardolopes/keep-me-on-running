@@ -97,6 +97,23 @@ public class Stable implements StableInterface {
         notifyAll();
     }
 
+    public synchronized void getOut() {
+        numberOfEntitiesDeclaringExit++;
+    }
+
+    /**
+     * Gives the number of entities running on this hippodrome region which will exit the simulation.
+     * @return the number of entities which declares death.
+     */
+    public int getNumberOfEntitiesDeclaringExit() {
+        return numberOfEntitiesDeclaringExit;
+    }
+
+    /**
+     * The number of entities running on this hippodrome region which will exit the simulation.
+     */
+    private int numberOfEntitiesDeclaringExit = 0;
+
     /**
      * Current race number identifier, as an integer.
      */

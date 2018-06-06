@@ -178,6 +178,10 @@ public class RacingTrack implements RacingTrackInterface {
         return winner;
     }
 
+    public synchronized void getOut() {
+        numberOfEntitiesDeclaringExit++;
+    }
+
     /**
      * Marks the final position of the pair Horse/Jockey identified with {@code horse}.
      *
@@ -236,6 +240,19 @@ public class RacingTrack implements RacingTrackInterface {
      * {@link LinkedBlockingQueue} of Java's Collections Library.
      */
     private Queue<Integer> horsesToRun = new LinkedBlockingQueue<>();
+
+    /**
+     * Gives the number of entities running on this hippodrome region which will exit the simulation.
+     * @return the number of entities which declares death.
+     */
+    public int getNumberOfEntitiesDeclaringExit() {
+        return numberOfEntitiesDeclaringExit;
+    }
+
+    /**
+     * The number of entities running on this hippodrome region which will exit the simulation.
+     */
+    private int numberOfEntitiesDeclaringExit = 0;
 
     /**
      * Internal structure correspondent to the horses which have completed the race.

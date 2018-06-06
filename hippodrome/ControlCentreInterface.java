@@ -35,4 +35,6 @@ public interface ControlCentreInterface extends Remote {
     void goCheckHorses() throws Exception;
 
     void makeAMove(int horseJockeyId) throws Exception;
+
+    public int getNumberOfEntitiesDeclaringExit() throws Exception;
 }

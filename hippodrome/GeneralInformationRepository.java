@@ -471,6 +471,21 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
         return line;
     }
 
+    public synchronized boolean isBrokerReadyToGiveTheMasterFart() {
+        if (brokerStatus == null || spectators == null) {
+            return false;
+        }
+        if (brokerStatus.equals("PHATB") && raceNumber == NUMBER_OF_RACES-1) {
+            for (int i = 0; i != spectators.length; i++) {
+                if (!spectators[i].getStatus().equals("C")) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Sets a new race number as the last race number.
      *

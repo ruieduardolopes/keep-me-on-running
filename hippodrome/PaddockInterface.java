@@ -23,4 +23,6 @@ public interface PaddockInterface extends Remote {
     Response proceedToStartLine(int horseJockeyId) throws Exception;
 
     boolean goCheckHorses() throws Exception;
+
+    public int getNumberOfEntitiesDeclaringExit() throws Exception;
 }
