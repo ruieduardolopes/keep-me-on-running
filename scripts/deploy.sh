@@ -73,7 +73,7 @@ shlastlog () {
 
 startrmi () {
     cd ~
-    rmiregistry -J-Djava.rmi.server.useCodebaseOnly=true 22417 &
+    rmiregistry -J-Djava.rmi.server.codebase="http://l040101-ws01.ua.pt/sd0402/registry" -J-Djava.rmi.server.useCodebaseOnly=true 22417 &
     cd -
 }
 
