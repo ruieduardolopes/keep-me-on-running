@@ -70,7 +70,7 @@ deployall () {
 }
 
 shlastlog () {
-    ssh sd0402@l040101-ws01.ua.pt 'cat $WORK_PATH/$(ls $WORK_PATH | grep horse-run | tail -n1)' | less
+    ssh sd0402@l040101-ws01.ua.pt 'cat $(echo $WORK_PATH)$(ls $WORK_PATH | grep horse-run | tail -n1)' | less
 }
 
 startrmi () {
@@ -83,18 +83,18 @@ compileregister () {
     cd $WORK_PATH
     javac -cp ".:lib/genclass.jar" registry/*.java hippodrome/*.java entities/*.java
     cd -
-    cp $WORK_PATH/registry/Register.java $WORK_PATH/out/registry/registry
-    mv $WORK_PATH/registry/*.class $WORK_PATH/out/registry/registry
-    mv $WORK_PATH/configurations/RMIConfigurations.class $WORK_PATH/out/registry/configurations
-    mv $WORK_PATH/hippodrome/*.class $WORK_PATH/out/registry/hippodrome
-    mv $WORK_PATH/hippodrome/actions/*.class $WORK_PATH/out/registry/hippodrome/actions
-    mv $WORK_PATH/hippodrome/responses/*.class $WORK_PATH/out/registry/hippodrome/responses
-    mv $WORK_PATH/hippodrome/rollfilm/*.class $WORK_PATH/out/registry/hippodrome/rollfilm
-    mv $WORK_PATH/entities/*.class $WORK_PATH/out/registry/entities
+    cp $(echo $WORK_PATH)registry/Register.java $(echo $WORK_PATH)out/registry/registry
+    mv $(echo $WORK_PATH)registry/*.class $(echo $WORK_PATH)out/registry/registry
+    mv $(echo $WORK_PATH)configurations/RMIConfigurations.class $(echo $WORK_PATH)out/registry/configurations
+    mv $(echo $WORK_PATH)hippodrome/*.class $(echo $WORK_PATH)out/registry/hippodrome
+    mv $(echo $WORK_PATH)hippodrome/actions/*.class $(echo $WORK_PATH)out/registry/hippodrome/actions
+    mv $(echo $WORK_PATH)hippodrome/responses/*.class $(echo $WORK_PATH)out/registry/hippodrome/responses
+    mv $(echo $WORK_PATH)hippodrome/rollfilm/*.class $(echo $WORK_PATH)out/registry/hippodrome/rollfilm
+    mv $(echo $WORK_PATH)entities/*.class $(echo $WORK_PATH)out/registry/entities
 }
 
 runregister () {
-    cd $WORK_PATH/out/registry
+    cd $(echo $WORK_PATH)out/registry
     java -cp . -Djava.rmi.server.codebase="file://$(echo $WORK_PATH)out/registry/" -Djava.security.policy=java.policy -Djava.rmi.server.useCodebaseOnly=false registry.ServerRegisterRemoteObject
     cd -
 }
@@ -119,7 +119,7 @@ compileservers () {
 }
 
 runserver () {
-    cd $WORK_PATH/out/servers
+    cd $(echo $WORK_PATH)out/servers
     java -cp . -Djava.rmi.server.codebase="file://$(echo $WORK_PATH)out/servers/" -Djava.security.policy=java.policy -Djava.rmi.server.useCodebaseOnly=false server.ServerLauncher $1
     cd -
 }
@@ -144,7 +144,7 @@ compileclients () {
 }
 
 runclient () {
-    cd $WORK_PATH/out/clients
+    cd $(echo $WORK_PATH)out/clients
     java -cp . -Djava.rmi.server.codebase="file://$(echo $WORK_PATH)out/clients/" -Djava.rmi.server.useCodebaseOnly=false clients.ClientLauncher $1
     cd -
 }
