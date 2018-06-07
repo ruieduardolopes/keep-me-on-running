@@ -53,6 +53,7 @@ public class ServerLauncher {
             try {
                 repositoryInterface = (GeneralInformationRepositoryInterface) registry.lookup(GLOBAL_REPOSITORY_OF_INFORMATION_NAME);
             } catch (RemoteException | NotBoundException e) {
+                e.printStackTrace();
                 Logger.printError("Error message 0");
                 System.exit(11);
             }

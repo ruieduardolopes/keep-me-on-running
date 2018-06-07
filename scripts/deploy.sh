@@ -24,7 +24,8 @@ preparehippodrome () {
 execute_code () {
     ssh sd0402@l040101-ws01.ua.pt 'startrmi > /dev/null' 2> /dev/null &
     echo "Executing RemoteRegistry & General Repository of Information on Machine01..."
-    ssh sd0402@l040101-ws01.ua.pt 'runregister &; runserver general-repo > /dev/null' 2> /dev/null &
+    ssh sd0402@l040101-ws01.ua.pt 'runregister > /dev/null' 2> /dev/null &
+    ssh sd0402@l040101-ws01.ua.pt 'runserver general-repo > /dev/null' 2> /dev/null &
     sleep 2
     echo "Executing Racing Track on Machine02..."
     ssh sd0402@l040101-ws02.ua.pt 'runserver racing-track > /dev/null' 2> /dev/null &
@@ -64,6 +65,12 @@ deployall () {
     git push origin tests
     preparehippodrome
     execute_code
+}
+
+sendcode () {
+    git add *
+    git commit -m "Added the last version on tests"
+    git push origin tests
 }
 
 shlastlog () {
