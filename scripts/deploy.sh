@@ -13,7 +13,7 @@ updatecoderemote () {
 }
 
 preparehippodrome () {
-    ssh sd0402@l040101-ws01node.ua.pt 'startrmi;'
+    ssh sd0402@l040101-ws01.ua.pt 'startrmi;'
     for node in {01,02,03,04,05,06,07,08,09}; do
         echo "Working on machine number $node."
         echo "Updating and compiling the code..."
@@ -83,14 +83,14 @@ compileregister () {
     cd $WORK_PATH
     javac -cp ".:lib/genclass.jar" registry/*.java hippodrome/*.java entities/*.java
     cd -
-    cp $(echo $WORK_PATH)registry/Register.java $(echo $WORK_PATH)out/registry/registry
-    mv $(echo $WORK_PATH)registry/*.class $(echo $WORK_PATH)out/registry/registry
-    mv $(echo $WORK_PATH)configurations/RMIConfigurations.class $(echo $WORK_PATH)out/registry/configurations
-    mv $(echo $WORK_PATH)hippodrome/*.class $(echo $WORK_PATH)out/registry/hippodrome
-    mv $(echo $WORK_PATH)hippodrome/actions/*.class $(echo $WORK_PATH)out/registry/hippodrome/actions
-    mv $(echo $WORK_PATH)hippodrome/responses/*.class $(echo $WORK_PATH)out/registry/hippodrome/responses
-    mv $(echo $WORK_PATH)hippodrome/rollfilm/*.class $(echo $WORK_PATH)out/registry/hippodrome/rollfilm
-    mv $(echo $WORK_PATH)entities/*.class $(echo $WORK_PATH)out/registry/entities
+    cp $(echo $WORK_PATH)registry/Register.java $(echo $WORK_PATH)out/registry/registry/
+    mv $(echo $WORK_PATH)registry/*.class $(echo $WORK_PATH)out/registry/registry/
+    mv $(echo $WORK_PATH)configurations/RMIConfigurations.class $(echo $WORK_PATH)out/registry/configurations/
+    mv $(echo $WORK_PATH)hippodrome/*.class $(echo $WORK_PATH)out/registry/hippodrome/
+    mv $(echo $WORK_PATH)hippodrome/actions/*.class $(echo $WORK_PATH)out/registry/hippodrome/actions/
+    mv $(echo $WORK_PATH)hippodrome/responses/*.class $(echo $WORK_PATH)out/registry/hippodrome/responses/
+    mv $(echo $WORK_PATH)hippodrome/rollfilm/*.class $(echo $WORK_PATH)out/registry/hippodrome/rollfilm/
+    mv $(echo $WORK_PATH)entities/*.class $(echo $WORK_PATH)out/registry/entities/
 }
 
 runregister () {
@@ -103,19 +103,19 @@ compileservers () {
     cd $WORK_PATH
     javac -cp ".:lib/genclass.jar" server/*.java clients/*.java hippodrome/*.java
     cd -
-    mv $(echo $WORK_PATH)configurations/*.class $(echo $WORK_PATH)out/servers/configurations
-    mv $(echo $WORK_PATH)entities/*.class $(echo $WORK_PATH)out/servers/entities
-    mv $(echo $WORK_PATH)hippodrome/*.class $(echo $WORK_PATH)out/servers/hippodrome
-    mv $(echo $WORK_PATH)hippodrome/actions/*.class $(echo $WORK_PATH)out/servers/hippodrome/actions
-    mv $(echo $WORK_PATH)hippodrome/responses/*.class $(echo $WORK_PATH)out/servers/hippodrome/responses
-    mv $(echo $WORK_PATH)hippodrome/rollfilm/*.class $(echo $WORK_PATH)out/servers/hippodrome/rollfilm
-    cp $(echo $WORK_PATH)hippodrome/*Interface.java $(echo $WORK_PATH)out/servers/hippodrome
-    mv $(echo $WORK_PATH)lib/logging/*.class $(echo $WORK_PATH)out/servers/lib/logging
-    cp $(echo $WORK_PATH)lib/genclass.jar $(echo $WORK_PATH)out/servers/lib
-    mv $(echo $WORK_PATH)registry/*.class $(echo $WORK_PATH)out/servers/registry
-    cp $(echo $WORK_PATH)registry/Register.java $(echo $WORK_PATH)out/servers/registry
-    mv $(echo $WORK_PATH)server/*.class $(echo $WORK_PATH)out/servers/server
-    mv $(echo $WORK_PATH)clients/*.class $(echo $WORK_PATH)out/servers/clients
+    mv $(echo $WORK_PATH)configurations/*.class $(echo $WORK_PATH)out/servers/configurations/
+    mv $(echo $WORK_PATH)entities/*.class $(echo $WORK_PATH)out/servers/entities/
+    mv $(echo $WORK_PATH)hippodrome/*.class $(echo $WORK_PATH)out/servers/hippodrome/
+    mv $(echo $WORK_PATH)hippodrome/actions/*.class $(echo $WORK_PATH)out/servers/hippodrome/actions/
+    mv $(echo $WORK_PATH)hippodrome/responses/*.class $(echo $WORK_PATH)out/servers/hippodrome/responses/
+    mv $(echo $WORK_PATH)hippodrome/rollfilm/*.class $(echo $WORK_PATH)out/servers/hippodrome/rollfilm/
+    cp $(echo $WORK_PATH)hippodrome/*Interface.java $(echo $WORK_PATH)out/servers/hippodrome/
+    mv $(echo $WORK_PATH)lib/logging/*.class $(echo $WORK_PATH)out/servers/lib/logging/
+    cp $(echo $WORK_PATH)lib/genclass.jar $(echo $WORK_PATH)out/servers/lib/
+    mv $(echo $WORK_PATH)registry/*.class $(echo $WORK_PATH)out/servers/registry/
+    cp $(echo $WORK_PATH)registry/Register.java $(echo $WORK_PATH)out/servers/registry/
+    mv $(echo $WORK_PATH)server/*.class $(echo $WORK_PATH)out/servers/server/
+    mv $(echo $WORK_PATH)clients/*.class $(echo $WORK_PATH)out/servers/clients/
 }
 
 runserver () {
@@ -128,19 +128,19 @@ compileclients () {
     cd $WORK_PATH
     javac -cp ".:lib/genclass.jar" clients/*.java hippodrome/*.java server/*.java
     cd -
-    mv $(echo $WORK_PATH)configurations/*.class $(echo $WORK_PATH)out/clients/configurations
-    mv $(echo $WORK_PATH)entities/*.class $(echo $WORK_PATH)out/clients/entities
-    mv $(echo $WORK_PATH)hippodrome/*.class $(echo $WORK_PATH)out/clients/hippodrome
-    mv $(echo $WORK_PATH)hippodrome/actions/*.class $(echo $WORK_PATH)out/clients/hippodrome/actions
-    mv $(echo $WORK_PATH)hippodrome/responses/*.class $(echo $WORK_PATH)out/clients/hippodrome/responses
-    mv $(echo $WORK_PATH)hippodrome/rollfilm/*.class $(echo $WORK_PATH)out/clients/hippodrome/rollfilm
-    cp $(echo $WORK_PATH)hippodrome/*Interface.java $(echo $WORK_PATH)out/servers/hippodrome
-    mv $(echo $WORK_PATH)lib/logging/*.class $(echo $WORK_PATH)out/clients/lib/logging
-    cp $(echo $WORK_PATH)lib/genclass.jar $(echo $WORK_PATH)out/clients/lib
-    mv $(echo $WORK_PATH)registry/*.class $(echo $WORK_PATH)out/clients/registry
-    cp $(echo $WORK_PATH)registry/Register.java $(echo $WORK_PATH)out/clients/registry
-    mv $(echo $WORK_PATH)server/*.class $(echo $WORK_PATH)out/clients/server
-    mv $(echo $WORK_PATH)clients/*.class $(echo $WORK_PATH)out/clients/clients
+    mv $(echo $WORK_PATH)configurations/*.class $(echo $WORK_PATH)out/clients/configurations/
+    mv $(echo $WORK_PATH)entities/*.class $(echo $WORK_PATH)out/clients/entities/
+    mv $(echo $WORK_PATH)hippodrome/*.class $(echo $WORK_PATH)out/clients/hippodrome/
+    mv $(echo $WORK_PATH)hippodrome/actions/*.class $(echo $WORK_PATH)out/clients/hippodrome/actions/
+    mv $(echo $WORK_PATH)hippodrome/responses/*.class $(echo $WORK_PATH)out/clients/hippodrome/responses/
+    mv $(echo $WORK_PATH)hippodrome/rollfilm/*.class $(echo $WORK_PATH)out/clients/hippodrome/rollfilm/
+    cp $(echo $WORK_PATH)hippodrome/*Interface.java $(echo $WORK_PATH)out/servers/hippodrome/
+    mv $(echo $WORK_PATH)lib/logging/*.class $(echo $WORK_PATH)out/clients/lib/logging/
+    cp $(echo $WORK_PATH)lib/genclass.jar $(echo $WORK_PATH)out/clients/lib/
+    mv $(echo $WORK_PATH)registry/*.class $(echo $WORK_PATH)out/clients/registry/
+    cp $(echo $WORK_PATH)registry/Register.java $(echo $WORK_PATH)out/clients/registry/
+    mv $(echo $WORK_PATH)server/*.class $(echo $WORK_PATH)out/clients/server/
+    mv $(echo $WORK_PATH)clients/*.class $(echo $WORK_PATH)out/clients/clients/
 }
 
 runclient () {
