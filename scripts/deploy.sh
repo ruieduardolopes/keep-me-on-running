@@ -73,7 +73,7 @@ shlastlog () {
 
 startrmi () {
     cd ~
-    rmiregistry -J-Djava.rmi.server.codebase="http://l040101-ws01.ua.pt/sd0402/registry" -J-Djava.rmi.server.useCodebaseOnly=true 22417 &
+    rmiregistry -J-Djava.rmi.server.codebase="http://l040101-ws01.ua.pt/sd0402/registry/" -J-Djava.rmi.server.useCodebaseOnly=true 22417 &
     cd -
 }
 
@@ -95,7 +95,7 @@ compileregister () {
 
 runregister () {
     cd $(echo $WORK_PATH)out/registry
-    java -cp . -Djava.rmi.server.codebase="http://l040101-ws01.ua.pt/sd0402/registry" -Djava.security.policy=java.policy -Djava.rmi.server.useCodebaseOnly=true registry.ServerRegisterRemoteObject
+    java -cp . -Djava.rmi.server.codebase="http://l040101-ws01.ua.pt/sd0402/registry/" -Djava.security.policy=java.policy -Djava.rmi.server.useCodebaseOnly=true registry.ServerRegisterRemoteObject
     cd -
 }
 
@@ -122,7 +122,7 @@ compileservers () {
 
 runserver () {
     cd $(echo $WORK_PATH)out/servers
-    java -cp . -Djava.rmi.server.codebase="http://l040101-ws01.ua.pt/sd0402/servers" -Djava.security.policy=java.policy -Djava.rmi.server.useCodebaseOnly=true server.ServerLauncher $1
+    java -cp . -Djava.rmi.server.codebase="http://l040101-ws01.ua.pt/sd0402/servers/" -Djava.security.policy=java.policy -Djava.rmi.server.useCodebaseOnly=true server.ServerLauncher $1
     cd -
 }
 
