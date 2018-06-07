@@ -75,13 +75,13 @@ shlastlog () {
 
 startrmi () {
     cd ~
-    rmiregistry8 -J-Djava.rmi.server.useCodebaseOnly=false 22417 &
+    rmiregistry -J-Djava.rmi.server.useCodebaseOnly=false 22417 &
     cd -
 }
 
 compileregister () {
     cd $WORK_PATH
-    javac8 -cp ".:lib/genclass.jar" registry/*.java hippodrome/*.java entities/*.java
+    javac -cp ".:lib/genclass.jar" registry/*.java hippodrome/*.java entities/*.java
     cd -
     cp $WORK_PATH/registry/Register.java $WORK_PATH/out/registry/registry
     mv $WORK_PATH/registry/*.class $WORK_PATH/out/registry/registry
@@ -95,13 +95,13 @@ compileregister () {
 
 runregister () {
     cd $WORK_PATH/out/registry
-    java8 -cp . -Djava.rmi.server.codebase="file://$(echo $WORK_PATH)out/registry/" -Djava.security.policy=java.policy -Djava.rmi.server.useCodebaseOnly=false registry.ServerRegisterRemoteObject
+    java -cp . -Djava.rmi.server.codebase="file://$(echo $WORK_PATH)out/registry/" -Djava.security.policy=java.policy -Djava.rmi.server.useCodebaseOnly=false registry.ServerRegisterRemoteObject
     cd -
 }
 
 compileservers () {
     cd $WORK_PATH
-    javac8 -cp ".:lib/genclass.jar" server/*.java clients/*.java hippodrome/*.java
+    javac -cp ".:lib/genclass.jar" server/*.java clients/*.java hippodrome/*.java
     cd -
     mv $(echo $WORK_PATH)configurations/*.class $(echo $WORK_PATH)out/servers/configurations
     mv $(echo $WORK_PATH)entities/*.class $(echo $WORK_PATH)out/servers/entities
@@ -120,13 +120,13 @@ compileservers () {
 
 runserver () {
     cd $WORK_PATH/out/servers
-    java8 -cp . -Djava.rmi.server.codebase="file://$(echo $WORK_PATH)out/servers/" -Djava.security.policy=java.policy -Djava.rmi.server.useCodebaseOnly=false server.ServerLauncher $1
+    java -cp . -Djava.rmi.server.codebase="file://$(echo $WORK_PATH)out/servers/" -Djava.security.policy=java.policy -Djava.rmi.server.useCodebaseOnly=false server.ServerLauncher $1
     cd -
 }
 
 compileclients () {
     cd $WORK_PATH
-    javac8 -cp ".:lib/genclass.jar" clients/*.java hippodrome/*.java server/*.java
+    javac -cp ".:lib/genclass.jar" clients/*.java hippodrome/*.java server/*.java
     cd -
     mv $(echo $WORK_PATH)configurations/*.class $(echo $WORK_PATH)out/clients/configurations
     mv $(echo $WORK_PATH)entities/*.class $(echo $WORK_PATH)out/clients/entities
@@ -145,6 +145,6 @@ compileclients () {
 
 runclient () {
     cd $WORK_PATH/out/clients
-    java8 -cp . -Djava.rmi.server.codebase="file://$(echo $WORK_PATH)out/clients/" -Djava.rmi.server.useCodebaseOnly=false clients.ClientLauncher $1
+    java -cp . -Djava.rmi.server.codebase="file://$(echo $WORK_PATH)out/clients/" -Djava.rmi.server.useCodebaseOnly=false clients.ClientLauncher $1
     cd -
 }
