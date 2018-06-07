@@ -16,58 +16,39 @@ preparehippodrome () {
     for node in {01,02,03,04,05,06,07,08,09}; do
         echo "Working on machine number $node."
         echo "Updating and compiling the code..."
-        ssh sd0402@l040101-ws$node.ua.pt 'updcode; compile_code'
-        #echo "Updating the host addresses..."
-        #ssh sd0402@l040101-ws$node.ua.pt 'chhost general-repo l040101-ws01.ua.pt'
-        #ssh sd0402@l040101-ws$node.ua.pt 'chhost betting-centre l040101-ws02.ua.pt'
-        #ssh sd0402@l040101-ws$node.ua.pt 'chhost control-centre l040101-ws03.ua.pt'
-        #ssh sd0402@l040101-ws$node.ua.pt 'chhost paddock l040101-ws04.ua.pt'
-        #ssh sd0402@l040101-ws$node.ua.pt 'chhost racing-track l040101-ws05.ua.pt'
-        #ssh sd0402@l040101-ws$node.ua.pt 'chhost stable l040101-ws06.ua.pt'
-        #ssh sd0402@l040101-ws$node.ua.pt 'chhost broker l040101-ws07.ua.pt'
-        #ssh sd0402@l040101-ws$node.ua.pt 'chhost spectators l040101-ws08.ua.pt'
-        #ssh sd0402@l040101-ws$node.ua.pt 'chhost horses l040101-ws09.ua.pt'
-        #echo "Updating the ports..."
-        #ssh sd0402@l040101-ws$node.ua.pt 'chport general-repo 22411'
-        #ssh sd0402@l040101-ws$node.ua.pt 'chport betting-centre 22412'
-        #ssh sd0402@l040101-ws$node.ua.pt 'chport control-centre 22413'
-        #ssh sd0402@l040101-ws$node.ua.pt 'chport paddock 22414'
-        #ssh sd0402@l040101-ws$node.ua.pt 'chport racing-track 22415'
-        #ssh sd0402@l040101-ws$node.ua.pt 'chport stable 22416'
-        #ssh sd0402@l040101-ws$node.ua.pt 'chport broker 22417'
-        #ssh sd0402@l040101-ws$node.ua.pt 'chport spectators 22418'
-        #ssh sd0402@l040101-ws$node.ua.pt 'chport horses 22419'
-        echo "All configurations were successfully applied."
+        ssh sd0402@l040101-ws$node.ua.pt 'updcode; compileregister; compileservers; compileclients; startrmi;'
+        
+        echo "All update, compiling and RMI enabling were successfully applied on the machines."
     done
 }
 
 execute_code () {
-    echo "Executing General Repository of Information..."
-    ssh sd0402@l040101-ws01.ua.pt 'execserver general-repo > /dev/null' 2> /dev/null &
+    echo "Executing RemoteRegistry & General Repository of Information on Machine01..."
+    ssh sd0402@l040101-ws01.ua.pt 'runregister & runserver general-repo > /dev/null' 2> /dev/null &
     sleep 2
-    echo "Executing Betting Centre..."
-    ssh sd0402@l040101-ws02.ua.pt 'execserver betting-centre > /dev/null' 2> /dev/null &
+    echo "Executing Racing Track on Machine02..."
+    ssh sd0402@l040101-ws02.ua.pt 'runserver racing-track > /dev/null' 2> /dev/null &
     sleep 2
-    echo "Executing Control Centre..."
-    ssh sd0402@l040101-ws03.ua.pt 'execserver control-centre > /dev/null' 2> /dev/null &
+    echo "Executing Paddock on Machine03..."
+    ssh sd0402@l040101-ws03.ua.pt 'runserver paddock > /dev/null' 2> /dev/null &
     sleep 2
-    echo "Executing Paddock..."
-    ssh sd0402@l040101-ws04.ua.pt 'execserver paddock > /dev/null' 2> /dev/null &
+    echo "Executing Betting Centre on Machine04..."
+    ssh sd0402@l040101-ws04.ua.pt 'runserver betting-centre > /dev/null' 2> /dev/null &
     sleep 2
-    echo "Executing Racing Track..."
-    ssh sd0402@l040101-ws05.ua.pt 'execserver racing-track > /dev/null' 2> /dev/null &
+    echo "Executing Stable on Machine05..."
+    ssh sd0402@l040101-ws05.ua.pt 'runserver stable > /dev/null' 2> /dev/null &
     sleep 2
-    echo "Executing Stable..."
-    ssh sd0402@l040101-ws06.ua.pt 'execserver stable > /dev/null' 2> /dev/null &
+    echo "Executing Control Centre on Machine06..."
+    ssh sd0402@l040101-ws06.ua.pt 'runserver control-centre > /dev/null' 2> /dev/null &
     sleep 2
-    echo "Executing Broker..."
-    ssh sd0402@l040101-ws07.ua.pt 'execclient broker > /dev/null' 2> /dev/null &
+    echo "Executing Broker on Machine07..."
+    ssh sd0402@l040101-ws07.ua.pt 'runclient broker > /dev/null' 2> /dev/null &
     sleep 2
-    echo "Executing Spectators..."
-    ssh sd0402@l040101-ws08.ua.pt 'execclient spectators > /dev/null' 2> /dev/null &
+    echo "Executing Spectators on Machine08..."
+    ssh sd0402@l040101-ws08.ua.pt 'runclient spectators > /dev/null' 2> /dev/null &
     sleep 2
-    echo "Executing Pairs Horse/Jockey..."
-    ssh sd0402@l040101-ws09.ua.pt 'execclient horses > /dev/null' 2> /dev/null
+    echo "Executing Pairs Horse/Jockey on Machine09..."
+    ssh sd0402@l040101-ws09.ua.pt 'runclient horses > /dev/null' 2> /dev/null
     echo "The race is over!"
 }
 
