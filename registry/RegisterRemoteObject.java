@@ -108,6 +108,11 @@ public class RegisterRemoteObject implements Register
      if ((name == null) || (ref == null))
         throw new NullPointerException("RegisterRemoteObject: null pointer parameter(s) on rebind!");
      registry = LocateRegistry.getRegistry (rmiRegHostName, rmiRegPortNumb);
-     registry.rebind (name, ref);
+
+       try {
+           registry.rebind (name, ref);
+       } catch (Exception e) {
+           e.printStackTrace();
+       }
    }
 }
