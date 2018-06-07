@@ -94,7 +94,7 @@ compileregister () {
 }
 
 runregister () {
-    cd ~/Public/registry
+    cd $(echo $WORK_PATH)out/registry
     java -cp . -Djava.rmi.server.codebase="http://l040101-ws01.ua.pt/sd0402/registry" -Djava.security.policy=java.policy -Djava.rmi.server.useCodebaseOnly=true registry.ServerRegisterRemoteObject
     cd -
 }
@@ -121,7 +121,7 @@ compileservers () {
 }
 
 runserver () {
-    cd ~/Public/servers
+    cd $(echo $WORK_PATH)out/servers
     java -cp . -Djava.rmi.server.codebase="http://l040101-ws01.ua.pt/sd0402/servers" -Djava.security.policy=java.policy -Djava.rmi.server.useCodebaseOnly=true server.ServerLauncher $1
     cd -
 }
