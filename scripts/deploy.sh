@@ -13,10 +13,12 @@ updatecoderemote () {
 }
 
 preparehippodrome () {
+    ssh sd0402@l040101-ws01node.ua.pt 'startrmi;'
     for node in {01,02,03,04,05,06,07,08,09}; do
         echo "Working on machine number $node."
         echo "Updating and compiling the code..."
-        ssh sd0402@l040101-ws$node.ua.pt 'updcode; compileregister; compileservers; compileclients; startrmi;'
+        ssh sd0402@l040101-ws$node.ua.pt 'updcode; compileregister; compileservers; compileclients;'
+
         
         echo "All update, compiling and RMI enabling were successfully applied on the machines."
     done
@@ -54,8 +56,8 @@ execute_code () {
 
 killallentities () {
     for node in {01,02,03,04,05,06,07,08,09}; do
-        echo "Clearing execution on machine number $node..."
-        ssh sd0402@l040101-ws$node.ua.pt "killscenario" 2> /dev/null
+        echo "Clearing execution of RMI on machine number $node..."
+        ssh sd0402@l040101-ws$node.ua.pt "pkill rmi;" 2> /dev/null
     done
 }
 
