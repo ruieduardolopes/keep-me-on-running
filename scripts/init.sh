@@ -7,6 +7,6 @@ source $WORK_PATH/scripts/server-and-client-controls.sh
 source $WORK_PATH/scripts/utils.sh
 source $WORK_PATH/scripts/deploy.sh
 
-alias 'java8'=java
-alias 'javac8'=javac
-alias 'rmiregistry8'=rmiregistry
+alias java8='java'
+alias javac8='javac'
+alias rmiregistry8='rmiregistry'
