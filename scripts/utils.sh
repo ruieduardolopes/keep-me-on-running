@@ -43,11 +43,8 @@ updcode () {
         return 1
     fi
 
-    rm -rf ~/keep-me-on-running/
-    cd ~
-    git clone git@github.com:ruieduardolopes/keep-me-on-running.git
-
     cd $WORK_PATH
+    git clean  -d  -f .
     git checkout --force tests
     git pull origin tests
 
