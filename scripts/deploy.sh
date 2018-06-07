@@ -79,7 +79,7 @@ startrmi () {
 
 compileregister () {
     cd $WORK_PATH
-    javac -cp ".:lib/genclass.jar" registry/*.java hippodrome/*.java entities/*.java
+    javac -cp . registry/*.java hippodrome/*.java entities/*.java
     cd -
     cp $(echo $WORK_PATH)registry/Register.java $(echo $WORK_PATH)out/registry/registry/
     mv $(echo $WORK_PATH)registry/*.class $(echo $WORK_PATH)out/registry/registry/
