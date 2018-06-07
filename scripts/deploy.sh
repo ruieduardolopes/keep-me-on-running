@@ -13,18 +13,16 @@ updatecoderemote () {
 }
 
 preparehippodrome () {
-    ssh sd0402@l040101-ws01.ua.pt 'startrmi;'
     for node in {01,02,03,04,05,06,07,08,09}; do
         echo "Working on machine number $node."
         echo "Updating and compiling the code..."
         ssh sd0402@l040101-ws$node.ua.pt 'updcode; compileregister; compileservers; compileclients;'
-
-        
-        echo "All update, compiling and RMI enabling were successfully applied on the machines."
     done
+    echo "All update, compiling and RMI enabling were successfully applied on the machines."
 }
 
 execute_code () {
+    ssh sd0402@l040101-ws01.ua.pt 'startrmi > /dev/null' 2> /dev/null &
     echo "Executing RemoteRegistry & General Repository of Information on Machine01..."
     ssh sd0402@l040101-ws01.ua.pt 'runregister & runserver general-repo > /dev/null' 2> /dev/null &
     sleep 2
@@ -51,7 +49,6 @@ execute_code () {
     sleep 2
     echo "Executing Pairs Horse/Jockey on Machine09..."
     ssh sd0402@l040101-ws09.ua.pt 'runclient horses > /dev/null' 2> /dev/null
-    echo "The race is over!"
 }
 
 killallentities () {
@@ -70,12 +67,13 @@ deployall () {
 }
 
 shlastlog () {
-    ssh sd0402@l040101-ws01.ua.pt 'cat $(echo $WORK_PATH)$(ls $WORK_PATH | grep horse-run | tail -n1)' | less
+    LOG_PATH="$(echo $WORK_PATH)out/server/"
+    ssh sd0402@l040101-ws01.ua.pt 'cat $(echo $LOG_PATH)$(ls $LOG_PATH | grep horse-run | tail -n1)' | less
 }
 
 startrmi () {
     cd ~
-    rmiregistry -J-Djava.rmi.server.useCodebaseOnly=false 22417 &
+    rmiregistry -J-Djava.rmi.server.useCodebaseOnly=true 22417 &
     cd -
 }
 
@@ -91,11 +89,13 @@ compileregister () {
     mv $(echo $WORK_PATH)hippodrome/responses/*.class $(echo $WORK_PATH)out/registry/hippodrome/responses/
     mv $(echo $WORK_PATH)hippodrome/rollfilm/*.class $(echo $WORK_PATH)out/registry/hippodrome/rollfilm/
     mv $(echo $WORK_PATH)entities/*.class $(echo $WORK_PATH)out/registry/entities/
+    rm -rf ~/Public/registry
+    cp -rf $(echo $WORK_PATH)out/registry ~/Public/
 }
 
 runregister () {
     cd $(echo $WORK_PATH)out/registry
-    java -cp . -Djava.rmi.server.codebase="file://$(echo $WORK_PATH)out/registry/" -Djava.security.policy=java.policy -Djava.rmi.server.useCodebaseOnly=false registry.ServerRegisterRemoteObject
+    java -cp . -Djava.rmi.server.codebase="http://l040101-ws01.ua.pt/sd0402/registry" -Djava.security.policy=java.policy -Djava.rmi.server.useCodebaseOnly=true registry.ServerRegisterRemoteObject
     cd -
 }
 
@@ -116,11 +116,13 @@ compileservers () {
     cp $(echo $WORK_PATH)registry/Register.java $(echo $WORK_PATH)out/servers/registry/
     mv $(echo $WORK_PATH)server/*.class $(echo $WORK_PATH)out/servers/server/
     mv $(echo $WORK_PATH)clients/*.class $(echo $WORK_PATH)out/servers/clients/
+    rm -rf ~/Public/servers
+    cp -rf $(echo $WORK_PATH)out/servers ~/Public/
 }
 
 runserver () {
     cd $(echo $WORK_PATH)out/servers
-    java -cp . -Djava.rmi.server.codebase="file://$(echo $WORK_PATH)out/servers/" -Djava.security.policy=java.policy -Djava.rmi.server.useCodebaseOnly=false server.ServerLauncher $1
+    java -cp . -Djava.rmi.server.codebase="http://l040101-ws01.ua.pt/sd0402/servers" -Djava.security.policy=java.policy -Djava.rmi.server.useCodebaseOnly=true server.ServerLauncher $1
     cd -
 }
 
@@ -145,6 +147,6 @@ compileclients () {
 
 runclient () {
     cd $(echo $WORK_PATH)out/clients
-    java -cp . -Djava.rmi.server.codebase="file://$(echo $WORK_PATH)out/clients/" -Djava.rmi.server.useCodebaseOnly=false clients.ClientLauncher $1
+    java -cp . clients.ClientLauncher $1
     cd -
 }
