@@ -24,7 +24,7 @@ preparehippodrome () {
 execute_code () {
     ssh sd0402@l040101-ws01.ua.pt 'startrmi > /dev/null' 2> /dev/null &
     echo "Executing RemoteRegistry & General Repository of Information on Machine01..."
-    ssh sd0402@l040101-ws01.ua.pt 'runregister & runserver general-repo > /dev/null' 2> /dev/null &
+    ssh sd0402@l040101-ws01.ua.pt 'runregister &; runserver general-repo > /dev/null' 2> /dev/null &
     sleep 2
     echo "Executing Racing Track on Machine02..."
     ssh sd0402@l040101-ws02.ua.pt 'runserver racing-track > /dev/null' 2> /dev/null &
@@ -48,7 +48,7 @@ execute_code () {
     ssh sd0402@l040101-ws08.ua.pt 'runclient spectators > /dev/null' 2> /dev/null &
     sleep 2
     echo "Executing Pairs Horse/Jockey on Machine09..."
-    ssh sd0402@l040101-ws09.ua.pt 'runclient horses > /dev/null' 2> /dev/null
+    ssh sd0402@l040101-ws09.ua.pt 'runclient horses'
 }
 
 killallentities () {
