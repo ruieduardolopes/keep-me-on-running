@@ -287,8 +287,6 @@ public class ServerLauncher {
 
     private static int port = 0;
 
-    private static final String RMI_HOSTNAME = "localhost"; // TODO: switch this for a proper configuration
-
     /**
      * Boolean variable to signal when the execution must be terminated
      */
