@@ -109,9 +109,9 @@ compileregister () {
     mv $(echo $WORK_PATH)hippodrome/*.class $(echo $WORK_PATH)out/registry/hippodrome/
     mv $(echo $WORK_PATH)hippodrome/responses/*.class $(echo $WORK_PATH)out/registry/hippodrome/responses/
     mv $(echo $WORK_PATH)entities/*.class $(echo $WORK_PATH)out/registry/entities/
-    rm -rf ~/Public/registry
-    cp -rf $(echo $WORK_PATH)out/registry/hippodrome/*Interface.class ~/Public/registry/hippodrome
-    cp -rf $(echo $WORK_PATH)out/registry/hippodrome/responses/*Interface.class ~/Public/registry/responses/hippodrome
+
+    cp -rf $(echo $WORK_PATH)out/registry/hippodrome/*Interface.class ~/Public/registry/hippodrome/
+    cp -rf $(echo $WORK_PATH)out/registry/hippodrome/responses/*Interface.class ~/Public/registry/responses/hippodrome/
 }
 
 runregister () {
