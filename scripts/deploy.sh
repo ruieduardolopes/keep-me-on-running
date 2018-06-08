@@ -13,12 +13,13 @@ updatecoderemote () {
 }
 
 preparehippodrome () {
-    for node in {01,02,03,04,05,06,07,08,09}; do
-        echo "Working on machine number $node."
-        echo "Updating and compiling the code..."
-        ssh sd0402@l040101-ws$node.ua.pt 'updcode; compileregister; compileservers; compileclients;'
-    done
-    echo "All update, compiling and RMI enabling were successfully applied on the machines."
+    #for node in {01,02,03,04,05,06,07,08,09}; do
+    #    echo "Working on machine number $node."
+    #    echo "Updating and compiling the code..."
+    #    ssh sd0402@l040101-ws$node.ua.pt 'updcode; compileregister; compileservers; compileclients;'
+    #done
+    ssh sd0402@l040101-ws01node.ua.pt 'updcode; compileregister; compileservers; compileclients;'
+    echo "All update, compiling and RMI enabling were successfully applied on the machine 01."
 }
 
 execute_code () {
@@ -155,7 +156,10 @@ compileclients () {
 }
 
 runclient () {
-    cd $(echo $WORK_PATH)out/clients
-    java -cp . clients.ClientLauncher $1
+    #cd $(echo $WORK_PATH)out/clients
+    #java -cp . clients.ClientLauncher $1
+    #cd -
+    cd $WORK_PATH
+    java -cp . -Djava.rmi.server.codebase="http://l040101-ws01.ua.pt/sd0402/clients/" -Djava.rmi.server.useCodebaseOnly=true clients.ClientLauncher $1
     cd -
 }
