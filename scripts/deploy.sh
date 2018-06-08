@@ -95,12 +95,11 @@ compileregister () {
     mv $(echo $WORK_PATH)registry/*.class $(echo $WORK_PATH)out/registry/registry/
     mv $(echo $WORK_PATH)configurations/RMIConfigurations.class $(echo $WORK_PATH)out/registry/configurations/
     mv $(echo $WORK_PATH)hippodrome/*.class $(echo $WORK_PATH)out/registry/hippodrome/
-    mv $(echo $WORK_PATH)hippodrome/actions/*.class $(echo $WORK_PATH)out/registry/hippodrome/actions/
     mv $(echo $WORK_PATH)hippodrome/responses/*.class $(echo $WORK_PATH)out/registry/hippodrome/responses/
-    mv $(echo $WORK_PATH)hippodrome/rollfilm/*.class $(echo $WORK_PATH)out/registry/hippodrome/rollfilm/
     mv $(echo $WORK_PATH)entities/*.class $(echo $WORK_PATH)out/registry/entities/
     rm -rf ~/Public/registry
-    cp -rf $(echo $WORK_PATH)out/registry ~/Public/
+    cp -rf $(echo $WORK_PATH)out/registry/*Interface.class ~/Public/registry
+    cp -rf $(echo $WORK_PATH)out/registry/responses/*Interface.class ~/Public/registry/responses
 }
 
 runregister () {
@@ -126,8 +125,6 @@ compileservers () {
     cp $(echo $WORK_PATH)registry/Register.java $(echo $WORK_PATH)out/servers/registry/
     mv $(echo $WORK_PATH)server/*.class $(echo $WORK_PATH)out/servers/server/
     mv $(echo $WORK_PATH)clients/*.class $(echo $WORK_PATH)out/servers/clients/
-    rm -rf ~/Public/servers
-    cp -rf $(echo $WORK_PATH)out/servers ~/Public/
 }
 
 runserver () {
@@ -153,14 +150,9 @@ compileclients () {
     cp $(echo $WORK_PATH)registry/Register.java $(echo $WORK_PATH)out/clients/registry/
     mv $(echo $WORK_PATH)server/*.class $(echo $WORK_PATH)out/clients/server/
     mv $(echo $WORK_PATH)clients/*.class $(echo $WORK_PATH)out/clients/clients/
-    rm -rf ~/Public/clients
-    cp -rf $(echo $WORK_PATH)out/clients ~/Public/
 }
 
 runclient () {
-    #cd $(echo $WORK_PATH)out/clients
-    #java -cp . clients.ClientLauncher $1
-    #cd -
     cd $(echo $WORK_PATH)out/servers
     java -cp . -Djava.rmi.server.codebase="http://l040101-ws01.ua.pt/sd0402/clients/" -Djava.security.policy=java.policy -Djava.rmi.server.useCodebaseOnly=true clients.ClientLauncher $1
     cd -
