@@ -111,7 +111,7 @@ compileregister () {
     mv $(echo $WORK_PATH)entities/*.class $(echo $WORK_PATH)out/registry/entities/
 
     cp -rf /home/sd0402/keep-me-on-running/out/registry/hippodrome/*Interface.class ~/Public/registry/hippodrome/
-    cp -rf /home/sd0402/keep-me-on-running/out/registry/hippodrome/responses/*Interface.class ~/Public/registry/responses/hippodrome/
+    cp -rf /home/sd0402/keep-me-on-running/out/registry/hippodrome/responses/*.class ~/Public/registry/responses/hippodrome/
 }
 
 runregister () {
