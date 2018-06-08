@@ -18,7 +18,7 @@ preparehippodrome () {
     #    echo "Updating and compiling the code..."
     #    ssh sd0402@l040101-ws$node.ua.pt 'updcode; compileregister; compileservers; compileclients;'
     #done
-    ssh sd0402@l040101-ws01node.ua.pt 'updcode; compileregister; compileservers; compileclients;'
+    ssh sd0402@l040101-ws01.ua.pt 'updcode; compileregister; compileservers; compileclients;'
     echo "All update, compiling and RMI enabling were successfully applied on the machine 01."
 }
 
@@ -153,6 +153,8 @@ compileclients () {
     cp $(echo $WORK_PATH)registry/Register.java $(echo $WORK_PATH)out/clients/registry/
     mv $(echo $WORK_PATH)server/*.class $(echo $WORK_PATH)out/clients/server/
     mv $(echo $WORK_PATH)clients/*.class $(echo $WORK_PATH)out/clients/clients/
+    rm -rf ~/Public/clients
+    cp -rf $(echo $WORK_PATH)out/clients ~/Public/
 }
 
 runclient () {
