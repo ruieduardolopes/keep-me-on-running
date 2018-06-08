@@ -27,6 +27,13 @@ public class HorseJockey extends Thread {
      *
      * @param identification number which identifies this pair Horse/Jockey.
      * @param ability number with characterizes the Horse maximum ability to run.
+     * @param bettingCentre An instance of a {@link BettingCentre} where this pair Horse/Jockey will work on.
+     * @param controlCentre An instance of a {@link ControlCentre} where this pair Horse/Jockey will work on.
+     * @param paddock An instance of a {@link Paddock} where this pair Horse/Jockey will work on.
+     * @param racingTrack An instance of a {@link RacingTrack} where this pair Horse/Jockey will work on.
+     * @param stable An instance of a {@link Stable} where this Broker pair Horse/Jockey work on.
+     * @param repository An instance of a {@link GeneralInformationRepository} in order to report all the actions and
+     *                   log each and every moment.
      * @throws Exception if an illegal argument is given.
      */
     public HorseJockey(int identification, int ability, BettingCentreInterface bettingCentre, ControlCentreInterface controlCentre, PaddockInterface paddock, RacingTrackInterface racingTrack, StableInterface stable, GeneralInformationRepositoryInterface repository) throws Exception {

@@ -19,6 +19,9 @@ public class Stable implements StableInterface {
      * <br>
      * This constructor creates a Stable. Plus, an instance of the
      * repository is also given in order to report status changes on the course of its actions.
+     *
+     * @param repository an instance of a {@link GeneralInformationRepositoryInterface} in order to report all the actions and
+     *                   log each and every moment.
      */
     public Stable(GeneralInformationRepositoryInterface repository) {
         this.repository = repository;

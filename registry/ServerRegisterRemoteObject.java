@@ -18,6 +18,7 @@ public class ServerRegisterRemoteObject
 {
   /**
    *  Main task.
+   * @param args The arguments of this program
    */
 
   public static void main(String[] args)

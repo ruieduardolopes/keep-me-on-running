@@ -1,5 +1,13 @@
 package configurations;
 
+/**
+ * Definition of the configurations for the RMI communications.
+ *
+ * @author Hugo Fragata
+ * @author Rui Lopes
+ * @since 3.0
+ * @version 3.0
+ */
 public class RMIConfigurations {
     /**
      * Name of the Betting Centre hippodrome region on RMI Registry.

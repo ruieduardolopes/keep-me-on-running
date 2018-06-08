@@ -25,6 +25,11 @@ public class Spectator extends Thread {
      * @param identification number which identifies this {@code Spectator}.
      * @param money amount of money given to this {@code Spectator}.
      * @param numberOfRaces number of races which will happen in this event.
+     * @param bettingCentre the {@link BettingCentre} instance where this {@link Spectator} will perform its actions.
+     * @param controlCentre the {@link ControlCentre} instance where this {@link Spectator} will perform its actions.
+     * @param paddock the {@link Paddock} instance where this {@link Spectator} will perform its actions.
+     * @param repository An instance of a {@link GeneralInformationRepository} in order to report all the actions and
+     *                   log each and every moment.
      * @throws InterruptedException if the communication channel is busy.
      */
     public Spectator(int identification, int money, int numberOfRaces, BettingCentreInterface bettingCentre, ControlCentreInterface controlCentre, PaddockInterface paddock, GeneralInformationRepositoryInterface repository) throws Exception {

@@ -51,14 +51,15 @@ execute_code () {
     sleep 2
 
     echo "Executing Pairs Horse/Jockey on Machine09..."
-    ssh sd0402@l040101-ws09.ua.pt "runclient horses && sleep 5 && ssh l040101-ws01.ua.pt 'pkill java; pkill rmiregistry;'"
-    # && sleep 5 && ssh l040101-ws01.ua.pt 'pkill java; pkill rmiregistry;'
+    ssh sd0402@l040101-ws09.ua.pt "runclient horses"
+   #ssh sd0402@l040101-ws09.ua.pt "runclient horses && sleep 5 && ssh l040101-ws01.ua.pt 'pkill java; pkill rmiregistry;'"
 }
 
 killallentities () {
     for node in {01,02,03,04,05,06,07,08,09}; do
-        ssh sd0402@l040101-ws$node.ua.pt 'pkill java; pkill rmiregistry;';
+        ssh sd0402@l040101-ws$node.ua.pt 'pkill java; pkill rmiregistry;' 2> /dev/null
     done
+    echo "The RMI service was terminated."
 }
 
 deployall () {

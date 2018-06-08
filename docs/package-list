@@ -1,9 +1,10 @@
 clients
-communications
 configurations
 entities
 hippodrome
 hippodrome.actions
+hippodrome.responses
 hippodrome.rollfilm
 lib.logging
+registry
 server

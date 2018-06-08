@@ -471,7 +471,7 @@ public class GeneralInformationRepository implements GeneralInformationRepositor
         return line;
     }
 
-    public synchronized boolean isBrokerReadyToGiveTheMasterFart() {
+    public synchronized boolean isBrokerReadyToDie() {
         if (brokerStatus == null || spectators == null) {
             return false;
         }

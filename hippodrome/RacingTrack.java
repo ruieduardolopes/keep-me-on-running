@@ -29,6 +29,8 @@ public class RacingTrack implements RacingTrackInterface {
      * repository is also given in order to report status changes on the course of its actions.
      *
      * @param race A race to be executed over this Racing Track.
+     * @param repository an instance of a {@link GeneralInformationRepositoryInterface} in order to report all the actions and
+     *                   log each and every moment.
      * @throws Exception if a illegal argument is sent.
      */
     public RacingTrack(GeneralInformationRepositoryInterface repository, Race race) throws Exception {

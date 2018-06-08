@@ -26,6 +26,8 @@ public class Paddock implements PaddockInterface {
      *
      * @param numberOfSpectators The number of Spectators which will be attending the event.
      * @param numberOfHorses The number of pairs Horse/Jockey which will be competing.
+     * @param repository an instance of a {@link GeneralInformationRepositoryInterface} in order to report all the actions and
+     *                   log each and every moment.
      */
     public Paddock(GeneralInformationRepositoryInterface repository, int numberOfSpectators, int numberOfHorses) {
         this.repository = repository;

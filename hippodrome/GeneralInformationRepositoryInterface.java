@@ -58,5 +58,5 @@ public interface GeneralInformationRepositoryInterface extends Remote {
 
     void raceIsOver() throws Exception;
 
-    boolean isBrokerReadyToGiveTheMasterFart() throws Exception;
+    boolean isBrokerReadyToDie() throws Exception;
 }

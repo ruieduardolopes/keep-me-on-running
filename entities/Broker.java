@@ -29,7 +29,13 @@ public class Broker extends Thread {
      * and logged - and a given number of races ({@code numberOfRaces}).
      *
      * @param numberOfRaces The number of races in which this Entities will work on.
-     * @throws InterruptedException if the communication channel is busy.
+     * @param bettingCentre An instance of a {@link BettingCentre} where this Broker will work on.
+     * @param controlCentre An instance of a {@link ControlCentre} where this Broker will work on.
+     * @param racingTrack An instance of a {@link RacingTrack} where this Broker will work on.
+     * @param stable An instance of a {@link Stable} where this Broker will work on.
+     * @param repository An instance of a {@link GeneralInformationRepository} in order to report all the actions and
+     *                   log each and every moment.
+     * @throws Exception if the communication channel is busy.
      */
     public Broker(int numberOfRaces, BettingCentreInterface bettingCentre, ControlCentreInterface controlCentre, RacingTrackInterface racingTrack, StableInterface stable, GeneralInformationRepositoryInterface repository) throws Exception {
         this.bettingCentre = bettingCentre;

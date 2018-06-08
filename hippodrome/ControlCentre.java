@@ -23,6 +23,8 @@ public class ControlCentre implements ControlCentreInterface {
      * repository is also given in order to report status changes on the course of its actions.
      *
      * @param numberOfHorses the number of pairs Horse/Jockeys which will compete against one another.
+     * @param repository an instance of a {@link GeneralInformationRepositoryInterface} in order to report all the actions and
+     *                   log each and every moment.
      */
     public ControlCentre(GeneralInformationRepositoryInterface repository, int numberOfHorses) {
         this.repository = repository;

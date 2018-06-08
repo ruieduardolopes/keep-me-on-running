@@ -182,7 +182,7 @@ public class ServerLauncher {
                     }
                     break;
                 case GLOBAL_REPOSITORY_OF_INFORMATION_NAME:
-                    while (!repositoryInterface.isBrokerReadyToGiveTheMasterFart()) {
+                    while (!repositoryInterface.isBrokerReadyToDie()) {
                         Thread.sleep(1000);
                     }
                     break;
@@ -214,6 +214,12 @@ public class ServerLauncher {
         System.exit(0);
     }
 
+    /**
+     * Resets the registry, by deleting all our project's registers in.
+     *
+     * @param register the register to be deleted.
+     * @param name the name of the register to be deleted.
+     */
     private static void resetRegistry(Register register, String name) {
         try {
             register.unbind(name);
@@ -261,30 +267,69 @@ public class ServerLauncher {
                 "  - stable              (Stable)\n");
     }
 
+    /**
+     * A Betting Centre instance.
+     */
     private static BettingCentre bettingCentre;
 
+    /**
+     * A Control Centre instance.
+     */
     private static ControlCentre controlCentre;
 
+    /**
+     * A Repository instance.
+     */
     private static GeneralInformationRepository repository;
 
+    /**
+     * A Paddock instance.
+     */
     private static Paddock paddock;
 
+    /**
+     * A Racing Track instance.
+     */
     private static RacingTrack racingTrack;
 
+    /**
+     * A Stable instance.
+     */
     private static Stable stable;
 
+    /**
+     * A Betting Centre interface.
+     */
     private static BettingCentreInterface bettingCentreInterface = null;
 
+    /**
+     * A Control Centre interface.
+     */
     private static ControlCentreInterface controlCentreInterface = null;
 
+    /**
+     * A Repository interface.
+     */
     private static GeneralInformationRepositoryInterface repositoryInterface = null;
 
+    /**
+     * A Paddock interface.
+     */
     private static PaddockInterface paddockInterface = null;
 
+    /**
+     * A Racing Track interface.
+     */
     private static RacingTrackInterface racingTrackInterface = null;
 
+    /**
+     * A Stable interface.
+     */
     private static StableInterface stableInterface = null;
 
+    /**
+     * The port identification to run the system.
+     */
     private static int port = 0;
 
     /**

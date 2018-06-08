@@ -47,6 +47,8 @@ public class BettingCentre implements BettingCentreInterface {
      *
      * @param numberOfHorses the number of pairs Horse/Jockeys which will compete against one another.
      * @param numberOfSpectators the number of Spectators which will attend the events.
+     * @param repository an instance of a {@link GeneralInformationRepositoryInterface} in order to report all the actions and
+     *                   log each and every moment.
      *
      */
     public BettingCentre(GeneralInformationRepositoryInterface repository, int numberOfHorses, int numberOfSpectators) {
