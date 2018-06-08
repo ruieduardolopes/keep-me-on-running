@@ -16,8 +16,8 @@ cleanpreviouscompiles() {
     for node in {01,02,03,04,05,06,07,08,09}; do
         echo "Working on machine number $node."
         echo "Updating and compiling the code..."
-        ssh sd0402@l040101-ws$node.ua.pt "rm -r keep-me-on-running/out/*.class;"
-        ssh sd0402@l040101-ws$node.ua.pt 'rm -r Public/*.class'
+        ssh sd0402@l040101-ws$node.ua.pt "cd keep-me-on-running/out/; find . -name \*.class -type f -delete;"
+        ssh sd0402@l040101-ws$node.ua.pt "cd Public/; find . -name \*.class -type f -delete;"
     done
 }
 
@@ -165,7 +165,7 @@ compileclients () {
 }
 
 runclient () {
-    cd $(echo $WORK_PATH)out/servers
+    cd $(echo $WORK_PATH)out/clients
     java -cp . -Djava.rmi.server.codebase="http://l040101-ws01.ua.pt/sd0402/clients/" -Djava.security.policy=java.policy -Djava.rmi.server.useCodebaseOnly=true clients.ClientLauncher $1
     cd -
 }
