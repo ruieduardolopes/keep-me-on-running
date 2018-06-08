@@ -161,7 +161,7 @@ runclient () {
     #cd $(echo $WORK_PATH)out/clients
     #java -cp . clients.ClientLauncher $1
     #cd -
-    cd $WORK_PATH
-    java -cp . -Djava.rmi.server.codebase="http://l040101-ws01.ua.pt/sd0402/clients/" -Djava.rmi.server.useCodebaseOnly=true clients.ClientLauncher $1
+    cd $(echo $WORK_PATH)out/servers
+    java -cp . -Djava.rmi.server.codebase="http://l040101-ws01.ua.pt/sd0402/clients/" -Djava.security.policy=java.policy -Djava.rmi.server.useCodebaseOnly=true clients.ClientLauncher $1
     cd -
 }
