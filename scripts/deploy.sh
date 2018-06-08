@@ -12,14 +12,27 @@ updatecoderemote () {
     done
 }
 
+cleanpreviouscompiles() {
+    for node in {01,02,03,04,05,06,07,08,09}; do
+        echo "Working on machine number $node."
+        echo "Updating and compiling the code..."
+        ssh sd0402@l040101-ws$node.ua.pt 'rm -r *.class keep-me-on-running/out/'
+        ssh sd0402@l040101-ws$node.ua.pt 'rm -r *.class Public/'
+    done
+}
+
 preparehippodrome () {
-    #for node in {01,02,03,04,05,06,07,08,09}; do
-    #    echo "Working on machine number $node."
-    #    echo "Updating and compiling the code..."
-    #    ssh sd0402@l040101-ws$node.ua.pt 'updcode; compileregister; compileservers; compileclients;'
-    #done
+
     ssh sd0402@l040101-ws01.ua.pt 'updcode; compileregister; compileservers; compileclients;'
-    echo "All update, compiling and RMI enabling were successfully applied on the machine 01."
+    ssh sd0402@l040101-ws02.ua.pt 'updcode; compileservers;'
+    ssh sd0402@l040101-ws03.ua.pt 'updcode; compileservers;'
+    ssh sd0402@l040101-ws04.ua.pt 'updcode; compileservers;'
+    ssh sd0402@l040101-ws05.ua.pt 'updcode; compileservers;'
+    ssh sd0402@l040101-ws06.ua.pt 'updcode; compileservers;'
+    ssh sd0402@l040101-ws07.ua.pt 'updcode; compileclients;'
+    ssh sd0402@l040101-ws08.ua.pt 'updcode; compileclients;'
+    ssh sd0402@l040101-ws09.ua.pt 'updcode; compileclients;'
+    echo "All update, compiling and RMI enabling were successfully applied on the machines."
 }
 
 execute_code () {
