@@ -22,7 +22,6 @@ cleanpreviouscompiles() {
 }
 
 preparehippodrome () {
-
     ssh sd0402@l040101-ws01.ua.pt 'updcode; compileregister; compileservers; compileclients;'
     ssh sd0402@l040101-ws02.ua.pt 'updcode; compileservers;'
     ssh sd0402@l040101-ws03.ua.pt 'updcode; compileservers;'
@@ -66,7 +65,7 @@ execute_code () {
 
     echo "Executing Pairs Horse/Jockey on Machine09..."
     ssh sd0402@l040101-ws09.ua.pt "runclient horses"
-   #ssh sd0402@l040101-ws09.ua.pt "runclient horses && sleep 5 && ssh l040101-ws01.ua.pt 'pkill java; pkill rmiregistry;'"
+    #ssh sd0402@l040101-ws09.ua.pt "runclient horses && sleep 5 && ssh l040101-ws01.ua.pt 'pkill java; pkill rmiregistry;'"
 }
 
 killallentities () {
@@ -111,8 +110,8 @@ compileregister () {
     mv $(echo $WORK_PATH)hippodrome/responses/*.class $(echo $WORK_PATH)out/registry/hippodrome/responses/
     mv $(echo $WORK_PATH)entities/*.class $(echo $WORK_PATH)out/registry/entities/
     rm -rf ~/Public/registry
-    cp -rf $(echo $WORK_PATH)out/registry/*Interface.class ~/Public/registry
-    cp -rf $(echo $WORK_PATH)out/registry/responses/*Interface.class ~/Public/registry/responses
+    cp -rf $(echo $WORK_PATH)out/registry/hippodrome/*Interface.class ~/Public/registry/hippodrome
+    cp -rf $(echo $WORK_PATH)out/registry/hippodrome/responses/*Interface.class ~/Public/registry/responses/hippodrome
 }
 
 runregister () {
