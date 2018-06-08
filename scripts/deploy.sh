@@ -25,6 +25,7 @@ execute_code () {
     ssh sd0402@l040101-ws01.ua.pt 'startrmi > /dev/null' 2> /dev/null &
     echo "Executing RemoteRegistry & General Repository of Information on Machine01..."
     ssh sd0402@l040101-ws01.ua.pt 'runregister > /dev/null' 2> /dev/null &
+    sleep 2
     ssh sd0402@l040101-ws01.ua.pt 'runserver general-repo > /dev/null' 2> /dev/null &
     sleep 2
     echo "Executing Racing Track on Machine02..."
@@ -48,14 +49,15 @@ execute_code () {
     echo "Executing Spectators on Machine08..."
     ssh sd0402@l040101-ws08.ua.pt 'runclient spectators > /dev/null' 2> /dev/null &
     sleep 2
+
     echo "Executing Pairs Horse/Jockey on Machine09..."
-    ssh sd0402@l040101-ws09.ua.pt 'runclient horses'
+    ssh sd0402@l040101-ws09.ua.pt "runclient horses && sleep 5 && ssh l040101-ws01.ua.pt 'pkill java; pkill rmiregistry;'"
+    # && sleep 5 && ssh l040101-ws01.ua.pt 'pkill java; pkill rmiregistry;'
 }
 
 killallentities () {
     for node in {01,02,03,04,05,06,07,08,09}; do
-        echo "Clearing execution of RMI on machine number $node..."
-        ssh sd0402@l040101-ws$node.ua.pt "pkill rmi;" 2> /dev/null
+        ssh sd0402@l040101-ws$node.ua.pt 'pkill java; pkill rmiregistry;';
     done
 }
 
@@ -74,8 +76,7 @@ sendcode () {
 }
 
 shlastlog () {
-    LOG_PATH="$(echo $WORK_PATH)out/server/"
-    ssh sd0402@l040101-ws01.ua.pt 'cat $(echo $LOG_PATH)$(ls $LOG_PATH | grep horse-run | tail -n1)' | less
+    ssh sd0402@l040101-ws01.ua.pt 'cd /home/sd0402/keep-me-on-running/out/servers && cat $(ls | grep horse-run | tail -n1 )' | less
 }
 
 startrmi () {
