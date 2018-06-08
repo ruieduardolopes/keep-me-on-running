@@ -16,8 +16,8 @@ cleanpreviouscompiles() {
     for node in {01,02,03,04,05,06,07,08,09}; do
         echo "Working on machine number $node."
         echo "Updating and compiling the code..."
-        ssh sd0402@l040101-ws$node.ua.pt 'rm -r *.class keep-me-on-running/out/'
-        ssh sd0402@l040101-ws$node.ua.pt 'rm -r *.class Public/'
+        ssh sd0402@l040101-ws$node.ua.pt "rm -r keep-me-on-running/out/*.class;"
+        ssh sd0402@l040101-ws$node.ua.pt 'rm -r Public/*.class'
     done
 }
 
