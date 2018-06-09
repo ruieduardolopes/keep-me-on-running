@@ -172,32 +172,32 @@ public class ServerLauncher {
         try {
             switch (nameEntryObject) {
                 case BETTING_CENTRE_NAME:
-                    while (bettingCentreInterface.getNumberOfEntitiesDeclaringExit() < NUMBER_OF_SPECTATORS*NUMBER_OF_RACES + NUMBER_OF_RACES) {
+                    while (bettingCentre.getNumberOfEntitiesDeclaringExit() < NUMBER_OF_SPECTATORS*NUMBER_OF_RACES + NUMBER_OF_RACES) {
                         Thread.sleep(1000);
                     }
                     break;
                 case CONTROL_CENTRE_NAME:
-                    while (controlCentreInterface.getNumberOfEntitiesDeclaringExit() < NUMBER_OF_SPECTATORS + 1) {
+                    while (controlCentre.getNumberOfEntitiesDeclaringExit() < NUMBER_OF_SPECTATORS + 1) {
                         Thread.sleep(1000);
                     }
                     break;
                 case GLOBAL_REPOSITORY_OF_INFORMATION_NAME:
-                    while (!repositoryInterface.isBrokerReadyToDie()) {
+                    while (!repository.isBrokerReadyToDie()) {
                         Thread.sleep(1000);
                     }
                     break;
                 case PADDOCK_NAME:
-                    while (paddockInterface.getNumberOfEntitiesDeclaringExit() < NUMBER_OF_SPECTATORS*NUMBER_OF_RACES) {
+                    while (paddock.getNumberOfEntitiesDeclaringExit() < NUMBER_OF_SPECTATORS*NUMBER_OF_RACES) {
                         Thread.sleep(1000);
                     }
                     break;
                 case RACING_TRACK_NAME:
-                    while (racingTrackInterface.getNumberOfEntitiesDeclaringExit() < 1) {
+                    while (racingTrack.getNumberOfEntitiesDeclaringExit() < 1) {
                         Thread.sleep(1000);
                     }
                     break;
                 case STABLE_NAME:
-                    while (stableInterface.getNumberOfEntitiesDeclaringExit() < 1) {
+                    while (stable.getNumberOfEntitiesDeclaringExit() < 1) {
                         Thread.sleep(1000);
                     }
                     break;

@@ -13,13 +13,23 @@ updatecoderemote () {
 }
 
 preparehippodrome () {
-    #for node in {01,02,03,04,05,06,07,08,09}; do
-    #    echo "Working on machine number $node."
-    #    echo "Updating and compiling the code..."
-    #    ssh sd0402@l040101-ws$node.ua.pt 'updcode; compileregister; compileservers; compileclients;'
-    #done
-    ssh sd0402@l040101-ws01.ua.pt 'updcode; compileregister; compileservers; compileclients;'
-    echo "All update, compiling and RMI enabling were successfully applied on the machine 01."
+    echo "Loading and compiling register and server code on Machine 01..."
+    ssh sd0402@l040101-ws01.ua.pt 'updcode; compileregister; compileservers;'
+    echo "Loading and compiling server code on Machines 02, 03, 04, 05 and 06..."
+    for node in {02,03,04,05,06}; do
+        echo "Working on machine number $node..."
+        echo "Updating and compiling the code..."
+        ssh sd0402@l040101-ws$node.ua.pt 'updcode; compileregister; compileservers;'
+        echo "Machine number 0$node successfully configured."
+    done
+    echo "Loading and compiling client code on Machines 07, 08 and 09..."
+    for node in {07,08,09}; do
+        echo "Working on machine number $node..."
+        echo "Updating and compiling the code..."
+        ssh sd0402@l040101-ws$node.ua.pt 'updcode; compileregister; compileclients;'
+        echo "Machine number 0$node successfully configured."
+    done
+    echo "All machines were successfully updated."
 }
 
 execute_code () {
@@ -100,7 +110,8 @@ compileregister () {
     mv $(echo $WORK_PATH)hippodrome/rollfilm/*.class $(echo $WORK_PATH)out/registry/hippodrome/rollfilm/
     mv $(echo $WORK_PATH)entities/*.class $(echo $WORK_PATH)out/registry/entities/
     rm -rf ~/Public/registry
-    cp -rf $(echo $WORK_PATH)out/registry ~/Public/
+    mkdir ~/Public/registry
+    cp -rf $(echo $WORK_PATH)out/registry/Register.class ~/Public/registry
 }
 
 runregister () {
@@ -126,8 +137,13 @@ compileservers () {
     cp $(echo $WORK_PATH)registry/Register.java $(echo $WORK_PATH)out/servers/registry/
     mv $(echo $WORK_PATH)server/*.class $(echo $WORK_PATH)out/servers/server/
     mv $(echo $WORK_PATH)clients/*.class $(echo $WORK_PATH)out/servers/clients/
-    rm -rf ~/Public/servers
-    cp -rf $(echo $WORK_PATH)out/servers ~/Public/
+    rm -rf ~/Public/hippodrome
+    mkdir ~/Public/hippodrome
+    mkdir ~/Public/hippodrome/actions
+    mkdir ~/Public/hippodrome/responses
+    cp -rf $(echo $WORK_PATH)out/servers/*Interface.class ~/Public/hippodrome
+    cp -rf $(echo $WORK_PATH)out/servers/actions/Race.class ~/Public/hippodrome/actions
+    cp -rf $(echo $WORK_PATH)out/servers/responses/*.class ~/Public/hippodrome/responses
 }
 
 runserver () {
@@ -153,15 +169,10 @@ compileclients () {
     cp $(echo $WORK_PATH)registry/Register.java $(echo $WORK_PATH)out/clients/registry/
     mv $(echo $WORK_PATH)server/*.class $(echo $WORK_PATH)out/clients/server/
     mv $(echo $WORK_PATH)clients/*.class $(echo $WORK_PATH)out/clients/clients/
-    rm -rf ~/Public/clients
-    cp -rf $(echo $WORK_PATH)out/clients ~/Public/
 }
 
 runclient () {
-    #cd $(echo $WORK_PATH)out/clients
-    #java -cp . clients.ClientLauncher $1
-    #cd -
-    cd $(echo $WORK_PATH)out/servers
-    java -cp . -Djava.rmi.server.codebase="http://l040101-ws01.ua.pt/sd0402/clients/" -Djava.security.policy=java.policy -Djava.rmi.server.useCodebaseOnly=true clients.ClientLauncher $1
+    cd $(echo $WORK_PATH)out/clients
+    java -cp . clients.ClientLauncher $1
     cd -
 }
