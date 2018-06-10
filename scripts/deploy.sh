@@ -111,7 +111,8 @@ compileregister () {
     mv $(echo $WORK_PATH)entities/*.class $(echo $WORK_PATH)out/registry/entities/
     rm -rf ~/Public/registry
     mkdir ~/Public/registry
-    cp -rf $(echo $WORK_PATH)out/registry/registry/Register.class ~/Public/registry
+    mkdir ~/Public/registry/registry
+    cp -rf $(echo $WORK_PATH)out/registry/registry/Register.class ~/Public/registry/registry
 }
 
 runregister () {
