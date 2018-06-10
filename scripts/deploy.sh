@@ -139,12 +139,13 @@ compileservers () {
     mv $(echo $WORK_PATH)server/*.class $(echo $WORK_PATH)out/servers/server/
     mv $(echo $WORK_PATH)clients/*.class $(echo $WORK_PATH)out/servers/clients/
     rm -rf ~/Public/hippodrome
-    mkdir ~/Public/hippodrome
-    mkdir ~/Public/hippodrome/actions
-    mkdir ~/Public/hippodrome/responses
-    cp -rf $(echo $WORK_PATH)out/servers/hippodrome/*Interface.class ~/Public/hippodrome
-    cp -rf $(echo $WORK_PATH)out/servers/hippodrome/actions/Race.class ~/Public/hippodrome/actions
-    cp -rf $(echo $WORK_PATH)out/servers/hippodrome/responses/*.class ~/Public/hippodrome/responses
+    mkdir ~/Public/servers
+    mkdir ~/Public/servers/hippodrome
+    mkdir ~/Public/servers/hippodrome/actions
+    mkdir ~/Public/servers/hippodrome/responses
+    cp -rf $(echo $WORK_PATH)out/servers/hippodrome/*Interface.class ~/Public/servers/hippodrome
+    cp -rf $(echo $WORK_PATH)out/servers/hippodrome/actions/Race.class ~/Public/servers/hippodrome/actions
+    cp -rf $(echo $WORK_PATH)out/servers/hippodrome/responses/*.class ~/Public/servers/hippodrome/responses
 }
 
 runserver () {
