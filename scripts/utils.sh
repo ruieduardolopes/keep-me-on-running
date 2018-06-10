@@ -14,7 +14,7 @@ revertsim () {
     fi
 
     cd $WORK_PATH
-    git checkout --force tests
+    git checkout --force alternative_tests
 
     # Verification of the result
     if [[ "$?" -ne 0 ]]; then
@@ -45,8 +45,8 @@ updcode () {
 
     cd $WORK_PATH
     git clean  -d  -f .
-    git checkout --force tests
-    git pull origin tests
+    git checkout --force alternative_tests
+    git pull origin alternative_tests
 
     # Verification of the result
     if [[ "$?" -ne 0 ]]; then

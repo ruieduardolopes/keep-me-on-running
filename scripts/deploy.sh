@@ -75,16 +75,16 @@ killallentities () {
 
 deployall () {
     git add *
-    git commit -m "Added the last version on tests"
-    git push origin tests
+    git commit -m "Added the last version on alternative_tests"
+    git push origin alternative_tests
     preparehippodrome
     execute_code
 }
 
 sendcode () {
     git add *
-    git commit -m "Added the last version on tests"
-    git push origin tests
+    git commit -m "Added the last version on alternative_tests"
+    git push origin alternative_tests
 }
 
 shlastlog () {
