@@ -141,7 +141,7 @@ compileservers () {
     mkdir ~/Public/hippodrome
     mkdir ~/Public/hippodrome/actions
     mkdir ~/Public/hippodrome/responses
-    cp -rf $(echo $WORK_PATH)out/servers/server/*Interface.class ~/Public/hippodrome
+    cp -rf $(echo $WORK_PATH)out/servers/hippodrome/*Interface.class ~/Public/hippodrome
     cp -rf $(echo $WORK_PATH)out/servers/hippodrome/actions/Race.class ~/Public/hippodrome/actions
     cp -rf $(echo $WORK_PATH)out/servers/hippodrome/responses/*.class ~/Public/hippodrome/responses
 }
