@@ -113,6 +113,8 @@ compileregister () {
     mkdir ~/Public/registry
     mkdir ~/Public/registry/entities
     mkdir ~/Public/registry/hippodrome
+    mkdir ~/Public/servers/hippodrome/actions
+    mkdir ~/Public/servers/hippodrome/responses
     mkdir ~/Public/registry/registry
     cp -rf $(echo $WORK_PATH)out/registry/registry/Register.class ~/Public/registry/registry
     cp -rf $(echo $WORK_PATH)out/servers/hippodrome/*Interface.class ~/Public/registry/hippodrome
