@@ -111,7 +111,7 @@ compileregister () {
     mv $(echo $WORK_PATH)entities/*.class $(echo $WORK_PATH)out/registry/entities/
     rm -rf ~/Public/registry
     mkdir ~/Public/registry
-    cp -rf $(echo $WORK_PATH)out/registry/Register.class ~/Public/registry
+    cp -rf $(echo $WORK_PATH)out/registry/registry/Register.class ~/Public/registry
 }
 
 runregister () {
@@ -141,9 +141,9 @@ compileservers () {
     mkdir ~/Public/hippodrome
     mkdir ~/Public/hippodrome/actions
     mkdir ~/Public/hippodrome/responses
-    cp -rf $(echo $WORK_PATH)out/servers/*Interface.class ~/Public/hippodrome
-    cp -rf $(echo $WORK_PATH)out/servers/actions/Race.class ~/Public/hippodrome/actions
-    cp -rf $(echo $WORK_PATH)out/servers/responses/*.class ~/Public/hippodrome/responses
+    cp -rf $(echo $WORK_PATH)out/servers/server/*Interface.class ~/Public/hippodrome
+    cp -rf $(echo $WORK_PATH)out/servers/hippodrome/actions/Race.class ~/Public/hippodrome/actions
+    cp -rf $(echo $WORK_PATH)out/servers/hippodrome/responses/*.class ~/Public/hippodrome/responses
 }
 
 runserver () {
