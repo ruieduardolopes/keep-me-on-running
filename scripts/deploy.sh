@@ -113,13 +113,13 @@ compileregister () {
     mkdir ~/Public/registry
     mkdir ~/Public/registry/entities
     mkdir ~/Public/registry/hippodrome
-    mkdir ~/Public/servers/hippodrome/actions
-    mkdir ~/Public/servers/hippodrome/responses
+    mkdir ~/Public/registry/hippodrome/actions
+    mkdir ~/Public/registry/hippodrome/responses
     mkdir ~/Public/registry/registry
     cp -rf $(echo $WORK_PATH)out/registry/registry/Register.class ~/Public/registry/registry
-    cp -rf $(echo $WORK_PATH)out/servers/hippodrome/*Interface.class ~/Public/registry/hippodrome
-    cp -rf $(echo $WORK_PATH)out/servers/hippodrome/actions/Race.class ~/Public/registry/hippodrome/actions
-    cp -rf $(echo $WORK_PATH)out/servers/hippodrome/responses/*.class ~/Public/registry/hippodrome/responses
+    cp -rf $(echo $WORK_PATH)out/registry/hippodrome/*Interface.class ~/Public/registry/hippodrome
+    cp -rf $(echo $WORK_PATH)out/registry/hippodrome/actions/Race.class ~/Public/registry/hippodrome/actions
+    cp -rf $(echo $WORK_PATH)out/registry/hippodrome/responses/*.class ~/Public/registry/hippodrome/responses
 }
 
 runregister () {
