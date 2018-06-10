@@ -19,7 +19,7 @@ preparehippodrome () {
     for node in {02,03,04,05,06}; do
         echo "Working on machine number $node..."
         echo "Updating and compiling the code..."
-        ssh sd0402@l040101-ws$node.ua.pt 'updcode; compileregister; compileservers;'
+        ssh sd0402@l040101-ws$node.ua.pt 'updcode; compileservers;'
         echo "Machine number 0$node successfully configured."
     done
     echo "Loading and compiling client code on Machines 07, 08 and 09..."
