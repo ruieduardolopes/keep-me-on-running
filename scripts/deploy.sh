@@ -138,7 +138,7 @@ compileservers () {
     cp $(echo $WORK_PATH)registry/Register.java $(echo $WORK_PATH)out/servers/registry/
     mv $(echo $WORK_PATH)server/*.class $(echo $WORK_PATH)out/servers/server/
     mv $(echo $WORK_PATH)clients/*.class $(echo $WORK_PATH)out/servers/clients/
-    rm -rf ~/Public/hippodrome
+    rm -rf ~/Public/servers
     mkdir ~/Public/servers
     mkdir ~/Public/servers/hippodrome
     mkdir ~/Public/servers/hippodrome/actions
