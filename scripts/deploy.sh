@@ -116,7 +116,7 @@ compileregister () {
     mkdir ~/Public/registry/hippodrome/actions
     mkdir ~/Public/registry/hippodrome/responses
     mkdir ~/Public/registry/registry
-    cp -rf $(echo $WORK_PATH)out/registry/entities/*.class ~/Public/registry/entities
+    cp -rf $(echo $WORK_PATH)out/registry/entities/*State.class ~/Public/registry/entities
     cp -rf $(echo $WORK_PATH)out/registry/registry/Register.class ~/Public/registry/registry
     cp -rf $(echo $WORK_PATH)out/registry/hippodrome/*Interface.class ~/Public/registry/hippodrome
     cp -rf $(echo $WORK_PATH)out/registry/hippodrome/actions/Race.class ~/Public/registry/hippodrome/actions
@@ -152,7 +152,7 @@ compileservers () {
     mkdir ~/Public/servers/hippodrome
     mkdir ~/Public/servers/hippodrome/actions
     mkdir ~/Public/servers/hippodrome/responses
-    cp -rf $(echo $WORK_PATH)out/servers/entities/*.class ~/Public/servers/entities
+    cp -rf $(echo $WORK_PATH)out/servers/entities/*State.class ~/Public/servers/entities
     cp -rf $(echo $WORK_PATH)out/servers/hippodrome/*Interface.class ~/Public/servers/hippodrome
     cp -rf $(echo $WORK_PATH)out/servers/hippodrome/actions/Race.class ~/Public/servers/hippodrome/actions
     cp -rf $(echo $WORK_PATH)out/servers/hippodrome/responses/*.class ~/Public/servers/hippodrome/responses
